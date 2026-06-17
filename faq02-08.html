@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-08</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリスト付加表題に全角文字を利用するテクニック</b></FONT>
+<HR>
+<br>
+メーリングリストの挿入ヘッダである付加表題に、そのまま全角文字を設定すると、付加表題は、ASCII文字の使用を前提としている部分のため、文字化けして表示されてしまいます。<br>
+メーリングリストの付加表題に全角文字を使うには、テクニックを使う必要があります。<br>
+弊社では、半角英数字の使用を推奨していますが、下記のような方法を使えば、全角文字でも何とか利用できないわけではありません。<br>
+<ol>
+<li>「メールサーバ構築ガイド」に記述されている<a href="../epmsent_construct_guide/kouchiku20.html" target="new2">「自動応答を設定してみよう」</a>と同じ方法で、付加表題にしたい全角文字を含んだ文字列を変換します。（書籍『E-Post Mail Server 完全ガイド』ではP.124以降）<br>
+<br>
+<li>同構築ガイドには、件名と本文のそれぞれの変換方法が書かれていますが、件名ではなく、本文の方法をそのまま使って、JISに変換された文字列をそのまま付加表題に貼り付けます。文字コード変換には「サポート２」で公開しているユーティリティの UnicodeConv.exe を使っても可能です。<br>
+<br>
+（例）付加表題を [情報 000x] としたいとき<br>
+　　　　　　　　↓<br>
+[情報 %004d] と記述した文字列を上記の方法などで、いったんJISに変換し、変換した文字列をそのまま貼り付ける（下記画面参照）<br>
+<p align="center"><a href="./img/faq02-08.jpg"><img src="./img/faq02-08s.jpg" border="0"></a></p>
+</ol>
+（注意１）<br>
+自動応答の「件名」のように、先頭部分に &quot;=?iso-2022-jp?&quot; を先頭につけるとうまく行きませんので、「本文」での文字コード変換方法を参考にしてください。<br>
+<br>
+（注意２）<br>
+次のFAQに記載されている方法１により、epstrdが使用する文字コードを明示してください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-63.html">自動応答メールの文字コードが西ヨーロッパ言語になっていて、メーラで文字化けする</a>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

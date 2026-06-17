@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-68</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>POP3メールボックスでメールデータ残存数が多いとパフォーマンス低下による logon overlap エラーが起きるおそれ</b></FONT>
+<HR>
+<br>
+POP3メールボックスでメールデータ残存数が多いと、OSがもつファイルシステムのパフォーマンス低下を招き logon overlap. エラーが起きるおそれがあります。<br>
+一部ユーザーアカウントにおいて、なぜか logon overlap のエラーが連続して多発する現象が報告された事例があり、POP3メールボックスに残しているメールデータを調べたところ、該当ユーザーのメールボックスに残しているメールデータ数が数千以上、場合によっては1万以上も及んでいることが判明しました。<br>
+これはまずメールボックスフォルダに残しているメールデータ数がいずれも膨大な数に及ぶことにより、ファイルアクセスのパフォーマンス低下が起きていることが予想されました。そのため、フォルダ内にある二重ログイン防止目的のファイルである $LockFile へのアクセスが思う通りに行かなくなり、結果的に logon overlap のエラーが発生したことが類推できました。<br>
+1フォルダ内に膨大な数のファイルがあると、ファイルシステムのパフォーマンス低下を引き起こしますが、これはサーバマシンのCPUパワーがどんなに強大でも無関係です。例えていうなら高速ランナーがぬかるんだ泥沼を走りたくてもまったく走れないような状況になってしまいます。<br>
+POP3メールボックスにメールデータを残す運用をしている場合は、残しているメールデータを削除してファイルを減らしてください。1フォルダ内でのファイル数の目安は、1万を超えるレベルは赤信号、数千レベルを超えると黄信号ととらえ、そうしたレベルに達しないように管理運営の徹底をはかってください。
+各ユーザーが利用するメールクライアントの設定では「サーバからすぐ削除」か「一定期間をおいて削除」のいずれかの設定を実施するよう、徹底をはかってください。<br>
+<br>
+ちなみに、どうしてもサーバに残さなくてはいけないアカウントがある場合、該当アカウントの運用だけIMAP4利用することをお薦めいたします。ただし、IMAP4での運用をする場合も、サブフォルダでの小分け管理は必須になります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-73.html">メールボックスにメールデータを残す運用をしているときの注意点</a><br>
+●<a href="./faq10-76.html">メールクライアントのPOP3受信タイミングが短いケースで logon overlap のエラーが持続してしまう場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

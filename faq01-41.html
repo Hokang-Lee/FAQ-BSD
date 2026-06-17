@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-41</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>SMTP認証有効時に内部アカウントから内部アカウントへ自動転送されない</b></FONT>
+<HR>
+<BR>
+内部アカウントから内部アカウントへの自動転送がされず、「送信エラー」メールが届く場合、送信先の内部アカウントがSMTP認証を必要としていないか確認してください。この場合、<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>で確認してみると、&quot;503 5.0.0 Need EHLO before AUTH&quot; が記録されていることが確認できます。<br>
+SMTP認証を必要としていて自動転送時に送信エラーとなるような上記の場合、内部アカウントから内部アカウントへの転送を可能にするには、「中継の制限【effect.dat】」にメールサーバ自体のIPアドレスを記述することにより、特定のIPアドレスからの送信を「許可」する設定を加えることで可能になります。<br>
+「中継の制限【effect.dat】」を呼び出すには、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］の中ほど［中継の制限］の［マシンごとの中継］、もしくは［中継の制限］で表示される「中継の制限設定」にある［マシンごとの中継］ボタンをクリック、表示される「effect.dat」に記述します。<br>
+<blockquote>【effect.dat】の記述例<br>
+192.168.0.xxx true　　←メールサーバ自体のIPアドレスを指定<br>
+　または<br>
+192.168.0.xxx　　←メールサーバ自体のIPアドレスを指定<br>
+</blockquote>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-22.html">中継の制限【effect.dat】で設定する default と true の違い、only の意味は？</a><br>
+●<a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a><br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

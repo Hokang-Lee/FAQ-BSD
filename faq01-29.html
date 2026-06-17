@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-29</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP認証の設定をしたのに認証なしで送信できてしまう</b></FONT>
+<HR>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開き、「セキュリティレベル」が「非認証有効」となっている場合、SMTP認証でなくても送信可能な設定となっています。<br>
+<br>
+そこで、内部ユーザーからの送信をSMTP認証のみで行う場合、次のように設定した後に epstrd の再起動を行ってください。<br>
+メールサーバ管理から［システム管理メニュー］をクリック<br>
+　→［SMTP受信詳細］<br>
+　　→「SMTP認証方法」では「PLAIN LOGIN CRAM-MD5」を選択<br>
+　　　続く「セキュリティレベル」では「認証ファイル」を選択<br>
+　　　→最後に［設定する］ボタンをクリック<br>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」からエクスポートする対象ドメインを選択して［ユーザー管理へ］をクリック。該当するユーザーを選択し［設定変更］を選択して「認証ファイルを設定する」チェックボックスをオンにしてください。<br>
+続いて［ユーザー管理］から該当するユーザーを選択し［パスワード変更］を選択して［操作する］ボタンをクリック。「変更するパスワード」「再確認パスワード」を入力し、パスワードを再設定。最後に「変更する」ボタンをクリックします。<br>
+<br>
+※ このとき更新されるパスワードは、POP3/IMAP4 用認証パスワードとともに、メールボックスフォルダ内にて管理される認証ファイル &quot;apop.dat&quot; にも合わせて保存されます。該当ユーザーのメールボックスフォルダ（デフォルトで /var/spool/epms/inbox/%USERNAME%）を開き、直接 &quot;apop.dat&quot; ファイルを作成、その &quot;apop.dat&quot; ファイル中にSMTP認証時のパスワードを平文で入力しておく作業を行ってもかまいません。<br>
+<br>
+なお、「認証ファイルを設定する」チェックボックスをオフにしているユーザーについては、「セキュリティレベル」を「認証ファイル」に設定されているとき、認証なしの送信が許可されるようになります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

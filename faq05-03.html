@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-03</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>接続マシンログ（acceptlog）について</b></FONT>
+<HR>
+<br>
+接続マシンログ（acceptlog）は、SMTP受信ログ（inlog）の前段階の処理についての記録です。<br>
+<ol><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ログ］を開き、［接続マシンログ］チェックボックスの状態を確認します。
+<li>チェックボックスがオンの設定のままのときはそのままで、［接続マシンログ］チェックボックスがオフのときはオンに変更してから［設定する］ボタンクリックします。
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面からSMTP受信サービス（epstrd）を［停止］→［開始］で再起動します。</ol>
+ログ記録は、［メール作業フォルダ/acceptlog/コンピュータ名］フォルダ下に日付単位で作成されます。<br>
+<br>
+記録内容は１接続に対し２種類記録されます。行が連続しているとは限りません。<br>
+ただし、接続相手がSMTPの手順を行う前に切断したときなど１行しか記録されない場合もあります。<br>
+<br>
+記録１：SOCKET接続の発生記録<br>
+　　接続相手からの接続要求が発生した時に記録されます。<br><small>
+<hr align="center" width="98%" size="1" noshade>
+　　　記録日時　　　　,宛先(TO)サーバー,送信元(FROM)IPアドレス:ポート, ステータス
+<hr align="center" width="98%" size="1" noshade>
+　[30/Nov/2017:08:20:44], (xxx.xxxx.jp), [xxx.xxx.xxx.xxx]:25, Client accept now.
+<hr align="center" width="98%" size="1" noshade>
+<br></small>
+記録２：SMTPプロトコルのネゴシェーションでメールの受領または拒絶の判断を行った結果の記録<br>
+　Ａ.ネゴシェーション結果で受領された場合<br><small>
+<hr align="center" width="98%" size="1" noshade>
+　　　記録日時　　　　, 送信先サーバー,　　　送信元 IP　　送信元アドレス,　　メッセージID, ステータス<br>
+<hr align="center" width="98%" size="1" noshade>
+　[30/Nov/2017:08:22:06], (xxx.xxxx.jp), xxx.xxxx.xxx.xxx [xxx.xxx.xxx.xxx], ?????????????????????,&lt;B0000097586>,ok<br>
+<hr align="center" width="98%" size="1" noshade></small>
+　Ｂ-１.ネゴシェーション結果で拒絶された場合<br>
+　　(拒絶理由が"effect.dat"や不明な送信先アドレス宛、SMTP認証による否認、送信ドメイン認証による否認などの場合)<br><small>
+<hr align="center" width="98%" size="1" noshade>
+　　　記録日時　　　　, 送信先サーバー,　　　送信元 IP　　送信元アドレス,　　メッセージID, ステータス<br>
+<hr align="center" width="98%" size="1" noshade>
+　[30/Nov/2017:08:22:06], (xxx.xxxx.jp), xxx.xxxx.xxx.xxx [xxx.xxx.xxx.xxx], ?????????????????????,&lt;B0000000000>,abort<br>
+<hr align="center" width="98%" size="1" noshade></small>
+　Ｂ-２.ネゴシェーション結果で拒絶された場合<br>
+　　(拒絶理由がメールサイズ制限、メールボックス制限、メールフィルタ条件などの場合)<br><small>
+<hr align="center" width="98%" size="1" noshade>
+　　　記録日時　　　　, 送信先サーバー,　　　送信元 IP　　送信元アドレス,　　メッセージID, ステータス<br>
+<hr align="center" width="98%" size="1" noshade>
+　[30/Nov/2007:08:22:06], (xxx.xxxx.jp), xxx.xxxx.xxx.xxx [xxx.xxx.xxx.xxx], ?????????????????????,&lt;B0000097586>,abort<br>
+<hr align="center" width="98%" size="1" noshade></small>
+　Ｂ-３.ORDB（DNSBL）問い合わせで拒絶された場合<br><small>
+<hr align="center" width="98%" size="1" noshade>
+　　　記録日時　　　　, 送信先サーバー,　　　送信元 IP　　送信元アドレス,　　メッセージID, ステータス<br>
+<hr align="center" width="98%" size="1" noshade>
+　[30/Nov/2017:08:22:06], (xxx.xxxx.jp), xxx.xxxx.xxx.xxx [xxx.xxx.xxx.xxx], It was in the ORDB IP.,&lt;B0000000000>,abort<br>
+<hr align="center" width="98%" size="1" noshade></small>
+記録１で接続の有無、記録２の"ok","abort"でメール受領・拒絶の結果が記録されます。<br>
+なお、"ok"が記録されたものは、その後「SMTP受信ログ(inlog)」の記録対象となります。<br>
+<br>
+具体的には、telnetでSMTPへ接続するために、以下を実行したとき、最初に必ず、"Client accept now."の記録がされます。（C…クライアントからの送信/S…サーバーからの送信を表します。）<br><small>
+<br>
+(C) telnet &lt;smtp server&gt; smtp&lt;CR&gt;　　　　　　……　[接続が発生した時、"Client acceptnow."を記録]<br>
+(S) 220 xxxx E-POST ESMTP Receiver (x.xx)....<br>
+(C) HELO &lt;domain&gt;&lt;CR&gt;<br>
+(S) 250 &lt;xxxxx.xxx.jp&gt; Hello .....<br>
+(C) MAIL FROM: xxxx＠xxxx.xxxx&lt;CR&gt;<br>
+(S) 250 xxxx@xxxx.xxxx... Sender ok.　　　　　　……(1)<br>
+(C) RCPT TO: xxxx＠xxxx.xxxx&lt;CR&gt;<br>
+(S) 250 xxxx@xxxx.xxxx... Recipient ok.　　　　 ……(2)<br>
+(C) DATA&lt;CR&gt;<br>
+(S) 354 Start mail input;id &lt;Bxxxx&gt; end with &lt;CRLF&gt;.&lt;CRLF&gt;<br>
+　　　: メッセージ送出<br>
+(C) . &lt;CR&gt;<br>
+(S) 250 Message received ok.　　　　　　　　　　……(3)<br>
+<br>
+(1)～(3)のいずれかの応答でメールの受信処理が中止された（拒絶された）とき "abort"の記録がされ、(3)まで進み、配送キュー(incomingフォルダ)に保管された場合, "ok"の記録がされるということになります。<br></small>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

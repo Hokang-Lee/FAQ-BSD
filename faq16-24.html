@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ16-24</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>上長承認（BossCheck）機能の承認・却下の結果ログについて</b></FONT>
+<HR>
+<br>
+上長承認の結果、承認または却下の結果は、[メール作業フォルダ]/approval/log に記録されます。<br>
+<br>
+（書式）<br>
+[日付 時刻] [承認/却下] [承認者/却下者=address] [承認メール=<br>
+メッセージID＠BASE64でエンコードされた部分]<br>
+--------------------------------------------------------------------------<br>
+<small>[2013/04/25:19:31:17] [承認] 承認者=bucho＠test-sample.jp 承認メール=<br>
+B0000317346＠YnVjaG9AdGVzdC1zYW1wbGUwMC5qcCxzaG9uaW5fYkB0ZX<br>
+N0LXNhbXBsZTAwLmpwLHNob25pbl9hQHRlc3Qtc2FtcGxlMDAuanAgICAg<br></small>
+<br>
+なお、合わせて下記の設定を行えば、<font color="#cc0000">上長承認の承認・却下の結果ログに「送信元IPアドレス」と「送信先メールアドレス」を追加することができる</font>ようになります。<br>
+<br>
+（新書式）<br>
+[日付 時刻] [承認/却下] [承認者/却下者=address] (送信元IPアドレス) [承認メール=<br>
+メッセージID＠BASE64でエンコードされた部分] [送信先メールアドレス]<br>
+--------------------------------------------------------------------------<br>
+<small>[2014/06/26:16:46:49] [承認] 承認者=bucho＠test-sample.jp (192.168.0.xxx) 承認メール=<br>
+B0000318902@YnVjaG9AdGVzdC1zYW1wbGUwMC5qcCxzaG9uaW5fYkB0ZXN0LXNhbXBsZTAw<br>
+LmpwLHNob25pbl9hQHRlc3Qtc2FtcGxlMDAuanAgICAg 送信先=okyaku＠domain.jp<br></small>
+<br>
+これを有効にする設定方法は、指定フォルダにテキストで設定ファイルを作成し、以下の説明の通り、設定値”1”を指定し、ファイルを保存します。保存したら、E-POST コントロールセンター（メールサーバ管理）の［サービス制御］より、epstrdサービスを再起動してください。<br>
+<br>
+<small>[メール作業フォルダ]/reg/epost/ims/MailApprovalLogLevel.1<br>
+（DWORD デフォルト値=0／履歴に送信元IPや送信先を（0:含まない1:含む））<br></small>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

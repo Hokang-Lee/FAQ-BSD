@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-59</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>追加処理プログラム指定時に自動転送も自動応答もしたくないときには</b></FONT>
+<HR>
+<br>
+「追加処理プログラム」を指定するには、E-POSTコントロールセンターのメールサーバ管理から指定することはできません。コンソールから該当ユーザーのメールボックスフォルダ（デフォルトで /var/spool/epms/inbox/%USERNAME%）を直接開き、メールボックスフォルダ内に保存される ims.ctl ファイル内に[AutoProcess]項目を追加し、下記のように追加処理プログラムを指定します。ちなみに指定できる追加処理プログラムは標準コンソールベースで動作するプログラムやスクリプトのみです。<br>
+<blockquote>
+【ims.ctl 変更例】
+<hr color="#C0C0C0" align="left" width="80%" noshade size="1">
+[AutoProcess]<br>
+Module=&lt;標準コンソール専用追加処理プログラム&gt;<br>
+<hr color="#C0C0C0" align="left" width="80%" noshade size="1">
+</blockquote>
+自動転送または自動応答の設定をしたくないときは、メールボックスフォルダ内に保存されている ims.ctl ファイル内に、上記の記述だけを残し他の記述を削除して保存します。自動転送および自動応答を行なわない状態のまま、追加処理プログラムを動作させることができます。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

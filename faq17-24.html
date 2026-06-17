@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-24</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メール送信時のメールサイズ制限を設定しているが設定サイズより小さいサイズで制限されてしまう <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メール送信時のメールサイズ制限を設定しているが設定サイズより小さいサイズで制限されてしまうという報告を受けたことがあります。<br>
+たとえば、社内パソコンからメール送信時のメールサイズ制限は10MB程度にするつもりで、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］を開いて［中継の制限］項目、もしくは［中継の制限］を開いて表示される「中継の制限設定」にある「メール受信時のサイズ」を「10000000byte」に設定したところ、7MBほどのサイズを越えるメール送信した時にエラー応答である「552 5.3.1 Requested mail action aborted: exceeded storage allocation.」が返されてくるというものです。<br>
+実はこれはE-Postに限らず、他のメール製品でもほとんど同様です。添付ファイルは仕組み的にMIMEエンコードされてメール本文に含まれていますが、MIMEエンコードされると一般的に約3割、厳密には133%程度、膨れることがその要因です。「MIMEエンコード　サイズ」などで検索してみると、他のメール製品での対応策として同様の内容の情報が出てくると思います。<br>
+したがって、E-Postの設定を考える場合、［中継の制限］項目、もしくは［中継の制限］を開いて表示される「中継の制限設定」にある「メール受信時のサイズ」に入れる数値も、想定している送信サイズ制限として考えている数値の約3割増し（133%程度）にしてみてください。<br>
+ただし、たとえばぴったり10MBというように、厳密なサイズで制限させようとしてもどうしても難しいことがあります。上記の設定値はあくまでMIMEエンコード部分を含むメール本文を対象にしているため、実際にはヘッダも含まれます。ヘッダが少し大きくてもテキストですので、加味すべきサイズはしれているでしょうが、ヘッダサイズが大きいメールも存在することを考えて、ほんの少し余裕をもたせてみるのもよいかもしれません。<br>
+ちなみに、設定値はあくまでbyte単位ですので、KBやMBを計算していく方法として簡易的な×1000で計算するか、より厳密に×1024で計算していくかも数値は変わってきますので、その点も合わせて考慮に入れてください。<br>
+なお、「メール受信時のサイズ」の設定値を変えた後は、epstrdサービスの再起動が必要になります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-71.html">メールクライアントからの送信時にサイズ制限をかけるには</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

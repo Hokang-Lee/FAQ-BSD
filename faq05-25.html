@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-25</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlog にscrambleRCP()の行がたくさん出力されているのは </b></FONT>
+<HR>
+<br>
+環境によっては、<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>に次のようなscrambleRCP()行がたくさん出力されていることがあります。scrambleRCP() の行がたくさん出力されているときには、次のように解釈してください。ちなみに、この例での後半、thread (30)は、マルチスレッド数の実行状態&quot;30&quot;を表しています。<br>
+<blockquote>
+<b>scrambleRCP() / thread (30).</b><br>
+</blockquote>
+まずメール送信時の基本的なしくみとしては、epstrd（SMTP受信サービス）による受領と、epstdd（SMTP配送サービス）による配送の2段階で行われます。<br>
+epstrd（SMTP受信サービス）による受領プロセスの完了後、メールキューフォルダであるincomingフォルダへ配送対象となるファイル（拡張子.MSGと拡張子.RCPのファイル）が生成・保存されていきます。このとき、ファイル生成・保存がスピーディに行われるかどうかは、マシンスペックおよびディスク性能の違い、何らかの影響による負荷など、環境によって大きく変わります。<br>
+その後、epstdd（SMTP配送サービス）が、メールキューフォルダであるincomingフォルダの内容を走査しますが、配送対象となるファイル（拡張子.MSGと拡張子.RCPのファイル）がその時点で生成・保存されているかどうかは、走査するタイミングによってもさらに異なります。<br>
+<br>
+一般的に言って、良好なマシンスペックおよびディスク性能の環境では、ファイルが生成・保存されていれば、対象ファイルの送信処理がすぐ開始されます。<br>
+ところが、マシンスペックおよびディスク性能が劣ったり、何らかの影響によるファイルI/Oなどの負荷が高くなっているような環境では、生成・保存が完了されていないケースが起こり得ます。このようなとき、ファイルが見つからない状態として扱われ、scrambleRCP() の行を出力、空回りをする記録が行われます。ただし、この時点でファイルが見つからなくとも、その後にファイルが生成・保存されていれば、次の送信サイクルで、送信処理が行われます。<br>
+つまり、性能的に劣ったり何らかの影響によるファイルI/Oなどの負荷が高くなっている環境で、scrambleRCP()行がたくさん出力されることはありますが、その後の送信サイクルで問題なく送信が行われますので、これ自体が特に問題があるというわけではありません。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

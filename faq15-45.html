@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-45</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>IDLE命令を無効に変更する前と後でログ記録にどのように違いが出るか</b></FONT>
+<HR>
+<br>
+<a href="./faq05-14.html">IMAP4詳細ログ（receiveimap4）</a>を取得しているとき、E-Post側でIDLE命令を無効に変更する前と後でログにどのように違いが出てくるか説明します。<br>
+<br>
+<ol>
+<b><li>デフォルトでIDLEコマンド有効になっている状態のとき</li></b><br>
+設定ファイルにIDLECmd.1に設定値"1":Enableを明示指定しているか、もしくは設定ファイルにIDLECmd.1が存在しないとき、IMAP4詳細ログ（receiveimap4）にはEPSTIMAP4サービス起動直後の記録を見ると以下の記録がされます。<br>
+---- regestry ----<br>
+（途中略）<br>
+IDLE Command        on<br>
+-------------------<br>
+<br>
+クライアント Outlook側からログイン、CAPABILITYでの問い合わせに対し、IDLE命令が有効な旨、返答されます。<br>
+- (例) --------------------------------------------------------------------<br>
+* CAPABILITY IMAP4 IMAP4rev1 IDLE NAMESPACE AUTH=CRAM-MD5 AUTH=LOGIN<br>
+------------------------------------ (↑含む) -----------------------------<br>
+<br>
+<b><li>IDLEコマンド無効に変更した状態のとき</li></b><br>
+設定ファイルにIDLECmd.1に設定値"0":Disableを指定、IDLE命令を有効から無効に変更してEPSTIMAP4を再起動すると、IMAP4詳細ログ（receiveimap4）にはEPSTIMAP4サービス起動直後に以下の記録がされます。<br>
+---- regestry ----<br>
+（途中略）<br>
+IDLE Command        off<br>
+-------------------<br>
+<br>
+クライアント Outlook側からログイン、CAPABILITYでの問い合わせに対し、IDLE命令が無効な旨、返答されます。<br>
+- (例) ---------------------------------------------------------------<br>
+* CAPABILITY IMAP4 IMAP4rev1 NAMESPACE AUTH=CRAM-MD5 AUTH=LOGIN<br>
+------------------------------------ (↑IDLE含まない) ----------------<br>
+<br>
+この後、メールクライアントOutlookからは、IDLE命令を出さなくなります。<br>
+</ol>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

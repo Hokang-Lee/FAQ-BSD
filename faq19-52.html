@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-52</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>中継の制限と送信先制限を組み合わせ、未登録アカウントでの無条件許可を与えながら内部ドメインのみの送信制限を実施できるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+中継の制限設定【effect.dat】と送信先制限設定【sender.dat】を組み合わせ、未登録アカウントでの送信に無条件許可を与えながら、さらに内部ドメインのみの送信制限を実施できるかという課題がサポート案件で寄せられました。<br>
+これは【effect.dat】で未登録アカウントでも無条件許可を与える &quot;true&quot; 指定をする一方で、許可された未登録アカウントから送信する際、内部ドメイン宛てのみの送信制限を実施したいというものでした。<br>
+一見するとこの無理難題な設定を実施するには、これまでは実施不可能でした。2025年以降の最新差分アップデートを適用すれば、こうした設定が可能になります。<br>
+<br>
+前提条件は以下の通りです。まず【effect.dat】の設定は以下のようになっており、&quot;true&quot; 指定されたIPアドレスからの送信に無条件許可を与え、Account Manager内に登録されていない未登録アカウントからの送信を許可する設定をしている状態です。<br>
+　-----【effect.dat】-----------------<br>
+　[IPアドレス1] true<br>
+　[IPアドレス2] true<br>
+　[IPアドレス3] true<br>
+　*.*.*.* norelay<br>
+　-------------------------------------<br>
+<br>
+次にドメイン毎の送信先制限設定の【sender.dat】設定を行います。以下の場所にフォルダを手動作成し、該当するフォルダ内に【sender.dat】ファイルを作成、内容を以下のように記述して保存します。<br>
+　-----------------------------------<br>
+　[メール作業フォルダ]\permit\[内部ドメイン名]\sender.dat<br>
+　-----------------------------------<br>
+　-----【sender.dat】----------------<br>
+　*＠[内部ドメイン名]<br>
+　--------------------------------------<br>
+<br>
+なお、【sender.dat】の処理優先順位は、以下の順になります。<br>
+　1. <b>全体共通設定</b>：プロフラムインストールフォルダ（既定値 /usr/local/mta/bin/）下の【sender.dat】（※1）<br>
+　2. <b>ドメイン毎の送信先制限設定</b>：[メール作業フォルダ（既定値 /var/spool/epms/）]\permit\[内部ドメイン名]フォルダ下の【sender.dat】（※2）<br>
+　3. <b>個別アカウント単位の設定</b>：該当アカウントのメールボックスフォルダ（既定値 /var/spool/epms/inbox/[ドメイン名]/[ユーザー名] または  /var/spool/epms/inbox/[ユーザー名]）下の【sender.dat】（※3）<br>
+<br>
+<small>（※1）全体共通設定の【sender.dat】は、E-Postで作成した内部ドメインに対してのみ有効です。上記事例では全体共通設定を使用することでも実現は可能です。<br>
+（※2）ドメイン毎の送信先制限設定の【sender.dat】は、E-Postで作成した内部ドメインに対してのみ有効です。<br>
+（※3）個別アカウントの設定は通常、ユーザー管理を開き、該当アカウントについて「送信先制限」を選択して行うことができます。<br></small>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

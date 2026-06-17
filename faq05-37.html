@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-37</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>receivelog にSOCKET_ERRORのコード 0 のエラーが記録されている場合</b></FONT>
+<HR>
+<br>
+<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>を取得して、調べている接続セッションを追跡してみると、5分を経過したところで次のエラーが記録されていて、直後に回線が切断されているケースがあります。<br>
+<blockquote><b>
+get_reply() SOCKET_ERROR OTHER CODE=0<br>
+CloseClient Started.:SOCKET.C<br>
+closesocket():SOCKET.C<br></b>
+</blockquote>
+SOCKET_ERRORのコード 0 がログに記録されて直後に回線が切断されているケースでは、SMTP受領時に接続開始してから、その後何らかの理由で、時間がかかっているために、無通信タイムアウトのデフォルト設定値である5分を経過したところで、切断されているパターンが多いようです。<br>
+接続開始してから何もアクションがなく、無通信タイムアウトの設定時間に達してしまうと、E-Postは回線切断を行い、その結果としてエラーとなります。メールクライアント側にはE-Postからエラー応答が返されます。<br>
+無通信タイムアウトの設定時間に達してしまうのは、大部分はメールクライアント側にその原因があることが考えられます。理論的に考えられるのは、次の３点です。<br><ol>
+<li>DATA命令のあと、メールクライアント側からメール本文データの受信が途中で送られてこない。<br>
+<li>メールクライアント側から本文最後の"."ピリオドが送られていない。<br>
+<li>メールクライアント側から本文最後の"."ピリオドが送られているのに、E-Post側がメールフィルタなどの後処理でひたすら時間がかかっている。<br>
+</ol>
+１と２は通常のメーラーを利用している限りはあまり考えられませんが、受信済みや送信済みのフォルダに膨大な数のメールデータを保管しすぎているときには、メーラーの動きがおかしくなることもあるようです。メールクライアントの動きを調べてください。<br>
+３については、メールフィルタ設定をしていないのであれば、関係ありませんが、巨大ファイルをメールフィルタ機能でスキャンしていて時間がかかりすぎていないか調べるようにしてください。<br>
+<br>
+無通信タイムアウトの設定時間を延ばして、ようすを見たい場合は、次の設定を行います。<br>
+E-Post Mail Server・E-Post SMTP ServerのSMTP受信サービスの無通信タイムアウトの設定値をデフォルト5分から、値を大きくして、無通信タイムアウトを延ばすには、設定ファイルの次の値を変更します。<br>
+<small><br>
+メール作業フォルダ<br>
+　->reg<br>
+　　->epost<br>
+　　　->ims<br>
+　　　　->EPST5RS <br>
+　　　　　->Timeout.1 <br>
+　　　　　　(数値　Default 300)sec　無通信状態タイムアウト<br>
+<br></small>
+設定ファイルの該当部分に&quot;Timeout&quot;がない場合は作成してください。値は10進、秒単位で入力します。設定ファイルを変更した場合は、epstrdサービスの再起動が必要になります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-27.html">receivelog や pop3log にSOCKET_ERRORのコード、53や54のエラーが記録されている場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

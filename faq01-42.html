@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-42</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>HELOコマンドで送出するホスト名がFQDN（ホスト名＋ドメイン名）になっていない</b></FONT>
+<HR>
+<BR>
+メール送信時に送るHELOコマンドで送出するホスト名がFQDN（ホスト名＋ドメイン名）にならないと、送り先によっては、スパムサイトと断定して受信を拒絶される場合があります。<br>
+この場合、グローバルで公開しているメールサーバーのFQDN（ホスト名＋ドメイン名）をメールサーバーマシンの /etc/hostsファイルに自身のローカルIPと関連付けを行うようにします。<br>
+仮にグローバルに公開しているメールサーバー名を mx.abcd.jp とすると、<br>
+メールサーバーのローカルIPアドレス＝ 192.168.0.10 とした場合に /etc/hostsファイルは次のようになります。<br>
+<br>
+192.168.0.10 mx.abcd.jp hostname<br>
+<small>※項目間の区切りは半角スペースまたはタブ区切り</small><br>
+<br>
+こうした設定により、HELOコマンドに続く情報（FQDN）として反映するようになります。<br>
+設定が正しく行えているかどうかは、Windowsマシンのコマンドプロンプトか、メールサーバマシンのターミナルより、telnetコマンドで確かめましょう。<br>
+<br>
+telnet 192.168.0.10 25<br>
+<br>
+正しく設定したFQDN名である mx.abcd.jp が返るかどうか確認してください。<br>
+220 <b>mx.abcd.jp</b> E-POST ESMTP Receiver v5 (5.00) Licence will be expired in XX days.  Wed, 20 Dec 2017 11:19:46 +0900<br>
+<br>
+（関連FAQ）<br>
+●<a href="./faq10-53.html">hostsファイル記述の必要性と有用性について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

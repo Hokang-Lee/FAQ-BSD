@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-20</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>別サーバからE-Postへメールを送ったとき、&quot;554 5.4.6 too many Received:  headers. (in reply to end of DATA command)&quot; と記載されたエラーメールが戻ってくる <font color="#ff0000">new!</font></b></FONT>
+<HR><br>
+エラーメール内に記載されたエラー応答の &quot;554 5.4.6 too many Received:  headers. (in reply to end of DATA command)&quot; とは、SMTPのホップ数が制限値を越えたため、E-Postが受領を拒絶し配送依頼を取りやめたという理由です。E-PostではSMTPのホップ数が設定した上限を越えると、エラー警告とともにメールのピンポン現象など、サーバの暴走をさせないようにしています。<br>
+<br>
+デフォルト設定でSMTPのホップ数上限が20に設定されています。メールヘッダの &quot;Received: &quot; ヘッダの個数に応じて、デフォルトで設定されているReceivedヘッダのホップ数を上げる必要があります。次のFAQ記事の通りデフォルト設定値を変更してください。<br>
+<br>
+<b>（関連FAQ）</b><br>●<a href="./faq10-79.html">Received:ヘッダのループ数制限＝SMTPホップ数の制限を緩和するには</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

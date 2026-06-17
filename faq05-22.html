@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-22</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP送信ローカルログ（outlocallog）などのログで fromアドレスが空白になっているケースがあるのはなぜ？</b></FONT>
+<HR>
+<br>
+<a href="./faq05-08.html">SMTP送信ローカルログ（outlocallog）</a>で &quot;from - &quot;のようにfromのアドレスがない記録がされることがあります。<br>
+<br>
+SMTP送信ローカルログ（outlocallog）でいちばん多く考えられるケースは、E-Post内部で自動生成するメール、特にpostmasterの名前で自動生成するエラーメールの送信時です。E-Postのアカウントマネージャにpostmasterアカウントが存在しても存在していなくても、自動生成するメールですので、fromの部分にアドレスが記録されません。<br>
+<br>
+エラーメールが生成されているかどうかの確認をするには、<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>を調べます。senderlog内には、エラーメールとして&quot;-E00x&quot;や&quot;-EP00x&quot;のように枝番付きで記録されますので、厳密に記録を追いたいのでしたら、そちらも参照するとよいかもしれません。<br>
+<br>
+さらに、SMTP送信ローカルログ（outlocallog）だけでなく、SMTP受信ログ（inlog）・マシン接続ログ（acceptlog）・SMTP送信ログ（outlog）・配送失敗ログ（faillog）などを調べていくと、fromのアドレスが記録されない別のケースがあります。<br>
+<br>
+メーリングリスト機能や自動転送機能の中にそれぞれ「未送信レポート」「不転送レポート」項目がありますが、この項目が「返信しない」設定になっているとき、E-PostのSMTPサービスプログラムは、エンベロープFROMを空にして書き換えています。それにより、関連するログではfrom部分が特に指定されない、空欄状態となり、メンバーへのメーリングリスト配送が行われたり、自動転送処理されたりします。<br>
+メーリングリスト配送や自動転送が行われているかどうかの確認をするには、<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>を調べます。メーリングリストの配送は、&quot;-M00000001&quot;のように枝番付きで記録されていることを確認できますし、自動転送が行われているときは、&quot;-T00x&quot;のように枝番付きで記録されていることを確認することができます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-18.html">ログに記録されるメッセージIDの後の枝番種類について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

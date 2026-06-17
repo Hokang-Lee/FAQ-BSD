@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-13</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>エイリアスの一括登録方法について</b></FONT>
+<HR>
+<br>
+<b>■ エイリアスの一括登録方法</b><br>
+<ul>
+通常のメールサーバでは使用するドメインが作成済みになっていますが、SMTPゲートウェイにする SMTP Server には、そうした環境とは、少々事情が異なり、使用するドメインが必ずしも作成されているわけではありませんので、下記のように操作してください。<br>
+<ul>
+1.ssh でrootアカウントにログインします。<br>
+2.プログラムの保存フォルダへ移動します。<br>
+# cd /usr/local/mta/bin<br>
+3.エイリアス登録コマンドを実行します。<br>
+# ./epstman mode=NA domname=testdomain.jp aliases=a1＠testdomain.jp mappedto=real＠real.jp<br>
+※複数ある場合は、シェルスプリプトファイル（eg. aliimport.sh 等）を任意で作成、実行権を設定して一括実行することができます。<br>
+</ul>
+<small>※登録されたエイリアスは、その数だけ、必要ライセンス数としてカウントされますので、ライセンスオーバーにならないように、注意してください。必要ライセンス数は、「バージョン情報」ボタンをクリックすることで確認できます。</small><br>
+<br>
+もし仮に、必要／不必要なエイリアスをテキストファイル上で追加したり削除して管理しているような場合、更新したテキストファイルに従って、ファイルに同期したエイリアス設定にしたいときには、インポートを実施する前に、下記の設定情報が保管されているフォルダを任意の別名フォルダにリネームしてください。<br>
+<br>
+[メール作業フォルダ](例 /var/spool/epms/)<br>
+→reg<br>
+　→epost<br>
+　　　→ims<br>
+　　　　→alias<br>
+　（例）aliasフォルダをalias_backフォルダにリネーム<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

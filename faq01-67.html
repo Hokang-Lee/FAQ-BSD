@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-67</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>リトライ処理が行われるときの情報とフォルダについて <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<BR>
+リトライ処理がされるときは、次のフォルダにリトライデータが格納され、設定されたリトライ間隔に基づいてリトライが行われます。<br>
+<br>
+<b>（リトライデータの情報を管理するフォルダについて）</b><br>
+・domainsフォルダ ... SMTP配送でリトライを行うメールアドレスの一時保存フォルダ<br>
+・holdingフォルダ ... SMTP配送でリトライを行うメールデータ一時保存フォルダ<br>
+　リトライデータの上の２つのフォルダは一対のデータとして扱われます。<br>
+・listsフォルダ ... メーリングリスト配送先展開用フォルダ<br>
+　さらにメーリングリスト配信が行われる場合はこのフォルダも配送先展開用として使われます。<br>
+<br>
+リトライメールが処理されるとき、一対のデータがメールキューフォルダであるincomingフォルダに移動し、メールリトライキューとなります。<br>
+<p align="center"><a href="./img/faq01-67-01.jpg"><img src="./img/faq01-67-01s.jpg" border="0"></a></p>
+なお、実際にはリトライするメールの処理を行うためのファイル移動は、domains（エンベロープ情報＆接続結果）とholding（メール本体）とさらにlists（メーリングリスト配送先展開用）とincoming（配送メールキュー）の間で相互に移動しあいます。厳密にはこの4フォルダがリトライ処理に関連するフォルダとなります。<br>
+また、domainsフォルダに一時保存される情報は、次回のリトライ処理で削除することから、配送完了してから完全に削除されるまでに一定のズレ（遅れ）があります。<br>
+domainsフォルダには、エンベロープ情報である.rcpファイルといっしょに"Domain.mri"ファイルが作成されますが、このファイルの内容は次の通りです。<br>
+<br>
+<b>（[Domain.mri]ファイルの例）</b><br>
+ -------------------------------<br>
+ Domain-name: xxx.yyy.co.jp<br>
+ Last-tried: 4245482927<br>
+ Try-number: 1<br>
+ Err-code: 501<br>
+ -------------------------------<br>
+Try-number（※）はリトライが繰り返されると、カウントアップされます。<br>
+また、最後のエラーコードは相手先サーバからの応答コードで、faillogなどに記録される他のエラーコードと同様です。この例では、エラーコード500番台の“恒久的エラー”で受信拒否されていることがわかります。<br>
+ちなみに、Err-code: 0 が表示されたときは、ネットワーク接続ができていない、DNSで名前解決ができていない、などの問題が考えられます。<br>
+※Try-numberのカウントは、「リトライ間隔のまま」がオンかオフのどちらであるかにかかわらず、単に「リトライ間隔」で設定されたタイミングに沿ってカウントアップしていきます。<br>
+従って、デフォルト設定である「リトライ間隔のまま」がオフのとき、Try-numberで表示されている回数から、たとえばTry-number:10なら×2分で約20分とリトライした延べ時間を類推することができますが、実際のリトライ回数をそのまま表しているわけではありません。<br>
+「リトライ間隔のまま」がオンのときは、実際のリトライ回数をそのまま表すことになります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

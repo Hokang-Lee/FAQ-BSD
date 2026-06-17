@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-52</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>リトライデータの孤児化防止とリトライデータを退避させるときのベストな手順について</b></FONT>
+<HR>
+<br>
+リトライ関係データを退避させるときには注意が必要で、holding フォルダと domains フォルダの対になっているデータを退避させる必要があります。これは、holding フォルダと domains フォルダが連携するしくみになっているためです。<br>
+<br>
+もし、holding にあるデータのみを移動させた場合、対になっている domains 下にあるフォルダとファイルがリトライサイクルのタイミングで消される仕様です。詳細に言うと、holdingフォルダにあるデータのみを移動または削除した場合、domains フォルダ下の対になっているフォルダやファイルはリトライサイクルの次のタイミングで、いわゆる「孤児化したデータ」として破棄、削除される仕様になっています。これは、domains フォルダ下のRCPファイルがリトライ時のキーになっているためであり、リトライ関係フォルダに万が一にも、処理できないデータが残ってしまうのを避けるための仕組みが盛り込まれていると理解してください。<br>
+<br>
+リトライデータのファイルの退避手順について、holding フォルダと domains フォルダにある対になっているデータを退避する必要がありますが、より安全に退避するには、domains フォルダ下に置かれているRCPファイルがリトライ時のキーになりますので、domains フォルダ下のRCPファイルを含むフォルダを先に移動した後、holding フォルダ内に置かれているMSGファイルの退避を行うことがより安全な手順といえます。従って domains フォルダ → holding フォルダの順で作業してください。<br>
+<br>
+一方、退避させたリトライデータを holding フォルダおよび domains フォルダに戻す方法を採る場合、epstdd のサービス停止が必要かどうかという問題があります。リトライサイクルが実行されていないタイミングであれば問題ないのですが、実際にはサービス稼働中は、リトライのタイミング自体は外部から見て判別がつくわけではありません。そのため、holding/domains フォルダへファイルを戻す動作は、できれば epstdd を停止したタイミングで行うことがより安全です。これはもしサービスが稼働中だと、ファイルを戻す際にたまたまリトライタイミングに入っていれば、データの孤児化現象が起きることを防ぐことにもつながります。holding/domains フォルダへファイルを戻したら、その直後にサービス開始をしてください。<br>
+<br>
+設定条件によっては、リトライ開始されるまでに一定時間待つことになります。epstdd の「配送詳細」設定で「リトライ間隔のまま」チェックボックスがオフの場合は、リトライ間隔は倍の倍に伸び、時間が経過するほどリトライサイクルが伸びて配送が試みられる仕組みです。そのため、リトライが実施されるまでかなり長い時間待たされるということがあります。一定の時間経過をさせておけばリトライ動作はきちんと行われます。<br>
+<br>
+ちなみにリトライを手動で強制的に実行させたい場合は、下記のFAQ記事のように、epstdd のサービスを一時的に停止させた上で、incoming フォルダにMSGファイルとRCPファイルを置いてやることで可能になります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-91.html">リトライを待たずに手動で強制的に実行させる方法</a><br>
+●<a href="./faq01-66.html">「リトライ間隔のまま」チェックボックスの意味について</a><br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

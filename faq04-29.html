@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-29</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	pre {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:1.6em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールフィルタによる拒絶や中継の制限機能によるリレー禁止や拒絶を行ったとき、送信元にエラーメールは返されるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Postシリーズ製品では、メールフィルタによる拒絶設定を行ったり、中継の制限機能「中継の制限」－「マシンごとの設定」【effect.dat】に「リレー禁止・中継拒否・送信依頼要求の拒否」を意味する &quot;norelay&quot; を設定したり、「接続自体の拒否・受領拒否」を意味する &quot;false&quot; を設定できます。これらの条件に合致した場合、500番台のエラー応答コードと拒絶応答メッセージを接続元のMTAに返します。<br>
+仮にメールの送信元が外部MTAからの送信者である場合、メールフィルタによる拒絶が行われたり、&quot;norelay&quot; の設定で送信依頼要求を拒否されたり、&quot;false&quot; の設定で接続自体拒否されたりした場合は、外部MTAからのSMTP接続時に500番台のエラー応答コードと拒絶応答メッセージが外部MTAに直接返されることになります。ちなみにこれ自体はメールではありません。SMTPプロトコルに準じた応答コードと応答メッセージです。<br>
+通常、ここから先、外部MTAは拒絶応答メッセージをもとにエラーメールを自動生成し、そのエラーメールを送信元である送信者に送り届けるのが標準的な動きとなります。これはすべてメールプロトコルに準じた動作です。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-01.html">epstrd（SMTPレシーバー）応答コード</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

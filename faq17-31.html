@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-31</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>自動転送設定時にメール転送の成功・失敗の判断はどのログで行うか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+自動転送設定時にメール転送の成功・失敗の判断はどのログで行えばよいかについてですが、基本的には、inlog（SMTP受信ログ）、senderlog（配送時の詳細ログ）の順で見てください。<br>
+※状況によっては acceptlog（接続マシンログ）、receivelog（SMTP受信詳細ログ）を調べたり、必要な場合には outlocallog（送信ローカルログ）、faillog（配送失敗ログ）を確認することもあります。<br>
+送信元のエンベロープからのメールを自動転送設定をしている該当アカウントでE-PostのSMTP（epstrd）がまず受領しているかを調べるためにinlogで確認します。記録されている &quot;B&quot; で始まるメッセージIDを控えてください。もしinlogで確認できないときは、acceptlogやreceivelogを調べることになります。<br>
+<br>
+続いて次の配送（転送）段階でどのように処理されたか、senderlog（配送時の詳細ログ）を調べます。転送先ドメインがE-Postの外部にあるときには、基本的にはsenderlogにすべて記載されます。転送先がE-Post内部に登録済みのドメインであるときは、senderlogにはほとんど記録されず、配送成功結果のみoutlocallog（送信ローカルログ）に載ります。メッセージIDを元に、senderlogを照らし合わして、一致する送信記録を探してください。<br>
+自動転送がうまく働いているときは、senderlogに記載される「MAIL From: 」（エンベロープFROM）は、自動転送設定の「不転送レポート先」で選択、あるいは指定したアドレスになっているはずです。これは「不転送レポート先」がエンベロープ書き換え機能と等価になっているためです。またsenderlogに記載される「RCPT To:」（エンベロープTO）は、自動転送設定の転送先になっているはずです。<br>
+<br>
+もし名前解決などの問題があり配送できなかったときには、senderlog および faillog（配送失敗ログ）にその失敗理由が載ることになります。失敗理由は両ログで異なることが理論的に起こり得るため、両方のログを確認するとより確実です。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-04.html">SMTP受信ログ（inlog）について</a><br>
+●<a href="./faq05-08.html">SMTP送信ローカルログ（outlocallog）について</a><br>
+●<a href="./faq05-09.html">配送失敗ログ（faillog）について</a><br>
+●<a href="./faq05-10.html">配送時の詳細ログ(senderlog)について</a><br>
+●<a href="./faq05-18.html">ログに記録されるメッセージIDの後の枝番種類について</a><br>
+●<a href="./faq05-20.html">senderlog と faillog に記載された配送失敗の理由が異なる</a><br>
+●<a href="./faq05-22.html">SMTPローカル送信ログ（outlocallog）などのログで fromアドレスが空白になっているケースがあるのはなぜ？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

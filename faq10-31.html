@@ -1,0 +1,85 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-31</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Received:ヘッダに該当しない別のドメイン名が表示される</b></FONT>
+<HR>
+<br>
+マルチドメイン設定をして運用しているときなど、Received:ヘッダの &quot;from ○○○&quot; 部分や、&quot;by ×××&quot; の部分について、該当しない別のドメイン名が表示されたり、ドメイン名ではなくホスト名がそのまま表示されることがあります。<br>
+このようなとき、メールサーバマシン内の /etc/hosts ファイルの記述について、何も記述していないことはないか、あるいは記述順序が正しいか、確認してください。運用中の正しいドメイン名を表示させるには、hostsファイルを明示的に記述してください。<br>
+<br>
+Received:ヘッダの編集を行うのは次の操作を行ってください。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開き、画面下部にある［'Received:'ヘッダ］ボタンをクリック。<br>
+Received:ヘッダの書式は以下の通りです。<br>
+<ul>
+[書式]<br>
+----------------------------------------------------------------<br>
+Received: from &HELO (unverified [&ORIGIN-IP]) by &MTA-NAME<br>
+　　(&SOFT-NAME &SOFT-VER) with ESMTP id &lt;&MSG-ID@&MTA-NAME&gt;<br>
+　　&PER{for &lt;&RECIPIENT&gt;  from &lt;&SENDER&gt;}; &DATETIME<br>
+----------------------------------------------------------------<br>
+</ul>
+<ul>
+[書式凡例]<br>
+Received: from ＜HELOコマンドに続く文字列＞<br>
+unverified [&lt;接続元IP&gt;]<br>
+by &lt;自身のマシン名&gt;（メールサーバマシンのローカルホスト名）<br>
+</ul>
+これに従うと、&quot;from ○○○&quot; 部分は、HELOするコンピュータ名（もしくはドメイン名）、&quot;by ×××&quot; 部分は、MTA自身のマシン名（もしくはドメイン名）が表示されます。<br>
+<br>
+別のMTA（E-Postシリーズ製品）からメールサーバ（E-Postシリーズ製品）に送信されたときのケースで、Received:ヘッダがどのように表示されるか例をあげます。<br>
+<ul>
+[例] <br>
+Received: from <font color="blue"><u>domain.jp</u></font> (unverified [192.168.0.xx]) by test.jp (E-POST ESMTP Receiver v5 (5.00)) with ESMTP id ...<br>
+　　　　　　　　　　　<font color="blue">(B)</font><br>
+Received: from COMPUTER (unverified [192.168.0.xx]) by <font color="red"><u>domain.jp</u></font> (E-POST ESMTP Receiver (4.9x)) with ESMTP id ...　　　　　<font color="red">(A)</font><br>
+</ul>
+受信処理された順に、Received:ヘッダを下から参照し、<font color="red">(A)</font> 別のMTA（E-Post）から送信されたときのマシン名（ドメイン名）、<font color="blue">(B)</font> 手元のメールサーバ（E-Post）で受信されたときのHELOコマンドに続くコンピュータ名（ドメイン名）、の表示がされていると見なせます。<br>
+<br>
+通常、この<font color="red">(A)</font>と<font color="blue">(B)</font>は同じ表示になることが、当然のこととして受け止められています。<br>
+ところが、マルチドメイン設定をしているときで、hostsファイルを記述していなかったり、記述順序が正しくないときは、運用中の正しいドメイン名が表示されないで、該当しない別のドメイン名が表示されることがあります。たとえば、<font color="blue">(B)</font>にコンピュータ名（例・SV01など）が表示されるケース、<font color="red">(A)</font>にマルチドメイン設定している別のドメイン名（例・abc.jp）が表示されたりするケースです。<br>
+<br>
+このようなときは、メールサーバマシン内のhostsファイルをメモ帳で開き、正しい記述がされているか確認してください。たとえば、マルチドメイン設定時に、&quot;by ×××&quot;の表示をそれぞれのドメインに変更する方法は、メールサーバマシン内のhostsファイルに、それぞれリッスンしているIPアドレスに対応するFQDNを記載します。<br>
+ちなみに、hostファイルは、［ファイル名を指定して実行］から次のように入力すれば、メモ帳で参照・編集できます。<br>
+# vi /etc/hosts
+<br>
+<ul>
+[例]<br>
+192.168.1.11　domain.jp hostname<br>
+192.168.1.12　abc.jp  hostname<br>
+</ul>
+（関連FAQ）<br>
+●<a href="./faq10-53.html">hostsファイル記述の必要性と有用性について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

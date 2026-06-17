@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-86</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>送信先のMXレコードにある優先MTAがダウンしていて別の次点MTAに強制的に送信したい</b></FONT>
+<HR>
+<br>
+送信先相手のMXレコードにある優先MTAがダウンしていて、メールを何度送信しても接続できずに失敗する状況下で、MXレコードにある別の次点MTAに強制的に送信するには、【gateway.dat】に次点MTAを記述することで暫定的に送信させることが可能です。以下は事例として紹介します。<br>
+<ol>
+（例）【abcdef.jpのMXレコード】<br>
+abcdef.jp.　　　　3600　　IN　　MX　　10 m1.abcdef.jp.<br>
+abcdef.jp.　　　　3600　　IN　　MX　　20 m2.abcdef.jp.<br>
+abcdef.jp.　　　　3600　　IN　　MX　　30 m3.abcdef.jp.<br>
+<br>
+abcdef.jpのMXレコードをnslookupコマンドで調べた結果、仮に上記のようになっていたとして、&quot;MX 10&quot; および &quot;MX 20&quot; のサーバがすべてSMTP接続できず、&quot;MX 30&quot; のサーバのみSMTP接続可能な状態となっている場合、E-Post側から強制的に &quot;MX 30&quot; のサーバに接続させるには、サーバに割り当てられたIPアドレスを調べた上で、次のように「テーブル編集」【gateway.dat】に記述します。<br>
+<br>
+<li>&quot;MX 30&quot; の m3.abcdef.jp に割り当てられたIPアドレスを調べる。</li>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］を選択すると最下端に表示される［ゲートウェイ詳細］ボタンをクリック。</li>
+<li>表示される【gateway.dat】の編集画面に次の行を追加。調べた[IPアドレス]を指定する。最後に［設定する］ボタンをクリック。</li>
+'-------------------------------<br>
+abcdef.jp,[IPアドレス],25<br>
+'-------------------------------<br></li>
+</ol>
+※この「テーブル編集」【gateway.dat】に記述された内容は、DNSのMXレコード参照より優先されて、配送されます。すなわち相手側MTAの全てが復旧するまで、稼働しているサーバのIPアドレス決め打ちで送るという代替案です。送信先相手のMTAが復旧されたら、削除することをお薦めします。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-28.html">フォワードするSMTPサーバをドメイン別に振り分け制御する</a><br>
+●<a href="./faq15-73.html">サブドメインが複数あるサーバ宛に送ると名前解決の問題で配送が失敗することがある場合の対策</a><br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

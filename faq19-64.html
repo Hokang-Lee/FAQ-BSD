@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-64</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>同報時のリトライ処理の流れはどのように行われるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+同報（複数宛先）送信時のリトライ処理の流れは、宛先の構成やSMTPセッション中にどの段階でエラーが発生したかによって挙動が別れるため、少し複雑に見えます。<br>
+<br>
+<b>１．同一ドメイン宛のみの同報の場合</b><br>
+同報先が同一ドメインのみで構成されている場合、初回送信（1回目）は基本的に1つのSMTPセッションでまとめて送信しようとします。<br>
+ただし、同報送信中に何らかの理由でセッションが拒否されたり、途中で切断・タイムアウト等が発生した場合は、同報メールとして<b>“一体だったメールデータが分離”</b>されることがあります。<br>
+分離されたメールデータは、いったんリトライ関連フォルダに留まり、リトライのタイミングでメールキューへ移動し、再送が試みられます。<br>
+<br>
+<b>２．複数ドメイン宛が混在する同報の場合</b><br>
+同報先に異なるドメインが含まれている場合は、送信処理の都合上、<b>結果的に“最初から分離”されることになります。</b><br>
+具体的には、<br>
+・まず同一ドメイン宛の送信を前記１の段取りで完了<br>
+・次に、別ドメイン宛を新たなSMTPセッションで探し送信<br>
+という流れになるため、ドメイン単位で配送セッションが分かれ、リトライの単位もそれに応じた形になります。<br>
+<br>
+<b>３．E-Post SMTP Server V でも同じか</b><br>
+E-Post SMTP Server V はSMTPゲートウェイ専用の特殊動作ではなく、E-Post Mail Server V の通常の外部配送と同様の考え方・同様の流れで同報送信やリトライが行われます。<br>
+<br>
+<b>４．実際の動きを確認するには</b><br>
+同報時に「どこで分離されたか」「どの宛先がリトライ対象になったか」「セッションは何回作られたか」などの具体的な流れは<a href="./faq05-10.html">senderlog（配送詳細ログ）</a>に最も明確に記録されます。<br>
+動作を追いたい場合は、senderlogを取得・参照し、該当メールのメッセージID（“B”で始まる10桁の連番数字）をキーに確認してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-18.html">ログに記録されるメッセージIDの後の枝番種類について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

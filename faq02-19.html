@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-19</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリスト設定の投稿パスワードとSMTP認証について</b></FONT>
+<HR>
+<br>
+メーリングリスト設定で投稿パスワードを設定していると、投稿が拒絶される場合があります。理由を調べるため、SMTP受信詳細ログ（receivelog）を取得すると、&quot;550 5.7.0 Please, mail after SMTP-authentication.&quot; のエラー応答が出力されているのを確認できます。理由と解決方法をお知らせします。<br>
+<ol>
+<li><b>&quot;550 5.7.0 Please, mail after SMTP-authentication.&quot;のエラー応答の意味について</b><br>
+<br>
+メーリングリストに投稿するため、送信しようとしている際、RCPT TO:のあとに、&quot;550 5.7.0 Please, mail after SMTP-authentication.&quot; のエラー応答が出力されることがあります。この応答内容は、「MAIL FROM:命令への送信元エンベロープ（メーリングリストへのメール投稿には、SMTP-AUTHを必要する）受領拒否応答」を意味します。<br>
+<br>
+この要因として考えられるのは、メーリングリスト側の設定において、投稿パスワードが設定されている場合、内部ドメインのアカウントからの投稿でSMTP認証を有効にせずに送信しようとすると、認証が通らないため、上記エラーで拒絶されている状況であることです。<br>
+<br>
+E-Post Mail Serverにマルチドメインの設定をしていて、同じE-Post内の片方のAドメインのあるアカウントから、片方のBドメインにあるメーリングリストに投稿する場合も、メーリングリスト設定側に投稿パスワードが設定されていると、Aドメインのアカウントでの送信時にSMTP認証をさせることが必要になります。<br>
+<br>
+メーリングリスト設定におけるヘルプ記述内容を下記に引用します。<br>
+<br>
+<hr width="95%" border="1">
+<b>投稿パスワード</b>
+(デフォルト 空白)<br>
+メーリングリスト投稿時に「SMTP認証を行わない投稿は拒否する」方法で、投稿者を信任する場合に設定を行います。このとき、E-POST コントロールセンター（メールサーバ管理）の［SMTP受信詳細］にある［SMTP認証方法］を &quot;NO&quot; 以外にしなければなりません。また、空白とした場合、未認証にて投稿内容を受付ける従来通りの処理となります。 <br>
+投稿パスワードを設定し認証をかけた場合の投稿時の注意点<br>
+ａ）メーリングリストが運営されているメールサーバーにクライアントは直接接続してSMTP認証を受け投稿しなければなりません。<br>
+ｂ）このときのＭＬ参加した投稿者のSMTP認証は、仮にメールグループが &quot;test&quot; であるとして、ID=test、PASSWORD=「投稿パスワード」に設定したパスワードで認証を行うことになります。<br>
+例外的に内部ユーザーで自分のIDにてSMTP認証できるように、APOP.DATファイルへ設定が行なわれている場合は、そのアカウントとパスワードでの認証にて投稿が可能です。 <br>
+<hr width="95%" border="1">
+<br>
+メーリングリスト設定における「投稿パスワード」は上記ヘルプに記載した扱いになります。つまり、この「投稿パスワード」設定をしていると、2通りの投稿方法しか許可されない仕様です。<br>
+<br>
+[1]. 内部アカウントから投稿する場合は、&quot;メーリングリスト名＋投稿パスワード&quot; の形で認証するか、あるいはアカウント自身のSMTP認証を有効にして送信を実施、投稿する（上記ヘルプのａに該当)<br>
+[2]. 外部のMTA（SMTPサーバ）を経由して投稿する場合は、&quot;メーリングリスト名＋投稿パスワード&quot; でSMTP認証を有効にした認証をおこなって投稿する（上記ヘルプのｂに該当）<br>
+<br>
+現実的な解決方法としては次のようになります。<br>
+<br>
+<li><b>解決方法について</b><br>
+<br>
+(1) 全員がSMTP認証を有効にすることができず、しかも外部ドメインの利用者がいるような環境で、E-Post Mail Serverに接続して送信できない環境のときは、メーリングリスト設定の「投稿パスワード」設定を見直し、デフォルトである &quot;空白&quot;＝&quot;なし&quot; の設定に戻す。（こうすればSMTP認証をしない設定のアカウントからでも投稿が可能）<br>
+<br>
+(2) 対象となるアカウントが、E-Post Mail Server内にマルチドメインとして設定されていて、送信できる環境であれば、SMTP認証を有効に設定する方法を取る。SMTP認証を有効にする方法や「認証ファイル」の意味、エラーメッセージの種類については下記の記事を参照のこと。<br>
+<br>
+(3) 外部ドメインで外部のMTAを経由して、E-Post Mail Serverにあるドメインのメーリングリストに投稿する場合、しかも「投稿パスワード」を継続することにどうしても固執されるのであれば、上記(b)で説明されている例に従い、&quot;ML名＋投稿パスワード&quot; で SMTP認証を行えるよう、外部のMTAの設定を見直し変更を実施する。<br>
+<br>
+おそらく、(3)が可能になるためには別次元の問題があるでしょうから、具体的に取れる方法としては、(1)か(2)のどちらかに限られます。現実的には、外部ドメインの利用者にどうしても投稿を許可させたい要件のときには、「投稿パスワード」をなしにする方法しか手段がないものと考えられます。<br>
+</ol>
+<br>
+（関連FAQ）<br>
+●<a href="./faq01-38.html">SMTP認証（SMTP-AUTH）設定の手順</a><br>
+●<a href="./faq01-54.html">SMTP認証（SMTP-AUTH）の認証方法を選択したときの挙動と「認証ファイル」の意味は？</a><br>
+●<a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

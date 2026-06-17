@@ -1,0 +1,157 @@
+<html>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-74</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP AUTHあり／なしで接続したときの動作とメッセージについて <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<BR>
+SMTP認証（SMTP-AUTH）を利用するとき、サーバ側（E-Post Mail Server）、クライアント側からそれぞれ、SMTP AUTHあり／なしで接続したときの動作結果とそのメッセージは、下表のようになります。<br>
+受信詳細ログ（receivelog）を記録しているとき、表内のエラーメッセージが出力されているときは、サーバかクライアントのいずれかの設定に問題がありますので、設定を再確認するとよいでしょう。<br>
+<br>
+<table border=1 cellspacing=0 cellpadding=2 width=610>
+ <tr>
+   <th class="m" bgcolor="#CCCCCC" colspan="2" width=180>メールクライアント側 ≫
+   </th>
+   <th class="m" bgcolor="#CCCCCC" rowspan="2" width=215>SMTP AUTHあり の設定
+   </th>
+   <th class="m" bgcolor="#CCCCCC" rowspan="2" width=215>SMTP AUTHなし の設定
+   </th>
+ </tr>
+ <tr>
+   <th class="m" bgcolor="#CCCCCC" colspan="2" width=180>E-Post Mail Server<br>
+   ▼ メールサーバ側　　
+   </th>
+ </tr>
+ <tr>
+   <th class="m" bgcolor="#CCCCCC" rowspan="2">
+     <small>（全体設定）</small><br>
+     SMTP AUTH<br>あり［有効］<br>
+     ＋<br>
+     <small>（ユーザー単位）</small><br>
+     認証ファイル<br>あり<font color="darkgreen">※</font><br>
+     <small><m>[SMTP AUTH &<br>APOPを使用]がオン</m></small><br>
+   </th>
+   <th class="s" bgcolor="#CCCCCC">
+     <small>認証<br>パス<br>ワード<br>一致</small>
+   </th>
+   <td class="m">
+     　グリーティング：EHLO<br>
+     　接続：<b><font color="blue">○</font></b><br>
+     　結果：OK<br>
+   </td>
+   <td class="m" rowspan="2" nowrap>
+     　グリーティング：HELO <br>
+     　<small>または</small> EHLO<br>
+     　接続：<b><font color="red">×</font></b><br>
+     　結果：503 5.0.0 Need EHLO<br>
+     　 before AUTH<br>
+   </td>
+ </tr>
+ <tr>
+   <th class="s" bgcolor="#CCCCCC">
+     <small>認証<br>パス<br>ワード<br>不一致</small>
+   </th>
+   <td class="m" nowrap>
+     　グリーティング：EHLO<br>
+     　接続：<b><font color="red">×</font></b><br>
+     　結果：535 5.7.0 Authentication<br>
+     　 failed（AUTH failed）<br>
+   </td>
+ </tr>
+ <tr>
+   <th class="m" bgcolor="#CCCCCC" colspan="2">
+     <small>（全体設定）</small><br>
+     SMTP AUTH<br>あり［有効］<br>
+     ＋<br>
+     <small>（ユーザー単位）</small><br>
+     認証ファイルなし<font color="darkgreen">※</font><br>
+     <small>[SMTP AUTH &<br>APOPを使用]がオフ</small><br>
+   </th>
+   <td class="m" nowrap>
+     　グリーティング：EHLO<br>
+     　接続：<b><font color="red">×</font></b><br>
+     　結果：535 5.7.0 Authentication<br>
+     　 failed（AUTH failed）<br>
+     　または<br>
+     　結果：503 <font color="#0000cc">5.0.0</font> Need AUTH before<br>
+     　 MAIL<br>
+   </td>
+   <td class="m" nowrap>
+     　グリーティング：HELO <br>
+     　<small>または</small> EHLO<br>
+     　接続：<b><font color="blue">○</font></b><br>
+     　結果：OK<br>
+     <br>
+   </td>
+ </tr>
+ <tr>
+   <th class="m" bgcolor="#CCCCCC" colspan="2">
+     <small>（全体設定）</small><br>
+     <br>SMTP AUTHなし［NO］<br>
+     <br>
+   </th>
+   <td class="m">
+     　グリーティング：EHLO<br>
+     　接続：<b><font color="blue">○</font></b><br>
+     　結果：OK<br>
+     <small>※通常のメールクライアントはEHLO後のサーバのSMTP AUTHなし応答を受けてこの動きをする。</small><br>
+     －－－－－－－－－－－－－－－<br>
+     　グリーティング：EHLO<br>
+     　SMTP AUTHなし応答後、あえてAUTHでの認証：<b><font color="red">×</font></b><br>
+     　結果：503 <font color="#0000cc">5.5.1</font> Error:<br>
+     　authentication not enabled.<br>
+     <small>※サーバのSMTP AUTHなし応答を受けても、あえてAUTHでの認証をしようとする一部のメールクライアントの場合。メールクライアントの仕様による。</small></small><br>
+   </td>
+   <td class="m" nowrap>
+     　グリーティング：HELO <br>
+     　<small>または</small> EHLO<br>
+     　接続：<b><font color="blue">○</font></b><br>
+     　結果：OK<br>
+   </td>
+ </tr>
+</table>
+<br>
+※E-Post Mail Serverシリーズ・E-Post SMTP Serverシリーズは、アカウント別に認証あり／認証なしの使い分けをすることができますが、サーバ全体でSMTP認証を有効に設定していて、認証レベルを「認証ファイル」で設定しているとき、該当ユーザーで「認証ファイルを設定する」チェックボックスがオフになっているものは、“認証ファイルなし”の状態となります。<br>
+もし該当ユーザーのチェックボックスがオフになっているときは、オンの状態に切り替え［設定変更］ボタンをクリックします。そして続いて、該当するユーザーを選択し［パスワード変更］を選択し「変更するパスワード」「再確認パスワード」を入力し、パスワードを再設定します。この一連の操作により、該当アカウントのメールフォルダ内に認証ファイル &quot;apop.dat&quot; が作られ、入力したパスワードはそのファイル内に暗号化されて格納されます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-01.html">epstrd（SMTPレシーバー）応答コード</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

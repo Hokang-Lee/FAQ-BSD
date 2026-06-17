@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-28</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>送受信が突然できなくなり、サービスが停止できなくなった</b></FONT>
+<HR>
+<br>
+送受信が突然できなくなったり、メールサーバ側でサービスが停止できなくなるような事態に陥ったとき、以下のことを真っ先に確認してください。<br>
+<ol>
+<li><b>ライセンスキーの登録を行わないで30日をすぎたケース</b><br>
+正式版をご購入後、ライセンスキーを登録せず30日をすぎたとき、または評価版を使用していて評価期限の30日をすぎたとき、メールの各サービスは動作していますが、各サービスへの接続が拒絶されるようになり、送受信が不能になります。<br>
+また、ライセンスキーを登録した後でも、サービス削除をして再インストールし、再び30日を経過しますと、同じ現象になってしまいますので、ご注意ください。<br>
+<font color="red">ライセンスキー登録を行なっていただくと各サービスの接続は回復します。</font><br>
+評価版を使用していたケースなどで、ライセンスキーを登録せずにサービスを停止したい場合は、[管理ツール]->[サービス]より、メールの各サービスを「自動」から「手動」に切り替えた後、OSを再起動します。<br>
+<br>
+<li><b>OSのパケットフィルタリングやファイアウォール機能でリッスンポートの制限をおこなっているケース</b><br>
+OSのパケットフィルタリング設定で、該当するリッスンポートを許可していなかったり、ファイアウォール機能を有効にして、接続するポートを許可していないときも、このような現象が発生します。<br>
+<br>
+・OS に装備されているIP Filter有効化で、各サービスのTCPリッスンポートが許可されていないと、クライアントからの接続だけでなく、サービス停止もできなくなります。<br>
+（デフォルト SMTP...25番、587番（Submissionポート）、POP3...110番、IMAP4...143番の各ポート)<br>
+[参考リンク]<br>
+<a href="http://freebsd.server-manual.com/freebsd9_ipfilter.html">http://freebsd.server-manual.com/freebsd9_ipfilter.html</a>
+<br>
+<br>
+・サードパーティ製ファイアウォールソフトウェアの設定で、リッスンポートに制限がされていると、クライアントからの接続だけでなく、サービス停止もできなくなります。<br>
+（デフォルト SMTP...25番、587番（Submissionポート）、POP3...110番、IMAP4...143番の各ポート)<br>
+</ol>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

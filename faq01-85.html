@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-85</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Active Directory（LDAP）連携時のSMTP認証パスワードの変更について</b></FONT>
+<HR>
+<br>
+ユーザー管理をActive Directory（LDAP）連携させるとき、Active Directory側で設定・変更されたユーザー認証パスワードが連動するのは、POP3認証パスワード・IMAP4認証パスワード項目です。<font color="#cc0000">また、SMTP認証方式を PLAIN 方式か LOGIN 方式に限定したときのSMTP認証パスワード項目も連動項目となります。</font><br>
+<font color="#cc0000">ユーザー管理をActive Directory（LDAP）連携させているとき、E-POSTコントロールセンターのメールサーバ管理からのパスワード変更の操作は無効ですので注意してください。</font>上記の認証パスワードを変更するときは、ドメインコントローラの「Active Directoryユーザーとコンピュータ」から「パスワード（パスワードのリセット）」で変更します。<br>
+<font color="#cc0000">一方、SMTP認証方式を CRAM-MD5 方式に設定している場合、そのとき利用されるSMTP認証パスワードは「Active Directoryユーザーとコンピュータ」で管理されるパスワードと連動項目とはなりません。</font>E-Post Mail Server 側が管理する &quot;apop.dat&quot; などの認証ファイルに設定されているSMTP認証パスワードとマッチングされます。 CRAM-MD5 方式を使うSMTP認証を利用しているときに、SMTP認証パスワードを変更するには「Active Directoryユーザーとコンピュータ」からは変更できず、E-POSTコントロールセンターのメールサーバ管理から変更を行う必要があります。<br>なお、SMTP認証を有効にするには、あらかじめE-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」からエクスポートする対象ドメインを選択して［ユーザー管理へ］をクリック。該当するユーザーを選択し［設定変更］を選択して「認証ファイルを設定する」チェックボックスをオン。続いて［パスワード変更］を実行してパスワードを入力します。その際、該当ユーザーのメールボックスフォルダに &quot;apop.dat&quot; という認証ファイルが作成・保存されます。<br>
+<br>
+（関連FAQ）<br>
+●<a href="./faq01-84.html">Active Directory（LDAP）連携時の連動項目は？</a><br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

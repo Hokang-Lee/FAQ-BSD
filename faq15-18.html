@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-18</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>送信先のMXレコードが変更されて以降も更新前の情報にもとづいて送られることがある</b></FONT>
+<HR>
+<br>
+E-Postの内部アカウントから外部へ向けて送信される際、メールの送信先相手がMXレコードの内容を更新した以降も、更新前の情報で送信される場合があります。これは、相手側のMXレコードが変更されてしまった場合に、E-Post側のMXキャッシュデータの自動更新するタイミングが間に合わないケースが原因だと考えられます。<br>
+<br>
+なお、MXキャッシュデータの更新時間は、デフォルトで 864,000sec＝24時間 に設定されています。次の個所で確認および変更が可能です。<br>
+<blockquote>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP送信詳細］を開き「MXキャッシュ更新間隔」<br>
+</blockquote>
+この設定値を短くすれば早めの更新ができることになり、長くすれば遅めの更新になります。また、&quot;0&quot;に設定すれば、MXキャッシュファイルを作成・更新したり参照したりすることはなくなります。キャッシュに頼らないで常にDNSのMXレコードを参照する動きになります。変更後は epstdd を再起動する必要があります。<br>
+<br>
+更新時間前に、更新前の情報で送信したことにより、相手先に不達になったことがわかった場合には、手動でMXキャッシュファイルを削除してください。MXキャッシュファイルは、[メール作業用フォルダ]/mxcash/ フォルダ下に該当ドメインの名の付いた拡張子.mxのデータファイルとして残っています。このキャッシュファイル自体を削除します。（※既定のメール作業用フォルダ /var/spool/epms/ ）<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-92.html">MXレコードに書かれた複数のMTAのうち優先度の低いサーバに繰り返し接続しエラーを返される</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

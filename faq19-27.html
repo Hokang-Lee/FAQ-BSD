@@ -1,0 +1,126 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-27</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>迷惑メール対策でメールフィルタ設定【mail.dat】に From:アドレス を指定しているが、まったく効かない <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+<B>メールフィルタ機能【mail.dat】でヘッダーFrom:のアドレス指定条件をしても効果は見込めない点について</B><br>
+まず、ヘッダーFrom:のアドレスは、送信元が簡単に詐称できるものです。<br>
+特に迷惑メールでは99％詐称していますので、メールフィルタの指定条件として詐称可能表向きヘッダーFrom:のアドレス指定条件を設定したとしても、効果はほとんど見込めません。<br>
+メールフィルタ機能を活用するにしても、ヘッダーにある他の特徴を把握して指定条件にする必要があります。<br>
+<br>
+メールサーバ本体でできる迷惑メール対策には限界もありますが、取ることができる対策はいくつかあります。<br>
+下記にまだ取ることができそうな対策をあげてみました。<br>
+<br>
+<B>1．メールフィルタ機能【mail.dat】でFrom:で指定するなら、迷惑メールの目的である文字で指定</B><br>
+メールフィルタでFrom:を条件に加えるときは、アドレス条件を指定しても役立たないことは前記の通りです。<br>
+しかしながら、迷惑メール発信者の狙いの一つは、From:文字列＜メールアドレス＞のうち、メールアドレスの直前に書かれているこの文字列なのですから、これを指定する方法はある程度は有効です。この文字列は名前というより発信者の宣伝文句が散りばめられます。<br>
+ただし、メールフィルタ指定時には注意が以下のように必要です。<br>
+From:に書いてある宣伝文字列は全角文字ですから、エンコードされた文字列をShiftJIS用、JIS（iso-2022-j）用とUTF-8用の3種類か、場合によってはさらにEUC用を加えた4種類の指定をしてメールフィルタで引っかける方法を取ることになります。<br>
+【mail.dat】内に直接、全角文字を書いただけの条件では、ShiftJISの文字しか指定したことになりません。詳細な指定方法は下記関連FAQ「From:ヘッダーにある特定の全角文字で拒絶するには」を参照ください。<br>
+<br>
+<B>2．SURBL方式のサイト指定で迷惑メール判定を設定する</B><br>
+メールフィルタの中では、SURBL方式のサイト指定が可能です。<br>
+SURBL方式とは、メール本文に記載されているURLから、迷惑メール発信者が誘因しようとしているブラックなドメインを判定・判別する方式です。<br>
+SURBL方式のサイトとして、有力な無料サービスは、surbl.orgが有名です。メール本文にURL記載がないメールに対しては、効力を発揮しませんが、URLを記載しているものなら、それなりの効果が期待できます。もしまだ設定していなければ、推奨の設定です。<br>
+下記指定例のうち、前者例Level:300はタグを付けて通す方法、後者例Level:600はタグを付けて隔離用メールアドレスに隔離する方法です。<br>
+<br>
+----------------【mail.dat】指定例1 --------------<br>
+Virus:RBL multi.surbl.org<br>
+RBL:multi.surbl.org<br>
+Level:300<br>
+Tag:[SPAM]<br>
+VirusEnd:<br>
+--------------------------------------------------<br>
+<br>
+----------------【mail.dat】指定例2 --------------<br>
+Virus:RBL multi.surbl.org<br>
+RBL:multi.surbl.org<br>
+Level:600<br>
+Tag:[SPAM]<br>
+Forward:spamhld＠domain.jp<br>
+VirusEnd:<br>
+--------------------------------------------------<br>
+<br>
+※下記関連FAQ「メールフィルタ【mail.dat】の設定事例」のケース1，ケース2を参照ください。<br>
+<br>
+<B>3．メールフィルタの設定で、題名だけでなく本文中のURLも含めるように指定して判定精度を上げる</B><br>
+メールフィルタの設定では、題名だけでなく、本文中のURLも含めるように設定すれば判定精度が上がります。<br>
+なお、以下の例では題名の全角文字を直接書いていますが、これだけではShiftJIS用の文字列だけを指定していることになります。<br>
+実際の設定では、"MIME-Bエンコード"されたトークン指定、つまり通常形態でもShift-JIS用、JIS（iso-2022-j）用とUTF-8用の3種類を並記した記載が必要です。詳細な説明は下記関連FAQ「Subject:ヘッダーにある特定の全角文字で拒絶するには」参照ください。<br>
+<br>
+メールフィルタ拒否設定例<br>
+--------------------------------------------------<br>
+Virus:題名と本文リンクが含まれるメールの拒否<br>
+Level:100<br>
+Subject:［ここに題名］<br>
+Body:<br>
+［ここにURL］<br>
+BodyEnd:<br>
+VirusEnd:<br>
+--------------------------------------------------<br>
+<br>
+具体例としては以下のようにします。<br>
+--------------------------------------------------<br>
+Virus:拒否設定例１<br>
+Level:100<br>
+Subject:「お支払い情報の更新が必要です - Amazon.co.jp」<br>
+Body:<br>
+://hogehoge.cn/<br>
+BodyEnd:<br>
+VirusEnd:<br>
+--------------------------------------------------<br>
+Virus:拒否設定例２<br>
+Level:100<br>
+Subject:「お支払い情報の更新が必要です - Amazon.co.jp」<br>
+Body:<br>
+://hogehoge.com/<br>
+BodyEnd:<br>
+VirusEnd:<br>
+--------------------------------------------------<br>
+<br>
+※"MIME-Bエンコード"するには、いろいろなツールサイトがありますのでそういったツールを探してご利用ください。<br>
+<br>
+<B>4．迷惑メールとは直接関係しないが、IPロックアウト機能導入も検討</B><br>
+迷惑メール発信者からの迷惑メールをブロックするのには直接関係しませんが、サーバ攻撃から防御するSMTP接続時のIPロックアウト機能についても、機能導入を検討ください。<br>
+なお、IPロックアウト機能で使われている設定テーブル、"rejectsmtpip.dat" ファイルにIPアドレスだけ書き、右側のオプションに何も書かない場合は、永続的に接続を拒否する対象のIPアドレスという動きになります。下記関連FAQ「〔新機能〕SMTP接続時の「IPロックアウト機能」について 」参照ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq04-05.html">From:ヘッダーにある特定の全角文字で拒絶するには</a><br>
+●<a href="./faq01-81.html">メールフィルタ【mail.dat】の設定事例</a><br>
+●<a href="./faq04-06.html">Subject:ヘッダーにある特定の全角文字で拒絶するには</a><br>
+●<a href="./faq17-09.html">〔新機能〕SMTP接続時の「IPロックアウト機能」について </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

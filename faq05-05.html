@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-05</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>SMTP受信詳細ログ（receivelog）について</b></FONT>
+<HR>
+<br>
+SMTP受信詳細ログ（receivelog）は、<b>SMTP受信サービスプログラム（epstrd）動作の詳細な記録</b>で、<b>重要性の高い記録ログ</b>の一つです。<br>
+<br>
+SMTP受信詳細ログ（receivelog）についての記録方法は、次の手順で行ってください。<br>
+<ol><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ログ］を開き［SMTP受信詳細ログ］チェックボックスの状態を確認します。
+<li>チェックボックスがオンの設定のままのときはそのままで、チェックボックスがオフのときはオンに変更してから［設定する］ボタンクリックします。［SMTP受信詳細ログ］をオンにすると［接続マシンログ］もオンになります。
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面からSMTP受信サービス（epstrd）を［停止］→［開始］で再起動します。</ol>
+ログ記録は、［メール作業フォルダ/receivelog/コンピュータ名］フォルダ下に日付単位で作成されます。<br>
+<br>
+SMTP受信詳細ログ(receivelog)で取得する記録は、SMTP受信サービスプログラムが、相手方MTAや、メールクライアントから接続された後のSMTP受信時における詳細記録です。<br>
+たとえば、外部から内部宛に着信するメールでは、存在しないアドレスに送られてきたとき <b>User unknown.</b>で拒絶した記録をはじめ、メールフィルタ設定で行う<b>SURBL/URLBL方式によるSPAM判定結果</b>（拒絶／隔離／通過）や、アンチウイルスエンジンによる<b>ウイルス検出結果</b><small>（※）</small>など、重要な記録が多く載ります。<small>※具体的にはフィルタ条件で受領拒絶された記録として残ります。</small><br> 
+また、内外からメールクライアントを利用して、送信リクエストを行うとき、接続時に<b>SMTP AUTH認証エラー</b>になっている記録とか、<b>中継拒否</b>されている記録なども残ります。ユーザーから見て“送ることができない”とされる理由のうち、接続時や受理時の内容が記録されますので、“送ることができない”理由のおおよそ約半分が載っていることになります。その点からも、<b>きわめて重要なログ</b>です。<br>
+いずれにしても、記録を続ける際は、ログはかなり大きなものになりがちですので、一定期間経過したログファイルはメンテナンスするなどの注意がより必要になります。<br>
+<br><small>
+<hr align="center" width="98%" size="1" noshade>
+　　記録日時　　　,スレッド・メモリ(※),　送受信内容・内部処理ステータス<br>
+<hr align="center" width="98%" size="1" noshade>
+　[30/Nov/2017:08:20:44], 00145008, 220 xxxx.xxx.jp E-POST ESMTP Receiver .....<br>
+　[30/Nov/2017:08:20:46], 00145008, helo<br>
+　[30/Nov/2017:08:20:46], 00145008, 250 xxxx.xxx.jp  Hello [xxx.xxx.xxx.xxx], pleased to meet you<br>
+　[30/Nov/2017:08:20:49], 00145008, mail from: ????????<br>
+　[30/Nov/2017:08:20:49], 00000000, Check MAIL FROM address = ????????<br>
+　[30/Nov/2017:08:20:49], 00000000, user check status(1) = found local group (0)<br>
+　[30/Nov/2017:08:20:49], 00000000, match!!<br>
+　[30/Nov/2017:08:20:49], 00000000, user check status(2) = found Aliases<br>
+　[30/Nov/2017:08:20:49], 00145008, 250 &lt;????????&gt;... Sender ok.<br>
+　[30/Nov/2017:08:20:51], 00145008, rcpt to: ????????<br>
+　[30/Nov/2017:08:20:51], 00000000, Check RCPT TO address = ????????<br>
+　[30/Nov/2017:08:20:51], 00000000, user check status(1) = found local group (0)<br>
+　[30/Nov/2017:08:20:51], 00000000, match!!<br>
+　[30/Nov/2017:08:20:51], 00000000, user check status(2) = found Lists<br>
+　[30/Nov/2017:08:20:51], 00145008, 250 &lt;????????&gt;... Recipient ok.<br>
+　[30/Nov/2017:08:20:51], 00145008, DATA<br>
+　　　　　　　　　　　：<br>
+　[30/Nov/2017:08:20:51], 00145008, 250 2.0.0 Message received ok.<br>
+　[30/Nov/2017:08:20:51], 00145008, QUIT<br>
+　[30/Nov/2017:08:20:51], 00145008, 221 2.0.0 xxxx.xxx.jp closing connection.<br>
+　[30/Nov/2017:08:20:51], 00145008, CloseClient Started.:SOCKET.C<br>
+　[30/Nov/2017:08:20:51], 00145008, closesocket():SOCKET.C<br>
+<hr align="center" width="98%" size="1" noshade>
+※　受信プログラムはマルチセッションで動作しているため、複数のセッション動作が１つのログに混在されて一緒に記録されます。そのため、同一セッションか異なるセッションかを見きわめるには、「スレッド・メモリ」の項目にある16進コードで判別します。<br></small>
+<br>
+ログ中に記録されるSMTP受信サービスプログラム（epstrd）が返している応答コード一覧については、次をご覧ください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-01.html">epstrd（SMTPレシーバー）応答コード</a>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

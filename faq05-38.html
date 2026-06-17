@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-38</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>receivelog に 550 5.1.7 Please, mail from a valid e-mail address. が記録されている場合</b></FONT>
+<HR>
+<br>
+<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>にMAIL FROM:[メールアドレス] 命令のあと、次のエラーが記録されているケースがあります。<br>
+<blockquote><b>
+550 5.1.7 Please, mail from a valid e-mail address.
+<br></b>
+</blockquote>
+MAIL FROM:[メールアドレス]で送信依頼しているとき、内部ドメインには該当メールアドレス存在せず無効のため拒絶したことを表します。内部ドメインに該当ユーザーアカウントが作られているかどうか、確認してください。<br>
+<br>
+なお、該当ユーザーアカウントが存在するにもかかわらず、このエラー応答が返るときは、アカウント単位で設定できる「送信先の制限」機能を使って、指定の宛先について送信を禁止する設定をしていないか確認してみてください。「送信先の制限」【sender.dat】で送信を禁止している場合も、同じエラー応答を返します。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-01.html">epstrd（SMTPレシーバー）応答コード</a><br>
+●<a href="./faq10-45.html">「送信先制限」で送り先アドレスを送信禁止させたい</a><br>
+●<a href="./faq10-88.html">「送信先制限」で1ドメインを送信禁止したとき、同報で他ドメイン宛もいっしょに拒絶される </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

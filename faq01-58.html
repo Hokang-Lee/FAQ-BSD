@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-58</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>アンチウイルス機能を有効にしても［メール作業フォルダ］下に&quot;viruslog&quot;というフォルダが自動的に作成されない</b></FONT>
+<HR>
+<br>
+
+viruslogフォルダは、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［メールフィルタ］を選択すると表示される「メールフィルタ機能を使用する」チェックボックスをオンにした場合に、自動作成されるようになっています。<br>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［アンチウイルス］を選択すると表示される「アンチウイルスを有効にする」または「ログを残す」チェックボックスを単にオンにした場合は、メール作業フォルダ（デフォルトでは&quot;/var/spool/epms/&quot;）下に手動で&quot;viruslog&quot;というフォルダを作成する必要があります。ちなみに&quot;viruslog&quot;というフォルダには、記録ログという形ではなく、ウイルス感染したメールデータそのものが格納されるようになっています。<br>
+<br>
+なお、アンチウイルスの検出動作ログを取得するときは、「検出ログを残す」チェックボックスをオンにしておくと、メール作業フォルダ（/var/spool/epms/）下に&quot;fsenglog&quot;フォルダ内にウイルス検出ログが記録されます。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

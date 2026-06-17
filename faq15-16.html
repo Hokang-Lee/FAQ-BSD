@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-16</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>中継の制限【effect.dat】で最下行に「norelay」の記述行を加えたときの動きについて</b></FONT>
+<HR>
+<br>
+中継の制限【effect.dat】の設定で、指定されたローカルIPアドレスの範囲から、E-Postに存在するアカウントおよびエイリアスからのみ送信や中継が可能なデフォルト設定にしておき、一方で外部からの受信はOKではあるものの、外部からE-Postに向けて送信要求はさせない場合は、最下行に「norelay」の記述行を加え、次のように設定します。<br>
+<blockquote>
+192.168.*.* default<br>
+*.*.*.* norelay<br>
+</blockquote>
+これに対して、中継の制限【effect.dat】の設定で最下行に「false」の記述にした場合は、外部からの受信も、外部からの送信要求も両方とも、&quot;550 5.1.7 Please, mail from a valid IP or Domain address.&quot; のエラー応答を返して一切拒絶するようになります。<br>
+<blockquote>
+192.168.*.* default<br>
+*.*.*.* false<br>
+</blockquote>
+なお、中継の制限【effect.dat】設定は、次の操作によって呼び出します。E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］の中ほど［中継の制限］の［マシンごとの中継］、もしくは［中継の制限］で表示される「中継の制限設定」にある［マシンごとの中継］ボタンをクリック。「effect.dat」を確認したり編集できるようになります。変更を反映させるには最下の［設定］ボタンをクリックします。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-22.html">中継の制限【effect.dat】で設定する default と true の違い、only の意味は？</a><br>
+●<a href="./faq10-60.html">中継の制限【effect.dat】でSMTP認証と関連する "norelay,2" オプション</a>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

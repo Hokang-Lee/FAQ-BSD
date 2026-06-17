@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-97</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4使用中にメールボックスのルートに"Bxxxxxxxxxx.MSG"ファイルが大量にたまっている <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メールボックスフォルダのルートにメールデータである"Bxxxxxxxxxx.MSG"ファイルが大量にたまっているケースが見つかることがあります。<br>
+これらは、POP3プロトコル運用で使用するメールデータであると同時に、IMAP4プロトコルでアクセスする前、一段深いIMAP4用メールボックスフォルダへ移動処理される前のデータということになります。つまり、POP3とIMAP4を両方とも有効にしているアカウントがこのようなケースになる可能性があります。<br>
+基本的にIMAP4で運用していて、メールデータのコピーを残さない方針なのであれば、下記の"１""２"をおこなってください。<br>
+<br>
+<b>１．ユーザーアカウント管理の各アカウント設定を見直す</b><br>
+ユーザーアカウント管理から、該当アカウントについて「POP3無効」チェックボックスが「オフ」になっていないか確認してください。<br>
+「POP3無効」チェックボックスがオフのまま =「POP3も有効」となり、POP3受信用としてルートのフォルダにメールデータ（"B"で始まるメッセージIDを冠した.MSGファイル）が保存され続けます。<br>
+「POP3無効」チェックボックスをオンにすると、それ以降は、ルートのフォルダにメールデータはいったん保存されますが、IMAP4プロトコル接続時に、一段深いIMAP4用のメールボックスフォルダ内へ移動処理が行われます。（下記記事の1，2番目参照）<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-35.html">IMAP4用メールボックスフォルダへのメール格納タイミングについて</a><br>
+●<a href="./faq10-14.html">IMAP使用時のメールボックスフォルダと「POP3無効」チェックボックスの関係について</a><br>
+●<a href="./faq10-64.html">IMAPデータファイルの基本的な構造について</a><br>
+<br>
+ユーザーアカウント管理で複数の設定を手動でおこなわず、「POP3無効」を一律で指定する方法も可能です。<br>
+アカウントの数が多い場合は下記を参照ください。
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-99.html">IMAP4だけを使いたい目的で「POP3無効」を一律で指定する方法</a><br>
+●<a href="./faq01-87.html">アカウントデータとインポートの仕様について</a><br>
+<br>
+もし、「IMAP4接続専用のユーザーアカウント」であるにもかからず「POP3無効」チェックボックスがオフのままの状態であることが確認できたとき、かつ、ルートフォルダに溜まったままになっている万を軽く超える大量のメールが存在するときは、作業のタイミングを気をつける必要があります。<br>
+ルートフォルダに溜まったままになっている万を軽く超える大量のメールデータを一気に削除する処理が行われることになりますので、そのときは思うようなファイルシステムのパフォーマンスが発揮されず、サーバにきわめて大きな負荷がかかることが予想されます。<br>
+サーバ全体に一度に大きな負荷を与えることを防止するため、タイミングをずらしながら少しずつ行うよう段取りを考えながら作業してください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-98.html">IMAP4接続専用アカウントの場合、「POP3無効」チェックボックスを必ずオンにして運用すること</a><br>
+<br>
+<b>２．各アカウントフォルダにある"imap.idx"ファイルの更新日付より、古いメールは削除する</b><br>
+IMAP4プロトコルでアクセスする前、一段深いIMAP4用メールボックスフォルダへ移動処理される前のデータということになります。<br>
+POP3での接続をしないのであれば、各アカウントフォルダに"imap.idx"というファイルの更新日付より、古いメールは削除してください。<br>
+"imap.idx"のファイルの更新日付より新しいメールは削除しないで残してください。それらは必要になります。<br>
+<br>
+IMAP4プロトコルにてログインされる毎に、直下のメールは（古いものも含めて）自動削除されるようになります。<br>
+自動削除されますが、大量にあるとIMAP4処理の負荷が高くなりすぎるので、できればシステム管理者がエクスプローラーから確認して、直接手動削除していただくのがベストです。<br>
+そのときに、"imap.idx"というファイルの更新日付より新しいメールデータは残し、更新日付より古いメールデータを削除するようにしてください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

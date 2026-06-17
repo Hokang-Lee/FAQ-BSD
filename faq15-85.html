@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-85</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>「VRFY,EXPNコマンドに応答」チェックボックスはオフのままでよいですか？</b></FONT>
+<HR>
+<br>
+Mail Control画面の「サービス制御」タブにある「VRFY,EXPNコマンドに応答」チェックボックスはデフォルトでオフになっています。<br>
+ユーザーズガイドなどのマニュアルでは、デフォルト値をオン＝応答すると説明していますが、マニュアルの内容は過去の記載がそのままになっています。現状の出荷時デフォルト設定では「VRFY,EXPNコマンドに応答」のチェックボックスはオフにしています。<br>
+VRFY,EXPNという命令は、クライアントからの接続時に、このメールサーバに指定したメールアカントの存在有無を確認するための機能です。<br>
+近年、このコマンドを悪用し、存在するアカウントを抜き出し、スパムやウイルスメール送信の踏み台に利用されることが多発するようになってしまいました。つまり、比較的平穏だった過去には便利に使われることもあったコマンドなのですが、最近の迷惑メールの増加や不正利用の増大にあわせ、運用セキュリティの観点から無効にしておくのが一般的になっています。マニュアルの記載は、比較的平穏だったときの過去のままの記載になっておりました。<br>
+なお、「VRFY,EXPNコマンドに応答」をオフ＝無効にしたからと言って、一般的なメールクライアントでは、このコマンドはまず使用されておらず、運用上問題は全く発生しません。VRFY,EXPNコマンドについてはIPA情報など参考になさってください。<br>
+<br>
+<b>（参考サイト）</b><br>
+◆<a href="https://www.ipa.go.jp/files/000025332.pdf" target="_blank">電子メールのセキュリティに関するガイドライン-IPA（PDF）</a>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

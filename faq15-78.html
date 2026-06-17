@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-78</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールクライアント種類によってSMTPでのメール送信元を制限することはできますか？</b></FONT>
+<HR>
+<br>
+メールクライアント種類によってSMTPでのメール送信元を制限することができるかどうかについて質問を受けたことがありますので説明します。<br>
+E-Postにはメーラー（メールクライアント）の種別によって、送信元を制限する機能はありませんが、IPアドレスベースで許可したり拒絶したりリレーを禁止することを目的とした「中継の制限－マシン毎の中継」【effect.dat】という機能によって送信元を制限することは可能です。<br>
+中継の制限【effect.dat】機能は、IPアドレスベースが基本ですが、送信元のエンベロープFROMのメールアドレスやドメイン名による拒絶、リレー禁止を設定することも可能です。ただし、自分のドメイン名をうっかりtrue指定してしまったりすると、無条件許可を与える結果となり、簡単になりすましを許してしまう事態を招いてしまうこともあります。<br>
+【effect.dat】での指定は、どちらかというとメールアドレスやドメイン名を指定することより、メールクライアントや送信元MTAのIPアドレスをdefault指定したり、false指定やnorelay指定を行うことが、現実的な設定内容となります。くわしいことはオンラインヘルプの「マニュアル－設定－６．中継の制限」をご参照ください。<br>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq04-01.html">中継の制限－マシン毎の中継【effect.dat】設定</a><br>
+●<a href="./faq10-22.html">中継の制限【effect.dat】で設定する default と true の違い、only の意味は？ </a><br>
+●<a href="./faq15-16.html">中継の制限【effect.dat】で最下行に「norelay」の記述行を加えたときの動きについて</a><br>
+●<a href="./faq10-60.html">中継の制限【effect.dat】でSMTP認証と関連する "norelay,2" オプション</a><br>
+●<a href="./faq15-22.html">特定のIPアドレスからの不正アクセスが大量に発生、これを拒否するには</a><br>
+●<a href="./faq01-08.html">作成されていないアカウントで受理され、勝手な送信を許している</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

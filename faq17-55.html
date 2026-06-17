@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-55</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>epstdd（SMTP配送サービス）が配送先を決める優先順位 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+epstdd（SMTP配送サービス）が配送先を決める優先順位は、原則として次の通りです。上位の事項ほど優先順位が高いです。<br>
+<br>
+1. メールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある［ゲートウェイ詳細］ボタンをクリック、表示される【gateway.dat】の記述内容<br>
+2. E-Post で下記の3にもとづいて配送が成功した際のMXレコード情報を保存キャッシュした内容 （MXキャッシュ情報）<br>
+3. メールサーバ管理から［システム管理メニュー］の［基本設定］にある「DNSサーバー」の設定（※MXレコードの解決）<br>
+4. OSで設定しているDNSサーバの情報（/etc/resolve.conf で設定している内容）および、/etc/hostsファイルの記述内容（※Aレコードの解決）<br>
+<br>
+上記の4は、E-Post独自で送信工夫している方式なので留意してください。OS側に設定されているDNSサーバの情報（Aレコード解決用途）を参照するのは、上記3のE-Postに設定されているDNSサーバを参照してMXレコードで配送失敗する場合のリトライとしてわざわざ行われるものです。いわば最後の決め手として、Aレコード解決し、メールアドレスの＠以降のドメインをAレコードよりアドレスを参照して送信を試みます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-23.html">メールサーバがDNSを参照するときの動きについて</a><br>
+●<a href="./faq01-64.html">配送処理とDNS参照について</a><br>
+<br>
+DNSを参照するより前に、優先して配送先を意図したルートにしたいとき、【gateway.dat】に定義するのが確実です。【gateway.dat】はメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある［ゲートウェイ詳細］ボタンをクリックすると表示されます。<br>
+<br>
+【gateway.dat】書式<br>
+'----------------------------------------------------<br>
+[対象ドメイン],[IPアドレス or FQDN],[Port番号]<br>
+'----------------------------------------------------<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-28.html">フォワードするSMTPサーバをドメイン別に振り分け制御する</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

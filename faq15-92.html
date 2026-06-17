@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-92</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>MXレコードに書かれた複数のMTAのうち優先度の低いサーバに繰り返し接続しエラーを返される</b></FONT>
+<HR>
+<br>
+MXレコードに書かれた複数のMTAのうち、常に優先度の低いサーバに接続し、一時的拒絶のエラーを繰り返し返されるという状況の報告が寄せられることがあります。一時的拒絶とはMTA種類によっても異なりますが、400番台のエラー、たとえば「421 Service Temporarily Unavailable」といったエラー応答がその典型的なものです。<br>
+E-Postの仕様では、DNSによる名前解決を高速化するため、MXキャッシュデータを作成・利用します。MXキャッシュデータは、接続成功時には継続して保管されます。これまでの仕様でMXキャッシュデータが削除されるのは接続（コネクト）に失敗したときのみで、接続が失敗した場合のみキャッシュ情報のリセット対象とみなしてMXキャッシュファイルを削除していました。しかしながら最新版では、MXキャッシュデータの削除タイミングを一時的拒絶や永続的拒絶の場合にも広げ、適用するように仕様が変更されました。MXキャッシュ有効時に接続が成功してもDNSのMXレコードにある全ての送信先に拒絶された場合は、MXキャッシュファイルを削除します。<br>
+<br>
+相手側MTAといったん接続できてしまうと、SMTPの最終的なネゴシェーション結果は400番台の一時的拒絶で終了していても、上で述べたように、保管されているキャッシュ情報は有効とみなし、MXキャッシュデータをそのままにしておきます。同じサーバに継続して接続してしまうのは、そうした動作仕様のためでした。最新版のこの改善内容により、MXレコードに書かれた複数のMTAのうち優先度の低いサーバに繰り返し接続し続けてエラーを返されることは、きわめて少なくなるのではないかと考えています。<br>
+<br>
+万が一、状況が改善しないときには、E-Post側で対応策を取るには、該当する送信先のMXキャッシュデータを手動で削除してください。MXキャッシュデータは、[メール作業用フォルダ]\mxcash\フォルダ下に該当ドメインの名の付いた拡張子.mxのデータファイルとして残っています。このキャッシュファイル自体を削除します。<br>
+また、MXキャッシュファイルを作らないでまったく利用しないよう設定する方法も有効です。「MXキャッシュの更新間隔」を&quot;0&quot;にしておくと、MXキャッシュファイルを作成せず、参照もしない状態になります。ただし、MXキャッシュを使わない設定にすると、DNSサーバへの参照がその都度発生しますので、負荷が高まることを留意してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-18.html">送信先のMXレコードが変更されて以降も更新前の情報にもとづいて送られることがある</a><br>
+●<a href="./faq15-91.html">MXキャッシュデータはどう更新されどういうときに削除されるのか</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

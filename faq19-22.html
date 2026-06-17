@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-22</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールのSMTP受信時のサイズ制限設定はどうすればいいか？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Postでは、メールのSMTP受信時のサイズ制限をバイト単位で設定できます。E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］を開いて［中継の制限］項目、もしくは［中継の制限］を開いて表示される「メール受信時のサイズ」で設定します。無制限にしたい場合は &quot;0&quot; を指定します。(Default：0)<br>
+とはいえ、ある程度の制限目安が必要と思われるため、１メールあたり数百MB単位のメールは避けたほうが良いという認識です。<br>
+その理由として、1メールがGBレベル、数百MBレベルのサイズのメールを扱った場合、考えられる状況としてどのようなことが想定されるかを以下の(1)～(4)のようにあげてみます。<br>
+<br>
+(1) 送信元の一般的なサーバでは、SMTP配送時に送信先のMTAが受領OKするのを判断して、送信できたと判断します。これが極端に大きなサイズのメールの場合、送信するにも一定の時間がかかり、また受ける側のMTAも一定の時間がかかります。一般的に、送信元サーバは、設定した一定の時間に応答がないとタイムアウトと判断し、配送できなかったと判断して配送リトライをかけてきます。このタイムアウトと判断する時間は、サーバ種類や製品、設定内容によってまちまちです。ちなみに、E-Postシリーズでは、配送時のタイムアウト（送信１回当りのタイムアウト時間）は、デフォルト値 1200秒＝20分 に設定されています。多くの送信元サーバは、サーバ種類や製品、設定によって、まちまちかと思います。多かれ少なかれ、E-Postシリーズのデフォルト値に近い時間が設定されているものと推察されます。<br>
+(2) 送信元のサーバは、送信先MTAから一定の時間内に応答がないと、無応答だと判断し、配送リトライをかけてくるわけですが、その結果、同じ内容のメールを複数回送ってくる現象を招くことになります。これは、利用者が見れば、同じ内容のメールですが、SMTP受信する側になるE-Postシリーズにしてみれば、異なるセッションで送られてきたメールであるので、異なるメールとして次々に受信し、ユーザーのメールボックスに着信することになります。このことは、E-Postシリーズでの特殊な話しではなく、他のメールサーバでも同じような現象は起こり得ます。<br>
+(3) また、内部ドメインのユーザーからメールクライアントによる送信指示を受ける場合も、極端に大きなサイズのメールの送信をユーザーが行うと、同じように長く待たされることになるだけでなく、メールクライアント種類によっては、サーバからの応答がないとエラーをポップアップ表示するケースがあります。このとき、メールサーバは大きなサイズのメールを受領しようと、仕事にかかりっきりになることで、他のユーザーのメール送受信が遅くなったり、メールサーバ全体のパフォーマンスに悪影響を与えかねません。<br>
+(4) いずれにしても、デフォルト値 &quot;0&quot; の無制限設定で運用しようとすれば、極端な巨大なサイズのメールを送ろうとするユーザーがいることも想定しておかなくてはなりませんので、運用上支障のないサイズ、常識的なサイズを検討し、設定することをお薦めします。やはり1メール数百MBレベルのメールを送ることは制限した方がよいでしょう。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq14-04.html">クライアントからメール送信するときの受領サイズ制限は可能ですか？</a><br>
+●<a href="./faq10-71.html">メールクライアントからの送信時にサイズ制限をかけるには</a><br>
+●<a href="./faq17-24.html">メール送信時のメールサイズ制限を設定しているが設定サイズより小さいサイズで制限されてしまう </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

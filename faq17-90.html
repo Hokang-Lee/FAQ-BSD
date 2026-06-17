@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-90</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP認証設定時に「認証ファイル」以外の「非認証有効」「認証専用」を選択するのはどのような場合か <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+SMTP認証の設定方法を解説した内容では、下記の通り「認証ファイル」を選択するとしています。<br>
+ここで「PLAIN LOGIN CRAM-MD5」を設定した場合、「認証ファイル」以外に設定することは推奨されていないのか、さらにそれ以外の「非認証有効」と「認証専用」を選択するのはどのような場合か、質問を受けたことがあります。<br>
+メールサーバ管理<br>
+　→［システム管理メニュー］
+　　→［SMTP受信詳細設定］開始する<br>
+　　　→［SMTP受信詳細設定］画面内<br>
+　　　　→［SMTP認証方法］＝「PLAIN LOGIN CRAM-MD5」を選択<br>
+　　　　→［セキュリティレベル］＝「認証ファイル」を選択<br>
+<br>
+セキュリティレベルを「認証ファイル」以外の「非認証有効」もしくは「認証専用」を選択するのは、下記の特殊ケースに限定されます。<br>
+<br>
+<b>A.「非認証有効」について</b><br>
+デフォルト状態では「非認証有効」が選択された設定になっていますが、［SMTP認証方法］＝「PLAIN LOGIN CRAM-MD5」を選択した状態で「非認証有効」に設定している場合は、同じアカウントに接続するSMTP送信クライアントが複数あり、SMTP認証をもつメーラーと、SMTP認証機能を持たない「古いシステムやアプリケーション」との混在が想定されている特殊なケースです。セキュリティ的に安全である前提でそこから送信される通知メール等を許容する場合を想定しているものです。これは過去の歴史でよくあったきわめて過渡的なものであるとご理解ください。<br>
+<br>
+一方、「認証ファイル」を選択している状態のときですが、アカウントそれぞれに「SMTP-AUTH ＆ APOPを使用する」チェックボックスをオフにすれば、SMTP認証をしないで送信許可を与えることもできます。
+そちらの場合は、SMTP認証をもつメーラーとSMTP認証機能を持たない「古いシステムやアプリケーション」とが併用されるものの、アカウントごとにSMTP認証をするユーザーアカウントとSMTP認証を必要としないユーザーアカウントが分けられているケースです。こちらのケースがよくあるケースですので、「認証ファイル」を選択すればすべて無難に設定ができるということになります。<br>
+<br>
+<b>B.「認証専用」について</b><br>
+「認証専用」に設定した場合は、全ての受信について認証されないと受信が一切できません。そのため外部ドメインからのメールであっても着信できずに一切が受信拒否される結果になります。<br>
+つまり、この設定を使う場合は、内部ドメインのユーザーアカウントからのSMTP認証付き送信専用SMTPとして使う場合などが想定されます。こちらもこの選択を行なうのは、かなり特殊なケースと言えます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-38.html">SMTP認証（SMTP-AUTH）設定の手順</a><br>
+●<a href="./faq01-54.html">SMTP認証（SMTP-AUTH）の認証方法を選択したときの挙動と「認証ファイル」の意味は？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

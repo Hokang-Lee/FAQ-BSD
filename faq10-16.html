@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-16</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>全ユーザーのメールを転送させる方法について</b></FONT>
+<HR>
+<br>
+E-Post Mail Serverシリーズでは、アカウント単位での転送設定はもちろん可能ですが、全ユーザを対象として、一括で別のメールサーバへ転送したい場合、できるだけ作業を簡単に行いたいとき、下記の運用方法である程度カバーすることができます。<br>
+<br>
+転送設定を有効にすると、&quot;ims.ctl&quot;というファイルがメールボックスフォルダ内に作成されますので、その作成されたファイル１つを全ユーザーのメールボックスフォルダにコピーしてください。それによって、同じ転送設定が可能になります。メールボックスフォルダの位置は、&quot;/var/spool/epms/inbox/[ユーザ名]/&quot; または &quot;/var/spool/epms/inbox/[ドメイン名]/[ユーザ名]/&quot; です。<br>
+<br>
+【ims.ctl の例】<br>
+<hr align="left" width="80%" size="1" noshade>
+[autoforward]<br>
+ForwardTo=user＠domain.jp<br>
+ForwardFrom=<br>
+<br>
+[Delivery]<br>
+Discard=no<br>
+<hr align="left" width="80%" size="1" noshade>
+<br>
+もし、転送先の指定を変更することが頻繁にある場合、転送先メールアドレスを列挙してあるテキストファイルを任意の場所に用意し、そのファイルを指定することも可能です。<br>
+<br>
+ForwardTo=file:/var/spool/epms/forward.txt<br>
+<br>
+このようにすれば、転送先アドレスを記述したテキストファイルのみ更新すれば、全ユーザーのメールボックスフォルダに置かれた&quot;ims.ctl&quot;を修正する必要がなくなります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

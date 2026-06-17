@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-91</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールボックスフォルダに&quot;%HOME%&quot;を指定する使い方</b></FONT>
+<HR>
+<br>
+メールボックスフォルダに&quot;%HOME%&quot;を使ったディレクトリ構造を指定する方法は次のように行います。<br>
+下の例では、ユーザーアカウントが&quot;user1&quot;のとき、メールボックスフォルダを<b>&quot;%HOME%/inbox&quot;</b>として指定します。<br>
+その結果、メールボックスフォルダのディレクトリは<b>&quot;[ユーザーアカウント設定で指定したホームディレクトリ]/inbox&quot;</b>となります。<br>
+仮に<b>[ユーザーアカウント設定で指定したホームディレクトリ]＝'/home/user1'</b>の場合は、メールボックスフォルダのディレクトリは<b>&quot;/home/user1/inbox&quot;</b>となります。<br>
+
+<ol>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面からいったん各サービスを［停止］。<br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定」を選択すると「サーバー環境設定」画面、もしくは［基本設定］を選択すると「基本設定」画面が表示される。<br>
+<li>「フォルダ環境」にある「メールボックスフォルダ」項目について、既定値の<b>&quot;/var/spool/epms/inbox/%USERNAME%&quot;</b>から、<b>&quot;%HOME%/inbox&quot;</b>へと変更。（※）<br>
+<li>［設定する］ボタンをクリック。<br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面から各サービスを［開始］。<br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］に入り、作成済みユーザー（&quot;user1&quot;）を選択し、<b>「ホームデイレクトリ 」</b>項目に<b>&quot;/home/user1 </b>&quot;と入力。<br>
+<li>telnetコマンドを使い該当ユーザー（&quot;user1&quot;）のSMTP送信テストを行う。自分から自分へのメール送信でOK。<br>
+<li>telnetコマンドを使い該当ユーザー（&quot;user1&quot;）のPOP3受信テストを行う。受信時にはメール削除しないでおく。さらに必要に応じてIMAP4受信テストを行う。<br>
+<li>TeraTermなどを使ってのSSHでのリモートでもよいのでサーバにログインし、メールボックスフォルダとして<b>&quot;/home/user1/inbox&quot;</b>ができているかどうかを確認する。<br>
+<li>メールボックスフォルダ<b>&quot;/home/user1/inbox&quot;</b>を開いてみて、拡張子.MSGのメールデータが格納されているのを確認する。上記８でIMAP4受信テストをした場合は一段階深い<b>&quot;/home/user1/inbox/inbox&quot;</b>ができていることを確認し、その中に拡張子.MSGのメールデータが格納されているのを確認する。<br>
+</ol>
+※アカウント管理は、OSアカウントでもSoftアカウントでもどちらの場合でも設定は有効です。<br>
+※「ユーザーアカウント管理」の「アカウント設定」で指定した「ホームディレクトリ」のアクセス権は、www(wheel)で書き込み可能にしておく必要があります。<br>
+※上記例の場合、<b>'chmod 0775 /home'</b>を事前に設定しておく必要があります。</br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

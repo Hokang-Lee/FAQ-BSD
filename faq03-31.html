@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ03-31</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>仮想マシンソフトウェア上で動作させる場合CPUコア割り当て数を増やさず&quot;1&quot;で利用する</b></FONT><br>
+<HR>
+<br>
+仮想マシンソフトウェア上で動作させる場合、むやみにCPU割り当て数を増やさず、CPUコア割り当て数は&quot;1&quot;で利用することが望ましいと考えます。<br>
+これまで仮想マシンソフトウェアでのゲスト構築時のCPUコア割り当て数を増やしたとき、パフォーマンスが低下するという報告を何例か受けたことがあります。詳細な理由は不明ですが、ディスクI/Oとの関係によるものらしいということまで把握、CPUコア割り当て数を増やした場合に、小さなファイルサイズのディスクI/Oに対するリクエストが増加し、それなりの排他及びディスクI/Oに対する同期作業がOS上で必要でそれが問題を及ぼしているのではないかという推測をしています。<br>
+なお、E-Postのメールサーバの各プログラムそのものは、CPU数に依存するような関数を使ったりコンパイルを行っておらず、CPU数に依存する作りにはなっていません。これは32bit版もそうですし、64bitネイティブ対応版も同様です。CPUコア割り当て数を増やすとパフォーマンスが低下するという現象については、プログラム上の観点からはよくわかっていません。<br>
+理由を推定した場合、SMTPサービスを代表とするメールサーバソフトウェアでは、他のサーバ系ソフトウェアと比べるとメールのサイズが小さい単位（数KB）でディスクのリード・ライトが発生するというメールサーバならではの特性があります。ブロックサイズで大きなサイズのデータをまとめてアクセスするような、他のサーバ形態とはかなり異なることが特徴で、格段にファイルの読み書きが発生し、ディスクI/Oに相当の負荷がかかります。CPUコア割り当て数を増やしても、下記のような理由から、処理が速くなるといった効果はまず期待できないことが考えられます。<br>
+<ul><li>メールサーバ E-Post Mail Server Standard では、CPUの負荷が過大になることは少なく常にボトルネックはディスクI/Oである。<br>
+<li>ただし、アンチウイルス機能のある Enterprise II 版ではメモリ消費量とCPUの負荷が問題になることがある。<br></ul>
+CPUコア割り当て数を増やすとパフォーマンスが低下する理由は、仮想マシンソフトウェア上での仮想マシンの時のCPUコア割り当て数とディスクI/Oの関係と推測していますが、ちなみにメールサーバを通常の物理マシン環境で動作させるときにも、ボトルネックはディスクI/Oにあります。以上のことから、メールサーバを使用する際の仮想マシンソフトウェアの特性上の組み合わせから来るように思われ、基本的にはCPUコア割り当て数は増やさず、&quot;1&quot;で利用することが望ましいと考えます。<br>
+以下は参考になりそうな情報です。ディスクI/Oがボトルネックになるような状況のときは、いずれもむやみにCPUコア割り当て数を増やすべきでない、あるいは増やすと問題が起きる可能性についてふれられています。<br>
+<br>
+<b>（参考情報）</b><br>
+マイクロソフト技術資料の中にHyper-Vの仮想マシン環境で使用する場合の注意事項が資料に掲載されています。資料9ページに「メールボックスサーバのパフォーマンス」という項目があり、つぎのような記述があります。<br>
+<small>「<b>●メールボックスサーバーのパフォーマンス。</b>メールボックスサーバーの最も一般的なパフォーマンスボトルネックは、ディスクI/OとネットワークI/Oです。仮想環境でメールボックスサーバーを実行した場合、このI/O帯域幅を、ホストマシンおよびそのホストに展開されている他の仮想マシンと共有しなければならなくなります。物理サーバーで実行されている仮想マシンが1つだけの場合、その仮想マシンが利用できるディスクI/OとネットワークI/Oは、物理サーバーが利用できるI/Oとほぼ同じです。しかし、使用頻度の高いメールボックスサーバーの場合、利用可能なI/O帯域幅をすべて消費してしまう可能性があるため、物理サーバーでの追加仮想マシンをホストすることは実用的ではありません。」</small><br>
+<a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=34&cad=rja&uact=8&ved=2ahUKEwjljoztiIPfAhXQMd4KHU1iCW04HhAWMAN6BAgGEAI&url=http%3A%2F%2Fdownload.microsoft.com%2Fdownload%2F8%2F4%2F2%2F84235DD4-FC17-4565-8BE2-F69BBFA89636%2FDeployingVMUsingHyperVTechnologyTCS.doc&usg=AOvVaw2SMg2tBYYO1bxe1FcgXn6C" target="_blank">「Microsoft ITショーケース｜Hyper-V 仮想化テクノロジを使用した仮想マシンの展開のベストプラクティス」</a>（.doc形式）<br>
+<br>
+<b>（参考情報）</b><br>
+マイクロソフトのサポートサイトには、SQL ServerのQ&Aで重要な記述があります。「SQL Server のディスクI/O処理に割り当てるCPU数が、システムのディスクI/O処理で必要なCPU数を上回ると、ディスクI/Oに無関係なCPUの要求が高まるためにパフォーマンスボトルネックが生じることがあります。」とあります。<br><a href="http://support.microsoft.com/kb/298402/ja" target="_blank">http://support.microsoft.com/kb/298402/ja</a><br>
+<br>
+<b>（参考情報）</b><br>
+VMwareの仮想マシン環境で使用する場合の注意事項が掲載されています。中段あたりに「ディスクI/Oはトラブルの一因になりやすく、仮想環境でデータが一番集中する箇所となります。ディスク書き込み量や数、キュー、応答レイテンシーといったポイントをチェックする必要があります。」とあります。<br>
+<a href="http://system-answer.com/column/2014/04/17/929/" target="_blank">http://system-answer.com/column/2014/04/17/929/</a><br>
+<br>
+<b>（参考情報）</b><br>
+日経コンピュータの有料記事です。無料で公開されているのは途中までです。<br>
+<a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20080408/298281/" target="_blank">http://itpro.nikkeibp.co.jp/article/COLUMN/20080408/298281/</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

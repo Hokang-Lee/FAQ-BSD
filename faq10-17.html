@@ -1,0 +1,115 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-17</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>サービスを停止しようとしても停止できない状態になる <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+E-Post Mail Serverの各サービスプログラムをWeb管理の「サービス制御」画面やあるいは serviceコマンドを使って停止しようとしても、停止できない状態になってしまうときは、次のようなケースが考えられます。<br>
+<br>
+<b>（こうした状況が起きるケースについて）</b><br>
+<b>１．サービスが動作中のまま、メールサーバIPアドレスの変更やポート番号の変更を行ったケース</b><br>
+<blockquote>
+サービスが動作中のまま、詳細設定画面で設定するIPアドレスや、ポート番号の変更を行う操作をすると、停止処理でうまく停止できなくなってしまいます。詳細設定画面で設定するIPアドレスや、ポート番号の変更を行うときは、設定の根幹部分ですので、事前にサービスを停止しておかなければなりません。<br>
+正式な手順としては、たとえば、epstrd（SMTP受信部）のポート番号を&quot;25&quot;から、&quot;20025&quot;に変更する場合、サービス動作状態のまま行わないようにします。E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面からいったん各サービスを［停止］させてから、IP設定やポート番号を変更した後で、サービスを［開始］させるという手順になります。<br>
+もし、うっかりミスで事前にサービスを停止せず、詳細設定画面で設定するIPアドレスや、ポート番号の変更を行ってから、サービス停止操作を行ったときには、他の対応方法がありませんので、マシン全体の再起動を行ってください。<br>
+</blockquote>
+<b>２．メール作業フォルダに指定しているドライブもしくはディスク不調、アクセス不可のケース</b><br>
+<blockquote>
+メール作業フォルダに指定しているドライブもしくはディスクがハード的に不調になっている状態、あるいはアクセス不可になっている状態では、サービスプログラムが正常に書き込みにいけませんから、このようになってしまう可能性もあります。<br>
+</blockquote>
+<b>３．サービスプログラムのファイルが破損しているケース</b><br>
+<blockquote>
+きわめてまれなケースですが、サービスプログラムのファイルが何らかの原因で破損してしまうと、このようになってしまう可能性も考えられます。<br>
+</blockquote>
+<b>４．EPSTDDサービスが停止できないケース</b><br>
+<blockquote>
+この場合、［メール作業用フォルダ］下にある以下のフォルダに配送メールが溜まったままになっていないか確認してください。<br>
+<blockquote>
+・<b>incomingフォルダ</b>（メールキューフォルダ）<br>
+・<b>holding/domainsフォルダ</b>（リトライ関係フォルダ）<br>
+</blockquote>
+メール配送中にサービスを停止しようとすると、上記フォルダにメールデータが溜まっている状況下では停止できない状態になります。<br>
+サービスを起動する前に、上記フォルダにあるメールデータを手動で任意フォルダへ退避させてください。<br>
+試験メールなどいずれのメールデータも不要であれば、削除してください。<br>
+フォルダをきれいにすることで、EPSTDSサービスが正常に起動・停止できるようになります。<br>
+任意フォルダへ退避させたメールデータは、元あったフォルダへ戻せばメールキューやリトライデータとして再度機能します。<br>
+なお、リトライデータはリトライ設定時間が経過したものから順にリトライをあきらめ、最終的に配送失敗として処理されます。<br></blockquote>
+<b>（対処策について）</b><br>
+万が一、各サービスプログラムを停止しようとしても、停止できない状態になるときは、次の操作を行って対処してください。<br>
+<blockquote>
+(1) sshなどを使いコンソールにrootアカウントでログインする。<br>
+(2) viなどで /etc/rc.confの以下の項を編集する<br>
+epstrd_enable="YES"　-> epstrd_enable="NO"<br>
+epstdd_enable="YES"　-> epstdd_enable="NO"<br>
+epstpop3d_enable="YES"　-> epstpop3d_enable="NO"<br>
+epstimap4d_enable="YES"　-> epstimap4d_enable="NO"<br>
+(3) OSを再起動する。(reboot)<br>
+(4) viなどで /etc/rc.confの以下の項を再編集する<br>
+epstrd_enable="NO"　-> epstrd_enable="YES"<br>
+epstdd_enable="NO"　-> epstdd_enable="YES"<br>
+epstpop3d_enable="NO"　-> epstpop3d_enable="YES"<br>
+epstimap4d_enable="NO"　-> epstimap4d_enable="YES"<br>
+(5) 各プログラムをデバッグモードで実行させてみる。<br>
+</blockquote>
+<a name="debug">
+<br>
+<b>（デバッグモードの使い方について）</b><br>
+デバッグモードの使い方は、下記の通り各サービスプログラムの後に &quot;-debug&quot; オプションを付け足す形で実行します。<br>
+<blockquote>
+<table bgcolor="#777777" width="480">
+ <tr>
+  <td><font color="#ffffff"><b> /usr/local/mta/bin/epstrd -debug /var/spool/epms/ [Enter]</b><br></font></td>
+ </tr>
+ <tr>
+  <td><font color="#ffffff"><b> /usr/local/mta/bin/epstdd -debug /var/spool/epms/ [Enter]</b><br></font></td>
+ </tr>
+ <tr>
+  <td><font color="#ffffff"><b> /usr/local/mta/bin/epstpop3d -debug /var/spool/epms/ [Enter]</b><br></font></td>
+ </tr>
+ <tr>
+  <td><font color="#ffffff"><b> /usr/local/mta/bin/epstimap4d -debug /var/spool/epms/ [Enter]</b><br></font></td>
+ </tr>
+</table>
+</blockquote>
+ステータスやメッセージがたくさん表示されれば、プログラムファイルの破損はなく、基本的に正しいプログラムファイルといえます。このデバッグモードの最中にクライアントからメールの送受信テストを行うことができ、表示される画面で基本的な動作を確認することができます。<br>
+デバッグモードを停止させるには《Ctrl》＋[C]キーを押します。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

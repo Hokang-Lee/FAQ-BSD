@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-32</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリスト設定で指定する管理人アドレスは、メーリングリストメンバーと重複しても問題ないか、通知メールがループしないか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メーリングリスト設定内の管理人アドレスは、主に入会許可依頼（JOIN）や退会依頼（LEAVE）などを管理人へ通知・転送するための宛先です。<br>
+このため、管理人アドレスがメーリングリストのメンバーに含まれていても問題ありません。通常、これによって通知メールがループすることはありません。<br>
+<br>
+メールのループ抑止は、メーリングリスト設定固有の仕組みというより、メール配送の一般的な仕組みであるReceived：ヘッダに基づくSMTPホップ数制限（デフォルト20回）によって抑止されます。<br>
+これにより、例えば次のようなケースでも一定回数以上のループが継続しないように制御されます。<br>
+<b>（例）</b><br>
+・メーリングリストメンバーに自動転送設定されたアドレスを含めてしまい、転送が原因でループするケース<br>
+・自動応答を設定したアドレスと自動転送を設定したアドレスが相互に反応し、いわゆる“ピンポン”状態になるケース<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-79.html">Received:ヘッダのループ数制限＝SMTPホップ数の制限を緩和するには</a><br>
+●<a href="./faq15-12.html">メールがループしたときの動きについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

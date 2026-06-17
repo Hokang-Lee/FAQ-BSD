@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-67</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>OutlookからIMAPのフォルダ移動をさせると rename命令が失敗してしまうケースがある</b></FONT>
+<HR>
+<br>
+IMAP4使用時にOutlookからフォルダ下にあるサブフォルダを別フォルダ下に移動をさせるとうまくいかないケースがあり、IMAP4詳細ログ（receiveimap4）を調べたところ、RENAME命令が実行されたとき、<b>&quot;NO RENAME fails&quot;</b>が返されている記録ががあり、どういう理由と原因が考えられるかという問い合わせがありました。どのようなときにこうした結果になるかを実際に検証した内容を説明します。<br>
+<br>
+<b>（事例）</b><br>
+Outlookの画面から受信トレイ（INBOX）下にあるサブフォルダ「<font color="blue">事務関係</font>」から、ルートに作った「<font color="red">保存メール</font>」フォルダ下に「<font color="blue">事務関係</font>」フォルダを移動させるケース。<br>
+<blockquote>
+＋受信トレイ（INBOX）<br>
+　　└<font color="blue">事務関係</font> ※<br>
+＋<font color="red">保存メール</font> ※<br>
+</blockquote>
+（※）実際のメールサーバは、RFCに基づき「<font color="blue">事務関係</font>」フォルダ名を IMAP4用 &quot;UTF-7 符号化の修正版&quot; エンコーディング「<font color="blue">&TotS2ZWiT8I-</font>」で処理し、同じく「<font color="red">保存メール</font>」フォルダ名を &quot;UTF-7 符号化の修正版&quot; エンコーディング「<font color="red">&T91bWDDhMPww6w-</font>」で処理する。<br>
+<br>
+ここでRENAME命令で<b>&quot;NO RENAME fails&quot;</b>となる事象を確認するため、親フォルダがある／ない状態や対象フォルダが既にある状態などの複数の異なるケースを作ってみて、telnetコマンドでRENAME命令による操作をしてみて、どのような場合に成功するかあるいは失敗するかを確認してみました。<br>
+<br>
+telnetコマンドでメールボックスに接続し、RENAME命令である<br>
+　<i>RENAME &quot;INBOX/<font color="blue">&TotS2ZWiT8I-</font>&quot; &quot;<font color="red">&T91bWDDhMPww6w-</font>/<font color="blue">&TotS2ZWiT8I-</font>"</i><br>
+のコマンドを実行し得られる動作結果です。<br>
+<br>
+失敗する（<b>&quot;NO RENAME fails&quot;</b>となる）のはメールボックスのフォルダ構造と状態が次のケースになります。これらはいずれも仕様通りの結果です。<br>
+<br>
+<ol><li><b>存在しないフォルダ下でフォルダをリネームさせようとしたケース</b><br>
+具体例では親フォルダの&quot;<font color="red">&T91bWDDhMPww6w-</font>&quot;（<font color="red">保存メール</font>）がないとき<br>
+<li><b>リネームすべきフォルダ名が既に存在したケース</b><br>
+具体例では移動先の&quot;<font color="red">&T91bWDDhMPww6w-</font>/<font color="blue">&TotS2ZWiT8I-</font>&quot;（<font color="red">保存メール</font>/<font color="blue">事務関係</font>）が既に存在するとき<br>
+<li><b>元のフォルダが既になくなっているケース</b><br>
+具体例では&quot;INBOX/<font color="blue">&TotS2ZWiT8I-</font>&quot;（INBOX/<font color="blue">事務関係</font>）がないとき<br>
+</ol>
+一方、成功する（<b>&quot;OK RENAME successful&quot;</b>となる）のはメールボックスのフォルダ構造と状態が以下のときになります。<br>
+<br>
+<blockquote>
+＋INBOX<br>
+　　└<font color="blue">&TotS2ZWiT8I-</font>　（<font color="blue">事務関係</font>）<br>
+＋<font color="red">&T91bWDDhMPww6w-</font>　（<font color="red">保存メール</font>）<br>
+</blockquote>
+このメールボックスのフォルダ構造と状態のときは、仕様上からも動作結果からも正常な結果が得られます。<br>
+<br>
+確認すべき点としては、サーバ上にこのフォルダが既に存在しているケースのように、メールサーバマシンから該当するユーザーのメールボックスフォルダを開いてみて、メールボックスのフォルダ状態が上記３つのケースに当てはまっていないか確認してみるとよいでしょう。<br>
+さらに、Outlook側の設定で関連するフォルダが購読取り消し設定になっていないかをチェックしてみたり、強制的に再同期させてみて、場合によってはOutlook開き直しして、それでもようすが変わらないかなども、確認してみることをお薦めします。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

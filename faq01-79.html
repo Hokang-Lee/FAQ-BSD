@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-79</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>送信しようとすると' 550 5.7.1 Sorry <i>[account＠domain]</i> , I don't allow unauthorized relaying . ' が表示されて送信できない</b></FONT>
+<HR>
+<br>
+' 550 5.7.1 Sorry <i>[account＠domain]</i> , I don't allow unauthorized relaying . 'の応答メッセージおよびログ記録は、E-Post Mail Server V が中継違反と見なしているメッセージです。<br>
+<br>
+<b>内部ドメインアドレスでないものを送信しようとしているケース</b><br>
+<br>
+たとえば、外部リモートユーザーから送信するとき、（設定済みの）内部ドメインアドレスでないもので送っていると、このようなエラーを返す結果になります。<br>
+つまり、メールサーバが単純に内部ドメインとして見つけられないため、外部ドメインから外部ドメインへのリレーとみなされた結果、「中継違反ですよ」と警告を出しているというわけです。<br>
+<br>
+E-Post Mail Server V ／ E-Post SMTP Server V は、デフォルト設定状態で下表の通り、外部ドメインから外部ドメイン宛のリレーを禁止しています。<br>
+メールサーバの動作テストをするとき、この点は勘違いしやすい点であり、仕組みがわかっていても、意外と間違いやすいので、よく確認するようにしましょう。<br>
+<br>
+<table border=1 cellspacing=0 cellpadding=2 width="480">
+ <tr>
+   <th bgcolor="#CCCCCC" width="130">Recipent　＞
+   </th>
+   <th bgcolor="#CCCCCC" rowspan="2" width="120">内部ドメイン<br>
+   （アカウントあり）
+   </th>
+   <th bgcolor="#CCCCCC" rowspan="2" width="120">内部ドメイン<br>
+   （アカウントなし）
+   </th>
+   <th bgcolor="#CCCCCC" rowspan="2" width="120">外部ドメイン<br>
+   </th>
+ </tr>
+ <tr>
+   <th bgcolor="#CCCCCC">▼　From　　
+   </th>
+ </tr>
+ <tr>
+   <th bgcolor="#CCCCCC">内部ドメイン<br>
+   （アカウントあり）
+   </th>
+   <td align="center"><b><font color="blue">○</font></b>
+   </td>
+   <td align="center"><b><font color="red">×</font></b>
+   </td>
+   <td align="center"><b><font color="blue">○</font></b>
+   </td>
+ </tr>
+ <tr>
+   <th bgcolor="#CCCCCC">内部ドメイン<br>
+   （アカウントなし）
+   </th>
+   <td align="center"><b><font color="red">×</font></b>
+   </td>
+   <td align="center"><b><font color="red">×</font></b>
+   </td>
+   <td align="center"><b><font color="red">×</font></b>
+   </td>
+ </tr>
+ <tr>
+   <th bgcolor="#CCCCCC">外部ドメイン<br>
+   </th>
+   <td align="center"><b><font color="blue">○</font></b>
+   </td>
+   <td align="center"><b><font color="red">×</font></b>
+   </td>
+   <td align="center"><b><font color="red">×</font></b>
+   </td>
+ </tr>
+</table>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-01.html">epstrd（SMTPレシーバー）応答コード</a><br>
+<br>
+<b>DNSの設定に問題があるケース</b><br>
+<br>
+また、下記のようなサブドメイン名をDNS定義している環境で、メールサーバにそのサブドメイン名が作成されていないときも、このエラーが返されることになります。このケースでは、xxxx＠m1.abc.co.jpを送信元として送信すると、m1.xxxxx.co.jpは運用ドメイン外（外部ドメイン）として判断されます。<br>
+<HR width="95%" size="1" noshade>
+　（例）<br>
+　　ドメイン名　　　　　　　　　　　＝　xxxxx.co.jp<br>
+　　メールサーバのマシン名(FQDN)　＝　m1.xxxxx.co.jp<br>
+　　メールサーバに設定した運用ドメイン　＝　xxxxx.co.jp<br>
+　　メールサーバマシン上において xxxxx.co.jp のIPアドレス　≠　m1.xxxxx.co.jp のIPアドレス<br>
+<HR width="95%" size="1" noshade>
+対策としては、以下のいずれかの対応策を取る必要があります。<br>
+１.メールサーバマシン上において、xxxxx.co.jpのIPアドレス　＝　m1.xxxxx.co.jpのIPアドレスとなるようDNSの定義を修正する<br>
+２.運用ドメイン一覧に、m1.abc.co.jpを加える<br>
+<br>
+<br>
+<b>セキュリティを考慮しながらリレーを許可する</b><br>
+<br>
+なお、意図的に外部から外部へのリレーをどうしても、許可したいというのであれば、「マシンごとの中継」（effect.dat）設定でマシンのIPアドレスを許可&quot;true&quot;設定してやれば可能です。E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］の中ほど［中継の制限］の［マシンごとの中継］、もしくは［中継の制限］で表示される「中継の制限設定」にある［マシンごとの中継］ボタンをクリックして表示される「effect.dat」を編集してください。<br>
+<br>
+ただし、effect.datで、&quot;true&quot;設定したIPアドレスについては、全体にSMTP認証を有効に設定していても、SMTP認証なしで無条件に送信許可されるため、セキュリティを十分に考慮する必要があります。<br>
+<br>
+また、メールサーバで設定した内部ドメイン名を&quot;true&quot;設定してしまうと、内部ドメイン名を語って送信要求されるものは、アカウントが存在しなくても送信でき、さらにSMTP認証パスワードが違っていても送信できることになり、<font color="red">なりすまし送信をそのまま許可してしまう事態になってしまうため、このような設定を絶対にしないよう</font>注意してください。もし下記のような設定があれば削除してください。<br>
+<HR width="80%" size="1" align="left" noshade>（絶対にしてはいけない例）<br>
+　　domain.jp　true　←<small>内部ドメイン名を"true"指定すると、ドメイン名を語れば、<br>
+　　または　　　　　　　　　　どこからでも無条件送信できてしまうので要注意</small><br>
+　　domain.jp<br>
+<HR width="80%" size="1" align="left" noshade>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

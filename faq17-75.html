@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-75</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP Server をメール中継サーバとしてもう一段はさんだとき、内側SMTPからの User Unknown エラーリターンメールを外部送信元に送り返すには <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Post SMTP Server を SMTPゲートウェイ位置の外部メール中継サーバとして、さらにもう一段はさんだとき、内側のSMTP（メール振り分けサーバ）から返される User Unknown. エラーリターンメールが、外部メール中継サーバにおいて「550 5.7.1 Sorry xxxxxxx I don't allow unauthorized relaying.」で中継拒否されてしまうとの問い合わせ事例がありました。それを拒否せず外部の送信元に送り返すには、どうしたらよいかという問題です。<br>
+<br>
+（想定環境）<br>
+・外部メール中継サーバ（E-Post SMTP Server / 172.16.1.2）<br>
+・内側メール振り分けサーバ（E-Post SMTP Server / 192.168.10.2）<br>
+　としたとき<br>
+<br>
+これは、中継する E-Post SMTP Server が2段になっているからこその要注意点と言えそうです。<br>
+実は「中継の制限」－「マシン毎の中継」【effect.dat】の設定で &quot;192.168.10.2 true&quot; の記述行を後ろに追加しただけでは、うまく行かないことがあります。<br>
+内側メール振り分けサーバ（192.168.10.2）側から User unknown. エラーリターンメールを外部メール中継サーバ（172.16.1.2）に送信しようとすると、「550 5.7.1 Sorry xxxxxxx I don't allow unauthorized relaying.」で中継拒否されてしまうケースです。<br>
+<br>
+デフォルトの【effect.dat】には &quot;#<> default&quot; の記述行が上位にあります。これは一致対象（エンベロープの送信元が空白<>）のときに default として扱うルール判定ですが、状況次第では不正中継判定となってしまうためです。外部メール中継サーバ（172.16.1.2）にとって、内部ドメイン（アカウントなし）から外部ドメイン宛と判定され、&quot;×&quot;扱いの結果となり得ます。<br>
+（※下記FAQ記事中の項目1のデフォルト設定時に該当）<br>
+<br>
+これに対し、外部メール中継サーバ（172.16.1.2）側の「中継の制限」－「マシン毎の中継」【effect.dat】の設定で &quot;192.168.10.2 true&quot; の記述行を &quot;#<> default&quot; より上の先頭行に移動してみるようにします。<br>
+---------------------------------------------------------<br>
+192.168.10.2 true　　'内部メール振り分けサーバ ←先頭行に持ってくる<br>
+#<> default<br>
+#blank false<br>
+---------------------------------------------------------<br>
+このように【effect.dat】設定を変更、&quot;192.168.10.2 true&quot; の記述行を上位にしたことにより、外部メール中継サーバ（172.16.1.2）にとって、内部ドメイン（アカウントなし）から外部ドメイン宛と判定されたときでも、&quot;○&quot;扱いの結果となります。<br>
+（※下記FAQ記事中の項目2の&quot;true&quot;指定時に該当）<br>
+言い換えますと、該当するIPアドレスからの送信は、無条件許可（true）で受領するルールが優先される状態となったために、From:<> （エンベロープ送信元が空白）で User Unknown. エラーのリターンメールを外部ドメインへ中継する際にも、中継を拒否されなくなります。最優先させたい指定行を上の方に持ってきたことで内側メール振り分けサーバ（192.168.10.2）が生成したエラーのリターンメールを外部メール中継サーバ（172.16.1.2）が受け取れるようになるというわけです。<br>
+<br>
+ちなみに、「中継の制限」－「マシン毎の中継」【effect.dat】の記載内容は、上から下の方向へ最終行まで昇順に実行される特徴があります。昇順で条件の一致した定義が処理されます。<br>
+<br>
+この問題は、中継する E-Post SMTP Server が2段になっているからこその要注意点と言えるかもしれません。中継する SMTP Server が1段だけであれば、User Unknown. のエラー応答を内側のメールサーバから受け、From:<> （エンベロープ送信元が空白）でのエラーのリターンメールを生成、そのまま外部ドメイン宛に配送できるからです。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq04-01.html">中継の制限－マシンごとの中継【effect.dat】設定</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

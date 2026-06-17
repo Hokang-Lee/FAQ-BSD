@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-42</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールサーバ管理［ユーザー管理］での［ユーザ氏名］項目は全角文字で運用してよいですか？</b></FONT>
+<HR>
+<br>
+メールサーバ管理［ユーザー管理］での［ユーザ氏名］項目は、全角文字にて運用可能かというご質問をいただくことがあります。［ユーザー管理］は、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリックすると表示されます。<br>
+この［ユーザ氏名］（※Windows版 E-Postシリーズでは［フルネーム(full name)］と表記）のデータは、E-PostシリーズではSMTPプロトコルのVRFY,EXPNコマンドの応答に利用されます。<br>
+仮に、この項目に全角文字を登録していた場合、VRFY,EXPNコマンドを使って問い合わせをする相手側のMTAやクライアント側があった場合、さらにそのMTAやクライアントが全角文字コードに対応していないときに、通信で文字化けや、予期しない動作を起こす可能性が考えられなくもありません。<br>
+ただし、最近はセキュリティ上、ほとんどのサーバがVRFY,EXPNの応答を禁止していることが普通ですので、メールサーバ側で応答禁止設定されていれば、不都合が発生することはほぼないでしょう。<br>
+その状態であれば全角文字にて運用することは特に支障はないものと考えます。<br>
+ちなみに、VRFY,EXPNコマンドに応答しない設定は次の通りです。E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を選択。表示される「SMTP受信詳細設定」画面にある「VRFY,EXPNコマンドに応答する。」チェックボックスがオフになっていれば、VRFY,EXPNコマンドに対してE-Postは応答しない設定となります。念のためオフの設定になっているかを確認してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq09-13.html">Web管理ツールのユーザー管理画面にある［ユーザ氏名］項目を全角文字で運用できますか？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

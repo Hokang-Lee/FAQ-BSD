@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-80</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!--Google Analytics start-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22937858-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!--Google Analytics end-->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>中継の制限【effect.dat】と SMTP-AUTH の処理順について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+中継の制限【effect.dat】と SMTP-AUTH の処理順についての問題が質問上のポイントになったことがあります。<br>
+epstrdサービスによる処理順がキーとなりますが、拒絶処理順序としては次のようになります。<blockquote>
+(1) SMTP-AUTH（SMTP認証）<br>
+(2) MAIL FROM：【effect.dat】での処理</blockquote>
+上記(1)の段階で先にSMTP認証がクライアントから送られ、万が一そこで拒絶応答が発生した場合には、(2)の中継の制限ルール【effect.dat】の判定へ進みません。<br>
+<br>
+さらにくわしい説明をすれば、中継の制限ルール【effect.dat】の処理での拒絶は、送信元のエンベロープ（MAIL FROM:）が送られて来た時に判定しているものです。<br>
+クライアントからEHLOされた後、EHLOの応答に基づくかEHLOの応答に基づかないかは別として、続いてSMTP認証を行う場合は、SMTP認証の判定結果が先に優先されます。<br>
+認証の可否が判定されてから、その後送信元エンベロープ（MAIL FROM:）に基づいて、中継の制限ルール【effect.dat】判定に進むというプロセスを経ます。<br>
+<br>
+次の事例は、先にSMTP認証の判定結果により拒絶応答が発生した場合で、その後の中継の制限ルール【effect.dat】の判定まで進んでいない例です。<br>
+拒絶対象条件として【effect.dat】に記述されていても、送信元のエンベロープ（MAIL FROM:）の処理判定は行われません。<br>
+----------------------------------------------------------------------------<br>
+ア）[220 [サーバー名] E-POST ESMTP Receiver(4.AH)x64] 後にコード、時間など記載<br>
+イ）EHLO User<br>
+ウ）250 [サーバー名] Hello [外部接続元IPアドレス],pleased to meet you<br>
+エ）AUTH LOGIN<br>
+------------------------------------------------------------------------<br>
+オ）<b>503 5.5.1 Error： authentication not enabled.</b><br>
+------------------------------------------------------------------------<br>
+ク）QUIT<br>
+ケ）221 2.0.0 [サーバー名] closing connection.<br>
+コ）CloseClient Started.:SOCKET.C<br>
+コ）closesocket():SOCKET.C<br>
+----------------------------------------------------------------------------<br>
+<br>
+対して次の事例は、先にSMTP認証が成功し、その後に中継の制限ルール【effect.dat】の判定に進み、送信元のエンベロープ（MAIL FROM:）の処理判定が行われ拒絶されている例です。<br>
+----------------------------------------------------------------------------<br>
+ア）[220 [サーバー名] E-POST ESMTP Receiver(4.AH)x64] 後にコード、時間など記載<br>
+イ）EHLO User<br>
+ウ）250 [サーバー名] Hello [外部接続元IPアドレス],pleased to meet you<br>
+エ）AUTH LOGIN<br>
+------------------------------------------------------------------------<br>
+オ）235 2.0.0 Authentication successful.<br>
+------------------------------------------------------------------------<br>
+カ）MAIL FROM:&lt;&gt;<br>
+キ）<b>550 5.1.7 Please, mail from a valid IP or Domain address.</b><br>
+------------------------------------------------------------------------<br>
+ク）QUIT<br>
+ケ）221 2.0.0 [サーバー名] closing connection.<br>
+コ）CloseClient Started.:SOCKET.C<br>
+コ）closesocket():SOCKET.C<br>
+----------------------------------------------------------------------------<br>
+なお、ここであげた事例の内容をログで確認するには、<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>の取得が必要です。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a><br>
+●<a href="./faq10-01.html">EPSTRS（SMTPレシーバー）応答コード</a><br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

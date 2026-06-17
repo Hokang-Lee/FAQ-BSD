@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-21</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>自ドメイン宛のsenderlogの中身で、ConnectHost(xxx...)の記録があるものとないものの違いは？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>senderlogは、epstdd サービスで管理する配送および配送リトライの記録です。senderlogには送信先ドメインが記録され、送信先ドメインの名前解決後、送信先への接続記録としてConnectHost(xxx...：送信先IP)が追記されます。<br>
+送信先が自ドメイン（内部ドメイン）の場合では、ConnectHost(xxx...)を記録しないことがあります。この場合は、自ドメインのローカルユーザのフォルダへメール保存したことを示します。<br>送信先が自ドメインで、ConnectHost(xxx...) の記録があるものは、ローカルユーザーのメールボックスフォルダに自動転送指定等があった場合、自動転送のため処理された記録と解釈できます。<br>
+この理由ですが、自動転送機能で自ドメイン宛てに転送すると、epstdd の配送→ epstrd の再受信 というプロセスが発生するためです。通常の内部同士のメール送信は epstrd が再受信することはなく、システム内部のファイルコピーで処理が行われる形です。<br>
+原理的仕組みの説明は下記のFAQ記事を参照してください。<br>
+<br>
+<b>（関連FAQ）</b><br>●<a href="./faq10-42.html">自動転送設定数が多いと、処理が遅くなり負荷が過大にかかってしまう</a><br>●<a href="./faq15-41.html">内部ドメイン宛アドレスに自動転送を行ったときに遅延する場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

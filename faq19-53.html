@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-53</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>上位サーバへのSMTP送信遅延が発生しincomingフォルダに膨大なファイルがたまり、パフォーマンスが落ちる現象の対処 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+上位サーバへのSMTP送信遅延が発生し、[メール作業フォルダ]（既定値 /var/spool/epms/）下のincomingフォルダに膨大なファイルがたまってパフォーマンスが落ちる現象の報告を受けたことがあります。考えられる要因をあげてみます。<br>
+<br>
+<b>1.上位サーバが、拒否する送信元や送信先が大量に含まれているとき</b><br>
+この場合は、送信拒否されるメールが、リトライキューに溜まり、正常な宛先のメール送信の妨げになることになります。<br>
+以下のフォルダににメールが溜まっていないか確認してください。<br>
+　[メール作業フォルダ]/incoming<br>
+　[メール作業フォルダ]/domains<br>
+　[メール作業フォルダ]/holding<br>
+上位サーバが、拒否しているメールは、それぞれ拒否理由を調べ上位サーバ側で許可できないメールの場合は、E-Post側の配送時のリトライ間隔や、リトライ回数等を調整し、無駄なリトライを減らすことで遅延解消に繋がります。<br>
+<br>
+<b>2.上記に関連して、ジャンクメールやSPAMメールが利用されている</b><br>
+クライアントがウィルスによるbotなどのメール送信の踏み台や不正中継の踏み台になっていないかも念のため確認してください。踏み台にされると、大量のメールがSMTPを経由して送信されることになりますが、これらにより送信遅延を起こすこともあります。<br>
+この場合も以下フォルダにメールが大量に溜っていないか目視で確認する必要があります。<br>
+　[メール作業フォルダ]/incoming<br>
+　[メール作業フォルダ]/domains<br>
+　[メール作業フォルダ]/holding<br><br>
+何らかの理由で上位サーバへのSMTP送信遅延が発生し、incomingフォルダに膨大なファイルが蓄積されていることが見つかった場合、配送スレッド数を増やすことでパフォーマンスを改善できるケースがあります。配送スレッド数とは、同時接続できるセッション数のことです。<br>
+［システム管理メニュー］をクリック、［SMTP送信詳細］をクリックして表示される「スレッド数（デフォルト値30）」を多くすれば、同時に接続できるセッションが多くなるため、蓄積メールの配送処理の改善が期待できます。<br>
+ただし、スレッド数を増やすと、相手サーバ側の能力により許容されない場合や、セキュリティ的には攻撃とみなされることもあるため、様子をみながら段階的に行っていく必要があります。配送スレッド数をデフォルトの30から、30刻みに増やしていき、60、90、120、180というように、スレッド数を200ぐらいに向けて段階的に増やすことで、配送がはけるようになるのか確認します。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-58.html">配送サービスepstddのスレッド数はどの程度まで上げても大丈夫か</a><br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

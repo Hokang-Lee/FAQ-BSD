@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-20</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>acceptlogにメッセージIDが出ているのにreceivelogに見つからないケースがある理由 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+<a href="./faq05-03.html">接続マシンログ（acceptlog）</a>にメッセージIDが出ているのに<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>の方には該当するメッセージIDが見つからないケースがあります。それは下記の理由によるものです。<br>
+<br>
+たとえば受領プロセス中の User unknown の理由で拒絶している場合などは、メッセージIDの Bxxxxxxxxxx は、仮発番状態で acceptlog には記載されますが、一方の詳細ログである receivelog にはDATAコマンドまで進まない限り、記載されない仕様です。そのため、acceptlog にメッセージIDが出ているのに receivelog には該当するメッセージIDが見つからないケースがあり得ます。<br>
+<br>
+acceptlog と receivelog の両者から該当メールを引き当てる場合、正常な受領であれば、メッセージIDの Bxxxxxxxxxx で引き当てはもちろん可能ですが、そうではない、途中の回線切断や、さまざまな理由による拒絶では、メッセージIDの完全な発番や完全な記載ができないプロセス中の可能性があります。そのため、時間（時分秒）で引き当ててみるのがよりよい方法となります。<br>
+<br>
+一方、受領プロセス前のSMTP AUTH（SMTP認証）の段階で拒絶しているケースでは、メッセージIDは発番されず、&lt;B0000000000&gt; として acceptlog に記録される形となります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-24.html">接続マシンログ（acceptlog）で abort されている理由を知るには </a><br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

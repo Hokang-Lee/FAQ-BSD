@@ -1,0 +1,113 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-34</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlogに送信リトライのたび&quot;socket error code=60&quot;のエラーが記録される場合</b></FONT>
+<HR>
+<br>
+senderlogに送信リトライのたび、<b>&quot;socket error code=60&quot;</b>のsocketのエラーコードが記録されている場合、、接続要求がタイムアウトして回線が切断されたことを意味します。<br>
+<br>
+<hr align="left" width="80%" size="1" noshade>
+[B0002570388] ConnectHost: ...sock connect failed. (socket error code=60)<br>
+　　　　　　　　：<br>
+[B0002570388-R0001] ConnectHost: ...sock connect failed. (socket error code=60)<br>
+　　　　　　　　：<br>
+[B0002570388-R0002] ConnectHost: ...sock connect failed. (socket error code=60)<br>
+<hr align="left" width="80%" size="1" noshade>
+<br>
+この原因としてはいくつか考えられますが、下記の点について問題がないかどうか調べてください。<br>
+<ol><li>E-Postが参照する次のDNSサーバの設定が正しいかどうかを調べてください。また設定されているDNSサーバの動作状況はどうかも改めて確認してください。<br>
+下記のDNSサーバ設定が正しいかどうかを調べます。<br>
+<ul type="square">
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある「DNSサーバー」<br>
+<li>/etc/resolv.confのnamserverで設定する「DNSサーバー」<br>
+</ul>
+E-Post Mail Server／E-Post SMTP Serverシリーズでは、リトライ毎に、MXレコード1→MXレコード2→Aレコードと順番に参照しますので、両方のDNSサーバー項目が正しく設定されていることを前提にしています。<br>
+<br>
+<li>設定されているDNSサーバは送信先であるドメイン名のMXレコードを正しくキャッシュしていて、かつ名前解決ができるようになっているか確認してください。<br>
+設定されているDNSサーバの動作状況を調べるには、E-Postがインストールされたマシンからnslookupコマンドで確認します。送信先ドメインの応答がされればDNSは正しく参照されていますが、名前解決ができなければDNSを参照できないか設定に問題があります。<br>
+（太字部分をユーザーが入力　abcd.ne.jpは架空のドメイン）<br>
+<table bgcolor="#777777" width="480">
+ <tr>
+  <td><font color="#ffffff">
+  <b><u>nslookup</u> [Enter]</b>　<font color="#ff0000">※</font><br>
+  Default Server:  ns.xxx.co.jp<br>
+  Address:  xxx.xxx.xxx.xxx<br>
+  <b><u>set type=mx</u> [Enter]<br>
+  <u>abcd.ne.jp</u> [Enter]</b><br>
+  Server:  ns.xxx.co.jp<br>
+  Address:  xxx.xxx.xxx.xxx<br>
+  <br>
+  abcd.ne.jp    MX preference = 5, mail exchanger = mail.abcd.ne.jp<br>
+  　　　　:<br>
+  <b><u>exit</u> [Enter]</b><br>
+  <br></font>
+  </td>
+ </tr>
+</table>
+※<b>nslookup type=mx abcd.ne.jp [Enter]</b> と一度に引数付きで入力することも可能。<br>
+<br>
+<li>確認できた送信先ドメインのMXレコード宛にE-PostがインストールされたマシンからtelnetコマンドでSMTPポートへ直接接続できるか試します。<br>
+接続できず、何の応答もないときは、相手側サーバーまたは到達するまでの経路上に問題があります。たとえば経路上にあるファイヤウォールなどを調べることが必要です。<br>
+<br>
+（太字部分をユーザーが入力　abcd.ne.jpは架空のドメイン）<br>
+<table bgcolor="#777777" width="480">
+ <tr>
+  <td><font color="#ffffff">
+  <b><u>telnet mail.abcd.ne.jp smtp</u> [Enter]</b><br>
+  220 OK　<font color="#ff0000">※</font><br>
+  <br>
+  <b><u>quit</u> [Enter]</b><br>
+  221 abcd.ne.jp Service closing transmission channel<br>
+  <br></font>
+  </td>
+ </tr>
+</table>
+※応答メッセージに長短があったり、メッセージの文言は相手のメールサーバ種類や設定状況によって一律ではありません。ただし、RFCで規定された応答コードについては、どのようなサーバでも原則は同じです。<br>
+※OP25Bを実施している回線上のクライアントマシンからは、原理上、SMTPの25番ポートではつながりません。OP25Bが実施されていない回線上のメールサーバマシンから、接続できるかどうかを試すようにしてください。<br>
+<br>
+<li>ここで該当する問題がないようであれば、下記記事も参照してください。
+</ul></ol>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-02.html">外部へメールが配送がされない</a><br>
+●<a href="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">FreeBSD エラーコード表</a><br>●<a href="./faq05-33.html">senderlogにデータ送信途中で&quot;socket error code=54&quot;や&quot;=53&quot;のようにWINSOCKのエラーコードが記録される場合</a><br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-38</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>SMTP認証（SMTP-AUTH）設定の手順</b></FONT>
+<HR>
+<br>
+SMTP認証（SMTP-AUTH）を可能にする場合は以下の手順にて設定を行って下さい。<br>
+<br>
+<b>１.SMTP認証の実行を可能にする設定</b><br>
+最初に「E-POST コントロールセンター（メールサーバ管理） 」にて、サービスがSMTP認証の実行を可能にする設定を行います。<br>
+E-POST コントロールセンター<br>
+→メールサーバ管理から［システム管理メニュー］をクリック<br>
+　→［SMTP受信詳細］<br>
+　　→「SMTP認証方法」では「PLAIN LOGIN CRAM-MD5」を選択 （※1）<br>
+　　　続く「セキュリティレベル」では「認証ファイル」を選択<br>
+　　　→最後に［設定する］ボタンをクリック<br>
+<blockquote>（※1）「SMTP認証方法」はいちばん下の &quot;PLAIN LOGIN CRAM-MD5&quot; にしておけば、メールクライアント側からアクセスしてきたとき、接続時に自動的に調整され、いちばん強いいずれかの方法で認証しようとします。<br>
+<font color="#cc0000">またActive Directory（LDAP）連携時の場合は、認証方法は PLAIN と LOGIN のみ有効です。Active Directory（LDAP）連携時には、現在の仕様では CRAM-MD5 は無効ですので設定しないようご注意ください。</font></blockquote>
+ <IMG SRC="./img/faq01-38-01.jpg"><br>
+<br>
+ <IMG src="./img/faq01-38-02.jpg"><br>
+<br>
+その後メールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面から epstrdを［停止］［開始］して再起動します。<br>
+<br>
+<b>２.アカウントの設定</b><br>
+次にE-POST コントロールセンター（メールサーバ管理） にて、［システム管理メニュー］からの［ユーザー管理］により各ユーザーがSMTP認証での接続有無を設定します。<br>
+E-POST コントロールセンター<br>
+→メールサーバ管理から［システム管理メニュー］をクリック<br>
+　　→［ユーザー管理］を選択<br>
+　　　→ドメインを選択し［ユーザー管理へ］ボタンクリック<br>
+　　　　→一覧から該当アカウントを選択、「設定変更」を選んで［操作する］ボタンクリック<br>
+　　　　　→「認証ファイルを設定する」チェックボックスをオン<br>
+　　　　　　→最後に「設定変更する」ボタンをクリック<br>
+<br>
+ <IMG src="./img/faq01-38-03.jpg"><br>
+<br>
+E-POST コントロールセンター<br>
+→メールサーバ管理から［システム管理メニュー］をクリック<br>
+　　→［ユーザー管理］を選択<br>
+　　　→ドメインを選択し［ユーザー管理へ］ボタンクリック<br>
+　　　　→一覧から該当アカウントを選択、［パスワード変更］選んで［操作する］ボタンクリック<br>
+　　　　　→「変更するパスワード」「再確認パスワード」を入力し、パスワードを再設定  （※2）<br>
+　　　　　　→最後に「変更する」ボタンをクリック<br>
+<blockquote>
+（※2）<font color="#cc0000">Active Directory（LDAP）連携時の場合は、［パスワード変更］の操作をしても無効です。パスワード変更はActive Directoryのドメインコントローラ側で設定することになりますのでご注意ください。</font></blockquote>
+ <IMG src="./img/faq01-38-04.jpg"><br>
+<br>
+以上でサーバー側の設定は完了します。続いてメールクライアント側でSMTP認証の設定を行います。メールの送信がSMTP認証が有効な状態で問題なく行えるかどうか確認してください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

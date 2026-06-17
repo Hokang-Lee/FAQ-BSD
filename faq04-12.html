@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-12</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールフィルタ設定で拒絶のエラー応答を返さないで受信メールを廃棄するには</b></FONT>
+<HR>
+<BR>
+メールフィルタ設定を使ってLevel:110やLevel:100を指定することによって受領を拒絶した場合、送信元MTAに対して「552 5.7.1 Requested mail action aborted: caught by the filter setting.」の500番台の拒絶エラー応答を返す動きになります。<br>
+<br>
+これに対して、拒絶のエラー応答を返さないで受信メールを廃棄するには、<u>Level:5xx を指定し、&quot;Forward:&quot;の後に指定するべきメールアドレスを未記入（空白）にする方法</u>が使えます。これは、Sendmail にある DISCARD 設定のような、エラー応答を返さないで受信メールを破棄する設定とほぼ同様になります。&quot;Forward:&quot;で指定すべきアドレスを空白にしてやれば、受信した後、フォワード先の指定がないため、メールはそのまま自然消滅します。拒絶のエラー応答は、送信元に返されることはありません。また、転送できなかったエラーも返されることはありません。また、フォワードするときに送信リトライもされませんので、負荷の面でも心配はないと考えます。<br>
+<blockquote>
+例）ヘッダFrom:にドメイン abcdefg.jp を含んだメールアドレスを語ってメールが来た場合、拒絶のエラー応答を返さずに受信メールを廃棄、合わせて viruslogフォルダにメールデータを保管する設定<br>
+－－－－－－－－－－－<br>
+Virus:Discard<br>
+From:@abcdefg.jp<br>
+Level:510<br>
+Forward:<br>
+VirusEnd:<br>
+－－－－－－－－－－－<br>
+</blockquote>
+ただし、上記のようにメールフィルタ機能においての From: の条件指定は、ヘッダレベルの判定によります。ヘッダFromの詐称が常態として行われるようなメールには効力を発揮しないので、注意してください。いわゆる迷惑メールではヘッダFromの詐称は当然行われてきますし、通常のメーラーによる送信でもヘッダFromの詐称は簡単にできます。<br>
+<br>
+より厳しくセキュアレベルを高めて判断することが必要なときは、エンベロープレベルの判定を行います。エンベロープFROMによる判定を行いたいときには、個々のアカウント単位で【effect.dat】を指定できる機能が追加されています。なお、個人アカウント単位での【effect.dat】で、false指定によって接続を拒否した場合は、500番台の拒絶の応答エラーが返されます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq04-10.html">個人アカウント単位で【effect.dat】を有効にするには</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

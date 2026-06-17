@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-62</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールクライアントから接続するユーザーIDに＠以降が必要なケース</b></FONT>
+<HR>
+<BR>
+原則として、作成したドメイン名が「共通ボックス方式」を取っているときは、メールクライアントから接続するユーザーIDとして＠以降は不要ですが、完全マルチドメイン設定を行うために「接続するIP/ドメインで区別する」方式に切り替えたときは、メールクライアントから接続するユーザーIDとして、＠以降が必要になります。<br>
+ちなみにActive Directory連携（LDAP）利用のときは、「共通ボックス方式」のみが有効ですので、メールクライアントから接続するユーザーIDは＠以降が不要のタイプとなります。<br>
+通常のシングルサーバとしてメールサーバを構築しているとき、メールクライアントでの接続方法を切り替えない状況でも、接続そのものは可能で、そのままPOP受信も可能に見えますが、上記２つの方式では、メールデータのフォルダ位置が異なるため、POP受信しても肝心のメールは“常に来ていない状態”になってしまいます。方式を切り替えたときは、メールクライアントの接続するユーザーIDもいっしょに切り替える必要があります。<br>
+<br>
+（例）作成したアカウントを user、作成したドメインを abc.co.jp としたとき。<br>
+　・「共通ボックス方式」のとき・・・　"user"のみでログイン<br>
+　・「接続するIP/ドメインで区別する」方式のとき・・・　"user@abc.co.jp"でログイン<br>
+<br>
+
+なお、次は基本的な関連事項、および公開メールサーバを構築する際の応用的な事例です。ケースによって、メールクライアントの接続するユーザーIDに＠以降が必要か不要かは、これらの原則からは少しずつ変わってきますので、ご注意ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-14.html">１つのIPアドレスで複数ドメインへの接続を処理したい場合</a><br>
+●<a href="./faq01-22.html">別々のIPで複数ドメインを割り当てる場合（グローバルIPで直接公開）</a><br>
+●<a href="./faq01-21.html">別々のIPで複数ドメインを割り当てる場合（ローカルIPをルータの静的マスカレード機能で割当て公開）</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

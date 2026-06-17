@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-94</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>社内ネットワークからのメーラーによるPOP3接続を止め、Webメールシステムからの接続だけ許可したい場合</b></FONT>
+<HR>
+<br>
+社内ネットワークからのメーラーによるPOP3接続を止め、Webメールシステムからの接続だけ許可したい場合、POP3認証時の接続ロックアウト機能を活用して設定します。POP3認証時の接続ロックアウト機能を有効に設定することにより、社内ネットワーク（LAN内）に接続されたPCからのPOP3接続を拒絶することが可能です。<br>
+<br>
+<b>社内ネットワークに接続されたPCからのPOP3接続を拒絶する方法</b><br>
+<ol type="1"><li>E-POSTコントロールセンターのメールサーバ管理からPOP3認証時の接続ロックアウト機能を有効にする。（下記記事参照）</li>
+<li>【rejectpopip.dat】ファイルがプログラムインストールフォルダ内に自動生成され、その内容は<b>［POP3認証ロックアウト］</b>ボタンクリックで確認できる。その【rejectpopip.dat】ファイルを編集する。</li>
+<li>【rejectpopip.dat】に次のような記述を行う。</li>
+ここでは例として社内ネットワーク（LAN）のIPアドレスを192.168.1.xxxとする。<br>
+'-------------------------------------------------------------------------------------<br>
+192.168.1.XXX<font color="pink">&lt;tab&gt;</font>true　　←（Webメールシステムを動かすサーバのIP）<br>
+192.168.1.*<font color="pink">&lt;tab&gt;</font><br>
+　　　　　　　　　↑（その他のネットワーク内からの接続をすべて拒絶）<br>
+'-------------------------------------------------------------------------------------<br>
+※WebメールシステムのサーバIPを指定する行ではtabコードの区切りの後、&quot;true&quot;指定にしてください。そのIPには接続ロックアウトは適用されなくなります。2行目の拒絶を指定する行はtabコードの区切りの後、何も書かないで改行してください。<br>
+※【rejectpopip.dat】の記述方法は次の記事を参考にしてください。IPと&quot;true&quot;の間の区切り文字はtabコードです。<br>
+<li>これ以降、192.168.1.*の社内ネットワークPCのメーラーからPOP3接続しても、この接続ロックアウト機能により接続が拒絶されます。</li></ol>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-26.html">POP3認証時の「接続ロックアウト機能」について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

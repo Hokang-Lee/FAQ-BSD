@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-43</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>大量のメールを一括送信する場合、配送キューにファイルが大量に溜まることで配送処理が悪化してしまうのを防ぐには</b></FONT>
+<HR>
+<BR>
+メール送信時には、SMTPレシーバーサービスプログラムであるepstrdから、配送キューであるincomingフォルダに、ファイルが格納されていきます。SMTP配送サービスプログラムであるepstddは、そのファイルを次々と外部へ配送したり、内部ドメインの場合はメールボックスへ格納する処理を行います。デフォルトでは、epstrdから、配送キューであるincomingフォルダにファイルが格納されるとき、その流量制限は特に設けられていません。<br>
+しかしながら、大量のメールを一括送信した場合は、epstrdサービスプログラムが受領した後、片っ端から配送キューであるincomingフォルダにファイルを格納していくため、ファイル数が膨大にふくれあがる状態になります。ファイル数が増えることで、OS側のファイル処理のパフォーマンスが極端に低下するという問題を引き起こし、ひいては配送速度が極端に低下したり、配送自体ができなくなるなどの問題が生じてしまう事態を招きかねません。<br>
+これは、ファイルシステム性能上の問題でもあり、ファイルインデックスの応答レスポンスが極端に低下してしまうものです。CPU性能やメモリ実装量などとは一切無関係です。<br>
+専用プログラムから大量のメールを送る場合は、通常はウエイトをかけながら送信をすることがノウハウのポイントとなっていることが多いようですが、E-Post Mail Server / E-Post SMTP Server側でも、上記の問題を起こさないようにする設定が必要なケースもあります。epstrdが大量の送信メールを受け付けるとき、配送キューであるincomingフォルダにファイルを移しすぎないよう、受領そのものに流量制限をかける方法です。<br>
+受領処理にウエイトをかけ、配送キューに流量制限をかけるには、次のように、設定ファイルを操作して数値10進で作成、値を設定します。
+たとえば、作成した設定ファイル、SpoolFsSync.1に&quot;1000&quot;（10進）の数値を設定することで、1000メール分（MSGとRCPの２ファイル１組で１メール分）を超えないように流量制限の設定を行います。incomingフォルダ内には、1000メール分以下、つまりファイル数はその約２倍の2000ファイル程度以下になるまで、受領処理にウエイトがかかります。クライアントはその分だけ待たされます。<br>
+なお、この設定値を調整すれば、受領処理のウエイトを減らし、配送のパフォーマンスを調整できます。たとえば、&quot;5000&quot;（10進）の数値を設定することで、5000メール分、つまりファイル数はその約２倍の10,000ファイル程度以下になるまで、受領処理のウエイトがかかるのを緩和することができます。ただし、数値を上げていって&quot;10000&quot;（10進）以上の数値を設定することは、1フォルダあたりのファイル数を2万個まで許容することになりますので、ファイルシステムのパフォーマンス低下を防げなくなる可能性があります。十分注意して設定してください。<br>
+<br><small>
+[E-Post Mail Server / E-Post SMTP Serverシリーズの場合]<br>
+<hr width="80%" align="left" size="1" noshade>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5RS<br>
+　　　　→SpoolFsSync.1 (数値)<br>
+　　　　デフォルト値 0:無制限<br>
+　　　　（incomingフォルダの走査をスキップする）<br>
+<hr width="80%" align="left" size="1" noshade>
+設定内容を変更した後は、設定値を反映させるため、epstrdサービスを再起動してください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

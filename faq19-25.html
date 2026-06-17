@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-25</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>実体のアカウントがSMTP認証ありならば、エイリアスにも認証による制限がかかる？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Postでは、実体のアカウントがSMTP認証ありならば、エイリアスにも認証による制限がかかります。デフォルトの設定では、a.［SMTP認証］手順でのSMTP認証ユーザIDと、送信手順 との間で送信される b.［エンベロープの送信元］（エンベロープFROM）との間で必ずしも一致している必要はなく(a≠b)、E-Postではそれを設定変更することもできます。<br>
+<br>
+セキュリティ強化し、a=b、つまり［SMTP認証ユーザID］＝［エンベロープの送信元］（エンベロープFROM）としたい場合は、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開き、「送信者の信頼度」について2番目の &quot;AUTHID=Env&quot;（意味は[SMTP認証ID]＝[エンベロープ]） のラジオボタンを選択しておく必要があります。セキュリティをもっと強化したい場合は、3番目の &quot;AUTHID=Env=Head&quot;（意味は[SMTP認証ユーザID]＝[エンベロープ]=[FROM:ヘッダー]） のラジオボタンを選択しておくことも可能ですが、この場合は制限が強すぎて、エイリアスを利用してるときは認証されなくなります。エイリアス利用時に正常使用するには、[FROM:ヘッダー]の書き換えなどが必要になるため、現実的には選択肢に入れることは困難です。<br>
+具体的には下記のFAQ記事で説明しております。ご参照ください。<br>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq10-20.html">SMTP認証使用時に、内部アカウントによる送信者の詐称を防ぐには</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

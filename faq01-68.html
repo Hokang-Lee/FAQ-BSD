@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-68</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>MXキャッシュのフォルダ内に残る情報について</b></FONT>
+<HR>
+<BR>
+MXレコードの情報をキャッシュするためのフォルダ（mxcash）には、ファイルが蓄積されていきますが、たとえばアクセス日付が古いものから削除したり、一定のサイズになったら自動削除されるような機能はE-Post Mail Serverシリーズには、特別に用意されていません。<br>
+そのままにしておいても、プログラム上は特に支障はありませんが、ファイルが膨大になってディスクを圧迫する要因になりそうなときは、手動で削除してください。<br>
+<br>
+mxcashフォルダに作成されるMXレコードのキャッシュ情報は、epstddサービスによる配送セッションが成功した場合に、次の配送セッションに引き継げるものとして保管されます。<br>
+<br>
+一時的に何らかの理由（相手拒否、回線エラーなど）による事象が発生した場合、配送セッションによって、MXレコードのキャッシュ情報がフォルダから削除されることもあります。<br>
+<br>
+また、このMXレコードのキャッシュ情報がない場合は、その次の配送セッションからは、DNSへ直接問い合わせすることにより、MXレコードの検索を行ってから配送処理されるようになります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

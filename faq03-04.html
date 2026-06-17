@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ03-04</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!--Google Analytics start-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22937858-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!--Google Analytics end-->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>POP before SMTP機能はないのですか？</b></FONT>
+<HR>
+<BR>
+“POP before SMTP”の機能は搭載されていません。今後も搭載の予定はありません。<BR>
+<BR>
+「SMTP認証」を導入することで、メール送信時のセキュリティの不安は解決されます。“POP before SMTP”は時代遅れであり、SMTP認証がなかった頃の一時しのぎでしかないものと考えます。<br>
+<BR>
+今は、常時接続があたりまえになり、数分間隔でメールチェックしているのが普通です。<br>
+“POP before SMTP”は、POP3への認証後、一定の時間内はそのユーザーアカウントでの送信は、誰が送信してもスルー状態になっています。<BR>
+例えば、サーバ側が“POP before SMTP”で５分間スルーにしていて、メールクライアントが常に５分以内の間隔によるメールチェックを行っている場合、このユーザのアカウントが知られてしまえば、簡単に第三者がメール送信できてしまう結果となり、重大なセキュリティホールにつながる危険性があります。<BR>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

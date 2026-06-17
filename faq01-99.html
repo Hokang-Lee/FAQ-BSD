@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-99</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTPゲートウェイとして構築したとき踏み台にならないようにする<font color="red">（重要）</font></b></FONT>
+<HR>
+<br>
+E-Post SMTP Server を SMTPゲートウェイとして設定し、エイリアス設定でワイルドカードを指定する方法で内部ドメインをすべてリレーする設定を行っている場合は、内部ドメインに設定したドメイン名＋任意アカウントを使って、迷惑メールの不正中継がされる可能性があります。いわゆる「踏み台」です。<br>
+<br>
+内部からほとんど送信してもいないのに、大量の配送記録がされ、大量のリトライデータが蓄積されている場合は、踏み台になってしまっている可能性を考え、以下の対策を取ってください。２つとも対策が困難なときは、１．だけでも対策を取ってください。<br>
+<br>
+<b>（対策方法について）</b><br>
+<br>
+外部からの不正中継に対する対策を取ってください。なお、１の設定を行ったとき、外部（自宅）から本人がアクセスすることを認めるポリシーを採用しているところでは、リレーが許可されない副作用があります。<br>
+<br>
+<b>１．不正中継に対する対策<font color="red">（重要）</font></b><br>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］の中ほど［中継の制限］の［マシンごとの中継］、もしくは［中継の制限］で表示される「中継の制限設定」にある［マシンごとの中継］ボタンをクリックして表示される「effect.dat」を確認して次のような設定を行ってください。<br>
+デフォルトで記述している２行のすぐ下に記述します。<内部ドメインの許可するIP>は、中継許可する任意のIPアドレスです。普通はLAN内のIPアドレスになります。必要な分だけ複数行登録します。<br>
+その後の最後の行に、外部からの中継送信を禁止する設定&quot;norelay&quot;の行を設定します。この設定は、「上で指定されたアドレス以外はすべてリレーを許可しない」という明示的な設定です。<br>
+<ul>
+（書式）<br>
+<hr align="left" width="80%" size="1" noshade>
+&lt;内部ドメインの許可するIP&gt;　default<br>
+*.*.*.*　norelay<br>
+<hr align="left" width="80%" size="1" noshade>
+（具体例）<br>
+<hr align="left" width="80%" size="1" noshade>
+#&lt;&gt;　false<br>
+#blank　false<br>
+172.16.*.*　default<br>
+192.168.*.*　default<br>
+*.*.*.*　norelay<br>
+<hr align="left" width="80%" size="1" noshade></ul>
+ちなみに、&quot;norelay&quot;の記述を加えることによって、可変IPアドレスなどが使われている外部（自宅）から本人がアクセスすることを認めるポリシーを採用しているところでは、リレーが許可されない結果となります。両立はできません。<br>
+<br>
+また、最終行に&quot;norelay&quot;の記述が必要なのは、E-Post SMTP Server を SMTPゲートウェイとして設定しているときに限られます。E-Post Mail Serverを通常のメールサーバに利用しているときは、外部から外部へのリレーはデフォルトで禁止されており、記述の必要はありません。ただし、E-Post Mail Serverでメールサーバの役割と共にSMTPゲートウェイの役割も兼用させる場合は、設定しておいてください。<br>
+&quot;effect.dat&quot;の最終行に&quot;norelay&quot;を記述することについては、SMTPゲートウェイにするマシンのSMTP不正中継を防止させるための方策として捉えてください。<br>
+<br>
+<b>２．アドレス単位でエイリアス登録する</b><br>
+<br>
+SMTPゲートウェイ（リレーサーバ）を構築するときに、50user版を購入し、エイリアス設定で　＊＠domain.jp　→　＊＠domain.jp　のようにワイルドカード指定での設定をしているときは、まず必要ライセンス分を追加購入なさってください。<br>
+<br>
+次にエイリアス設定で　user@domain.jp　→　user@domain.jp　のようにアドレス単位ごとにエイリアスに登録を行っていってください。<br>
+アドレス数が多く、エイリアスを一括登録したいときは、sshでコンソール接続を行い登録コマンドを使って、一括登録を行う方法があります。エイリアスの一括登録については以下を参考にしてください。<br>
+また、すべてのエイリアス登録まで手間がかかって行えないとき、&quot;2009＊＠domain.jp&quot;などのように、アドレスの一部分にワイルドカードを使用することも可能です。<br>
+<br>
+<b>■ エイリアスの一括登録方法</b><br>
+通常のメールサーバでは使用するドメインが作成済みになっていますが、SMTPゲートウェイにする SMTP Server には、そうした環境とは、少々事情が異なり、使用するドメインが作成されているわけではありませんので、下記のように操作してください。<br>
+<ol>
+<li>ssh でrootアカウントにログインします。<br>
+<li>プログラムの保存フォルダへ移動します。<br>
+# cd /usr/local/mta/bin<br>
+<li>エイリアス登録コマンドを実行します。<br>
+# ./epstman mode=NA domname=testdomain.jp aliases=a1＠testdomain.jp mappedto=real＠real.jp<br>
+※複数ある場合は、シェルスプリプトファイル(eg. aliimport.sh 等)を任意で作成し実行権を設定し、一括実行することができます。<br>
+</ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

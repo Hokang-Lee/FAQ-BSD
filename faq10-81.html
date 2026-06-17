@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-81</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>serviceコマンドでE-Postサービスを起動させたり停止させるには </b></FONT>
+<HR>
+<br>
+メンテナンスを自動化させるケースなどで、E-Postの各サービスプログラムを起動させたり、停止させる必要がある場合、FreeBSDに装備されているserviceコマンドを使って、他の一般的なサービスプログラムと同様、起動させたり、停止させることが可能です。<br>
+<br>
+各サービスプログラムごとに例をあげると次のような操作になります。<br>
+<br>
+［epstrd］<br>
+[開始]:  # service epstrd start<br>
+[停止]:  # service epstrd stop<br>
+<br>
+［epstdd］<br>
+[開始]:  # service epstdd start<br>
+[停止]:  # service epstdd stop<br>
+<br>
+［epstpop3d］<br>
+[開始]:  # service epstpop3d start<br>
+[停止]:  # service epstpop3d stop<br>
+<br>
+［epstimap4d］<br>
+[開始]:  # service epstimap4d start<br>
+[停止]:  # service epstimap4d stop<br>
+<br>
+なお、epstrdサービスをコマンドで停止させる場合、tempフォルダに処理中のデータが残っていない状況を確認した上でおこなってください。<br>
+epstddサービスをコマンドで停止させる場合、メールキューであるincomingフォルダに処理中のデータができるだけ残っていない状況を確認した上でおこなってください。<br>
+ちなみに、内部・外部への配送時間そのものを操ることが目的の場合、メールサーバ・SMTPサーバにおけるepstddサービスに関して、送信時間の細かい制御を行うことも可能です。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

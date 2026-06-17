@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-88</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>インポート・エクスポートするテキストファイルの書式について <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+インポートおよびエクスポート時に利用されるテキストファイルの書式は、以下の通りです。なお、ファイルに設定される数値として一般的に "0"は無効、"1"は有効です。<br>
+また、「Domain」項目ですが、Soft Account（E-Post独自アカウント）方式の場合は、仮に実際のドメイン名と異なる文字列を指定していたときでも、ユーザーインポート時にインポート対象の作成済みドメイン名に強制的に変更される仕様です。<br>
+※OS環境がBSD系であることから、<b><font color="#cc0000">エクスポートされるタブ区切りテキストファイルの各行末尾は[LF]コードのみの改行となりますので注意</font></b>してください。Windowsマシンで同ファイルを確認する場合、メモ帳では改行部分が正しく表示できず各行がくっついた表示になります。正しい状態で見るには、[LF]コードの改行でも正常に表示される高機能エディタを使って確認してください。<br>
+※エクスポートされる際のファイル各行末尾は[LF]コードのみの改行でしたが、<b><font color="#cc0000">インポートされるときに使われるタブ区切りテキストファイルの各行末尾の改行は、[LF]コードでも[CRLF]コードでもどちらでも正常に取り込まれる仕様</font></b>です。<br>
+<br>
+［書式］<br>
+<hr size="1" color="#999999" noshade>
+Account <font color="#FF69B4">[TAB]</font> Pass <font color="#FF69B4">[TAB]</font> Fullname <font color="#FF69B4">[TAB]</font> Domain <font color="#FF69B4">[TAB]</font> Homefolder <font color="#FF69B4">[TAB]</font> SMTP認証flag <font color="#FF69B4">[TAB]</font> APOP認証flag <font color="#FF69B4">[TAB]</font> MailBox制限Size <font color="#FF69B4">[TAB]</font> POP3有効無効 <font color="#FF69B4">[TAB]</font> IMAP4有効無効 <font color="#FF69B4">[LF]</font><br>
+<hr size="1" color="#999999" noshade>
+<br>
+［例］<br>
+<hr size="1" color="#999999" noshade>
+user <font color="#FF69B4">[TAB]</font> pass1234 <font color="#FF69B4">[TAB]</font> user <font color="#FF69B4">[TAB]</font> domain.jp <font color="#FF69B4">[TAB]</font> Home <font color="#FF69B4">[TAB]</font> 1 <font color="#FF69B4">[TAB]</font> 1 <font color="#FF69B4">[TAB]</font> 0 <font color="#FF69B4">[TAB]</font> 1 <font color="#FF69B4">[TAB]</font> 1 <font color="#FF69B4">[LF]</font><br>
+<hr size="1" color="#999999" noshade>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq01-87.html">アカウントデータとインポートの仕様について</a><br>
+●<a href="./faq15-53.html">アカウントマネージャのホーム（home）項目が他項目と関連づけられたり動作上影響があるケースはありますか？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

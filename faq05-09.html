@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-09</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>配送失敗ログ（faillog）について</b></FONT>
+<HR>
+<br>
+配送失敗ログ（faillog）は、外部ドメインへの配送を実行し、何らかの理由で配送失敗処理されたメールの記録です。リトライを繰り返した結果、最終的に送信失敗したメールは、faillogに記録されます<br>
+<ol><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ログ］を開き［配送失敗ログ］チェックボックスの状態を確認します。
+<li>チェックボックスがオンの設定のままのときはそのままで、［配送失敗ログ］チェックボックスがオフのときはオンに変更してから［設定する］ボタンクリックします。
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面からSMTP配送サービス（epstdd）を［停止］→［開始］で再起動します。</ol>
+ログ記録は、［メール作業フォルダ/faillog/コンピュータ名］フォルダ下に日付単位で作成されます。<br>
+<br>
+配送失敗ログ（faillog）の内容は、以下の通りです。<br><small>
+<hr align="center" width="98%" size="1" noshade>
+  &lt;メッセージID＠マシン名&gt;　&lt;send fail on [記録日時]&gt;　　　　　&lt;from 送信元アドレス&gt; &lt;to 送信先アドレス&gt; ※&lt;[理由コード＆理由]&gt;<br>
+<hr align="center" width="98%" size="1" noshade>
+ B0000055688＠xxxxx.xxx.xxx　send fail on [01/Nov/2017:10:29:51]　from xxx＠xxxx.xxx.jp　to xxxx＠xxxx.jp　[550 User Unknown]<br>
+<hr align="center" width="98%" size="1" noshade>
+<br>
+※最右端の [理由コード＆理由] は、相手MTA側の応答による送信拒否コード＆メッセージに従って記録します。理由コードは、相手MTA側が発行したものです。<br>
+なお、マシン無応答のときは、つながらないのでエラーコードがありません。そのため、相手MTAが無応答のままメール送信のマシン無応答の設定時間が過ぎた場合、[Unable to deliver to destination domain] というエラー理由を一律で返します。<br></small>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-20.html">senderlog と faillog に記載された配送失敗の理由が異なる</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

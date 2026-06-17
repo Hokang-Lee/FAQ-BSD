@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ09-13</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Web管理ツールのユーザー管理画面にある［ユーザ氏名］項目を全角文字で運用できますか？</b></FONT>
+<HR>
+<br>
+Web管理ツールのユーザー管理画面にある［ユーザ氏名］項目には、「半角アルファベットにて入力して下さい」との表記があります。<br>
+現状で［ユーザ氏名］項目に全角文字を入力して運用をしているが、問題がないかどうか問い合わせをいただいたことがあります。<br>
+Web管理ツールのユーザー管理画面にある［ユーザ氏名］項目に入力する文字が全角文字で支障がないかどうかという質問に対し、弊社の考えは以下の通りです。<br>
+<br>
+Web管理の［ユーザ氏名］は［full name］項目に該当します。この［ユーザ氏名］（［full name］）のデータについては、E-Postシリーズ製品では VRFY, EXPN コマンドの応答に利用されます。<br>
+仮に、この部分を全角データにした場合、問い合せするメールクライアント側や送信元サーバが全角文字コードに対応していないときに、メールクライアント側や送信元サーバとの通信で文字化けや、予期しない動作を起こす可能性があります。<br>
+ただ、最近はセキュリティ上、ほとんどのサーバが VRFY, EXPN コマンドの応答を禁止していることが普通であり、メールサーバ側で応答禁止設定されていれば、不都合が発生することはほぼないだろうと考えます。VRFY, EXPN コマンドの応答を禁止しているかどうかは次の操作で確認してください。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を選択すると表示される「VRFY,EXPNコマンドに応答する。」チェックボックスを確認します。チェックボックスがオフになっていれば、E-Postは応答しない設定となります。<br>
+［ユーザ氏名］項目に半角英数文字でなく、全角文字を入れて運用しているところは、「VRFY,EXPNコマンドに応答」チェックボックスの状態を念のため確認してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-42.html">メールサーバ管理［ユーザー管理］での［ユーザ氏名］項目は全角文字で運用してよいですか？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

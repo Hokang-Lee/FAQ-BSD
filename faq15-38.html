@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-38</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>パフォーマンス上負荷のかかるActive Directory（LDAP）連携・IMAP4使用時の性能検証について</b></FONT>
+<HR>
+<br>
+パフォーマンス上負荷のかかるActive Directory（LDAP）連携で、なおかつIMAP4使用時のメールの性能検証について試験を実施するとき、パフォーマンス上デメリットとなる側面があります。Active Directory（LDAP）連携の点、さらにIMAP利用の点について、それぞれパフォーマンス上負荷がかかったり、遅くなる要因をあげてみます。<br>
+<br>
+<b>１．Active Directory（LDAP）連携の問題点と課題について</b><br>
+<br>
+Active Directory（LDAP）のドメインコントローラとの通信、応答時間がかかることによって、SMTPの送受信や、POP3/IMAP4の認証に結果的に時間がかかってしまって、エラーとなってしまうケースが起こり得ます。<br>
+下記の記事の通り、Active Directory（LDAP）連携時の設定で、タイムアウト値や問い合わせ回数などの変更ができるようになっています。速くなるように設定することより、確実性のある通信ができるように調整する必要があります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-29.html">Active Directory（LDAP）への問い合わせリトライ間隔と時間を調整するには</a><br>
+●<a href="./faq10-67.html">Active Directory（LDAP）連携時にまれに送信エラーになったり、POP受信エラーが発生するとき</a><br>
+●<a href="./faq15-33.html">Active Directory（LDAP）への問い合わせ負荷の軽減方法について</a><br>
+<br>
+もし、Active Directory（LDAP）連携を行った場合にパフォーマンスがどうしても改善できないときには、Soft Account（E-Post方式）のアカウント管理に変更することも検討してください。<br>
+<br>
+<b>２．IMAP4使用時の問題点と課題－適正ユーザー数・適正流量について</b><br>
+<br>
+メールサーバ導入時にはアドバイスさし上げることもありますが、IMAP4をメールサーバで利用するには、適正ユーザー数や適正流量をサイジングする必要があります。<br>
+POP3利用で1サーバ、5000ユーザー規模程度であれば、まったく問題にはならないと考えていますが、IMAP4利用で1サーバ、1000ユーザー程度内におさめるべきではないかと弊社では考えます。もし、そうした数字を超えるユーザー規模であれば、サブドメインなどを作成し、サーバを複数台に分けて運用すべきではないかと考えます。いずれにしても、想定したユーザー規模数でのパフォーマンス見きわめが大事です。<br>
+また、IMAP4では、メールクライアントの製品種類によって、コマンドの出し方や流儀がかなり異なります。無理なコマンドの出し方をしたりするような“方言”の強いメールクライアントの対策をこれまで数多く取ってきています。そうした対策機能を有効にするため、状況に応じてE-Post側の設定を変更することが必要な場合もあります。<br>
+メールクライアントを実運用で想定する台数分だけ用意して試してみない限り、どういう問題やパフォーマンス上の課題が出てくるのか、実際のところはなかなかわからないと言えます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-13.html">UID値の上限に達していたときの非対応メーラーの動きとその対応方法について</a><br>
+<br>
+IMAP4のパフォーマンス課題があり、サーバを分けるなどの物理的な解決方法が取れないようであれば、POP3での利用をお薦めいたします。なお、POP3とIMAP4混在利用自体には問題ありません。たとえば、大部分のアカウントはPOP3で運用し、一部共用アカウントだけIMAP4で運用する方法もあります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

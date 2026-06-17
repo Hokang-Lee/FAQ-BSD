@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-79</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	dd {
+		padding:0;
+		margin:0 0 0.5em 0em;
+		padding:3px;
+		background:#f4f3e8;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4メールデータ取得バッチファイル事例 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+他社製メールサーバなど、IMAP4使用時のメールボックスフォルダに残っているメールデータがある場合、1台のWindowsマシンからバッチファイルによってIMAP4メールデータ取得を行うには、事例にあるバッチファイルおよびリストファイルを任意フォルダ内に作成し、管理者権限のコマンドプロンプトから実行します。<br>
+バッチファイル実行に当たっては、接続メールサーバのIPアドレス、ポート番号（通常は143）をバッチファイル【get_imap_data2.bat】内の&quot;set adr=&quot;部分に記述することと、すべてのユーザーアカウント（メールアドレス）とそれぞれIMAP4パスワードが事前に判明しており、それらの情報と保存先フォルダをリストファイル【userlist.txt】へあらかじめ全部登録しておく作業が必須になります。メールサーバ製品種類を問わないでご利用になれると思いますが、すべてのユーザーのIMAP4パスワードがわからない場合は、このバッチファイルは使えません。バッチファイルを実行すると&quot;0000000001-000000.MSG&quot;というファイル連番形式で保存先フォルダへメールデータが出力されます。<br>
+ちなみにE-Postシリーズでは、ユーザー管理がSoftAccount方式であれば、ユーザーエクスポート時にIMAP4パスワードも合わせて出力できます。
+<dl>
+<dd>
+<b>【get_imap_data2.bat】</b> IMAP4メールデータ取得バッチファイル事例 下線部書き換え<br>
+@echo off<br>
+<br>
+setlocal enabledelayedexpansion<br>
+<br>
+rem userlist.txtへカンマ区切りで保存右記の書式で保存 ユーザアカウント,パスワード,保存先フォルダ <br>
+rem 接続アドレス:ポート<br>
+set adr=imap://<u>10.0.1.9</u>:143/<br>
+<br>
+rem ユーザリストuserlist.txtからID,PWを取得し順次保存<br>
+for /f "tokens=1,2,3 delims=, " %%a in (userlist.txt) do (<br>
+<br>
+echo %%a<br>
+echo %%b<br>
+echo %%c<br>
+<br>
+curl -v -u "%%a:%%b" %adr% -o list.txt<br>
+<br>
+rem for /f "delims=" %%d in (list.txt) do (<br>
+for /f "tokens=2 delims=)" %%d in (list.txt) do (<br>
+<br>
+rem UID値<br>
+set s1=%%d<br>
+set s2=!s1:~5!<br>
+set s=!s2:"=!<br>
+rem echo s=!s!<br>
+set s3=!s: =%%20!<br>
+set n=!s:/=_!<br>
+<br>
+curl -u "%%a:%%b" %adr%!s3!/ -X "FETCH 1:* (UID FLAGS)" -o flags.txt<br>
+rem type flags.txt<br>
+<br>
+mkdir "%%c!s!"<br>
+<br>
+for /f "tokens=5,7*" %%f in (flags.txt) do (<br>
+<br>
+echo %%f<br>
+rem フラグ<br>
+set l=%%g%%h%%i%%j%%k<br>
+set t1=0<br>
+<br>
+ECHO !l! | find "Answered" >NUL<br>
+IF NOT ERRORLEVEL 1 (set t2=1)  else (set t2=0)<br>
+ECHO !l! | find "Flagged" >NUL<br>
+IF NOT ERRORLEVEL 1 (set t3=1)  else (set t3=0)<br>
+ECHO !l! | find "Deleted" >NUL<br>
+IF NOT ERRORLEVEL 1 (set t4=1)  else (set t4=0)<br>
+ECHO !l! | find "Seen" >NUL<br>
+IF NOT ERRORLEVEL 1 (set t5=1)  else (set t5=0)<br>
+ECHO !l! | find "Draft" >NUL<br>
+IF NOT ERRORLEVEL 1 (set t6=1)  else (set t6=0)<br>
+<br>
+set u=%%f$<br>
+echo !u! !t1!!t2!!t3!!t4!!t5!!t6!<br>
+rem echo !u:~0,-1!<br>
+set num=0000000000!u:~0,-1!<br>
+set num=!num:~-10,10!<br>
+<br>
+curl -u "%%a:%%b" "%adr%!s3!;UID=!u:~0,-1!;SECTION=" -o "%%c!s!\!num:~!-!t1!!t2!!t3!!t4!!t5!!t6!.MSG"<br>
+)<br>
+del "flags.txt"<br>
+)<br>
+)<br>
+endlocal<br>
+</dd>
+</dl>
+<br>
+<dl>
+<dd>
+<b>【userlist.txt】</b> リストファイル事例 ※書式：ユーザーアカウント（メールアドレス）,IMAP4パスワード,保存先フォルダ ※すべてのユーザーアカウントの登録が必要<br>
+dummy@domain.test,dummy,inbox\dummy\<br>
+　　　　：　　　　<br>
+　　　　：　　　　<br>
+</dd>
+</dl>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-78.html">POP3メールデータ取得バッチファイル事例</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

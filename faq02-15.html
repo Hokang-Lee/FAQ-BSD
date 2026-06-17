@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-15</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>ログに記録されるメーリングリストの枝番末尾に&quot;e&quot;や&quot;f&quot;の記号がつく</b></FONT>
+<HR>
+<br>
+メーリングリストの送信時には、<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>などのログに、&quot;B&quot;で始まるメッセージIDに、さらに&quot;-M0000001&quot;のように、&quot;M&quot;で始まるメーリングリスト枝番が追加されて記録されます。その枝番部分に&quot;-M0000001e&quot;や&quot;-M0000001f&quot;のように、末尾に&quot;e&quot;や&quot;f&quot;などの記号がつくことがあります。<br>
+<br>
+枝番部分に&quot;-M0000001e&quot;や&quot;-M0000001f&quot;のように末尾に&quot;e&quot;や&quot;f&quot;などの記号が付いているのは、ソフトウェアの仕様です。&quot;-M0000001e.MSG&quot;や&quot;-M0000001f.MSG&quot;となっているファイルは、下記の通りファイル名としてあり得るものです。<br>
+<br>
+【メーリングリストの枝番について】<br>
+ファイル名のメーリングリストの枝番部分を表す部分については下記の要領で作成されます。<br>
+<b>&quot;B0000123123-M&lt;連番(16進)&gt;.MSG&quot;</b><br>
+<br>
+&quot;B&quot;で始まるメッセージID番号は10進の整数が使われますが、&quot;M&quot;で始まるメーリングリスト枝番番号には16進数が使われています。従って、0x1e＝30番目、0x1f＝31 番目に分割されたメーリングリストデータということになります。従って、ファイル名としては正しく、あり得るファイル名です。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

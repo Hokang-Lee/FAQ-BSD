@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-77</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>「SMTPゲートウェイ」項目と【gateway.dat】の併用は可能？　両方が設定されているときの優先順位は？</b></FONT>
+<HR>
+<br>
+「SMTPゲートウェイ」項目とゲートウェイ詳細【gateway.dat】の併用は可能か、また両方が設定されているときの優先順位について説明します。<br>
+両者の設定は排他ではなく、併用自体は可能です。また、両方を設定しているときの優先順位は、<b>「ゲートウェイ詳細【gateway.dat】」＞「SMTPゲートウェイ」項目の順位</b>となります。<br>
+ただし、設定次第では「SMTPゲートウェイ」項目の参照がされません。【gateway.dat】の任意行または最終行にすべてのエンベロープTOの宛先を意味するワイルドカード指定により<b> *,[IPアドレス],25 </b>を記述しておくケースです。この場合、該当行の設定に従って、その他のすべてのエンベロープTOの宛先とするときのフォワードが実施されるため、結果的に「SMTPゲートウェイ」項目の参照はされない結果となり、「SMTPゲートウェイ」項目の設定をしても意味をなさなくなります。<br>
+<blockquote>
+（【gateway.dat】だけが実施される設定例）<br>
+Adomain.co.jp,192.168.0.200,25<br>
+Bdomain.co.jp,192.168.0.201,25<br>
+*,192.168.0.200,25<br>
+</blockquote>
+ちなみに、変更後のサービス再起動が必要かどうかについてですが、【gateway.dat】を編集しただけでしたらサービス再起動は不要で、一方、「SMTPゲートウェイ」項目修正後は、［設定］ボタンクリック後にE-Postサービス再起動が必要になります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-28.html">フォワードするSMTPサーバをドメイン別に振り分け制御する</a><br>
+●<a href="./faq01-11.html">設定変更してもサービスの再起動しなくて「よい」設定について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

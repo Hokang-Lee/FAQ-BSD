@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-28</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTPゲートウェイ → メールアーカイブ → メールサーバの経路で構成しているが、外部から送られてきたメールが着信していない。調べる方法は？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+以下の構成時、外部からのメールが着信していないときの切り分け方と調べ方です。<br>
+<small>------------(例)------------<br>
+インターネット<br>
+　　　↓<br>
+SMTPゲートウェイ<br>
+　　　↓<br>
+メールアーカイブ<br>
+　　　↓<br>
+メールサーバ<br>
+----------------------------<br></small>
+<br>
+まず、切り分けできるようにインターネットにつながっている側、すなわちSMTPゲートウェイの acceptlog、inlog、receivelog（SMTP受信詳細ログ）を調べ、対象のメールの送信アクセスがあったか否か調べ、接続元のIPを確認する必要があります。<br>
+具体的には、SMTPゲートウェイの acceptlog、inlog、receivelog（SMTP受信詳細ログ）において、問題の社外特定ドメイン（例：user00001@kaisha.jp）からの接続の有無があるかどうかの確認をします。<br>
+なお、acceptlogでは、From:アドレスの記載はありませんので、接続元IPだけの判断になります。<br>
+<ol>
+<li>acceptlogでステータス"ok"で受領成功されたものは、inlogに記録があります。<br>
+inlogで記録されたのであれば、今度は内側のメールアーカイブ経由でメールサーバにフォワードされるはずですから、その次のステップで追跡します。</li>
+<li>acceptlogでabort記録があるものは、その理由はreceivelog（SMTP受信詳細ログ）で記録されますので、同じ"B"で始まるメッセージIDをもとに調べてみます。</li>
+<li>受信記録がまったく見つからないのであれば、abort（reject）の記録から、推定される時間帯の接続元のIPを調べて、許可設定をSMTPゲートウェイの【effect.dat】に加えてみるという手順も有効と思われます。</li>
+</ol>
+ちなみに、acceptlogにもreceivelogにも記録がないものは、少なくともまったく接続が行われていないということになります。<br>
+仮に、接続すらされていないことがわかればそれはそれで大事な切り分けとなります。<br>
+なお、receivelog（SMTP受信詳細ログ）は、今後も切り分けや特定をする再に重要度の高いログとなります。下記関連FAQの3番目を参照いただきフォルダ手動作成ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-03.html">接続マシンログ（acceptlog）について</a><br>
+●<a href="./faq05-04.html">SMTP受信ログ（inlog）について</a><br>
+●<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）について</a><br>
+●<a href="./faq05-30.html">該当メールをログから探し出す基本的な方法と手順</a><br>
+●<a href="./faq17-20.html">acceptlogにメッセージIDが出ているのにreceivelogに見つからないケースがある理由 </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

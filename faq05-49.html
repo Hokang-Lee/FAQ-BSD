@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-49</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	dd {
+		padding:0;
+		margin:0 0 0.5em 0em;
+		padding:3px;
+		background:#f4f3e8;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>添付ファイルのあるメール件数やメール送信容量の統計を取りたい <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+添付ファイルのあるメール件数の統計やメール送信容量の統計を取りたいのだが、何か案がないかという問い合わせを受けたことがあります。<br>
+<br>
+E-Postのもつ基本機能としては、E-Postで取得できる記録ログの機能や集計ツールのLogAnalyzerでは、添付ファイルのあるメール件数やメール送信容量を知ることはできません。ただ、やり方次第で工夫する方法がないかと言えば、次のような手法が考えられます。参考程度にお知らせします。<br>
+<br>
+添付ファイルのあるメールをメールフィルタ機能で判定抽出し、該当メールを保管するようにしておいてから、その後でメール件数やメールデータサイズを調べる方法です。具体的には、あらかじめ設定しておくことが前提ですが、まず添付ファイルのあるメールを判断するために、メールフィルタ機能を使います。<br>
+下記は条件としてマッチングさせるワードと、同時に該当メールのアーカイブを取るための設定例です。該当メールを保管するためにLevel:x1x を指定します。これにより条件に合致するメールは、viruslogフォルダに保管されます。<br>
+<blockquote>
+（メールフィルタ【mail.dat】設定例）<br>
+'---------------------------------------------<br>
+Virus:attached_file<br>
+Level:010<br>
+Content-Type: multipart/mixed;<br>
+VirusEnd:<br>
+'---------------------------------------------<br>
+※上記の検索条件では、単純な添付ファイルだけでなく送信メーラーによってはHTMLメールも含まれるケースがあります。<br>
+</blockquote>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-81.html">メールフィルタ【mail.dat】の設定事例</a><br>
+●<a href="./faq04-08.html">PDFファイルなどの添付ファイル付きメールをメールフィルタ機能に通さないようにするには</a><br>
+●<a href="./faq04-25.html">メールフィルタや中継の制限機能で拒絶された記録や該当メールの取り出し方について</a><br>
+<br>
+その後、viruslogフォルダに蓄積されたメールデータのファイル群（拡張子.MSG）を直接対象にして、grep検索して抽出させます。あるいはWindowsに用意されているfindstrコマンドで抽出したりするという方法が考えられます。<br>
+<blockquote>
+（findstrコマンドの使用例）<br>
+findstr /C: "name=" *.MSG <br>
+※"name="の指定で添付ファイル名部分を見つけます。<br>
+</blockquote>
+抽出されたものをもとに、該当するメール件数をカウントし、メールデータのファイルサイズを見て、メール送信容量を割り出します。<br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-37</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>監視ソフトから数百通のメールを送ると配送遅延が発生し、incoming,holdings,domainフォルダのファイルが増減を繰り返しているがこれは何なのか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+ハード側に特に問題がなく、メールキューの&quot;incoming&quot;フォルダ、リトライ関係の&quot;holdings&quot;、&quot;domain&quot;フォルダ内で増減が起きている状況は、メールが送れずリトライ送信を繰り返している状況なのではないかと思われます。下記のことを試しながらファイルが減少するか確認ください。<br>
+<br>
+<B>1.新規投入を止めてドレインさせる</B><br>
+監視ソフトからの追加送信を一時停止し、現キューを&quot;古い順&quot;に吐き出させます。<br>
+最古ファイルの滞留時間が下がるかを観測してください。<br>
+<br>
+<B>2.SMTP配送設定を大きく変更した場合</B><br>
+「速すぎるリトライ＋（事実上）無制限の同時セッション」が重なって、相手先の一時拒否やタイムアウトに当り続け、キューが&quot;揺れ続ける&quot;だけで<B>出口が細い</B>状態になってしまう場合もあります。<br>
+配送リトライ関係［SMTP送信詳細］の設定で、すでにリトライ間隔などの数値を小さくした場合、まず初期設定に戻すか、数値を<u>一時的</u>に以下のように変更するとキューの膨張を抑えられる可能性があります。<br>
+・リトライ間隔 120秒毎 → 300秒毎（短すぎると相手側の制限にぶつかる）<br>
+・リトライ回数(受信拒否) 9回 → 0回か1回（400番台エラーのみ再送対象にしたい）<br>
+・リトライ期間(回線異常) 8時間（短すぎると効果が薄い）<br>
+・リトライ期間(マシン無応答) 24時間<br>
+・epstddサービスのスレッド数 30 → 10～16程度に下げる<br>
+<br>
+<B>3.ログでエラー応答を確認する</B><br>
+senderlogで相手側SMTPとの接続状況を確認し、何らかのエラー応答が記録されていないか確認してください。<br>
+エラー応答によって、DNS解決・接続タイムアウト・TLS・相手側による制限なのかが見えてきます。<br>
+ログによって応答を確認したのち、接続アドレスの名前解決ができていない等の理由を調べる必要があります。<br>
+<br>
+<B>4.各種状態・設定を見直す</B><br>
+もう一度、E-Postのマシン上で下記の設定・内容に問題がないか確認します。<br>
+(1). 送り先との経路上で通信トラブルが起きていないか<br>
+(2). DNSは正常にアドレス参照し名前解決できているか<br>
+(3). /etc/hostsファイルの設定でおかしな設定が残っていたり、新たに設定したことはないか<br>
+(4).【gateway.dat】の設定で拒否されるような送り先を割り当ててはいないか<br>
+<br>
+<B>（関連FAQ）</B><br>
+●<a href="./faq01-67.html">リトライ処理が行われるときの情報とフォルダについて</a><br>
+●<a href="./faq10-53.html">/etc/hostsファイル記述の必要性と有用性について</a><br>
+●<a href="./faq01-04.html">クライアントからのメール送信が遅いケースと/etc/hostsファイルの必要性</a><br>
+●<a href="./faq05-43.html">配送できなかったメールをログで確認する方法</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

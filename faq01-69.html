@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-69</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>POP3サービス使用時に特定のユーザーが二重ログイン状態になってしまったとき</b></FONT>
+<HR>
+<BR>
+POP3サービス使用時には、クライアントから接続したときに二重ログイン状態を防止するために、POP3によるメールボックスアクセス認証時からログアウト時までPOP3サービス（epstpop3d）によって、メールボックス内のユーザー名フォルダに"$lockfile"というファイルが自動的に作成されます。<br>
+この"$lockfile"は、二重ログイン防止のフラグファイルです。<br>
+<br>
+正常なログイン、ログアウト（QUIT）のシーケンスが行われている場合は、この"$lockfile"はログアウト時に自動的に削除されますが、何らかの事情で、きちんとログアウト（QUIT）されずに、セッションを中断した場合などは、残ってしまう場合があり、そのときにPOP3でログインしようとすると、「二重ログイン状態である」旨のメッセージがクライアントに表示されることがあります。<br>
+<br>
+E-Post Mail Serverシリーズでは、一定期間（既定値で５分）を過ぎると、再度のログイン－ログアウトによって、"$lockfile"を自動的に削除するように処理します。<br>
+<br>
+万が一、二重ログイン状態が解消しないときは、POP3サービスを止めた上で、メールボックスフォルダ内のユーザー名のフォルダに残っている"$lockfile"ファイルを削除し、その後、POP3サービスを再開します。<br>
+<br>
+</BODY>
+</HTML>

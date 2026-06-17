@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-52</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>pop3log に &quot;RETR nnn&quot; で受信している記録があるが、この nnn の数字は何を示すか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+POP3受信記録ログである pop3log を調べていく際、&quot;RETR nnn&quot; でメールクライアントからPOP3受信している記録を見つけられますが、この nnn の数字は何を示すか説明します。<blockquote>
+例）user1＠[domain.jp] from 192.168.1.xxx RETR 744 [28/Jan/2022:09:30:00]</blockquote>
+上記は、該当ユーザーアカウントが09:30:00に &quot;RETR 744&quot; でPOP3受信している記録を意味します。RETR命令の対象となる数字（&quot;RETR nnn&quot;）は、メールボックス内に残っているメールの昇順位置を番号で示しているものです。このメールが何であるかをメールサーバのメールデータから確認する必要があるのであれば、該当ユーザーアカウントのメールボックスフォルダを直接開いてみて、残っている拡張子.MSGのメールデータがファイル名の昇順位置で何番目か目視で実際に確認してみます。<blockquote>
+例）メールボックスフォルダ内に以下の.MSGファイルがある場合<br>
+B0000000001.MSG ← RETR 1<br>
+B0000000005.MSG ← RETR 2<br>
+B0000000008.MSG ← RETR 3<br>
+B0000000014.MSG ← RETR 4<br>
+※&quot;B&quot;で始まるファイル名部分はepstrdサービスがSMTP受信時に発番する「メッセージID」と同じもの</blockquote>
+また、ログから該当するメールを引き当てる必要があれば、より詳しい情報が得られるPOP3詳細ログ（receivepop3）を採取してください。<br>
+なお、 pop3log を調べていく際、&quot;RETR nnn&quot; の数字が数千をはるかに超え、1万以上の極端に大きい数字の記録が見つかった場合は下記の理由で注意してください。<blockquote>例）user2＠[domain.jp] from 192.168.1.xxx RETR 12327 [28/Jan/2022:10:10:00]</blockquote>
+ここで &quot;RETR 12327&quot; を記録していることから見ると、該当ユーザーアカウントのメールボックス残存メールデータがどうやら1万を大きく超えていることを示します。<br>
+POP3プロトコルでメールサーバを運用する場合、メールデータを残しっぱなしにしている運用方法は薦められないばかりでなく、場合によっては下記記事であげるように、 logon overlap エラーが起きたり、メールサーバ全体のパフォーマンス低下という危険な状況に陥りかねません。放置しますと間違いなくトラブルの遠因となります。運用ルールを厳格に見直しユーザーに通達してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-73.html">メールボックスにメールデータを残す運用をしているときの注意点</a><br>
+●<a href="./faq15-68.html">POP3メールボックスでメールデータ残存数が多いとパフォーマンス低下による logon overlap エラーが起きるおそれ</a><br>
+●<a href="./faq15-90.html">メールボックスに放置されている大量のメールデータを削除するときの注意点</a><br>
+●<a href="./faq05-12.html">POP3の詳細ログ（receivepop3）について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

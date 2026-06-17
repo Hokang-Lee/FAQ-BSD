@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-37</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>管理者アカウントに絡んでの［自動転送］時の注意 <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<BR>
+E-Post Mail Server V / E-Post SMTP Server V シリーズでは、送信元のエンベロープFROMアドレスが管理者アカウントの場合、万が一にも転送先を間違えたり、送信できなかったりするおそれがあることから、エラーメールの無限ループが発生してしまうのを防ぐため、管理者アカウントに絡んでの［転送指定］時の注意点があります。<br>
+<br>
+まず理解いただきたい点として、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」からエクスポートする対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーを選択して［転送指定］を選択。「メール転送先の設定」画面で「不転送レポート先」の設定は、エンベロープFROMをどのように書き換え、指定するかという意味と等価になっております。<br>
+<br>
+従って、メッセージの真意は、［不転送レポート先］の指定、つまりエンベロープFROMの指定を管理者アカウントにしているとそのメールは再転送できなくなることを意味するとともに、管理者アカウントでの自動転送時でも、エンベロープFROMの“送信元”が管理者アカウントになっているメールは転送できないことを意味します。<br>
+管理者アカウントの転送が無効になることがあるのを理解するとともに、他のアカウントが自動転送設定しているときにも設定次第で大きな影響があります。それは管理者アカウントから自動転送を設定している任意アカウントにメールを送信した際、管理者アカウントから送られてきたメールが転送されないことになります。<br>
+<br>
+具体的には、上記にもあげた［ユーザー管理へ］から［転送指定］を設定した際「不転送レポート先」が「送信者」「管理者」になっている設定のときに、管理者アカウントから送られたメールは転送されません。その理由は E-Post Mail Server V / E-Post SMTP Server V シリーズにとって、「不転送レポート先」の指定＝「エンベロープFROMの書き換え」機能だからです。管理者からのメールは、エンベロープFROMが「送信者」＝「管理者」に書き換えられることとなり、自動転送自体が無効とされている管理者アカウントのエンベロープFROMが２回目となりますので、そのメールについては転送しないという動きになります。回避するにはそれ以外の「返信しない」か「返信先を指定」を選んでください。もちろん「返信先を指定」するときは管理者アカウント以外を指定します。<br>
+<br>
+いずれにしても、管理者アカウントについては自動転送しないように注意するか、さらに自動転送を設定している任意アカウントでも「不転送レポート先」が「送信者」「管理者」になっている設定のときに、管理者アカウントから送られたメールは転送されないので、よくよく注意が必要です。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-25.html">自動転送先で再転送できない（“多重転送”ができない）場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

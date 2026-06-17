@@ -1,0 +1,119 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-82</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>内部・外部への配送時間を制御するには </b></FONT>
+<HR>
+<br>
+内部・外部への配送時間をメールサーバ・SMTPサーバ全体で制御したい場合、epstddサービスに関して送信許可時間の設定を行うことが可能です。各アカウントに「利用時間設定」を行えますが、これはいわば、その全体設定版に該当するものです。<br>
+送信許可時間の設定を行うには、設定ファイルを開き、下記の設定ファイル値を設定します。<br>
+<blockquote><small>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5DS<br>
+　　　　　→UseTimeFileEnabled.1　(数値 デフォルト: 0 )<br>
+　　　　　　(0:無効 1:許可[送信先条件] 2:許可[送信元＆送信先条件])<br>
+※最初は、&quot;UseTimeFileEnabled&quot; が作られていませんので、数値（10進）を指定して作成します。有効にするには、&quot;1&quot; または &quot;2&quot; の値を入力しますが、違いは次の通りです。変更後は、epstddサービスの再起動が必要です。</blockquote></small>
+<b>&quot;UseTimeFileEnabled&quot; の設定値の違い</b></li>
+<ol><li>UseTimeFileEnabled.1 = 1（送信先条件）のとき<br>
+プログラムインストールフォルダ（既定値 /usr/local/mta/bin/）下に作成された設定ファイル &quot;usetime.dat&quot; だけがチェックされます。<br>
+アカウント別に設定されたメールボックスフォルダ（既定値 &quot;/var/spool/epms/inbox/%USERNAME%&quot;）内の設定ファイル &quot;usetime.dat&quot; は無視されます。
+<br>
+<li>UseTimeFileEnabled.2 = 2（送信元＆送信先条件）のとき</li>
+最初にアカウント別に設定されたメールボックスフォルダ（既定値 &quot;/var/spool/epms/inbox/%USERNAME%&quot;）内の設定ファイル &quot;usetime.dat&quot; がチェックされ、続いてプログラムインストールフォルダ（既定値 /usr/local/mta/bin/）下に作成された設定ファイル &quot;usetime.dat&quot; がチェックされます。<br>
+</ol>
+送信許可時間の設定ファイル名を任意のファイル名に変えたいときには、下記の設定ファイル値を設定します。<br>
+<blockquote><small>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5DS<br>
+　　　　　→UseTimeFile.2　(文字列 デフォルト:usetime.dat )<br>
+※変更後は、epstddサービスの再起動が必要です。</blockquote></small>
+送信許可時間の設定ファイル &quot;usetime.dat&quot; は、プログラムインストールフォルダ下に、メモ帳などのテキストエディタで作成、以下の書式で記述します。ワイルドカード'*'指定が使用できます。<br>
+<blockquote><small>（書式例)<br>
+'-----------------------<br>
+'&quot;usetime.dat&quot;の記述<br>
+'-----------------------<br>
+[送信先SMTP(FQDN)1]<br>
+Sun,[HH:MM]-[HH:MM]<br>
+Mon,[HH:MM]-[HH:MM]<br>
+Tue,[HH:MM]-[HH:MM]<br>
+Wed,[HH:MM]-[HH:MM]<br>
+Thu,[HH:MM]-[HH:MM]<br>
+Fri,[HH:MM]-[HH:MM]<br>
+Sat,[HH:MM]-[HH:MM]<br>
+　　　　:<br>
+[送信先メールアドレス1]<br>
+Sun,[HH:MM]-[HH:MM]<br>
+Mon,[HH:MM]-[HH:MM]<br>
+Tue,[HH:MM]-[HH:MM]<br>
+Wed,[HH:MM]-[HH:MM]<br>
+Thu,[HH:MM]-[HH:MM]<br>
+Fri,[HH:MM]-[HH:MM]<br>
+Sat,[HH:MM]-[HH:MM]<br>
+　　　　:<br>
+[送信先メールアドレスN]<br>
+Sun,[HH:MM]-[HH:MM]<br>
+Mon,[HH:MM]-[HH:MM]<br>
+Tue,[HH:MM]-[HH:MM]<br>
+Wed,[HH:MM]-[HH:MM]<br>
+Thu,[HH:MM]-[HH:MM]<br>
+Fri,[HH:MM]-[HH:MM]<br>
+Sat,[HH:MM]-[HH:MM]<br>
+　　　　:<br>
+[送信先SMTP(FQDN)N]<br>
+Sun,[HH:MM]-[HH:MM]<br>
+Mon,[HH:MM]-[HH:MM]<br>
+Tue,[HH:MM]-[HH:MM]<br>
+Wed,[HH:MM]-[HH:MM]<br>
+Thu,[HH:MM]-[HH:MM]<br>
+Fri,[HH:MM]-[HH:MM]<br>
+Sat,[HH:MM]-[HH:MM]<br>
+　　　　:<br>
+[*.*] 'その他<br>
+Sun,[HH:MM]-[HH:MM]<br>
+Mon,[HH:MM]-[HH:MM]<br>
+Tue,[HH:MM]-[HH:MM]<br>
+Wed,[HH:MM]-[HH:MM]<br>
+Thu,[HH:MM]-[HH:MM]<br>
+Fri,[HH:MM]-[HH:MM]<br>
+Sat,[HH:MM]-[HH:MM]<br>
+'-----------------------<br>
+</small></blockquote>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

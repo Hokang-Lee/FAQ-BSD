@@ -1,0 +1,97 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-63</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>faillogに記録された配送失敗理由として“354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;”があるが、これは何を意味するか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+faillogに記録された配送失敗理由として“354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;”があるが、これは何を意味するかという質問を受けたことがあります。<br>
+<br>
+<b>通常ではfaillog（配送失敗ログ）に記録されない300番台</b><br>
+faillog（配送失敗ログ）の右端には、その配送セッションで相手側から帰ってきた<b>“最後のSMTP応答コード”</b>が記録されます。<br>
+<u>通常、faillogは配送失敗したもののみが記録されるログ</u>なので、500番台の永続的エラー、400番台の一時的エラー、名前解決やサーバ無応答などの<b>“失敗理由”</b>が記録されます。<br>
+しかし、今回は354番なので300番台の意味である、<b>成功・中間応答</b>を示します。もう少し詳しく言うと、<b>「コマンドは受け付けたが、追加情報待ちで保留している」</b>という意味です。<br>
+つまり、今回の“354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;”はエラー応答ではないということになります。<br>
+<br>
+<b>インターネット通信規格RFC（SMTP RFC 5321）で説明されている応答コード3桁目の意味</b><br>
+<ul>
+<li>200番台<br>
+・肯定的、完了（Positive Completion reply）<br>
+　要求された処理が正常に完了したことを意味します。</li>
+<li>300番台<br>
+・肯定的、中間（Positive Intermediate reply）<br>
+　コマンド自体は受理されたが、要求された処理は追加情報待ちで保留されている状態。<br>
+　クライアントは続きのコマンドを送って完結させる必要があります。</li>
+<li>400番台<br>
+・一時的な否定、完了（Transient Negative Completion reply）<br>
+　コマンドは受理されず、要求された処理は行われなかった。<br>
+　ただしエラー条件は一時的で、再試行すれば成功する可能性がある。</li>
+<li>500番台<br>
+・永続的な否定・完了（Permanent Negative Completion reply）<br>
+　コマンドは受理されず、要求された処理は行われなかった。<br>
+　クライアントは同じ要求を同じ手順で繰り返すべきではない。</li>
+</ul>
+<b>“354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;”の意味</b><br>
+SMTPでは、送信側がDATAコマンドを送った後、相手側が本文受信を許可すると、354を返します。<br>
+この354は「本文データを送ってよい。本文の終端は&lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;で送れ」という意味の途中段階の正常応答です。<br>
+telnetを使って手動でメールを送るとき、DATAコマンドを入力した段階でこの応答（メール内容入力の開始）を見ることができます。<br>
+<br>
+<b>ではなぜfaillog（配送失敗ログ）に354が残るのか</b><br>
+faillogに354が残っているということは、<br>
+・相手側はDATAコマンドを受け付けて本文送信の許可（354）までは返している<br>
+・しかし、その後に本来返ってくるはずの最終応答（通常は250）がE-Post側で受信できないままセッションが終了し、最終的に配送を断念した<br>
+という状況が推測されます。<br>
+<br>
+考えられるのは次のようなケースです。<br>
+・ネットワーク切断／瞬断／途中の機器による切断<br>
+・相手サーバ側が本文受信途中・受信後に切断<br>
+・タイムアウト（相手が最終応答を返さないまま時間切れ）<br>
+このような状況が当てはまる場合、「相手は受信を許可した途中で止まっている」という読みになります。<br>
+<br>
+<b>本当の理由を確認するにはsenderlogを見る</b><br>
+先述までの説明はあくまで<b>“faillog上の最後の応答から推測できる範囲”</b>です。<br>
+実際にどこで止まったかは、<b><a href="./faq05-10.html">senderlog（配送詳細ログ）</a>を確認する必要があります。</b><br>
+・senderlogを取得している場合は、メッセージID（“B”で始まる10桁の連番数字）をキーに該当時刻帯を検索してください。<br>
+・仕組み上、faillogの「最終的な失敗理由」と、senderlogに記録される「処理途中の状況」が一致しない・見え方が異なるケースがあります。<br>
+<br>
+<b>まとめ</b><br>
+・354は失敗理由ではなく、DATA送信許可の途中応答<br>
+・faillogに354が残るのは、DATA許可後に最終応答（250等）を受信できないまま切断し、E-Postが最終的に送信を断念した可能性が高い<br>
+・断定と切り分けにはsenderlogで該当メッセージIDの前後を確認する<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-20.html">senderlog と faillog に記載された配送失敗の理由が異なる</a><br>
+●<a href="./faq15-29.html">送信できなかったエラーメールの内容とfaillogの内容が異なる</a><br>
+●<a href="./faq05-18.html">ログに記録されるメッセージIDの後の枝番種類について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

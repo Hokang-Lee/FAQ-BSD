@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-23</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	pre {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:1.6em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>上長承認(BossCheck)機能で使用している設定ファイル</b></FONT>
+<HR>
+<PRE>
+<B>■共有情報－[メール作業ディレクトリ]/regディレクトリ内の設定ファイルで設定</B>
+    <small><font color="darkgreen">※設定ファイルの拡張子種類は、次の通り値の型を表わす。設定ファイルのバイナリ,数値,文字列の型に該当。
+       （ .0 = バイナリ,  .1 = 数値,  .2 = 文字列及びその他の形式 ）
+     ※秒数や回数、サイズなどの数値値は原則としてすべて10進数表記で設定。</font>
+
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）
+->reg
+  ->epost
+    ->ims
+      ->MailApprovalLog.1        (数値  Default 1) 上長承認履歴（記録ログ）の保存有無
+                                             ( 1:保存する, 0:保存しない )
+      ->MailApprovalManager.2  (文字列   Default NULL) 上長承認メールシステム管理者
+      ->MailApprovalRes.1        (数値  Default 1) 保留通知メールの有無
+                                             ( 1:保留通知あり, 0:保留通知なし )
+      ->MailApprovalDepath.1   (数値  Default 1) 代理承認者の代理設定可能な階層
+                                             ( 1～:回帰的に可能な代理承認の深さ ）
+      ->MailApprovalNotification.1  (数値  Default 1) 開封通知メールを添付ファイル条件除外
+                                             ( 1:除外する, 0:除外しない )
+      ->MailApprovalNum.1      (数値  Default 2) 2人を超える承認者数 ( 例:承認者3人…3 )
+         <small>ただしフルパス表記[メールボックスフォルダ/作成ドメイン名/アカウント名]長さ合計が最大200バイトまで</small>
+      ->MailApprovalDomain.2  (文字列   Default NULL) サブドメインをエイリアス設定したときの
+                                            サブドメイン名 ( 例:sub )
+      ->MailApprovalLogLevel.1 (数値  Default 0) 履歴に送信元IPや送信先を含むか含まないかの設定
+                                             ( 0:含まない, 1:含む )
+      ->MailApprovalCodepage.1 (数値  Default 932) 承認依頼メールのmailtoリンクの生成時の文字コード設定
+                                             ( 932(Shift-JIS), 65001(UTF-8),20932(JP_EUC),
+                                              50220 or 50222(JP_JIS) )
+      ->MailApprovalHtml.1       (数値  Default 0) 上長承認依頼メールをHTML形式メールに変更するオプション
+                                              ( 0:PLAIN 1:HTML ) <font color="blue">(epstrd v5.01～)</font></small>
+
+<B>■個別情報－設定ファイルに設定</B><small>
+
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）
+->reg
+  ->epost
+    ->bosscheck
+      ->proxymessage40.2      (文字列) 代理承認時の通知メールメッセージ（JISエンコード文字列）
+      ->proxymessage41.2      (文字列) 代理承認解除時の通知メールメッセージ（JISエンコード文字列）
+</small>
+</pre>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-14</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリストメンバーが重複して表示されているときには</b></FONT>
+<HR>
+<br>
+メーリングリスト設定のメンバーリストが重複表示されている場合、以下の手順で確認と修復作業を行ってください。<br>
+<ol><li>次のフォルダを開いて確認します。メーリングリストのメンバーは、メール作業フォルダにあるREGフォルダ下に次のような情報として管理されています。<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→lists<br>
+　　　　→[ML名] メーリングリスト名<br>
+　　　　　→<b>Members</b><br>
+　　　　　　→[mail address] 参加者メールアドレス<br>
+　　　　　　　　: 繰り返し<br>
+<br>
+<li>上記のMembersフォルダ内に、<b>&quot;ext.dat&quot;ファイル</b>ができていないか確認してください。もし&quot;ext.dat&quot;ファイルができていたら、以下に示す手順で中身をメモ帳で確認します。d.ですべてのアドレスが一致しているようなら、&quot;ext.dat&quot;ファイル自体を削除してください。</li>
+<ol type=a>
+<li>各メーリングリストメンバーを管理しているフォルダを開きます。<br>
+（例）[メール作業フォルダ]/reg/epost/ims/lists/[ML名]/Members<br>
+<li>上記 a.のフォルダに、メーリングリストのメンバーのアドレスがフォルダ名になったフォルダが作成されていることを確認します。<br>
+（例）以下のようにメンバーのアドレスがフォルダ名になったフォルダが作成されている<br>
+[メール作業フォルダ]/reg/epost/ims/lists/[ML名]/Members/abc0001＠cdf.com<br>
+[メール作業フォルダ]/reg/epost/ims/lists/[ML名]/Members/abc0002＠cdf.com<br>
+[メール作業フォルダ]/reg/epost/ims/lists/[ML名]/Members/abc0003＠cdf.com<br>
+[メール作業フォルダ]/reg/epost/ims/lists/[ML名]/Members/abc0004＠cdf.com<br>
+<li>上記 a.のフォルダに&quot;ext.dat&quot; がある場合は、メモ帳などテキストエディタで&quot;ext.dat&quot;を開きます。<br>
+<li>上記 b.で確認したフォルダ名になっているアドレスが&quot;ext.dat&quot;内に部分的に記載されている場合は、該当する行を削除し保存します。すべて一致している場合は、&quot;ext.dat&quot;ファイル自体を削除してください。<br>
+（例）<br>
+---【ext.dat】-----<br>
+abc0000＠cdf.com<br>
+abc0001＠cdf.com ← フォルダが存在するのでこの行を削除<br>
+abc0002＠cdf.com ← フォルダが存在するのでこの行を削除<br>
+abc0005＠cdf.com<br>
+abc0006＠cdf.com<br>
+--------------------<br>
+</li></ol>
+その後、メーリングリスト設定のメンバーリストの重複表示が直り、正常な表示になっているかどうかを確認してください。<br>
+</li>
+<b>※ &quot;ext.dat&quot;ファイルについて</b><br>
+&quot;ext.dat&quot;ファイルは、元来、メーリングリストメンバーのアドレス長＋フォルダのパス長さが256byteを超えるような設定状況が発生した場合、補助用に作成されるファイルです。「インポート」後に、Memberフォルダ内に、もし&quot;ext.dat&quot;ファイルができているのを確認した場合、上記 a.～ d.の手順に従って作業してください。<br></ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

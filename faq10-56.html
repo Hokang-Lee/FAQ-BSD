@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-56</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>外部からの正常なメールがスパムメールと判断され、受信されないケースがあるかどうかを調べるには</b></FONT>
+<HR>
+<br>
+外部から送られてくるメールが、ウイルス付きメールやスパムメールと判断され、受信されないケースがあるかどうかを調べるには、マシン接続ログ（<a href="./faq05-03.html">acceptlog</a>）やSMTP受信詳細ログ（<a href="./faq05-05.html">receivelog</a>）を取得して調べてください。<br>
+<br>
+上記２つの記録ログ内に残される&quot;abort&quot;はネゴシェーション結果で「拒絶」された結果です。それに対して&quot;ok&quot;は、ネゴシェーション結果で最終的に「受領」したものです。&quot;abort&quot;される拒絶理由は以下の要件が考えられます。<br>
+<ul>
+<li>ORDB問い合わせ判定によるもの（acceptlog右端に拒絶理由が記載される）<br>
+<li>user unknownなど不明な送信先アドレス宛のもの<br>
+<li>SMTP認証による否認によるもの（AUTH-LOGIN:の記載があるため判読できる）<br>
+<li>SPFやDKIMなど送信ドメイン認証による否認によるもの<br>
+<li>メール受信サイズ制限によるもの<br>
+<li>メールボックスサイズ制限によるもの<br>
+<li>メールフィルタ設定の&quot;effect.dat&quot;によるもの<br>
+</ul>
+以上のことから、外部から送られてくるメールが受信されないケースを調べるには、以下のログで拒絶理由を判別することが可能です。<br>
+<br>
+<b>（acceptlogのみで判別可能）</b><br>
+<ul>
+<li>ORDB判定により接続時に拒絶されている<br>
+（ORDBサイトを参照した結果、登録ブラックサイトIPアドレスからの接続である）<br>
+</li>
+</ul>
+<b>（acceptlogとreceivelogで判別可能）</b><br>
+<ul>
+<li>接続時に拒絶されている<br>
+（RCPT TOで指定された宛先のユーザーが&quot;user unknown&quot;で存在しない）<br>
+<li>接続時に拒絶されている<br>
+（SMTP受信サイズ制限を超過）<br>
+<li>接続時に一時的に拒絶されている<br>
+（メールボックス保管サイズ制限を超過）<br>
+<li>接続時に拒絶されている<br>
+（「中継の制限」設定によるリレーの禁止）<br>
+</li>
+</ul>
+<b>（receivelogを見ることで判別可能）</b><br>
+<ul>
+<li>アンチウイルスエンジンによりウイルスが発見された結果、ウイルス付きメールを削除（隔離）している（※Enterprise版のみ）<br>
+<li>メールフィルタ設定でSPAM判定された結果、拒絶／隔離している<br>
+（SURBL/URLBL方式による問い合わせ結果）<br>
+<li>メールフィルタ設定で判定された結果、拒絶／隔離している<br>
+（&quot;mail.dat&quot;内に手動で記述したパターンへの問い合わせ結果）<br>
+</li>
+</ul>
+以上のポイントで記録ログをチェックすることにより、拒絶されたり隔離されている理由を調べることが可能です。<br>
+<br>
+なお、&quot;abort&quot;されたものは、受領されていないため、inlogには記載されません。<br>
+また、outlogおよびoutlocallogは、epstddサービスによる外部への配送記録、内部への配送記録ですので、受領していない以上、&quot;abort&quot;されているものがoutlogおよびoutlocallogに載ることはありません。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-03.html">接続マシンログ（acceptlog）について </a><br>
+●<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）について </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

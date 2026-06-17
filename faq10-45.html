@@ -1,0 +1,92 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-45</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<script language="JavaScript" src="pull.js"></script>
+<link rel=stylesheet type=text/css href=font.css>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>「送信先制限」で送り先アドレスを送信禁止させたい</b></FONT>
+<HR>
+<br>
+「送信先制限」の機能では、送信を許可するドメインやアドレスを指定することができます。その設定方法は、ヘルプやマニュアルに記載されています。一方で、ヘルプやマニュアルには記載されていないため、特定ドメインや特定アドレスへの送信を禁止指定できるようになっていないと受け取られています。<br>
+実際には、下記のようなオプション値&quot;-1&quot;の指定を行う方法で、送信を禁止したいドメインやアドレスを指定できます。ヘルプやマニュアルに記載されていないのは、これまで非公開オプションとして扱われてきたためです。<br>
+<ol type="1">
+ <li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック<br>
+ <li>送り先を制限させたい該当ユーザーを選択し、「送信先制限」の下に [sender.dat] が表示されているのを確認して［操作する］をクリック<br>
+ <li>表示された [sender.dat] を編集し、下記の行を追加。送信禁止するメールアドレスかドメイン名を指定。編集が終わったら最後に［設定］をクリック<br>
+ （書式例その１）<br>
+'-------------------------<br>
+ <b>　*＠domain.jp,-1<br>
+ <font color="#cc0000">　*,0</font></b><br>
+'-------------------------<br>
+ <small>※ドメイン指定のときは、ワイルドカードを指定する方法で記述します。＠マークは半角。１行目にオプション値"-1"の指定を行う方法で、送信を禁止した場合は、２行目以降に、その他のドメインを通常通り送信させる意味でオプション値"0"を必ず指定する必要があります。</small><br>
+ （書式例その２）<br>
+'-------------------------<br>
+ <b>　user＠domain.jp,-1<br>
+ <font color="#cc0000">　*,0</font></b><br>
+'-------------------------<br>
+ <small>※１行目にオプション値"-1"の指定を行う方法で、送信を禁止した場合は、２行目以降に、その他のドメインを通常通り送信させる意味でオプション値"0"を必ず指定する必要があります。＠マークは半角。なお、記述行は上から実行されますので、複数行あるときで、他の条件より優先させたいときは、上の方の行に記述します。また、上記いずれかの設定を行うと、キャッシュに記憶されていることがありますので、解除するには行を削除するだけでなく、&quot;sender.dat&quot;のファイルを削除してください。</small><br>
+ <li>サービス再起動は不要<br>
+</ol>
+条件に当てはまる特定ドメインや特定アドレスへの送信を行おうとすると、&quot;550 5.1.1 Please, mail from a valid e-mail address.&quot; 応答がクライアントに返され、epstrdサービスにより送信要求のための受領が拒否され、結果的に送信ができなくなります。<br>
+ここであげた設定方法は、アカウント単位で設定を行う必要がありますが、エンベロープレベルで行われるため、よりセキュアな方法です。<br>
+また、該当アカウントのメールボックスフォルダに設定ファイル&quot;sender.dat&quot;が生成されますので、このファイルを他のアカウントのメールボックスフォルダにコピーすることで、同じ設定をコピーすることが可能です。<br>
+<br>
+<br>
+一方、「送信先制限」を使わないで、「メールフィルタ機能」を使う別の方法を紹介します。<br>
+ヘッダレベルで、全体の設定である「メールフィルタ機能」により、送信できないメールアドレスを指定する方法です。<br>
+<ol type="1">
+ <li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［メールフィルタ］を選択すると表示される［メールフィルタ］(mail.dat) ボタンをクリック<br>
+ <li>表示された [mail.dat] ファイルを編集し下記の行を追加。拒絶するメールアドレスかドメイン名を指定。編集が終わったら最後に［設定］をクリック<br>
+ （書式例その１）<br>
+'------------------------------------------------------<br>
+Virus:reject_domain<br>
+To:＠domain.jp<br>
+Level:100<br>
+VirusEnd:<br>
+'-----------------------------------------------------<br>
+<small>※To:項目ではこの表記をすることでワイルドカード指定されたものとして扱われます。＠マークは半角。</small><br>
+ （書式例その２）<br>
+'------------------------------------------------------<br>
+Virus:reject_address<br>
+To:user＠domain.jp<br>
+Level:100<br>
+VirusEnd:<br>
+'-----------------------------------------------------<br>
+<small>※＠マークは半角。</small><br>
+ <li>サービス再起動は不要<br>
+</ol>
+上記の設定をすることで、メールヘッダ内のTo:ヘッダと対比してチェックされます。特定ドメイン宛、特定メールアドレス宛へ送信使用とすると &quot;552 5.7.1 Requested mail action aborted: caught by the filter setting.&quot; 拒絶メッセージがクライアントに返されるようになります。<br>
+ただし、この設定方法は、エンベロープレベルではなく、ヘッダレベルで行っていますので、完全セキュアな方法ではありません。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

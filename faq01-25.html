@@ -1,0 +1,178 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-25</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>自動転送先で再転送できない（多重転送ができない）場合</b></FONT>
+<HR>
+<br>
+E-Post Mail Serverシリーズでは、管理者アカウントに設定されたアカウントでは、自動転送機能は利用できないよう制限が設けられています。これは、エラーメールの永久ループを防ぐための仕様です。送信元エンベロープが管理者アカウントになっているときは、転送ができないようにしてあります。<br>
+<br>
+このことによって、次のような制限が発生します。<br>
+自動転送先で再び自動転送させるいわゆる“多重転送”にしているとき、最初の自動転送指定で、「不転送先レポート」＝「管理者」にした場合、自動転送されるメールの「エンベロープFROM」＝送信元エンベロープ（Mail From:）が、管理者アカウントに書き換えられて実行されます。そのため、自動転送先で再び自動転送する設定にしているときは、２回目の転送が行われません。<br>
+<br>
+自動転送先で再び自動転送させるケースとは、たとえば下図のような場合です。自動転送設定の「不転送先レポート」は、エンベロープFROMを指定されたアドレスに書き換える機能にもなっていることをご理解いただくことが肝になります。<br>
+<br>
+<p align="center">
+任意の外部ドメインアカウント<br>
+↓<br>
+ <table align="center" border=0>
+  <tr>
+   <td>
+    <table border=1 cellspacing=0 cellpadding=4 width=300>
+     <tr>
+      <td align="center" class="m">
+       内部ドメインアカウント1（自動転送設定）<br>
+       　　↓<br>
+       内部ドメインアカウント2（自動転送設定）<br>
+      </td>
+     </tr>
+    </table>
+   </td>
+   <td>
+    <table border=0 cellspacing=0 cellpadding=4>
+     <tr>
+      <td class="s">
+       <small>E-Post<br>シリーズ<br>
+       が設定可<br>能な部分</small>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+↓<br>
+任意の外部ドメインアカウント<br>
+</p>
+自動転送先で再び自動転送させる場合は、最初の（１回目の）自動転送指定で、「不転送先レポート」＝「管理者」ではなく、「送信者」もしくは、「送信者を指定」にして、管理者以外の任意アドレスを指定するかのどちらかの設定にしてください。<BR>
+なお、管理者にだけエラー通知しておきたいだけなら、「不転送先レポート」＝「返信しない」の設定でもOKです。その際は必ず次の設定を確認してください。E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］を開いて表示される「管理者にもエラーメールを送信する」チェックボックスをオンにします。この設定により自動転送時でのエラーについても通知が管理者アカウントに届きます。<br>
+<BR>
+ims.ctlファイルを直接書き加える場合は、<BR>
+<hr align="left" width="80%" size="1" noshade>
+[autoforward]<BR>
+ForwardTo=&lt;転送先アドレス&gt;<BR>
+ForwardFrom=*<BR>
+<hr align="left" width="80%" size="1" noshade>
+もしくは、以下のように修正してください。<BR>
+<hr align="left" width="80%" size="1" noshade>
+[autoforward]<BR>
+ForwardTo=&lt;転送先アドレス&gt;<BR>
+ForwardFrom=&lt;任意の管理者以外のアドレス&gt;<BR>
+<hr align="left" width="80%" size="1" noshade>
+<br>
+なお、上記で、最初の自動転送指定で、「不転送先レポート」＝「管理者」にした場合、２回目の転送が行われないと断定しましたが、より厳密に言うと、「不転送先レポート」＝「管理者」としていて、なおかつ２回目の「不転送先レポート」を「送信者」にしたとき、２回目の転送が行われない結果になります。<br>
+<br>
+下表のうち、No.2を見てください。１回目転送が「不転送先レポート」を管理者にしているとき、このときのエンベロープFROMは管理者アカウントになります。２回目の転送の「不転送レポート」設定次第で３つのケースに分かれ、実際には次のような結果になります。<br>
+<br>
+ <table border=1 cellspacing=0 cellpadding=2 width=540>
+  <tr>
+   <th bgcolor="#CCCCCC" align="center" class="m">&nbsp;
+   </th>
+   <th bgcolor="#CCCCCC" align="center" class="m">１回目転送「不転送先」
+   </th>
+   <th bgcolor="#CCCCCC" align="center" class="m">２回目転送「不転送先」
+   </th>
+   <th bgcolor="#CCCCCC" align="center" class="m">最終宛先受信可否
+   </th>
+  </tr>
+  <tr>
+   <th bgcolor="#CCCCCC" align="center" class="m">No.1
+   </th>
+   <td class="m">管理者
+   </td>
+   <td class="m">管理者
+   </td>
+   <td align="center" class="m">×
+   </td>
+  </tr>
+  <tr>
+   <th rowspan="3" bgcolor="#CCCCCC" align="center" class="m">No.2
+   </th>
+   <td rowspan="3" class="m">管理者
+   </td>
+   <td class="m">送信者
+   </td>
+   <td align="center" class="m">×
+   </td>
+  </tr>
+  <tr>
+   <td class="m">返信しない
+   </td>
+   <td align="center" class="m">○
+   </td>
+  </tr>
+  <tr>
+   <td class="m">返信先指定
+   </td>
+   <td align="center" class="m">○
+   </td>
+  </tr>
+  <tr>
+   <th bgcolor="#CCCCCC" align="center" class="m">No.3
+   </th>
+   <td class="m">管理者以外
+   </td>
+   <td class="m">管理者
+   </td>
+   <td align="center" class="m">○
+   </td>
+  </tr>
+  <tr>
+   <th bgcolor="#CCCCCC" align="center" class="m">No.4
+   </th>
+   <td class="m">管理者以外
+   </td>
+   <td class="m">管理者以外
+   </td>
+   <td align="center" class="m">○
+   </td>
+  </tr>
+ </table>
+<br>
+２回目転送「不転送先」が「送信者」の場合は、エンベロープFROMが管理者で１回目転送から送られてくるので、実質的に、２回目転送「不転送先」が「管理者」のケース、No.1と等しいことになります。<br>
+<br>
+そのため、１回目転送が「不転送先レポート」を管理者になっているときでも、２回目転送の「不転送先」が「返信しない」場合や、「返信先指定する」場合であれば、二重転送は一応可能です。<br>
+<br>
+とはいえ、自動転送そのものがE-Post Mail Serverにとって、比較的負荷が高い機能であること、可能だからと言ってうかつな多重転送は負荷を高める可能性があること、などを考慮に入れてください。自動転送機能では、多重転送の禁止こそしていませんが、もともと多重に転送される使われ方をあまり想定しているわけではありません。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-42.html">自動転送設定数が多いと、処理が遅くなり負荷が過大にかかってしまう</a><br>
+●<a href="./faq01-37.html">管理者アカウントに絡んでの［自動転送］時の注意</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

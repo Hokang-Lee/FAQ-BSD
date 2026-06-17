@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-04</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>クライアントからのメール送信が遅いケースと/etc/hostsファイルの必要性</b></FONT>
+<HR>
+<br>
+クライアントからのメール送信を行うと、メールサーバからの応答が遅い場合、まず/etc/hostsファイルについて確認してください。<br>
+<UL>
+<LI>運用するドメイン用DNSの逆引きゾーンに、メールサーバに設定したドメイン名を設定していますか？<br>
+/etc/hostsファイルにメールサーバに設定したドメイン名をその通りに記述していますか？　特に、LAN内にDNSサーバが存在せず、LAN内のみでメールを使うような場合、hostsファイルを記述しているか確認してください。もし、/etc/hostsファイルの記述をしていない場合は、メールサーバに作成済みのドメイン名を明示的に記述する必要があります。<br>
+（例）<br>
+192.168.1.11 myname.my.domain myname<br>
+<small>※項目間の区切りは半角スペースまたはタブ区切り</small><br>
+</ul>
+/etc/hostsファイルの場所、働きについては、関連サイトの解説などを参考にしてください。<br>
+<ul>
+<LI>E-PostシリーズのSMTP受信サービス（epstrd）は、プログラムのその仕組み上、受領時にDNSへの逆引き問合わせを行う部分があります。運用するドメインのDNS設定で、逆引きゾーン（逆引きファイル）に運用サーバーのアドレスが未登録だったり、hostsファイルが未記述の場合は、メールサーバから問い合わせに対し、タイムアウト待ちが発生し、結果的にサーバの応答が遅くなります。<BR>
+/etc/hostsファイルを明示的に記述していれば、その内容をepstrdが逆引きに利用し、応答がスムーズになります。最低限、hostsファイルの明示的な記述が必要です。<br>
+</ul>
+/etc/hostsファイルを記述しているのにもかかわらず、メールサーバからの応答が遅い場合、次の[ORDBによる制限]の設定について、確認してください。<br>
+<ul>
+<LI>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［中継の制限］を選択、「中継の制限設定」にある［RBL(ORDB)］ボタンをクリックして表示される「ordb.dat」内にレスポンスの悪いORDBサイトが指定されていませんか？<BR>
+レスポンスのよしあしをチェックするには、問い合せ指定したサイトへpingコマンドを使いレスポンス確認してみてください。レスポンスが遅いか、または応答がないサイトは、設定ファイル「ordb.dat」でコメントアウトするか、削除してしまうかして、応答速度が改善されるかを確認してください。<br>
+</ul>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-50.html">ORDBによる制限からordb.orgの指定をはずすには</a><br>
+●<a href="./faq10-19.html">特定のMTAから同じメールを何回も受信してしまう</a><br>
+●<a href="./faq10-53.html">hostsファイル記述の必要性と有用性について</a><br>
+●<a href="./faq15-04.html">POP3/IMAP4利用時にもhostsファイル記述を必須とする理由について</a><br>
+●<a href="./faq10-54.html">内部アカウントを自動転送で設定したり、メーリングリストに設定したときに、送信処理に時間がかかってしまう</a><br>
+<b>（参考情報）</b><br>
+　<a href="http://www.atmarkit.co.jp/fwin2k/win2ktips/442hostsfile/hostsfile.html" target="NEW2">hostsファイルについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

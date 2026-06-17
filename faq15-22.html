@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-22</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>特定のIPアドレスからの不正アクセスが大量に発生、これを拒否するには</b></FONT>
+<HR>
+<br>
+メールサーバ管理者にとって日々の運用時に毎日生成されるログサイズをチェックしておくことは重要な仕事の一つです。これは<a href="./faq05-03.html">接続マシンログ（acceptlog）</a>が肥大していることがあるからです。そのようなとき、接続マシンログ（acceptlog）を確認すると、特定のIPアドレスから連続して接続が試され、エラーが大量に発生しているケースが見つかることがあります。これは不正アクセスを試みようとしていると考えられます。<br>
+<br>
+なお、接続マシンログ（acceptlog）には&quot;abort&quot;として失敗した結果しか記録されません。詳細な拒絶理由、たとえば存在しない適当なユーザーアカウント名で送信を試みているのか、適当なSMTP認証パスワードでSMTP AUTHしようとしているのかなど、具体的に確認するには<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>を取得するようにし、そこで確認してください。<br>
+<br>
+不正アクセスを試みようとしていると考えられる特定IPアドレスからの接続を拒否するには、マシン毎の中継【effect.dat】ファイルに下記のように記述します。「false」の記述行によって、外部からの受信も外部からの送信要求も、&quot;550 5.1.7 Please, mail from a valid IP or Domain address.&quot; のエラー応答を返して一切拒絶するようになります。【effect.dat】ファイルは、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］の中ほど［中継の制限］の［マシンごとの中継］、もしくは［中継の制限］で表示される「中継の制限設定」にある［マシンごとの中継］ボタンをクリックすると表示されます。<br>
+<br>
+なお、記述する場所は、デフォルトで用意されている &quot;#&lt;&gt; default&quot; および &quot;#blank false&quot; の下でよいですが、【effect.dat】は行の上から下に向けて順に実行されます。記述場所によってはパスされることもあります。優先順位をよく確認した上で設定してください。<br>
+<br>
+（例－拒否したいIPが200.100.100.xxxのとき）<br>
+-----------------------------<br>
+200.100.100.xxx false<br>
+-----------------------------<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

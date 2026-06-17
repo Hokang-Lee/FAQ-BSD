@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-76</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>エラーメール送信時のエンベロープFROMとエンベロープTOはどう生成されるのか、さらにメールヘッダ情報との関係について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+エラーメール送信時のエンベロープFROMとエンベロープTOはどう生成されるのか、さらにメールヘッダのヘッダFromとヘッダToとの関係について、説明します。<br>
+<br>
+まず大前提として理解いただきたいのは、一般的にMTAが使用する情報であるエンベロープFROM、エンベロープTOの情報と、ユーザーがメールクライアント画面で確認できる、メールヘッダに記載されたヘッダFromやヘッダToの情報、Return-Path:などのヘッダ情報とは、並列の二本立てになっておりそもそも違うということです。E-Post Mail Server V・E-Post SMTP Server V の E-Postシリーズも、この考え方に則っており、エンベロープFROMおよびエンベロープTOの情報を用います。エンベロープFROMおよびエンベロープTOの情報は、メールヘッダに記載されるヘッダFromやヘッダTo情報とは並立の二本立てであり、両者はそれぞれ一致することがあっても、取り扱いはまったく異なります。<br>
+また、E-Post関係ログ（inlog, outlog, faillog, senderlog）に記載されるのは、すべてエンベロープFROMおよびエンベロープTOの情報です。ログにはヘッダ情報は載りません。<br>
+そして、 E-Postシリーズは、エラーメールを送信するとき、デフォルトではエンベロープの送信元（エンベロープFROM）として「<> 空白」を使います。そしてエンベロープの送信先（エンベロープTO）は、送ったメールの「エンベロープの送信元（エンベロープFROM）」から置きかえて作成し、送信することになります。<br>
+<br>
+サポート問い合わせで「エラーメール送信先【To】、送信元【From】は、メールヘッダに記載されている【Return-Path】に設定したメールアドレスなのか？」という質問を受けたことがあります。これについては、いずれもヘッダ情報のため、エンベロープFROM、エンベロープTOと合致することもあるが、異なる場合もあり、直接の関係はないものと考えてください。<br>
+エラーメールを返すときのエンベロープFROMは、E-Postシリーズは、デフォルトで「<> 空白」を使うことになりますから、これについてもヘッダ情報とつなげてみることはできません。さらにヘッダのReturn-Pathとの直接的なつながりはありません。<br>
+このように、E-Postのエラーメール生成の場合は、メールに記載したヘッダフィールドは一切利用していません。この点、他のメールサーバ製品とは、設計思想が異なることをご理解ください。<br>
+まとめると以下のようになります。<br>
+<blockquote>１．エンベロープの送信先（エンベロープTO）<br>
+　エラーメールを送信するとき、メールクライアント（送信元SMTP）から送信されて来た際のエンベロープの送信元（エンベロープFROM）を返送先とし、エンベロープの送信先（エンベロープTO）として送信しています。<br>
+２．エンベロープの送信元（エンベロープFROM）<br>
+　エラーメールを送信するとき、デフォルトで（<>"空白"）を指定して送ります。<br>
+　なお、エラーメールを送信するときに、送信元アドレスを指定する場合は、以下の設定ファイル項目で設定します。値を'0'に設定した場合はメールサーバに設定した「管理者アカウント」が利用されることになります。</blockquote>
+------------------------------------------------------------<br>
+<small>メール作業フォルダ<br>
+　->reg<br>
+　　->epost<br>
+　　　->ims<br>
+　　　　->EPST5DS 　　　　　　(ディレクトリ)<br>
+　　　　　→ReturnMailEnvelope.1 （DWORD Default 1)<br>
+　　　　　　 1:(<>空白) 0:管理者アカウントを使用<br>
+------------------------------------------------------------<br>
+　※設定ファイルを作成したり、設定値を変更した場合は、epstddサービスの再起動が必要になります。設定ファイルが作成されていないときデフォルト値がシステム内で利用されます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-22.html">SMTP送信ローカルログ（outlocallog）などのログで fromアドレスが空白になっているケースがあるのはなぜ？</a><br>
+●<a href="./faq01-94.html">作成していない postmaster アカウントでエラーメールが返ってくるのはなぜ？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

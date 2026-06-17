@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-15</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールフィルタ【mail.dat】RBLタグにホワイトリスト定義ファイル指定が可能に</b></FONT>
+<HR>
+<br>
+SURBL方式によるスパムサイト判定サービスを利用しているとき、RBLタグにホワイトリストの定義ファイルを指定することが可能になり、この設定をするとスパムサイト判定サービス自体に指定されたドメイン・URIを問い合わせしない動きになります。<br>
+SURBL方式によるスパムサイト判定サービスを利用しているとき、以下の要領でメールフィルタ機能【mail.dat】のRBLタグにオプションを追加することができ、ホワイトリスト定義ファイルを指定することができます。<br>
+まずメールフィルタ【mail.dat】での記述方法は、利用中のRBLサイトに続いて、ダブルクォーテーションで括ったフルパス表記でホワイトリスト定義ファイル名を指定します。続いて定義ファイル内には、メモ帳で問い合わせをしないURIを１行単位で記述します。URIは'*'ワイルドカード指定が可能です。この設定により、記述されたURIについては、RBLタグで指定されたスパムサイト判定サービスへの問い合わせは行わなくなります。<br>
+<br>
+　--------------------------------------------------------------------------------<br>
+　メールフィルタ【mail.dat】書式と設定例<br>
+　※〈N/Y〉はDNSキャッシュ無効/有効、ホワイトリスト定義ファイルはフルパス表記<br>
+　--------------------------------------------------------------------------------<br>
+　RBL:〈RBL site〉([TAB]〈メールサーバIPアドレス〉,〈N/Y〉〈&quot;ホワイトリスト定義ファイル&quot;〉)<br>
+　RBL:multi.surbl.org<font color="pink"> [TAB] </font>192.168.0.xx,N &quot;/usr/local/mta/bin/whitelist.dat&quot;<br>
+　--------------------------------------------------------------------------------<br>
+<br>
+　---------------------------------------------------------<br>
+　ホワイトリスト定義ファイル &quot;whitelist.dat&quot; の記述例<br>
+　---------------------------------------------------------<br>
+　*.xxxxx.com<br>
+　*.yyyyyy.jp<br>
+　　:<br>
+　www.zzzzz.jp<br>
+　---------------------------------------------------------<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

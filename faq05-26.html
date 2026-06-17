@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-26</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlog に&quot;421 Service Temporarily Unavailable&quot;と&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;が記録される理由について <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>にリトライした度に接続先サーバからの応答が次のように記録されている場合は、相手先サーバが一時的に使えなくなっているという解釈ができます。基本的に、こちら側（E-Post側）の問題でなく、相手側（先方）の問題であったり、回線上の問題であったりします。<br>
+<blockquote>
+<b>421 Service Temporarily Unavailable</b><br>
+</blockquote>
+さらに、上記エラーのあい間に以下のようなエラーが記録されているケースがあります。<br>
+<blockquote>
+<b>451 Requested action aborted: error in processing. (code=0/0)</b><br>
+</blockquote>
+この記録から見ると、回線上で通信ができない、もしくは回線が混雑のため、通信タイムアウトが発生している可能性があることが推測されます。ちなみにこの応答コード&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;は、無通信タイムアウトや、セッションが切られた場合など、E-Post側においてその事象に応じて内部で自動作成した応答コード＆メッセージです。その理由はあくまでも基本的にこちら側（E-Post側）の問題ではなく、相手側（先方）の抱えている問題であったり、回線上の問題であったりします。<br>
+ただし、このほか送信時にSTARTTLS通信を有効に設定している状況下で、かつ多方面へ大量配送を行っているケースに限定されますが、送信スレッド内でいったんSTARTTLS開始による暗号化通信のメール送信が行われると、その後の同じ継続スレッドのメールデータ送信は接続相手によりプレーン送信が必要な場合でも、勝手に暗号化通信の &quot;SMTP over SSL&quot; として処理を行ってしまい、&quot;451 Requested action aborted: error in processing. (code=0/0)&quot; を記録して回線が切断されるE-Post側の不具合が見つかっています。これについては下記の関連FAQにある <a href="./faq05-32.html">senderlogに&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;が記録される場合の対処策</a> を参照してください。<br>
+<br>
+<b>[codeに続く数値の意味について]</b><br>
+senderlog内に記載される下記451のエラーコードは、基本的に接続相手から返されたエラー応答内容ではなく、E-Post（epstdd）側の処理機能により、便宜上ログに記載される記録です。さらに下記の記録は &quot;code=&quot; で示した値が異なります。コードの前半部／後半部の意味について説明します。<br>
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7<br>
+451 Requested action aborted: error in processing. (code=0/0)<br>
+451 Requested action aborted: error in processing. (code=0/ffffffff)<br>
+451 Requested action aborted: error in processing. (code=54/ffffffff)<br>
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7<br>
+( )内の &quot;code=&quot; に続く数値は &quot;Windows Socket Errorcode／受信サイズ&quot; となっています。<br>
+■(code=0/0) ＝ ソケットエラーなし／0バイト受信<br>
+　接続開始したにも関わらず、Socket Errorcodeなしでかつデータ0バイトで切断していることを示します。無通信タイムアウトで0バイト受信したか、あるいは相手サーバ側もしくは途中の中継経路から0バイトを受信等、通信切断された可能性が最も大きいことを示します。<br>
+■(code=0/ffffffff) = ソケットエラーなし／-1=ソケット受信しなかった<br>
+　Socket Errorcodeなしでソケット受信しなかったことを示します。受信サイズffffffff＝-1＝ソケット受信しなかった－これは無通信タイムアウトによる切断を示します。<br>
+■(code=54/ffffffff) = ソケットエラー情報54（ピアによる接続のリセット。リモートホストによって既存の接続は強制的に切断されました）／-1=ソケット受信しなかった<br>
+　Socket Errorcode 54でソケット受信しなかったことを示します。(Socket Errorcode 54：ピアによる接続のリセット。リモート ホストによって、既存の接続は強制的に切断された)<br>
+　受信サイズffffffff＝-1=ソケット受信しなかった－これは無通信タイムアウトによる切断を示します。<br>
+　※Socket Errorcode：54は、「Connection reset by peer ネットワーク接続が相手によって破棄された」（下記記事参照）<br>
+　これらのことから上記3つのいずれも、相手側との経路上あるいは回線上で発生した問題ということになります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-10.html">配送時の詳細ログ(senderlog)について</a><br>
+●<a href="./faq05-32.html">senderlogに&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;が記録される場合の対処策</a><br>
+●<a href="./faq10-04.html">socket エラーコード表</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

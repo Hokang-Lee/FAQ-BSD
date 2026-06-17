@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-06</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリストにコメントを投稿したはずなのに、投稿者個人への返信メールになってしまう</b></FONT>
+<HR>
+<br>
+この問題は、サーバ側の問題ではありません。<br>
+メーリングリストを運用しているとき、メーリングリストにコメントを投稿したはずなのに、投稿者個人への返信メールになってしまうときは、投稿者がメーリングリストへ投稿する際、メールクライアント側の設定でReply-To:ヘッダを書き換えている状態になっていないか、注意してください。<br>
+<br>
+下記の参考資料のように Outlook や Outlook Express で「返信用の電子メール・アドレス」を設定したりしていると、Reply-To:ヘッダを書き換えて、投稿する状態になってしまいます。<br>
+<br>
+［参考］
+<a href="http://www.atmarkit.co.jp/fwin2k/win2ktips/414replyto/replyto.html" target="_blank">http://www.atmarkit.co.jp/fwin2k/win2ktips/414replyto/replyto.html</a><br>
+<br>
+これを E-Post Mail Server の場合に当てはめると次のような流れになります。<br>
+通常、メーリングリストの詳細設定で「Reply-To:ヘッダを付加する」がオンになっているとき、Reply-To:ヘッダには投稿後、E-Post Mail Serverによって、「メーリングリストのアドレス」が自動的に付加されます。<br>
+<blockquote><b>Reply-To:<メーリングリストのアドレス></b></blockquote>
+このように、投稿されたメーリングリストのメッセージに返信すると、宛先に <メーリングリストのアドレス> が自動的にセットされます。<br>
+<br>
+ところが、投稿するときにメールクライアントの設定で、Reply-To:ヘッダを投稿者本人のアドレスに書き換えた設定で送ったり、あるいはReply-To:ヘッダを無視してしまうメーラーから返信したりすると、E-Post Mail Server側はあえて書き換えることはせず、次の状態になります。<br>
+<blockquote><b>Reply-To:<投稿者のアドレス></b></blockquote>
+これは投稿者が「自分自身に返信してほしいという意思表示をしている」と考え、サーバ側はこれをあえて書き換えるということはしないというポリシーです。ですから、メーリングリスト記事のうち、ヘッダがこの状態に書き換えられていると、返信しても、メーリングリストへの投稿ではなく、投稿者への返信になってしまうというわけです。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

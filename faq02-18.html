@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-18</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>メーリングリストでのメール宛先処理について</b></FONT>
+<HR>
+<br>
+メーリングリストでのメール宛先の処理の流れですが、epstrdサービス受領時は宛先をメーリングリストアドレスとして受領し、epstddサービス配送時にはメーリングリストに登録済みの内部メールアドレス・外部のメールアドレスをそれぞれ宛先として配送する形になります。<br>
+<br>
+それぞれの記録をログで確認するには、E-Post内部での次の動きを理解していただくとよいでしょう。<br>
+<br>
+epstrdによる受領時…宛先をメーリングリストアドレス（※1）として受領。<br>
+　　　↓<br>
+epstddによる配送時…宛先を内部メールアドレス（※2）、外部メールアドレス（※3）としてそれぞれ配送。<br>
+<br>
+（※1）の記録は acceptlog および inlog に記載<br>
+（※2）の記録は outlocallog に記載<br>
+（※3）の記録は outlog に記載<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

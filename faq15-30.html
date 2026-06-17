@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-30</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>inboxフォルダ（メールボックスフォルダ）配下に格納されるデータファイルについて</b></FONT>
+<HR>
+<br>
+inboxフォルダ（メールボックスフォルダ）配下に格納されているデータファイルの種類には次のものがあります。<br>
+大部分はメールデータがメインとなりますが、それ以外のものは、アカウント単位のパスワードファイル、各種設定ファイルや記録ファイル、排他処理やUID値を制御するためのメールサーバシステム制御用作業ファイルといったファイルになります。<br>
+<br>
+《メールデータ関係》<br>
+・メールデータ（拡張子.MSG）<br>
+　（例・B0000123123.MSG／0000000001-100000.MSG）<br>
+　※eml形式のメールデータファイルについてそのまま拡張子だけ変えた形で格納されます。<br>
+<br>
+《SMTPAUTH/APOP認証関係》<br>
+・SMTPAUTH or APOPパスワードファイル（apop.dat）<br>
+　※設定ファイルで &quot;smtpauth.dat&quot; などに任意名リネーム可です。<br>
+<br>
+《メールボックスサイズ関係》<br>
+・メールボックスサイズ制限設定ファイル（size.ctl）<br>
+<br>
+《自動転送・自動応答関係》<br>
+・自動転送・自動応答設定ファイル（ims.ctl）<br>
+・自動応答内容ファイル（autoreply.txt）<br>
+・自動応答非応答設定ファイル（noreply.txt）<br>
+・自動応答時送信元記録ファイル（replied.txt）<br>
+・自動転送送信元許可ファイル（permitfrom.txt）<br>
+・自動転送複数アドレス指定ファイル（ファイル名任意）<br>
+　※ファイル名は &quot;tensou.txt&quot; など任意で指定可です。<br>
+<br>
+《送信先制限関係》<br>
+・送信先制限設定ファイル（sender.dat）<br>
+<br>
+《メールフィルタ関係》<br>
+・個別メールフィルタ設定ファイル（mail.dat）<br>
+<br>
+《利用時間設定関係》<br>
+・利用時間設定ファイル（usetime.dat）<br>
+<br>
+《個別受信制限関係》<br>
+・個別受信制限設定ファイル（effect.dat）<br>
+　※E-POST コントロールセンター（メールサーバ管理）から操作するには「送信先制限」を選択、すぐ下のボックス内に &quot;effect.dat&quot; と入力することで設定可能です。<br>
+<br>
+《メールサーバシステム制御関係》<br>
+・POP3排他制御用ロックファイル（$LockFile）<br>
+　※POP3ログイン時に自動生成・管理されます。<br>
+・POP3無効設定時の制御ファイル（$offpop3）<br>
+　※POP3無効設定時に自動生成・管理されます。<br>
+・IMAP4無効設定時の制御ファイル（$offimap4）<br>
+　※IMAP4無効設定時に自動生成・管理されます。<br>
+・IMAP4共有メールボックス #Shared設定ファイル（$Shared）<br>
+　※IMAP4 #Shared設定時に自動生成・管理されます。<br>
+・IMAP4用インデックスファイル（imap.idx）<br>
+　※IMAP4プロトコル使用時に自動生成・管理されます。<br>
+・IMAP4用フォルダ単位のメッセージIDファイル（uid、rid、fetch）<br>
+　※IMAP4プロトコル使用時に自動生成・管理されます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-11.html">方式の違いによるメールボックスフォルダの作成位置について </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

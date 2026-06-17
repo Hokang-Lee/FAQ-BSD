@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-07</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP対応Webメール[1]: RainLoopでユーザーログインが失敗する場合</b></FONT>
+<HR>
+<br>
+WebメールのRainLoopでは、SMTP認証を実施しないアカウントでのユーザーログインを行う場合、ユーザーログイン時の認証が初期状態で &quot;PLAIN&quot; を優先してログインしているようで、そのことが原因で失敗するケースがあるようです。以下のどちらかの設定を試してください。<br>
+<br>
+<b>１．SMTP認証を実施しないままの場合はアカウント単位で「認証ファイルを設定する」をオンにする</b><br>
+<br>
+SMTP認証を実施しない非認証有効のままの場合は、アカウント単位で「認証ファイルを設定する」をオンにします。その後、「パスワード変更」でパスワードを再登録します。<br>
+「認証ファイルを設定する」設定がオンになることで、該当ユーザーのメールボックス内に認証ファイルである &quot;apop.dat&quot; が生成されます。それを使って &quot;PLAIN&quot; 認証でのログインが可能になります。<br>
+<br>
+「認証ファイルを設定する」項目は、次の操作で呼び出す画面内にあります。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーを選択して［設定変更］を選び［操作する］ボタンをクリックし表示される「アカウントの設定変更」画面。<br>
+「パスワード変更」は、次の操作手順になります。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーを選択して［パスワード変更］を選び、［パスワードの変更］画面で変更するパスワードから「再確認パスワード」を入力。<br>
+<br>
+<b>２．IMAP4サービスの定義ファイル ImapAuthType.2 を作成し &quot;LOGIN&quot; を記述する</b><br>
+<br>
+下記のディレクトリ位置に viエディタを使って ImapAuthType.2 ファイルを作成、セットする値として &quot;LOGIN&quot; のみを記述、その後 epstimap4d サービスを再起動します。<br>
+WebメールのRainLoopは初期状態でSMTP認証を実施しないアカウントでのユーザーログインを行う場合、&quot;PLAIN&quot; を優先してログインし失敗するようです。セットする値として &quot;LOGIN&quot; を明示的に記述することにより、&quot;PLAIN&quot; を禁止してログインを許可する方法となります。ユーザーログインが失敗してうまく行かない場合は試してください。<br>
+<br>
+<small>[メール作業ディレクトリ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5IMAP4S  (ディレクトリ)<br>
+　　　　　→ImapAuthType.2　　［CAPABILITY 命令で応答する認証方法の制限指定］<br>
+　　　　　　(文字列)　Default &quot;CRAM-MD5,LOGIN,PLAIN&quot;　→  <u>&quot;LOGIN&quot; だけを記述</u><br></small>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

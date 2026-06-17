@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ16-27</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>上長承認の承認待ちメールを毎日決まった時間に自動発行させるには</b></FONT>
+<HR>
+<br>
+まず、手動で上長承認の承認待ちメールを得るには、承認待ちリストの取得コマンド（waitlist_）を利用します。このコマンド（waitlist_）は、承認待ちリスト一覧で表示されるメールについて、承認または却下（否認）がいまだされていないメールを取得します。<br>
+<br>
+承認待ちリストの取得（waitlist_）については、Windows版用解説ですが <a href="/doc/E-Post_BossCheck_unyoukouchiku_jirei_19.pdf" target="_blank">『BossCheck Server運用＆構築事例集 Rev1.9』(PDF)</a> P.26を参照してください。<br>
+<br>
+なお、BossCheck Serverに、サブドメインが付与されている場合、事例集P.26の通り、承認待ちリストを取得するためのコマンド（waitlist_）を利用する際、上長自身のアドレスのドメイン部分に、サブドメイン名を付与したアドレス宛に送信することが必要なケースもあります。<br>
+<br>
+さらに、この承認待ちメールを自動取得するために、メール送信を自動で実施する仕組みを Windows版送信クライアントプログラム &quot;sendmail.exe&quot; を使ってバッチファイルを作成することにより、件名「waitlist_」のメールを自動送信させることが可能です。<br>
+<ol>
+<li>Windows版送信クライアントプログラム &quot;sendmail.exe&quot; を使う。&quot;sendmail.exe&quot;（Sendmail 互換 SMTP Client）は、<a href="/download.html#tool" target="_blank">ダウンロードページ</a>からダウンロードが可能。<br>
+<br></li>
+<li>&quot;sendmail.exe&quot;を使い始めるには、Windowsのコマンドプロンプトより、sendmail -configにて設定し、&quot;sendmail.ini&quot;を出力させて使用を開始する。<br>
+（※詳細は添付の&quot;sendmail.exe&quot;に付属するreadme-jp.txtを参照）<br>
+<br>
+【sendmail.ini】作成事例<br>
+'------------------------------------------<br>
+family=0<br>
+from=<br>
+name=<br>
+charset=iso-2022-jp<br>
+smtpserver=192.168.1.xxx<br>
+port=25<br>
+esmtp=0<br>
+authid=<br>
+authpass=<br>
+ssl=0<br>
+debug=0<br>
+'------------------------------------------<br>
+<br></li>
+<li>上長のアドレスについてバッチファイルを作成する。<br>
+<br>
+【上長のアドレスが&quot;bucho@domain.jp&quot;のときの作成事例】<br>
+'-----------------------------------------------------------------------------------------------------------<br>
+sendmail bucho@domain.jp -f=&quot;bucho@domain.jp&quot; -subject=&quot;waitlist_&quot; -message=&quot;waitlist_&quot;<br>
+'-----------------------------------------------------------------------------------------------------------<br>
+※「waitlist_」の命令で必須なのは-subject="waitlist_"の方。<br>
+また、-message="waitlist_"の方は、中身は任意でよいが、メッセージ本文を何か指定しないと送信実行できないために指定している。<br>
+<br></li>
+<li>上記で作成したバッチファイルをタスクスケジューラで時間を指定させて自動実行させる。<br>
+<ul type="square"><br>
+<li>送信クライアントプログラムの&quot;sendmail.exe&quot;の詳細については、readme-jp.txtを参照してください。<br></li>
+<li>送信クライアントプログラムの&quot;sendmail.exe&quot;では、送信時にリトライ機能を持っていません。そのため、タスクスケジューラのタイミング次第で、通信エラーがあった場合は、送信されない場合もありえますので、その点をご理解の上、利用してください。<br></li>
+</li></ol>
+なお、承認待ちリストでは、一見すると、どれがどのメールなのかを判断する際の目安として、途中に含まれる"B"で始まるメッセージIDの部分を見て、該当メールかどうかを判断なさってください。"B"で始まるメッセージIDは、E-Post SMTP Serverが受領時に発番するIDで、１つの案件のメールに対して振られるものです。<br>
+<p align="center">
+例）添付画像の&quot;B0000319320&quot;部分がE-Postの発番するメッセージID部分<br>
+<img src="./img/faq16-27-01.jpg" border="0"></p>
+このメッセージIDについて、承認依頼メールのときと承認待ちリスト取得とで見比べて、同じものが該当するメールという判断ができ、一方、メッセージIDが違うものは該当するメールとは異なる別メールである、という判断が可能です。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

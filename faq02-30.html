@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-30</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Web管理ツールでメーリングリスト設定する画面をパスワードなしでアクセスできるようにしたい <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+Web管理ツールのアクセス権限の階層は、［システム管理者＞ドメイン管理者＞個別ユーザー］という階層になっています。<br>
+ドメイン管理者ですとドメイン管理パスワードが要求されますので、そのままですとメーリングリスト設定だけ行う場合に、パスワードが不要なURL、および html ファイルは現行では用意されていません。これは仕様です。<br>
+<br>
+しかし、もし運用するドメイン名が決まっているようであれば、以下のように、html ファイルを別名コピーして編集し、作成ドメイン名毎に html ファイルを同フォルダ上に用意し、その html ファイルをブラウザからアクセスするようにすれば、パスワードなしでメーリングリスト設定を操作できるようにすることは可能です。<br>
+以下は、例としてドメイン名 &quot;hogehoge.jp&quot; だけに対応するメーリングリスト設定の専用操作ページを用意する場合の事例です。<br>
+<br>
+======================================<br>
+1. Web管理ツールの各画面ページの保存フォルダ内にある<br>
+　&quot;/usr/local/www/apache24/data/epms/domman/lists/ml-index.html&quot; を<br>
+　&quot;hogehoge.jp.html&quot; として名前を変えて同一フォルダ内にコピーする。<br>
+　※登録済みメールドメイン名に合わせて作成してください。<br>
+<br>
+======================================<br>
+2. hogehoge.jp.html メモ帳やエディタで以下の行を編集する。(3箇所)<br>
+  ----------------------------------------------------<br>
+　14行目 &lt;!--domname--&gt;%s&lt;BR&gt; を<br>
+　　　　 &lt;!--domname--&gt;hogehoge.jp&lt;BR&gt;<br>
+　　　　 に置き換える<br>
+  ----------------------------------------------------<br>
+　45行目 &lt;!--domname--&gt;&lt;INPUT TYPE="hidden" NAME="domname" VALUE="%s"&gt; を<br>
+　　　　 &lt;!--domname--&gt;&lt;INPUT TYPE="hidden" NAME="domname" VALUE="hogehoge.jp"&gt; <br>
+　　　　 に置き換える<br>
+  ----------------------------------------------------<br>
+　65行目 &lt;!--domname--&gt;&lt;INPUT TYPE="hidden" NAME="domname" VALUE="%s"&gt; を<br>
+　　　　 &lt;!--domname--&gt;&lt;INPUT TYPE="hidden" NAME="domname" VALUE="hogehoge.jp"&gt;<br>
+　　　　 に置き換える<br>
+<br>
+======================================<br>
+3. 保存後 http://[サーバドメイン名またはIPアドレス]/emps/domman/lists/hogehoge.jp.html <br>
+をブラウザで開き、操作できるか確認する。<br>
+<br>
+htmlファイル群は、リネームを含めカスタマイズ可能なので、使用環境や使用形態に合わせてうまく適用させてください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

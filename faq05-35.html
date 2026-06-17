@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-35</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlogに&quot;GetTryServer:(xxxx)/120=(0)&quot;が記録される意味について</b></FONT>
+<HR>
+<br>
+senderlogを確認したとき、下記の例のように&quot;GetTryServer:(xxxx)/120=(0)&quot;の記録されている部分がたくさん見つかることがあります。これはどういう意味かとご質問を受けることがありますので、その意味の概要を説明します。<br>
+<blockquote>
+GetTryServer:(ltime(13110269502)-otime(13110269501))/120=(0)<br>
+</blockquote>
+最後の&quot;/120&quot;の表記は、120秒間ごとに配送リトライを繰り返していることを表します。<br>
+上記例に基づいて解説しますと、まず otime=メールキューに置くためにMSGファイルを最初に作成した時間、ltime=現在のスレッド処理の時間をそれぞれ表します。配送しようとするMSGファイルが処理時間からどれくらい時間が経過したかを求め、その時間差をリトライ間隔時間で割ることで、リトライを定期的に行った場合に実行したはずのリトライ回数を算出している記録です。<br>
+上記例では、時間差である ltime(13110269502)-otime(13110269501)、つまり 13110269502-13110269501=1 をリトライ間隔の120秒（デフォルト）で割った答えの整数部分が 0 を表すことから 1/120=0 という結果になります。言い換えると、0 になるのは、MSGファイルが作成されてすぐに送信スレッドで処理されたことを示します。<br>
+<br>
+ちなみに、E-PostのSMTP配送サービスは、送信時の名前解決としてリトライ毎に MXレコード1→MXレコード2→Aレコード と順番に参照します。加えてhostsファイルも参照したりするので、1回の送信分だけでもいくつかの方法が繰り返し試されます。&quot;GetTryServer:&quot;の記録が多いのは、そういう仕組みのせいも一因としてあります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-23.html">メールサーバがDNSを参照するときの動きについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

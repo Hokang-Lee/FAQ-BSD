@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-79</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Received:ヘッダのループ数制限＝SMTPホップ数の制限を緩和するには</b></FONT>
+<HR>
+<br>
+E-Post Mail／SMTP Serverシリーズには、Received:ヘッダのループ数のデフォルト制限値が「20」に設定されています。これは、同時にSMTPホップ数の制限ともなっています。<br>
+<br>
+メールのReceived:ヘッダ（SMTPホップ数：デフォルト20）の記録とその制限値（メールループ数制限）を緩和するには、設定ファイルを開き、下記の設定ファイルの値を変更します。<br>
+<blockquote><small>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5RS<br>
+　　　　　→Received　　(数値 Default 20) メールループ最大回数<br>
+※&quot;Received&quot;が作られていない場合は、数値を指定して作成してから、値を10進で入力してください。変更後は、epstrdサービスの再起動が必要です。<br></small></blockquote>
+なお、ループ最大回数のデフォルト制限値「20」については、一般的なメールサーバ・SMTPサーバ用途には、まず問題ないだろうという想定のもとに決めております。<br>
+<br>
+もし、E-Post Mail／SMTP ServerシリーズのSMTPサービスによって、<b>”554 5.4.6 too many Received: headers.”</b>というような応答コードと理由で拒絶された場合、Received:ヘッダのループ数、つまりSMTPホップ数が20を超えてるのが原因と思われますので、そのような場合は、設定変更することで改善が期待できます。<br>
+<br>
+ただし、20を超えていながら正常なものか、あるいは異常含みで多重転送をしたものかの判断は別になりますので、より大きな値を設定するにあたっては、十分注意してください。<br>
+<br>
+この制限が設けられていることによって、万が一、メールのピンポン現象が発生した場合とか、メーリングリストの多重送信が不用意に行われた場合など、不測の事態のときに、この設定によって、暴走を止められることにもなります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-48</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>認証接続ロックアウト機能で、"rejectsmtpip.dat"ファイル形式の崩れの影響範囲や「永続的に拒絶」の意味について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+認証接続ロックアウト機能で用いる"rejectsmtpip.dat"ファイルは行単位で設定を管理します。したがって、記述ミスによる不要な改行が入った程度では、認証接続ロックアウト機能機能は問題なく動作します。文字列を誤って記載した部分については、その部分が働かないだけで、誤った設定行以外については、行単位で記載された内容に合わせた挙動となります。<br>
+また、下記の関連FAQには、「4.メールサーバ管理者が、記録されている"rejectsmtpip.dat"ファイルを編集し、記録された接続時間情報（シリアル値）部分をカット、接続元IPアドレスだけを残すと、該当IPアドレスからの接続は、永続的に拒絶されます」という記述がありますが、これも"rejectimapip.dat"の行単位での設定がされるので、編集後の対象の行が接続元IPアドレスだけのときは永久に接続拒否となるという意味になります。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-25.html">SMTP認証時の「認証接続ロックアウト機能」について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

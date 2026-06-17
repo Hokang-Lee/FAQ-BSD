@@ -1,0 +1,163 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-02</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>epstpop3d（POP3サーバー）応答コード</b></FONT>
+<HR>
+<TABLE border=1 cellspacing=0 cellpadding=2>
+<TR bgcolor="#CCCCCC">
+ <TH>コード＆メッセージ</TH>
+ <TH>意味</TH>
+</TR>
+<TR>
+ <TD>+OK 'POP3サーバーのFQDN' 'バージョン' ...
+ </TD>
+ <TD>セッション確立時のグリーティング。</TD>
+</TR>
+<TR>
+ <TD>-ERR Exceeded an expiration date.
+ </TD>
+ <TD>試用期間を経過した。</TD>
+</TR>
+<TR>
+ <TD>-ERR exceeds an accepting limit. ... 
+ </TD>
+ <TD>セッション制限数を超えた接続。</TD>
+</TR>
+<TR>
+ <TD>+OK 'POP3サーバーのFQDN' POP3 server signing off (mailbox empty)
+ </TD>
+ <TD>QUIT命令への応答。（メールボックスへの非接続時）</TD>
+</TR>
+<TR>
+ <TD>+OK 'POP3サーバーのFQDN' POP3 server signing off ('メール数' messages left)
+ </TD>
+ <TD>QUIT命令への応答。（メールボックスへの接続時）</TD>
+</TR>
+<TR>
+ <TD>-ERR unknown or invalid command in this state ['命令']
+ </TD>
+ <TD>不明な命令に対する応答。</TD>
+</TR>
+<TR>
+ <TD>-ERR " too many arguments for the %s command"
+ </TD>
+ <TD>STAT/LAST命令に余分な引数が指定された。</TD>
+</TR>
+<TR>
+ <TD>-ERR General failure on server
+ </TD>
+ <TD>ユーザーログイン後のメールボックス操作メモリ確保がサーバー側で失敗した。</TD>
+</TR>
+<TR>
+ <TD>-ERR no such message, only 0 messages in mailbox
+ </TD>
+ <TD>ログオンしたメールボックスが開かなかった。</TD>
+</TR>
+<TR>
+ <TD>-ERR command doesn't exist.
+ </TD>
+ <TD>引数に問題のある命令。</TD>
+</TR>
+<TR>
+ <TD>+OK Password required for 'ユーザ'
+ </TD>
+ <TD>USER命令に対する応答。</TD>
+</TR>
+<TR>
+ <TD>-ERR too few arguments for the USER command
+ </TD>
+ <TD>USER命令の引数がない。</TD>
+</TR>
+<TR>
+ <TD>+OK 'ユーザー名's mailbox has 'メール数' message(s) ('データ数' octets)
+ </TD>
+ <TD>メールボックスへのログイン成功応答。 </TD>
+</TR>
+<TR>
+ <TD>-ERR 'ユーザー名' logon failed ('エラーコード') in PASS
+ </TD>
+ <TD>メールボックスへのログイン失敗応答。 <br>
+ エラーコード:<B>-1</B> → ユーザーまたはパスワードが間違い。<br>
+ [Softアカウントの場合]<br>
+ 1.エラーコード:<B>-1</B> → ユーザーまたはパスワードが間違い。<br>
+ </TD>
+</TR>
+<TR>
+ <TD>+OK 'メール数' messages ('データ数' octets)<br>
+ 'メール番号' 'データ数'<br>
+ 　　:<br>
+ 'メール番号' 'データ数'<br>
+ </TD>
+ <TD>LIST命令への応答。</TD>
+</TR>
+<TR>
+ <TD>+OK 'メール番号' 'データ数'
+ </TD>
+ <TD>STAT命令への応答。</TD>
+</TR>
+<TR>
+ <TD>+OK unique-id listing follows<br>
+ 'メール番号' 'UIDL値'<br>
+ 　　:<br>
+ 'メール番号' 'UIDL値'<br>
+ </TD>
+ <TD>UIDL命令への応答。</TD>
+</TR>
+
+<TR>
+ <TD>+OK 'データ数' octets<BR>
+ メール内容<BR>
+ </TD>
+ <TD>RETR命令への応答。</TD>
+</TR>
+<TR>
+ <TD>+OK 'メール番号'
+ </TD>
+ <TD>LAST命令への応答。</TD>
+</TR>
+<TR>
+ <TD>-ERR 'ユーザー名's logon overlap.
+ </TD>
+ <TD>対象のユーザのログインが重複している。</TD>
+</TR>
+</TABLE>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

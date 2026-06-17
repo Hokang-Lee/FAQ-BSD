@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-13</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>UID値の上限に達していたときの非対応メーラーの動きとその対応方法について</b></FONT>
+<HR>
+<br>
+IMAP4使用時において、メッセージが管理されるUID値は、メールボックスフォルダのフォルダごとに管理されていますが、UID値が上限値である（UID値=4294967295）に達してしまっているとき、非対応のメーラーを使っているときには、サーバ側の操作対応が必要なことがあります。メッセージが管理されるUID値に関する説明と、E-Post側の動作と非対応のメーラーであるOutlook側の動き、そして対応方法の提示をします。<br>
+<ol>
+<b><li>UID値の上限値および、E-Post側とOutlook側の動きの推測について</li></b>
+<br>
+IMAP4プロトコルでは、メッセージがUID値によって管理されます。E-PostシリーズのIMAP4用メールボックスでは、INBOXフォルダ下にできる &quot;uid&quot; ファイルにその連番情報が書き換えられていきます。サブフォルダにもそれぞれ &quot;uid&quot; ファイルができ、連番情報が管理されることになります。このうち、いちばん問題になる可能性があるのは、受信トレイにあたるINBOXフォルダ下のUID値です。<br>
+<br>
+あるユーザー様から、メールが届いても、Outlook2013側がメールを認識できず、処理ができないというサポート案件がありました。IMAP4ログを調べたところ、UID FETCHの命令でUIDの上限値である32bitの値（4294967295）いっぱいで要求している次のような記録が見つかりました。<br>
+<hr width="95%" border="1">
+[31/Jan/2016:08:55:55] abcdef from 192.168.xxx.xxx UID FETCH<br>
+97316:<u>4294967295</u> (UID FLAGS RFC822.SIZE BODY.PEEK[] INTERNALDATE) <br>
+<hr width="95%" border="1">
+このUID値については、IMAP4プロトコルを規定したRFCのひとつ、RFC2060に規定があります。RFC2060では「2.3.1.1. ユニーク識別子(UID)メッセージ属性」項目では、&quot;A 32-bit value assigned to each message,&quot;＝「各メッセージに割り当てられた32ビット値で...」とされています。32ビット値ですから、最大値 4294967295 となります。ちなみに、RFCの規定では、上限値に達したあとのルールは一切決められておりません。<br>
+<br>
+E-Postシリーズでは、この上限値に達したあとは、最初に戻って &quot;1&quot; から発番していく動きをするように開発されています。しかし、Outlook2013などのIMAP4クライアントソフト（メーラー）では、UID値が上限に達した際の動きがどのようになっているかは、おそらく対応はまちまちであろうと推測され、中にはその処理もまったく想定されていないものがあると推測されます。<br>
+<br>
+報告された現象は、UIDの上限値に達したためそれ以上メールが届いても、Outlook2013側が認識できない、あるいは処理ができない状態なのではないかと推測されました。ちなみに、UIDの上限値 4294967295 に達してしまったことについて、このような値になってしまうことは、通常の使い方をする限り、あまり考えられないことではあるのですが、この値になっている現状から、次のような対応策を提示いたしました。<br>
+<br>
+<b><li>対応策方法について</li></b>
+<br>
+受信トレイにあたるE-PostのIMAP4用メールボックスである inbox フォルダのリネームを行います。<br>
+<br>
+(1) クライアント側のメーラーを閉じておく。<br>
+(2) SSHなどでコンソールにログインする。<br>
+(3) IMAP4用メールボックスフォルダのルートのフォルダ＝POP3用に用意されているメールボックスフォルダにアクセスする。<br>
+　例）cd /var/spool/epms/inbox/[ドメイン名]/[ユーザー名]<br>
+(4) その中に inbox フォルダがあることを確認。表示された inbox フォルダがE-PostのIMAP4用メールボックスであるので、inbox フォルダのフォルダ名を別名にリネームする。<br>
+　例）mv  index  old_inbox <br>
+　※半角英数字の文字でのリネームを推奨。全角文字にしたいときは &quot;UTF-7の拡張版&quot; でエンコードしなくてはならないため煩雑になる。<br>
+(5) クライアント側のメーラーを起動し、メールの再同期を行う。新しいメールを受信してみて、受信トレイに表示されるか確認する。<br>
+(6) このとき、自動的に新しい inbox フォルダが生成される。&quot;uid&quot; ファイルも、新しく &quot;1&quot; から自動的にふり直される。新着したメールは、新しい inbox フォルダに入る。<br>
+<br>
+なお、受信トレイに利用してきたフォルダ名を上記例で &quot;old_inbox&quot; にリネームしましたが、そのフォルダがメーラーの画面からそのまま表示されていて、メッセージも読めることを確認してください。念のため、作業はバックアップを取った上で行ってください。なお、サービスの停止・開始などの操作は必要ありません。<br>
+</ol>
+IMAP4使用時のメールボックスフォルダの位置は、次の記事を参考にしてください。<br>
+<br>
+（関連FAQ）<br>
+●<a href="./faq10-11.html">方式の違いによるメールボックスフォルダの作成位置について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

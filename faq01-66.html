@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-66</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>「リトライ間隔のまま」チェックボックスの意味について</b></FONT>
+<HR>
+<BR>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP送信詳細］を選択すると、「SMTP送信詳細設定」画面に「リトライ間隔のまま」というチェックボックスがあります。この「リトライ間隔のまま」チェックボックスがオフのとき（既定値）と、オンにしたときの違いは次のようになります。<br>
+<br>
+Ａ．既定値のまま「リトライ間隔のまま」チェックボックスをオフにしているときは、下記の間隔のように、待機時間の間隔が延びていく形でリトライが実行されます。<br>
+<br>
+　リトライ1回目 ・・・・・・通算 2分<br>
+　リトライ2回目 ・・・・・・通算 6分<br>
+　リトライ3回目 ・・・・・・通算12分<br>
+　（予備リトライ※）・・・・通算14分<br>
+　リトライ4回目 ・・・・・・通算30分<br>
+　（予備リトライ※）・・・・通算32分<br>
+　リトライ5回目 ・・・・・・通算60分<br>
+　（予備リトライ※）・・・・通算62分<br>
+　　　　：<br>
+※予備リトライについては、他の送信処理とぶつかったとき、送信タイミングを逸しないときの予備回ですが、状況によっては上記8回分のリトライがすべて実行されるケースもあります。<br>
+<br>
+Ｂ．「リトライ間隔のまま」のチェックボックスをオンにすると、リトライ間隔で設定した時間での待機時間間隔でリトライが実行されます。<br>
+<br>
+　リトライ1回目・・・（2分後）通算 2分<br>
+　リトライ2回目・・・（2分後）通算 4分<br>
+　リトライ3回目・・・（2分後）通算 6分<br>
+　リトライ4回目・・・（2分後）通算 8分<br>
+　リトライ5回目・・・（2分後）通算10分<br>
+　　　　：<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

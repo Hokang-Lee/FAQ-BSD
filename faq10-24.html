@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-24</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>epstrdをデバッグモードで起動しようとしても、エラー表示し起動しない</b></FONT>
+<HR>
+<br>
+動作確認のため、epstrdを<a href="./FAQ10-17.html#debug">デバッグモード</a>で起動したとき、下記のエラーメッセージが出力され続け、正常に起動できずにループしてしまう状態のときは、epstrdの詳細設定を再確認してください。<br>
+<br>
+<b>select() failed. error = WSAEINVAL</b><br>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］にある、「一覧のIPアドレスに応答する」がオンになっていて、リッスンするIPアドレスが登録されていないとき、このような状態になります。<br>
+「一覧のアドレスに応答する」状態にしているときは、リッスンする正しいIPアドレスをきちんと入力してください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

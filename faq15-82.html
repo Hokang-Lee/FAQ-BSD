@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-82</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>送信先メールサーバとの無通信タイムアウト時間について</b></FONT>
+<HR>
+<br>
+送信先のメールサーバとE-Postが通信ができなかった場合のタイムアウト時間について質問を受けたことがあります。送信先と通信ができなかったときにどのくらいの時間が経過したら、相手先との通信が異常であると判断し、その後「SMTP送信詳細」設定画面での設定値に基づいたリトライ動作の挙動へ移るのかという主旨のご質問です。<br>
+E-Postが送信先メールサーバとの通信ができなかった場合の無通信タイムアウト時間について、下記の２点に分けて説明します。<br>
+<ol><li>sokectの接続を試みようとして失敗する場合</li>
+sokectの接続を試みようとして失敗する場合は、OSであるFreeBSDの仕様によります。<br>
+（※）FreeBSDでは、タイムアウト時間がデフォルトで75秒になるという記述があります。<br>
+<br>
+<li>socket接続後の通信状態によるE-Post側のタイムアウト設定値</li>
+たとえば応答が遅いためや回線断などのsocket接続後の通信状態によるタイムアウトについては、E-PostのSMTP配送サービスである epstdd が送信・受信（応答）の無通信タイムアウト値として下記のような設定値を持っており、それぞれ設定ファイル内の値を変更することで変更可能です。<br>
+<ol type="a"><li>送信データのタイムアウト値がデフォルト20分（1200秒）</li>
+<li>受信データのタイムアウト値がデフォルト20分（1200秒）</li>
+下記の設定ファイル内の値を変更することが可能です。変更後は、epstdd サービスの再起動が必要です。<br>
+<small>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5DS<br>
+　　　　　→SendDataTimeout.1<br>
+　　　　　　(DWORD  Default 1200)sec 送信１回当りのタイムアウト時間<br>
+　　　　　→RecvDataTimeout.1<br>
+　　　　　　(DWORD  Default 1200)sec 応答１回当りのタイムアウト時間<br>
+　（※該当項目やキーがない場合は新規作成して設定値を入力）<br>
+</small></ol></ol>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-15.html">E-Post Mail Server V / E-Post SMTP Server V で使用している設定ファイル〔BSD版〕</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

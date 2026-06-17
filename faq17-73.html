@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-73</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>holding/domainsのリトライ関係フォルダに残ったデータは削除してよい？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+holdingとdomainのリトライ関係フォルダ内にリトライ関係のファイルが残っているが、リトライ間隔・回数を経過した後でもholding/domainsフォルダ内にファイルは残ったままになるのか、またファイルが残っている場合で、不要なメールでリトライが不可となった際はフォルダ内の該当ファイルを削除しても問題ないのか質問を受けたことがあります。<br>
+<br>
+これについてくわしい説明をすると、リトライ待機中の通常の状態としては、holdingフォルダ下にRCP形式のファイルが残り、domainsフォルダ下に同一名称のフォルダが作成されそのフォルダ内にMSG形式のファイルがある形です。これがリトライ用の待機メールとなります。（下記1番目の記事参照）<br>
+holding/domainsフォルダへ一時滞留しているデータは、epstdd詳細設定のリトライ設定（回数や期間）に応じて、最終的に配送できないとなった時点で、削除されます。（下記2番目の記事参照）<br>
+<br>
+ですから前半の質問については、設定されたリトライ間隔・回数を終えると、holding/domainsフォルダ内にファイルは残ったままにはならず、削除されることになります。<br>
+一方、後半の質問については、通常のケースでは、リトライ関係フォルダに一時滞留しているデータを手動削除することはありません。リトライ設定期間内の待機中データはもう少し時間が経過すれば、最終的に配送できないことになった時点で自動的に削除されます。
+たとえば「リトライ期間（マシン無応答）」のデフォルト設定が24時間になっていますので、その設定下では24時間以上経過すれば、リトライデータファイルは自動的に削除されてなくなります。<br>
+<br>
+ただし、リトライ期間を経過した古いものでも何らかの理由で残るケースが起きることもあり、それをE-Postでは「リトライデータの孤児化」と言って孤児化したデータを自動的に削除・廃棄する機能も持っております。（下記3番目の記事参照）<br>
+epstddサービスの再起動（停止＆再開）を行うことで、リトライ間隔の設定に応じてリトライ待機メールの再配送が試みられ、上記でふれたように「孤児化したデータ」として判断できれば、不要なファイル＆フォルダの掃除が自動的に行われます。<br>
+ちなみにepstddの再起動をする前に「リトライ間隔のまま」チェックボックスをオンにしておけば、定間隔リトライとなり、リトライが早く終わる設定にもなります。（下記4番目の記事参照）<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-67.html">リトライ処理が行われるときの情報とフォルダについて</a><br>
+●<a href="./faq01-65.html">リトライ回数やリトライ期間の設定について</a><br>
+●<a href="./faq15-52.html">リトライデータの孤児化防止とリトライデータを退避させるときのベストな手順について</a><br>
+●<a href="./faq01-66.html">「リトライ間隔のまま」チェックボックスの意味について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

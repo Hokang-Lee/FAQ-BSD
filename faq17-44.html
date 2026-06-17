@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-44</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4メールボックスフォルダにサイズ制限を設定したときサブフォルダも対象となるか？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+ユーザーごとのIMAP4メールボックスフォルダにサイズ制限を定めているとき、ユーザーがメーラーから作成した「サブフォルダ」についても制限の対象となるのか質問を受けました。<br>
+<br>
+結論から言うと、IMAP4でのメールボックスフォルダの各ユーザーに割り当てるサイズ制限設定機能ですが、ユーザーがメーラーから作成した「サブフォルダ」についても、［中継の制限］で設定するメールボックスの保管サイズ制限、あるいは［ユーザー管理］で設定する同サイズ制限で設定したサイズに対象として含まれます。<br>
+IMAP4用のメールボックスフォルダの&quot;INBOX&quot;の上の階層に、ルート（POP3用でもある）のフォルダ＝ユーザーごとのフォルダがありますが、このフォルダ下のサブフォルダを含むすべてのメールデータ（拡張子 *.MSGのファイル）が上記サイズ制限機能の対象となります。<br>
+ただし、サイズ制限機能が検知して働くタイミングは、あらたにSMTPプロトコルでメールを着信させて、フォルダ内にメールデータ(*.MSG)が生成される時点となることにもご注意ください。<br>
+このことは、メーラーが作った［送信済み］や［下書き］、［ごみ箱］のフォルダでも同様のことが言えます。メーラー操作時にそれらが増えて制限を超えていてもふだんはわかりません。<br>
+たとえば、［送信済み］フォルダに次々と保管されていく動作は、E-Post側のメールボックスの保管サイズ制限機能には検知されません。しかし、その次の段階で、SMTP受信時に新たなメールが着信しようとすると、そのときに初めてサイズ制限に引っかかっていることがわかるという事態につながることになります。<br>
+さらに［ごみ箱］も本当に空にしなければ、サイズ制限対象となる容量を食ったままの状態になります。<br>
+下記のFAQ記事の内容にも通じる部分があるので、仕様についての理解をしてください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-95.html">メールボックスの保管サイズ制限の対象外となるメール</a><br>
+●<a href="./faq15-47.html">IMAP4使用時のメールボックスフォルダにメールボックス保管サイズ制限を
+超えてメールデータが格納される理由について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-31</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリスト設定で指定した管理人アドレスに届く通知メールはどのようなものがあるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メーリングリスト設定内の「管理人アドレス」は、主に入退会要求を管理人に回すため、および管理人権限のコマンド実行元として使われます。<br>
+<br>
+<b>１．管理人アドレスに届く代表的な通知（JOIN／LEAVE）</b><br>
+「メーリングリスト詳細」設定内の、管理方法で<br>
+・「入会要求は管理人に転送」<br>
+・「退会要求は管理人に転送」<br>
+のチェックボックスをオンにしている場合、入会許可依頼／退会依頼は管理人アドレス宛に通知メールとして届きます。<br>
+このとき通知メールの送信元は、［ML名-request＠ドメイン名］になります。<br>
+<br>
+<b>２．-request宛コマンド等に紐づく通知（送信元は -request）</b><br>
+管理人アドレスには、メンバーからの要求や運用上の応答として、次のような通知が届くことがあります。<br>
+・許可していない投稿元から投稿された場合のエラー通知<br>
+・HELPコマンドへの応答通知<br>
+・記事一覧／記事内容の通知（「投稿内容保存」を有効にし、保存先フォルダを設定している場合）<br>
+・投稿用一時キーの通知<br>
+また、管理人だけに許可されている各種コマンドは、管理人アドレスから送信することで実行可能です。<br>
+つまり、「管理人アドレスに届くML関連通知」は、基本的に［ML名-＠ドメイン名］に送る要求（JOIN／LEAVE／各種コマンド）に対応する通知・応答と同系列のもの、とご理解ください。<br>
+<br>
+<b>３．管理人アドレスには届かないもの</b><br>
+一方で、メーリングリスト設定の管理人アドレスには、次の種類の通知は届きません。<br>
+・バウンスメール通知（エラーメールの返送）<br>
+・容量超過の通知<br>
+・モデレーション依頼<br>
+・その他フィルタ／配送失敗系の“管理人宛て集約通知”<br>
+<br>
+<b>バウンスメールについて</b><br>
+バウンスメール（配送不能通知）は、メーリングリスト設定の管理人アドレスとは無関係で、送信元は［postmaster＠ドメイン名］で返されます。（※）<br>
+システム管理者としてエラーメールも受け取りたい場合は、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある「管理者アカウント」を設定すると同時に「管理者にもエラーメールを送信する」チェックボックスをオンにしておく必要があります。<br>
+※このときpostmasterアカウントが実在している必要はありません。<br>
+<br>
+<b>容量超過の通知について</b><br>
+メールボックス容量制限に達した場合は受信自体ができずエラー応答になりますが、到達前の警告メールについては、LogAnalyzerの警告メール機能をご利用ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-46.html">「管理者にもエラーメールを送信する」チェックボックスについて</a><br>
+●<a href="./faq01-94.html">作成していない postmaster アカウントでエラーメールが返ってくるのはなぜ？</a><br>
+●<a href="./faq10-95.html">メールボックス保管サイズ制限値になったときのエラー応答メッセージについて</a><br>
+●<a href="./faq15-81.html">〔新機能〕メールボックス使用状況レポート機能およびユーザーへのメールボックス使用量警告メール機能</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-17</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>コマンドでメーリングリスト作成やメンバー追加・削除などを操作したいときには </b></FONT>
+<HR>
+<b>メーリングリストの作成</b><br>
+Epstuser mode=LA domname=[ドメイン名] mlname=[メーリングリスト名]<br>
+<b>（実行例）</b><br>
+Epstuser mode=LA domname=testdomain.jp mlname=ml＠testdomain.jp<br>
+<br>
+※domname=[ドメイン名]、mlname=[メーリングリスト名]をそれぞれ指定します。<br>
+<br>
+<b>メーリングリストの削除</b><br>
+Epstuser mode=LD domname=[ドメイン名] mlname=[メーリングリスト名]<br>
+<b>（実行例）</b><br>
+Epstuser mode=LD domname=testdomain.jp mlname=ml＠testdomain.jp<br>
+<br>
+※メンバーが存在するメーリングリストを削除しようとしても「OK」は返りますが、実際には削除されません。メンバーが空になって初めてメーリングリストが削除される仕様です。<br>
+<br>
+<b>メーリングリストへのメンバー追加（削除）</b><br>
+Epstuser mode=LS next=P domname=[ドメイン名] mlname=[メーリングリスト名] mlmembdel=0(1) mlmember=[メーリングリストメンバー名]<br>
+<b>（実行例）</b><br>
+Epstuser mode=LS next=P domname=testdomain.jp mlname=mlist＠testdomain.jp mlmembdel=0 mlmember=&quot;member1＠testdomain.jp&quot;<br>
+Epstuser mode=LS next=P domname=testdomain.jp mlname=mlist＠testdomain.jp mlmembdel=1 mlmember=&quot;member2＠testdomain.jp&quot;<br>
+<br>
+※スイッチ next=P の意味は、CGI実行時の動作遷移で書込み動作を指示する内部処理向けオプションです。
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

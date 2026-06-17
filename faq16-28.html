@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ16-28</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>承認依頼メール自体が不要のため［否認］しないで削除するには </b></FONT>
+<HR>
+<br>
+何らかの理由で、承認依頼メール自体が不要となってしまい、［否認］しないで削除するには、次の方法で保留中の承認依頼メールデータを削除してください。<br>
+<ol>
+<li>&quot;waitlist_&quot;コマンドで取得できる承認待ちメール一覧から、不要になってしまって削除したいと考える承認依頼メールを見つけ、E-Post SMTP Serverが発番した&quot;B&quot;で始まるメッセージIDを探し出す<br>
+例）<br>
+ [再送]<br>
+mailto:zz10002＠sub.domain.jp?subject=waitlist_B0000116024＠enoxM<br>
+　　　　　　　　　　　　　　　　　　　　　　　　　　　↓<br>
+　　　　　　　　　　　　　　　　メッセージIDは <b>&quot;B0000116024&quot;</b><br>
+<li>メール作業フォルダ内にある承認待ち保留用のフォルダ（既定値 /var/spool/epms/approval）を開く<br>
+<li>１で確認したメッセージIDで始まる長いファイル名の同名ファイル、拡張子.MSGと.RCPをもつ一組（一対）のファイルがあることを確認する<br>
+例）<br>
+B0000116024＠xxx....yyy.MSG<br>
+B0000116024＠xxx....yyy.RCP<br>
+<li>上記で確認した拡張子.MSGと.RCPをもつ一組（一対）のファイルを削除する<br>
+<li>最後に確認のため、再度承認待ちメールを取得してみて、削除されているのを確認する<br>
+</ol>
+以上で作業が終わります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

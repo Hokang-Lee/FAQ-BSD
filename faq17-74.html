@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-74</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>内部宛と外部宛の同報メールを送信すると内部宛メールが遅延してしまう <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+最新差分プログラムの20230425差分で公開された epstdd v5.10バージョン以降、配送時のセッションの扱いについてのデフォルト仕様が変更され、旧デフォルト値が&quot;セッション分離する&quot;だったものから、新デフォルト値が&quot;セッション分離しない&quot;へ変更された経緯があります。その結果、内部宛と外部宛とが混在した同報メールを送信すると、内部宛メールが遅延してしまう現象を引き起こしてしまいます。<br>
+<br>
+内部宛と外部宛の同報メールを送信すると、内部宛メールが遅延してしまう現象を防ぐには、従来の旧デフォルト値&quot;セッション分離する&quot;に変更するには、以下の通りレジストリ項目を作り、設定値を入力してください。<br>
+<br>
+レジストリを編集し、以下の IncludeForward を DWORD で手動作成、値として'0'（セッション分離する）を入力してください。<br>
+ちなみにこの項目がないときは、デフォルトである'1'（セッション分離しない）が適用されています。設定した後は必ずepstddサービスを再起動してください。<br>
+------------------------------------------------------------<br>
+<small>メール作業フォルダ<br>
+　->reg<br>
+　　->epost<br>
+　　　->ims<br>
+　　　　->EPST5DS 　　　　　(ディレクトリ)<br>
+　　　　　IncludeForward.1　(数値 Default 1）<br>
+　　　　　1:セッション分離しない 0:セッション分離する<br></small>
+------------------------------------------------------------<br>
+<br>
+【最新差分プログラム修正履歴より】<br>
+------------------------------------------------------------<br>
+<small>　epstdd v5.10 2023.04.25<br>
+　2.SMTPゲートウェイ欄にゲートウェイ先明記ならセッションを分離しない機能を追加した。<br></small>
+------------------------------------------------------------<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

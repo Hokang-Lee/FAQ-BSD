@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ16-41</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>Secure Handler 機能初期導入時での留意点</b></FONT>
+<HR>
+<br>
+Secure Handler 機能の初期導入時の留意点をあげてみます。<br>
+<br>
+初期設定として［ハンドリングルール］に「題名（キーワード）」や「ドメイン名(メールアドレス)」等を設定しないと、基本的に Secure Handler の判定対象としないので、ここが未設定ならメールは基本的にスルーします。<br>
+<br>
+なお、［ハンドリングルール］で止められたメールについて逐次、「題名（キーワード）」や「ドメイン名(メールアドレス)」等のブラック・ホワイト設定を行うのは次の段階になります。<br>
+
+ホワイトリストである［許可アドレス一覧］に追加するには、Secure Handler の保留リストを確認し、保留扱いされているメールを［リスト登録する］を選んで［許可］していきます。送られてきたメールアドレス一つに対してホワイトリスト登録がされます。また、メールアドレス一つずつではなく、送られてくるドメインを対象にするときは、ホワイトリストである［許可アドレス一覧］を編集して、ドメイン部分だけを残すようにしてください。<br>
+初期導入時にはホワイトリストである［許可アドレス一覧］の記述はひとつもありません。内部ドメインの記述は真っ先にしておいたらよいでしょう。<br>
+<br>
+ Secure Handler 機能が“怪しい”メールを機械判定するポイントとして、現時点で23項目ありますが、その中でも典型的なものには、送られてきたメールアドレスについてエンベロープFROMとヘッダーのFromをチェックするポイントがあります。ヘッダーのFromを詐称して送られてきたものは、いったん止める動きをします。<br>
+<br>
+なお、ユーザーズガイドP.25に自動化＝自動判定の設定が書かれています。自動判定の設定は、cron機能にコマンドを登録することにより、定期的に機械判定による一括処理を自動で行うように設定しています。この自動判定の設定ができていないと、止められたメール全てが止まったままで手動判定待ちの状態になってしまいます。Free BSD版 Secure Handler 機能では自動化＝自動判定の設定がインストール時にセットされています。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

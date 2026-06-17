@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-27</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>ヘッダ行が252byte以上のメールをメーリングリストで再配送するとき、ヘッダが途切れたり本文が文字化けをしたりすることがある <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+ヘッダ行が252byte以上のメールをメーリングリストからメーリングリストへ再配送するとき、ヘッダが途切れたり本文が文字化けを起こしたりするケースがあることが判明しました。<br>
+これはヘッダの行が252byte以上のメールをメーリングリストからメーリングリストへ再配送するとき、epstdd が余計な空白行を出力することが原因です。これによりヘッダの途切れや本文の文字化け、あるいはメールのエンコード異常といった現象を引き起こすことにつながります。<br>
+この問題の対策が取られているのは、epstdd のバージョン5.03以降です。提供されるCDより最新差分アップデートプログラムを適用し、最新のモジュールに置き換えてください。なお、以降の最新版では累積的に適用されています。<br>
+<br>
+対策が取られた epstdd の修正点<br>
+--------------------------------------------------------------------<br>
+ [epstdd]<br>
+　v5.03 2020.06.10<br>
+　1.配送メールのヘッダ行が252byte以上だと不正な改行が追加される不具合の修正。<br>
+--------------------------------------------------------------------<br>
+<br>
+対策を取るには以下の最新差分を適用してください。今後これ以降の版では累積的に適用されます。<br>
+[FreeBSD版]<br>
+・E-Post Mail Server V Enterprise 差分アップデートプログラム（20200610差分）<br>
+・E-Post Mail Server V Standard 差分アップデートプログラム（20200610差分）<br>
+・E-Post SMTP Server V Enterprise 差分アップデートプログラム（20200610差分）<br>
+・E-Post SMTP Server V Standard 差分アップデートプログラム（20200610差分）<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

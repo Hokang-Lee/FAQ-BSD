@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-28</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールサーバに telnet 接続するとなぜか 500 command unrecognized: "XXXX XXXXXXXXX" とエラー応答が返ってくる</b></FONT>
+<HR>
+<br>
+メールサーバに対し、Windowsマシンのコマンドプロンプトか、メールサーバマシンのターミナルから telnet 接続すると 500 command unrecognized: "XXXX XXXXXXXXX" （XXXは伏せ字ではない）とエラー応答が返ってくる現象があり、なぜそのようになるのか不明という問い合わせを受けたことがあります。<br>
+<br>
+言えることとして、 500 command unrecognized: "XXXX XXXXXXXXX" のエラー応答のうち、特にコマンド引用部分 "XXXX XXXXXXXXX" については、E-Postは関与していません。<br>
+telnet接続をしているクライアント端末とメールサーバとの間の経路上に、プロキシサーバやファイヤウォール装置など、何か通信を阻害しているものがないか確認してください。<br>
+ちなみに、500 5.5.2 command unrecognized: "[命令]" という「拡張されたメールシステムステータスコード」付きのエラー応答コードとエラー応答メッセージを返す仕様です。<br>
+たとえ類似したエラー応答であっても、拡張コードまでを見きわめることによって、E-Postから発せられたものか、それ以外のものから発せられたものなのか、両者の判断をすることがより容易となります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-01.html">epstrd（SMTPレシーバー）応答コード</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

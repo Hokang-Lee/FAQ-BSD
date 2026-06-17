@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-50</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	dd {
+		padding:0;
+		margin:0 0 0.5em 0em;
+		padding:3px;
+		background:#f4f3e8;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>inlog、acceptlog、outlog、faillog等のログのファイルサイズが異様に膨れ上がっている <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+inlog、acceptlog、outlog、faillog等のログファイルサイズがある日突然、異様に肥大化し膨れ上がっていることが見つかる場合があります。<br>
+このことは、特定アカウントが不正利用されてしまうおそれとともに大量配信される可能性があることを示します。あるいは既にそのような事態を引き起こされてしまった可能性があります。<br>
+そうしたことが起きていないか調べるには、最初に異様に肥大化した次のログファイルを調べ、連続して繰り返されている不審な挙動を見つけ、不正利用された可能性のあるエンベロープFROMの送信元アカウントを調べます。<br>
+<blockquote>
+・<a href="./faq05-03.html">接続マシンログ（acceptlog）</a>や<a href="./faq05-04.html">SMTP受信ログ（inlog）</a><br>
+・<a href="./faq05-07.html">SMTP送信ログ（outlog）</a>や<a href="./faq05-09.html">配送失敗ログ（faillog）</a><br>
+</blockquote>
+SMTP認証しているのにSMTP認証パスワードが見破られ使われたのかを確認するには、接続マシンログ（acceptlog）やSMTP受信ログ（inlog）のメッセージIDを元に次のログを調べます。<br>
+<blockquote>
+・<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a><br>
+</blockquote>
+特定アカウントのSMTP認証パスワードが見破られ使われた可能性があると推測されるケースで Mail Server を運用中の場合、その手始めはPOP3パスワードあるいはIMAP4パスワードからかもしれません。特にPOP3/IMAP4を実装している Mail Server の場合は、該当するアカウントについてPOP3パスワードあるいはIMAP4パスワードを総当たりで試されていることはないか、次のログから調べます。<br>
+<blockquote>
+・<a href="./faq05-11.html">POP3ログ（pop3log）</a><br>
+・<a href="./faq05-13.html">IMAP4ログ（imap4log）</a><br>
+</blockquote>
+<b>（関連FAQ）</b><br>
+●<a href="./faq03-14.html">不正中継の踏み台対策</a><br>
+●<a href="./faq17-49.html">メールの不正利用・なりすまし被害に遭った場合の一連の手順</a><br>
+●<a href="./faq01-08.html">作成されていないアカウントで受理され、勝手な送信を許している</a><br>
+●<a href="./faq04-20.html">存在しないアカウントに大量メールなどメール攻撃に対する総合的な手だてはどうしたらよいか</a><br>
+●<a href="./faq15-25.html">〔新機能〕SMTP認証時の「認証接続ロックアウト機能」について </a><br>
+●<a href="./faq17-09.html">〔新機能〕SMTP接続時の「IPロックアウト機能」について</a><br>
+●<a href="./faq15-26.html">〔新機能〕POP3認証時の「認証接続ロックアウト機能」について</a><br>
+●<a href="./faq15-27.html">〔新機能〕IMAP4認証時の「認証接続ロックアウト機能」について </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

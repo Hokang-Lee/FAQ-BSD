@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-65</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP認証を有効にしていないのに、メール送信するときアカウントが存在しないとメールが送信できない理由</b></FONT>
+<HR>
+<br>
+E-Postからメール送信するとき、SMTP認証を有効にしていないにもかかわらず、アカウントが存在しないとメールが送信できない理由について、どうしてなのかよく理解できないという声をいただくことがあります。<br>
+これを理解するには、SMTP AUTH（SMTP認証）を設定していないときの初期状態＝デフォルト状態では、デフォルトの中継の制限ルールが働いていることをご理解いただくのがいちばんよいと思います。<br>
+くわしい内容は、下記の関連FAQ記事をご参照ください。中継の制限【effect.dat】のデフォルト時、設定未定義のときは、Mail From:に内部アカウントが指定され、指定された内部アカウントが存在しないときは、内部宛にも外部宛にも中継ルールは不可、つまり「送信できない」ことになります。言い方を変えると、内部アカウントがちゃんと存在するか、しないかのチェックがされているわけです。<br>
+これはベースの話しであり、SMTP AUTH（SMTP認証）を有効に設定していないときでも常に効いています。またこれはデフォルト状態で「不正中継の踏み台にならない」ための設定内容でもあります。デフォルトの中継の制限ルールを変えたいときには【effect.dat】の記述を行って調整します。<br>
+中継の制限ルールは、一見するとわかりにくいかもしれませんが、これを理解することにより、E-Postの基本動作をさらに熟知していただけます。<br>
+<br>
+ちなみに、SMTP AUTH（SMTP認証）が有効にされているかいないかの判断ですが、receivelog（SMTP受信詳細ログ）を見る方法があります。接続時のグリーティングへの応答はEHLOとHELOの2種類ですが、SMTP AUTHは拡張SMTPの仕様ですから、SMTP AUTHをするならグリーティングの応答でまず最低限EHLOが出ていなければなりません。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-22.html">中継の制限【effect.dat】で設定する default と true の違い、only の意味は？</a><br>●<a href="./faq01-08.html">作成されていないアカウントで受理され、勝手な送信を許している</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

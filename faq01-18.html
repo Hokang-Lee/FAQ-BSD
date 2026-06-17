@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-18</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>アカウントの文字数と使えない文字およびパスワード長さについて <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<BR>
+E-Post Mail Server／E-Post SMTP Serverシリーズに設定できる１アカウントの文字数制限はデフォルト状態で20文字となります。これは、Windows版E-Postシリーズと整合性を取るための制約です。なお、設定をおこなうことで、アカウント管理方法が Soft account方式（E-Post方式）の場合に限り、20文字を超えたアカウントでも登録できるようになります。ちなみに、＠より右のドメイン名は最大64文字まで使用可能です。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-80.html">アカウント部分が20文字を超えるアドレスを使えるようにするには </a><br>
+<br>
+また、アカウントにおいて使用できない文字は、以下の通りです。<br>
+<br>
+<b>[使用不可キャラクタ]<br>
+@ &quot; / \ [ ] ; : | = , + * ? &lt; &gt;</b>v
+<br>
+また、アカウントの先頭や末尾に '.'(ピリオド)を使ったアドレス及び、連続したピリオド'..'の使用は、RFC上問題があり、送信先によっては受信を拒否される場合がありますので、設定しないで下さい。<br>
+<blockquote>
+（例）アカウントへのピリオド指定例　×禁止　○許可<br>
+×　test.＠xxx.jp　←　アカウントの末尾 &quot;＠&quot;の手前にピリオドが含まれているアカウント登録は禁止。<br>
+×　.test＠xxx.jp　←　アカウントの先頭にピリオドが含まれているアカウント登録は禁止。<br>
+×　test..test＠xxx.jp　←　アカウントの文字間に連続したピリオドが含まれているアカウント登録は禁止。<br>
+○　test.test＠xxx.jp　←　アカウントの文字間に１つのピリオドが含まれているアカウント登録は可能。<br>
+</blockquote>
+一方、これまでPOP3パスワード/IMAP4パスワードの長さについて、Windows Server旧バージョンのアカウントと整合性を取るため、パスワード長さに最大14文字までの制限が設けられていましたが、2022年5月30日に公開された最新差分アップデートにより、POP3パスワード/IMAP4パスワードを14文字を超えて設定することができるようになりました。詳細は関連記事をご覧ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-46.html">最大14文字に制限されていたPOP3パスワード/IMAP4パスワードを14文字を超えて設定する方法について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

@@ -1,0 +1,456 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-15</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	pre {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:1.6em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>E-Post Mail Server V / E-Post SMTP Server V で使用している設定ファイル〔BSD版〕</b></FONT>
+<HR>
+<PRE>
+<B>■共有情報－[メール作業ディレクトリ]/regディレクトリ内の設定ファイルで設定</B>
+    <small><font color="darkgreen">※設定ファイルの拡張子種類は、次の通り値の型を表わす。
+       （ .0 = BINARY,  .1 = 数値,  .2 = 文字列及びその他の形式 ）
+     ※秒数や回数、サイズなどの数値値は原則としてすべて10進数表記で設定。</font>
+
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）
+->reg
+ ->epost
+   ->ims
+     ->UserManager.1          (数値  Default 1) 1:OS Account, 0:独自 Account
+     ->Membership.2           (文字列  Default NULL) NULL=OS Accountの場合、マシンのローカルグループを使用
+                                       Soft Accountの場合、ユーザアカウントDB名
+     ->SendDataTimeout.1    (数値  Default 60)sec (送信タイムアウト時間:default 60秒)
+     ->AddressFamily.1        (数値  Default 0) 0:IPv4 only, 1:IPv6 only, 2:IPv4&IPv6 mix
+     ->AccountLength.1        (数値  Default 20) Soft Account運用時でのアカウント最大文字数(最大値=64)
+     ->FullnameLength.1      (数値  Default 30) Soft Account運用時でのフルネーム最大文字数(最大値=64)
+                                        ※FullnameLength.1での指定サイズはAccountLength.1の指定サイズに影響し、
+                                        ホーム項の入力サイズにも影響する
+     ->HostName.2             (文字列  Default NULL) IPv6 host name.
+     ->DomainNamesAreLocal.0  (BINALY Default NULL) 運用ドメインリスト
+     ->MailInCopy.0             (BINARY Default NULL) Mail Carbon copy address.
+     ->MailInMaxSize.1        (数値  Default 0) 0:無制限 1メール当りの限界サイズ
+     ->MailInBoxSize.1        (数値  Default 0) 0:無制限 1メールボックス当りの保存限界サイズ
+     ->RCPTMaximum.1       (数値  Default 0) 0:無制限 あて先(RCPT TO:)数の制限
+     ->MailInBoxDir.2          (文字列  Default /var/spool/epms/inbox/%USERNAME%) メールボックスディレクトリ
+     ->LastMsgId.1             (数値  Default 0) メール受信カウンタ
+     ->MailGroup.2              (文字列  Default IMSUsers) OS Accountの場合、メールローカルグループ名
+     ->MailSpoolDir.2           (文字列  Default /var/spool/epms/) メール作業ディレクトリ
+     ->MailFilterUp.1           (数値  Default 0) 0:しない 1:する メールフィルタ処理の強化
+                                      '1'の指定で'*[STRING]*'のようなワイルドカード指定が可能になる
+     ->LocalFailuresToPostmaster.1 (数値  Default 0) 0:Disable, 1:Enable エラーメールをpostmasterに送信
+     ->PostMaster.2             (文字列  Default administrator) postmasterアカウント
+     ->POP3IsNotUsed.1       (数値  Default 0) 0:反映しない 1:反映する  POP3禁止を全アカウントに反映する
+     ->SearchLocalTime.1     (数値  Default 1) 0:UTC日付 1:ローカル日付 IMAP4で日付検索を行う場合
+                                       従来はデフォルト[UTC日付]、該当バージョンから[ローカル日付]に変更
+     ->SearchAccessType.1   (数値  Default 0) 0:更新日時 1:アクセス日時 2:作成日時  IMAP4で日付検索を行う場合
+                                       従来はデフォルト[ファイル作成日時]、該当バージョンから[ファイル更新日時]に変更
+     ->PasswordLength.1     (数値  Default 14) パスワードの最大入力数を変更 (MAX 64byte,最大値=64)
+                                       <font color="blue">(EPSTMAN v5.04～)</font>
+     ->SecureAccountDB.1    (数値  Default 0) Soft Accountデータベース内のパスワードの暗号化指定オプション
+                                       0:プレーン 1:暗号化
+     ->AutoCreateFolder.1     (数値  Default 1) IMAP4ログイン時にルートディレクトリ(POP3の場所と同じ)が存在しない場合
+                                       ディレクトリを自動作成する 1:作成する 0:作成しない
+     →AutoSubDirAndMsg.1   (数値  Default 1) 削除対象ディレクトリにメールやサブディレクトリが含まれていても
+                                       削除可能にする 1:削除する 0:削除しない
+     ->aliases                       (ディレクトリ)  エイリアス管理用
+       ->00000000               (ディレクトリ)  エイリアスその0
+         ->Alias.2                   (文字列  Default NULL) エイリアス名
+         ->MappedTo.2            (文字列  Default NULL) 実アドレス
+       ->00000001               (ディレクトリ)  エイリアスその1
+         ->Alias.2                   (文字列  Default NULL) エイリアス名
+         ->MappedTo.2            (文字列  Default NULL) 実アドレス
+       ->00000002                (ディレクトリ)  エイリアスその2
+           : 以下繰り返し
+         
+     ->lists                          (ディレクトリ) メーリングリスト管理用
+       ->[ML-list name1]       (ディレクトリ) メーリングリスト名1
+         ->BounceAction.1      (数値  Default 0) 未送信レポート先 0:送信しない,1:送信者に戻す,2:返信者を指定
+         ->BouncesTo.2         (文字列  Default NULL) 未送信レポート指定時メールアドレス
+         ->CharSet.2           (文字列  Default NULL) UTF-8: ARTICLE INDEXコマンドで返される一覧表示メールのヘッダを
+                                     Content-Type: text/plain; charset="UTF-8" に置き換え
+         ->ListPassword.2      (文字列  Default NULL) 投稿パスワード
+         ->ListSave.1            (数値  Default 0) 投稿内容を保存 0:保存しない,1:保存する
+         ->ListSaveFolder.2    (文字列  Default NULL) 投稿内容保存先
+         ->ListSaveExtension.2 (文字列  Default TXT）投稿内容保存ファイルの拡張子の指定 <font color="blue">(EPSTRD v5.06～ EPSTDD v5.05～)</font>
+         ->ListSaveOrign.1     （数値  Default 0) 投稿内容保存ファイルに添付削除の有無を無視して原本メールを保存
+                                         0:添付削除の有無に依存 1:原本のまま <font color="blue">(EPSTRD v5.06～)</font>
+         ->ListSaveURL.2        (文字列  Default NULL）投稿内容保存ファイルのWebからの参照用URL <font color="blue">(EPSTRD v5.06～)</font>
+         ->ListSaveHTMLIndex.1 (数値  Default 1) 投稿内容保存ファイルのHTML形式のインデックスファイルの作成
+                                         1:作成する 0:作成しない <font color="blue">(EPSTRD v5.06～)</font>
+         ->MlId.1                   (数値  Default 0) カウンタ値
+         ->MlToken.2              (文字列  Default NULL) 付加表題＆カウント方法
+         ->Moderator.2            (文字列  Default NULL) 管理人アドレス
+         ->ModeratorControlJoin.1  (数値  Default 0) 入会要求は管理人へ転送
+         ->ModeratorControlLeave.1 (数値  Default 0) 退会要求は管理人へ転送
+         ->ReplyTo.1                (数値  Default 1) Reply-To:ヘッダを付加する 0:しない,1:する
+         ->WhoCanSend.1        (数値  Default 1) 投稿者の条件 1:メンバーのみ,2:誰でも,3:管理人のみ
+         ->Members                (ディレクトリ) 参加者管理用
+           ->[mail address]       (ディレクトリ) 参加者メールアドレス
+                  : 繰り返し
+       ->[ML-list nameN]         (メーリングリスト名１)
+         : 以下繰り返し
+         
+     ->domain
+       ->operation                    (ディレクトリ) ドメイン毎の操作パスワード（空白＝パスワード無し）
+           ->[domain name1].2 (文字列) eg.password1
+                 :
+           ->[domain nameN].2 (文字列) eg.password2
+     ->Secur
+       ->SysPassword.2            (文字列) メールサーバーの操作パスワード（空白＝パスワード無し）
+</small>
+<B>■個別情報－[メール作業ディレクトリ]/regディレクトリ内の設定ファイルで設定</B>
+    <small><font color="darkgreen">※設定ファイルの拡張子種類は、次の通り値の型を表わす。
+       （ .0 = BINARY,  .1 = 数値,  .2 = 文字列及びその他の形式 ）
+     ※秒数や回数、サイズなどの数値値は原則としてすべて10進数表記で設定。</font>
+
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）
+->reg
+ ->epost
+    ->ims
+      ->MailSpoolDir.2             (文字列  Default /var/spool/epms/) メール作業ディレクトリ
+      ->LISTENADDRPRI.1      (数値  Default 1) リッスンIPアドレスのFQDNをホスト名にする
+                                          1:優先する 0:優先しない(ホスト名) <font color="blue">(EPSTRD v5.12～)</font>
+      ->domain
+        ->acountNumber         (ディレクトリ) ドメイン毎の登録者数上限値 (0＝無制限)
+            ->[domain name1].1 (数値  Default 0)
+                :
+            ->[domain nameN].1
+        ->folder                 (ディレクトリ) ドメイン毎のメールボックス保存ディレクトリ位置
+            ->[domain name1].2 (文字列) eg.domain1.co.jp
+                :
+            ->[domain nameN].2 (文字列) eg.domainN.co.jp
+        ->smtpip               (ディレクトリ) ドメインに対応するSMTP-IPアドレス（空白＝マシンに設定されている全てのIPに応答）
+            ->[domain name1].2 (文字列) eg.192.168.0.3
+                :
+            ->[domain nameN].2 (文字列) eg.192.168.0.4
+        ->pop3ip               (ディレクトリ) ドメインに対応するPOP3-IPアドレス（空白＝マシンに設定されている全てのIPに応答）
+            ->[domain name1].2 (文字列) eg.192.168.0.3
+                :
+            ->[domain nameN].2 (文字列) eg.192.168.0.4
+        ->imap4ip              (ディレクトリ) ドメインに対応するIMAP4-IPアドレス（空白＝マシンに設定されている全てのIPに応答）
+            ->[domain name1].2 (文字列) eg.192.168.0.3
+                :
+            ->[domain nameN].2 (文字列) eg.192.168.0.4
+
+</small>
+<B>[epstrd] </B>(E-POST SMTP Receiver)
+    <small><font color="darkgreen">※設定ファイルの拡張子種類は、次の通り値の型を表わす。
+       （ .0 = BINARY,  .1 = 数値,  .2 = 文字列及びその他の形式 ）
+     ※秒数や回数、サイズなどの数値値は原則としてすべて10進数表記で設定。</font>
+
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）
+->reg
+ ->epost
+    ->ims
+     ->EPST5RS                 (ディレクトリ)
+       ->Timeout.1               (数値  Default 300)sec  無通信状態タイムアウト
+       ->SpoolFsSync.1         (数値  Default 1000) incomingディレクトリへの滞留可能最大メール数 0:無制限
+       ->MovefileRetry.1       (数値  Default 300000)ms incomingフォルダへの移動リトライ上限(300000ms=30秒)
+                                         0:無制限 <font color="blue">(v5.02～)</font>
+       ->PatternOfTheOnce.1 (数値  Default 500) フィルタデータパターンの一括処理数。
+       ->PasswordFile.2        (文字列  Default apop.dat) SMTP認証パスワード設定ファイル名
+       ->ListenMode.1          (数値  Default 0) 0:全てのIP許可, 1:指定IPのみ リッスンIPアドレス制限フラグ
+       ->ListenIP.2                (文字列  Default NULL) 指定IPアドレス：ポート設定
+       ->ImagePath.2           (文字列  Default NULL) サービスプログラムのインストール先フルパス表記
+       ->DefaultCode.2         (文字列  Default us-ascii) us-ascii=ASCII, iso-2022-jp=JIS  自動応答文字コード
+       ->RecvDataBufferSize.1(数値  Default 0) 0:システムに依存  socket受信バッファサイズ
+       ->AcceptLimit.1          (数値  Default 0) 同時接続数 0:無制限
+       ->AcceptlogEnabled.1   (数値  Default 0) 接続マシンログ(acceptlog) 0:Disable, 1:Enable
+       ->SMTPAUTHOnly.1      (数値  Default 0) 0:両方 1:認証専用 2:認証ファイル毎 セキュリティレベル
+       ->SMTPAUTHMode.2    (文字列  Default NO) PLAIN,LOGIN,CRAM-MD5  SMTP認証方式,  "XOAUTH2"を追加 <font color="blue">(v5.14～)</font>
+       ->VirusCheck.1           (数値  Default 0) 0:Disable, 1:Enable メールフィルタ実行フラグ
+       ->Received.1              (数値  Default 20) メールループ最大回数
+       ->UsedSSL.1              (数値  Default 0) TRUE:SSL使用, FALSE:SSL不使用
+       ->Certificate.2            (文字列  Default 空白) SSL/TSL 証明書ファイル名
+       ->Private-Key.2           (文字列  Default 空白) SSL/TSL 個人鍵ファイル名
+       ->UsedSTARTTLS.1     (数値  Default 1) 0:Disable, 1:Enable  STARTTLS命令を使用
+       ->SecureLayOption.1   (数値  Default 3) 1:SSL2.0禁止 2:SSL3.0禁止 3:SSL2.0-3.0禁止(SSL3.0以前禁止)
+                                     4:TLS1.0禁止 7:TLS1.0,SSL2.0-3.0禁止(TLS1.0以前禁止) 8:TLS1.1禁止
+                                     15:TLS1.1以前禁止 16:TLS1.2禁止 31:TLS1.2以前禁止 <font color="blue">(v5.01～)</font>
+                                     ※10進指定。&quot;31&quot;指定でTLS1.2以前禁止となりTLS1.3以降のみ許可
+       ->SecureLevel.1          (数値 default:0) SSL_CTX_set_security_levelの設定に相当 レベル:0～5 <font color="blue">(v5.16～)</font>
+       ->SecuerLayCipher.2   (文字列  Default ALL) 利用する暗号アルゴリズムの組み合わせオプション（最大1023文字）<font color="blue">(v5.01～)</font>
+                                     ※TLSv1.3の暗号組み合わせ名を":"で区切る。以下が既定値
+                                 <small>&quot;TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256&quot;</small>
+       ->HidesGreeting.1       (数値  Default 0) グリーティングでの製品名・バージョン表示 0:表示する, 1:非表示
+       ->ADRetryTime.1        (数値  Default 10) ADへのユーザ情報問合せリトライ回数
+       ->ADRetryMSec.1        (数値  Default 1000)msec  ADへのユーザ情報問合せリトライ間隔時間(単位:ミリ秒)
+       ->ADCashLiveTime.1    (数値  Default 0)sec AD連携のアカウント情報問合せ時のキャッシュ機能有効時間,0:無効 
+       ->AuthLockOut.1         (数値  Default 0) 認証失敗時に接続元IPからの接続ロックアウト機能とロックアウトまでの回数 0:無効 
+       ->AuthLockOutTime.1  (数値  Default 0)min  認証失敗時に接続元IPからの接続ロックアウト期間(単位:分) 
+       ->IPLockOut.1             (数値  Default 0) 指定時間内でのIP毎の同時接続可能数 0:制限無し <font color="blue">(v5.01～)</font>
+                                     ※下の設定とともに任意値設定で有効に働く。例・10,30（回）&quot;rejectsmtpip.dat&quot; にデータ蓄積
+       ->IPLockOutSPTime.1   (数値  Default 0)sec 同上サンプリング間隔(秒単位) <font color="blue">(v5.01～)</font>
+                                     ※上の設定とともにサンプリング間隔設定で有効に働く。例・1 (秒)
+       ->IPLockOutTime.1      (数値  Default 0)sec 同上ロックアウト時間(秒単位) <font color="blue">(v5.01～)</font>
+                                     ※上2つの設定によるロックアウト時間。例・300,60 (秒)
+       ->Parameters               (ディレクトリ)
+         ->PortNo.1                 (数値  Default 25)
+         ->MailInlogEnabled.1  (数値  Default 0) SMTP受信ログ(inlog) 0:Disable, 1:Enable
+         ->MailQueueDir.2        (文字列  incoming) メール受信ディレクトリ名
+</small>
+<B>[epstdd] </B>(E-POST SMTP Delivry Agent)
+    <small><font color="darkgreen">※設定ファイルの拡張子種類は、次の通り値の型を表わす。
+       （ .0 = BINARY,  .1 = 数値,  .2 = 文字列及びその他の形式 ）
+     ※秒数や回数、サイズなどの数値値は原則としてすべて10進数表記で設定。</font>
+
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）
+->reg
+ ->epost
+    ->ims
+     ->EPST5DS                     (ディレクトリ)
+       ->SendMaxRetryTime.1 (数値  Default 8)h リトライ終了時間
+       ->RetryRule.1               (数値  Default 1) 0:定期的,1:倍数的 リトライの方法
+       ->SendDataBufferSize.1 (数値  Default 0) 0:システムに依存  socket送信バッファサイズ
+       ->SendDataTimeout.1   (数値  Default 1200)sec 送信１回当りのタイムアウト時間
+       ->RecvDataTimeout.1    (数値  Default 1200)sec 応答１回当りのタイムアウト時間
+       ->ThreadType.1           (数値  Default 1) 1:マルチスレッド, 0:シングルスレッド
+       ->MaxThread.1            (数値  Default 1) 送信スレッド数
+       ->SendGateway.2         (文字列  NULL) Gatewayアドレス
+       ->IncludeForward.1     (数値  Default 1) SMTPゲートウェイ欄にゲートウェイ先明記のとき
+                                         セッションを分離しない機能。ゲートウェイ先のセッション:
+                                         1:セッション分離しない 0:セッション分離する <font color="blue">(v5.10～)</font>
+       ->MailForward.1          (数値  Default 0) 0:Disable, 1:Enable 全受信をGatewayへ転送
+       ->MailForward2.1        (数値  Default 0) DNS問合せ後にSMTPゲートウェイの処理順位
+                                          0:DNS問合せ前, 1:DNS問合せ後
+       ->ESMTP.1                  (数値  Default 0) 0:Disable, 1:Enable Greeting を EHLO で行うか否か
+       ->SMTPAUTHId.2         (文字列  NULL) SMTP認証時のID
+       ->SMTPAUTHPass.2      (文字列  NULL) SMTP認証時のPassword
+       ->SMTPAUTHMode.2     (文字列  NULL) PLAIN,LOGIN,CRAM-MD5 SMTP認証方式,  "XOAUTH2"を追加 <font color="blue">(v5.12～)</font>
+       ->ExpansionGatewayTable.1(数値  Default 0) ゲートウェイ先ごとにSMTP認証ID,PW規定を有効にするオプション
+                                           0:無効 1:有効 <font color="blue">(v5.08～)</font>
+                      <small>[gateway.datの新書式]
+                          '対象ドメイン,ゲートウェイ先(FQDN or IP)|[0,1,2,3]|([ID]|[PW])
+                          'or(BASE64([ID]|[PW])or(BASE64(Original encoding([ID]|[PW]))),接続ポート(*)
+                          '[ID],[PW]ともMAX127byte。
+                          '[0,1,2]
+                           0=SMTP-AUTHを実施しない。
+                           1=SMTP-AUTHを[ID]|[PW]の生データを使って実施する。
+                           2=SMTP-AUTHを[ID]|[PW]情報をBASE64エンコードされている文字列を使って実施する。
+                           3=SMTP-AUTHを[ID]|[PW]情報を独自エンコード後にBASE64エンコードされている文字列を使って実施する。</small>
+       ->ImagePath.2             (文字列  Default NULL) サービスプログラムのインストール先フルパス表記
+       ->GetRCPWait.1          （数値  Default 10) 配送スレッドが減るのを防ぐため配送スレッドウエイト制限数設定
+       ->MailSendLocallogEnabled.1 (数値  Default 0) SMTP送信ローカルログ(outlocallog) 0:Disable, 1:Enable
+       ->MailFaillogEnabled.1  (数値  Default 0) SMTP配送失敗ログ(faillog) 0:Disable, 1:Enable
+       ->SenderlogEnabled.1   (数値  Default 0) 配送時の詳細ログ(senderlog)長出力 0:Disable, 1:Level1ログ, 2:Level2ログ
+       ->Sender2logEnabled.1 (数値  Default 1) 配送時の詳細ログ(senderlog)短出力 0:Disable, 1:Enable
+       ->SaveDead.1              (数値  Default 1) 0:しない 1:する deadディレクトリに保管するか否か
+       ->LogicalIP.1                (文字列  Default NULL) 空白(NULL)は常に配送実行、IPアドレスを設定すると該当IP獲得時のみ配送実行
+                                        クラスタ構成（E-Post/MSCS/MSFC）のとき、獲得する論理IP（仮想IP）を設定
+       ->UsedSTARTTLS.1      (数値  Default 1) 0:Disable, 1:Enable  STARTTLS命令を使用
+       ->SecureLayOption.1    (数値  Default 3) 1:SSL2.0禁止 2:SSL3.0禁止 3:SSL2.0-3.0禁止(SSL3.0以前禁止)
+                                     4:TLS1.0禁止 7:TLS1.0,SSL2.0-3.0禁止(TLS1.0以前禁止) 8:TLS1.1禁止
+                                     15:TLS1.1以前禁止 16:TLS1.2禁止 31:TLS1.2以前禁止 <font color="blue">(v5.01～)</font>
+                                     ※10進指定。&quot;31&quot;指定でTLS1.2以前禁止となりTLS1.3以降のみ許可
+       ->SecureLevel.1          (数値 default:0) SSL_CTX_set_security_levelの設定に相当 レベル:0～5 <font color="blue">(v5.14～)</font>
+       ->SecuerLayCipher.2    (文字列  Default ALL) 利用する暗号アルゴリズムの組み合わせオプション（最大1023文字）<font color="blue">(v5.01～)</font>
+                                     ※TLSv1.3の暗号組み合わせ名を&quot;:&quot;で区切る。以下が既定値
+                                 <small>&quot;TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256&quot;</small>
+       ->ADRetryTime.1         (数値  Default 10) ADへのユーザ情報問合せリトライ回数
+       ->ADRetryMSec.1         (数値  Default 1000)msec  ADへのユーザ情報問合せリトライ間隔時間(単位:ミリ秒)
+       ->ADCashLiveTime.1     (数値  Default 0)sec AD連携のアカウント情報問合せ時のキャッシュ機能有効時間,0:キャッシュ無効 
+       ->ReturnMailForm.1     (数値  Default 2) エラー返信時バウンスメール構成内容の選択オプション
+                                          0:テキスト 1:添付ファイル 2:マルチパートレポート
+       ->UseTimeFileEnabled.1 (数値  Default 0) 送信許可時間の設定機能
+                                          0:無効 1:許可[送信先条件] 2:許可[送信元＆送信先条件]
+       ->UseTimeFile.2         (文字列  Default &quot;usetime.dat&quot;) 送信許可時間の設定機能定義ファイル名の設定項目
+       ->SelectCase             (数値  Default 2) &quot;MAIL From:&quot;,&quot;RCPT To:&quot;のコマンド出力を&quot;MAIL FROM:&quot;,&quot;RCPT TO:&quot;に変更可能
+                                      なオプションSelectCase動詞部分の大小文字の選択: 0:従来 1:小文字 2:大文字 <font color="blue">(v5.09～)</font>
+       ->MTAIPOn.1             (数値  Default 0) &quot;Reporting-MTA&quot;ヘッダにメール受領時のFQDNをセットさせるようにする
+                                      0:しない 1:する <font color="blue">(v5.08～)</font>
+       ->XUIDL                    (数値  Default 0) メールボックスへメールを保管する際 &quot;X-UIDL: [ファイル名]&quot;のヘッダを挿入する
+                                      オプション 0:無効 1:有効（追加する） <font color="blue">(v5.10～)</font>
+       ->Parameters             (ディレクトリ)
+         ->Timeout.1             (数値  Default 120)sec リトライ間隔
+         ->PortNo.1               (数値  Default 25)
+         ->MailOutlogEnabled.1 (数値  Default 0) SMTP送信ログ(outlog) 0:Disable, 1:Enable
+</small>
+<B>[epstpop3d] </B>(E-POST POP3 Server) (※Mail Serverシリーズのみ、SMTP Serverは非該当)
+    <small><font color="darkgreen">※設定ファイルの拡張子種類は、次の通り値の型を表わす。
+       （ .0 = BINARY,  .1 = 数値,  .2 = 文字列及びその他の形式 ）
+     ※秒数や回数、サイズなどの数値値は原則としてすべて10進数表記で設定。</font>
+
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）
+->reg
+ ->epost
+    ->ims
+     ->EPST5POP3S              (ディレクトリ)
+       ->Timeout.1               (数値  Default 300)sec 無通信状態タイムアウト
+       ->PasswordFile.2         (文字列  Default apop.dat) APOP認証パスワード設定ファイル名
+       ->SendDataBufferSize.1(数値  Default 0) 0:システムに依存  socket送信バッファサイズ
+       ->AcceptLimit.1          (数値  Default 0) 同時接続数 0:無制限
+       ->AcceptlogEnabled.1  (数値  Default 0) POP3の詳細ログ(receivepop3) 0:Disable, 1:Enable
+       ->MailExtension.2       (文字列  Default "MSG") メールメッセージファイルの拡張子、デフォルト".MSG"
+       ->ListenMode.1          (数値  Default 0) 0:全てのIP許可, 1:指定IPのみ リッスンIPアドレス制限フラグ
+       ->ListenIP.2                (文字列  Default NULL) 指定IPアドレス：ポート設定
+       ->SendDataTimeout.1 (数値  Default 60)sec 送信１回当りのタイムアウト時間
+       ->ImagePath.2            (文字列  Default NULL) サービスプログラムのインストール先フルパス表記
+       ->UsedSSL.1               (数値  Default 0) TRUE:SSL使用, FALSE:SSL不使用
+       ->Certificate.2             (文字列  Default 空白) SSL/TSL 証明書ファイル名
+       ->Private-Key.2            (文字列  Default 空白) SSL/TSL 個人鍵ファイル名
+       ->UsedSTARTTLS.1      (数値  Default 1) 0:Disable, 1:Enable  STARTTLS命令を使用
+       ->SecureLayOption.1   (数値  Default 3) 1:SSL2.0禁止 2:SSL3.0禁止 3:SSL2.0-3.0禁止(SSL3.0以前禁止)
+                                   4:TLS1.0禁止 7:TLS1.0,SSL2.0-3.0禁止(TLS1.0以前禁止) 8:TLS1.1禁止
+                                   15:TLS1.1以前禁止 16:TLS1.2禁止 31:TLS1.2以前禁止 <font color="blue">(v5.01～)</font>
+                                   ※10進指定。&quot;31&quot;指定でTLS1.2以前禁止となりTLS1.3以降のみ許可
+       ->SecureLevel.1          (数値 default:0) SSL_CTX_set_security_levelの設定に相当 レベル:0～5 <font color="blue">(v5.06～)</font>
+       ->SecuerLayCipher.2   (文字列  Default ALL) 利用する暗号アルゴリズムの組み合わせオプション（最大1023文字）<font color="blue">(v5.01～)</font>
+                                   ※TLSv1.3の暗号組み合わせ名を&quot;:&quot;で区切る。以下が既定値
+                                 <small>&quot;TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256&quot;</small>
+       ->HidesGreeting.1       (数値) Default 0) グリーティングでの製品名・バージョン表示 0:表示する, 1:非表示
+       ->APOPEnable.1          (数値  Default 1) 0:Disable, 1:Enable  APOPコマンド使用
+       ->AUTH.1                    (数値  Default 1) POP-AUTHの有効無効 デフォルト 1:有効 0:無効
+       ->AUTHMode.2            (文字列  Default PLAIN LOGIN CRAM-MD5)利用可能なPOP-AUTHの種類,  "XOAUTH2"を追加 <font color="blue">(v5.05～)</font>
+       ->ADRetryTime.1         (数値  Default 10) ADへのユーザ情報問合せリトライ回数
+       ->ADRetryMSec.1         (数値  Default 1000)msec  ADへのユーザ情報問合せリトライ間隔時間(単位:ミリ秒)
+       ->ADCashLiveTime.1    (数値  Default 0)sec AD連携のアカウント情報問合せ時のキャッシュ機能有効時間,0:キャッシュ無効
+       ->AuthLockOut.1          (数値  Default 0) 認証失敗時に接続元IPからの接続ロックアウト機能とロックアウトまでの回数 0:無効
+       ->AuthLockOutTime.1   (数値  Default 0)min  認証失敗時に接続元IPからの接続ロックアウト期間(単位:分)
+       ->IPLockOut.1             (数値  Default 0) 指定時間内でのIP毎の同時接続可能数 0:制限無し <font color="blue">(v5.01～)</font>
+                                     ※下の設定とともに任意値設定で有効に働く。例・10,30（回）&quot;rejectpopip.dat&quot; にデータ蓄積
+       ->IPLockOutSPTime.1   (数値  Default 0)sec 同上サンプリング間隔(秒単位) <font color="blue">(v5.01～)</font>
+                                     ※上の設定とともにサンプリング間隔設定で有効に働く。例・1 (秒)
+       ->IPLockOutTime.1       (数値  Default 0)sec 同上ロックアウト時間(秒単位) <font color="blue">(v5.01～)</font>
+                                     ※上2つの設定によるロックアウト時間。例・300,60 (秒)
+       ->Parameters               (ディレクトリ)
+         ->PortNo.1                 (数値  Default 110) POP3ポート番号
+         ->Pop3LogEnabled.1   (数値  Default 0) POP3基本ログ  0:Disable, 1:Enable
+         ->ExclusiveAPOP.1       (数値  Default 0) POP/APOP排他利用設定  0:Disable, 1:Enable
+</small>
+<B>[epstimap4d]</B> (E-POST IMAP4rev1 Server) (※Mail Serverシリーズのみ、SMTP Serverは非該当)
+    <small><font color="darkgreen">※設定ファイルの拡張子種類は、次の通り値の型を表わす。
+       （ .0 = BINARY,  .1 = 数値,  .2 = 文字列及びその他の形式 ）
+     ※秒数や回数、サイズなどの数値値は原則としてすべて10進数表記で設定。</font>
+
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）
+->reg
+ ->epost
+    ->ims
+     ->EPST5IMAP4S             (ディレクトリ)
+       ->Timeout.1                (数値  Default 1800)sec 無通信状態タイムアウト
+       ->PasswordFile.2        (文字列   Default apop.dat) APOP認証パスワード設定ファイル名
+       ->SharedRoot.2          (文字列   Default 空白) 共有ディレクトリルート
+       ->SharedMode.2          (数値  Default 0) 共有ディレクトリアクセス権　0:読込み専用 1:読み書き可
+       ->SendDataBufferSize.1 (数値  Default 0) 0:システムに依存  socket送信バッファサイズ
+       ->AcceptLimit.1           (数値  Default 0) 同時接続数 0:無制限
+       ->AcceptlogEnabled.1   (数値  Default 0) IMAP4の詳細ログ(receiveimap4) 0:Disable, 1:Enable
+       ->MailExtension.2       (文字列   Default "MSG") メールメッセージファイルの拡張子、デフォルト".MSG"
+       ->ListenMode.1          (数値  Default 0) 0:全てのIP許可, 1:指定IPのみ リッスンIPアドレス制限フラグ
+       ->ListenIP.2                (文字列  Default NULL) 指定IPアドレス：ポート設定
+       ->SendDataTimeout.1  (数値  Default 300)sec 送信１回当りのタイムアウト時間
+       ->ImagePath               (文字列  Default NULL) サービスプログラムのインストール先フルパス表記
+       ->UsedSSL.1               (数値  Default 0) TRUE:SSL使用, FALSE:SSL不使用
+       ->Certificate.2              (文字列  Default 空白) SSL/TSL 証明書ファイル名
+       ->Private-Key.2           (文字列  Default 空白) SSL/TSL 個人鍵ファイル名
+       ->UsedSTARTTLS.1     (数値  Default 1) STARTTLS命令を使用  0:Disable, 1:Enable 
+       ->SecureLayOption.1   (数値  Default 3) 1:SSL2.0禁止 2:SSL3.0禁止 3:SSL2.0-3.0禁止(SSL3.0以前禁止)
+                                   4:TLS1.0禁止 7:TLS1.0,SSL2.0-3.0禁止(TLS1.0以前禁止) 8:TLS1.1禁止
+                                   15:TLS1.1以前禁止 16:TLS1.2禁止 31:TLS1.2以前禁止 <font color="blue">(v5.01～)</font>
+                                   ※10進指定。&quot;31&quot;指定でTLS1.2以前禁止となりTLS1.3以降のみ許可
+       ->SecureLevel.1          (数値 default:0) SSL_CTX_set_security_levelの設定に相当 レベル:0～5 <font color="blue">(v5.12～)</font>
+       ->SecuerLayCipher.2   (文字列  Default ALL) 利用する暗号アルゴリズムの組み合わせオプション（最大1023文字）<font color="blue">(v5.01～)</font>
+                                   ※TLSv1.3の暗号組み合わせ名を&quot;:&quot;で区切る。以下が既定値
+                                 <small>&quot;TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256&quot;</small>
+
+       ->HidesGreeting.1       (数値  Default 0) グリーティングでの製品名・バージョン表示  0:表示する, 1:非表示
+       ->ADRetryTime.1         (数値  Default 10) ADへのユーザ情報問合せリトライ回数
+       ->ADRetryMSec.1         (数値  Default 1000)msec  ADへのユーザ情報問合せリトライ間隔時間(単位:ミリ秒)
+       ->ADCashLiveTime.1    (数値  Default 0)sec AD連携のアカウント情報問合せ時のキャッシュ機能有効時間,0:キャッシュ無効
+       ->ImapAuthType.2       (文字列  Default "CRAM-MD5,LOGIN,PLAIN") CAPABILITY 命令で応答する認証方法の制限指定
+                                        デフォルト &quot;CRAM-MD5,LOGIN,PLAIN&quot;,  "XOAUTH2"を追加 <font color="blue">(v5.09～)</font>
+       ->UIDRecover.1          (数値  Default 0) IMAPディレクトリ内のUID値情報が壊れた場合の回復機能
+                                        0:スキップ 1:実行
+       ->IDLETimeout.1         (数値  Default 1800)sec NOOP命令のみのセッションで新着が1800秒(=30分)ないときセッションを切断
+                                        デフォルト:1800秒  0:タイムアウトしない
+       ->IDLECmd.1             (数値  Default 1) IDLE命令の有効化  0:Disable, 1:Enable
+       ->IDLELoop.1            (数値  Default 5)sec IDLE命令実施中の監視間隔 デフォルト:5秒
+       ->IDLEMSLoop.1          (数値  Default 1000) msec IDLE命令実施中の監視間隔ミリ秒単位指定 デフォルト:1000ミリ秒
+                                     0指定は無効で1ミリ秒に強制変更 <font color="blue">(v5.15～)</font>
+                                     ※IDLELoop値×IDLEMSLoop値が実際のIDLEポーリング間隔。IDLELoop値を1,IDLEMSLoop値を300と
+                                     設定した場合 IDLELoop×IDLEMSLoopで300ミリ秒となる <font color="blue">(v5.15～)</font>
+       ->NOOPPoll.1             (数値  Default 1) NOOP命令内でのディレクトリポーリング実行の有無  0:Disable, 1:Enable
+       ->Broadcast.1            (数値  Default 1) 同一ディレクトリの操作情報を接続中の各セッションに同報するオプション
+                                        0:Disable, 1:Enable
+       ->PutLockCount.1       (数値  Default 3)sec 同一ディレクトリの操作情報を接続中のセッションに同報する
+                                       排他用フラグチェックのタイムアウト値
+       ->AuthLockOut.1        (数値  Default 0) 認証失敗時に接続元IPからの接続ロックアウト機能とロックアウトまでの回数 0:無効
+       ->AuthLockOutTime.1  (数値  Default 0)min  認証失敗時に接続元IPからの接続ロックアウト期間(単位:分)
+       ->IPLockOut.2            (文字列  Default 0) 指定時間内でのIP毎の同時接続可能数 0:制限無し <font color="blue">(v5.01～)</font>
+                                     ※下の設定とともに任意値設定で有効に働く。例・10,30（回）&quot;rejectimapip.dat&quot; にデータ蓄積
+       ->IPLockOutSPTime.2  (文字列  Default 0)sec 同上サンプリング間隔(秒単位) <font color="blue">(v5.01～)</font>
+                                     ※上の設定とともにサンプリング間隔設定で有効に働く。例・1 (秒)
+       ->IPLockOutTime.2     (文字列  Default 0)sec 同上ロックアウト時間(秒単位) <font color="blue">(v5.01～)</font>
+                                     ※上2つの設定によるロックアウト時間。例・300,60 (秒)
+       ->SimpleAuth.2          (文字列  Default 0) 認証ファイルがない時にAUTHENTICATE LOGIN/PLAIN命令での処理
+                                      を可能にするオプション 0:無効(従来) 1:有効 <font color="blue">(v5.04～)</font>
+       ->BulkSearch.1          (数値  Default 1) SEARCH命令で検査対象のメールデータ読込みを1回で処理 1:する 0:しない <font color="blue">(v5.09～)</font>
+       ->BulkFetch.1             (数値  Default 0) FETCH ENVELOPE命令で取得のメールデータ読込みを1回で処理 0:しない 1:する <font color="blue">(v5.09～)</font>
+       ->FetchDisposition.1   (数値  Default 0) FETCH BODYSTRUCTURE命令応答でContent-Disposition:ヘッダの"filename="項目
+                                    のみ出力か否かの選択  0:filenameのみ出力 1:filename以外もあれば出力 <font color="blue">(v5.09～)</font>
+       ->BodyPeekCoolTime.1 (数値 Default 0) FETCH命令で添付受信時にCPU負荷低減用調整値
+                          デフォルト 0:調整しない 調整値 50～65535 <font color="blue">(v5.09～)</font>
+                          （調整値の目安）
+                          50(10進)でCPU負荷は約半分程度、受信時間が3倍程度に伸びる
+                          100(10進)でCPU負荷は約6割程度、受信時間が2倍程度に伸びる
+                          500(10進)でCPU負荷は約8割程度、受信時間が1.2倍程度に伸びる
+       ->Parameters                (ディレクトリ)
+         ->PortNo.1                  (数値  Default 143) IMAP4ポート番号
+         ->Imap4LogEnabled.1  (数値  Default 0) IMAP4基本ログ  0:Disable, 1:Enable
+</small>
+<B>[FSUPDD/FSENGD]</B> (Fastscan Antivirus Service) (※Enterprise 版のみ)
+    <small><font color="darkgreen">※設定ファイルの拡張子種類は、次の通り値の型を表わす。
+       （ .0 = BINARY,  .1 = 数値,  .2 = 文字列及びその他の形式 ）
+     ※秒数や回数、サイズなどの数値値は原則としてすべて10進数表記で設定。</font>
+
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）
+->reg
+ ->epost
+    ->ims
+     ->VMCS                       (ディレクトリ)
+      ->ImagePath.2            (文字列  Default NULL) サービスプログラムのインストール先フルパス表記
+</small>
+</pre>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

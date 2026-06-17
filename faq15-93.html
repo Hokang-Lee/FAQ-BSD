@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-93</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>社内ネットワークからのメーラーによるSMTP接続を止め、Webメールシステムからの接続だけ許可したい場合</b></FONT>
+<HR>
+<br>
+社内ネットワークからのメーラーによるSMTP接続を止め、Webメールシステムからの接続だけ許可したい場合、マシンごとの中継【effect.dat】を活用して設定します。<br>
+SMTPプロトコルで社内ネットワーク（LAN内）に接続されたPCからの接続を拒絶するには、［中継の制限］の［マシンごとの中継］を設定します。この機能は従来から実装されており、EPSTRDのバージョンが最新のものでなくても設定可能です。また、SMTP認証を導入していなくても関係なく使えます。<br>
+<br>
+<b>社内ネットワークに接続されたPCからのSMTP接続を拒絶する方法</b><br>
+<ol type="1"><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］の中ほど［中継の制限］の［マシンごとの中継］、もしくは［中継の制限］で表示される「中継の制限設定」にある［マシンごとの中継］ボタンをクリックして表示される【effect.dat】を設定</li>
+<li>【effect.dat】に次のような記述を行う。<br>
+　ここでは例として社内ネットワーク（LAN）のIPアドレスを192.168.1.xxxとする。<br>
+'-------------------------------------------------------------------------------------<br>
+192.168.1.XXX default　　←（Webメールシステムを動かすサーバのIP）<br>
+192.168.1.* false　　　　　←（その他のネットワーク内からの接続をすべて拒絶）<br>
+'-------------------------------------------------------------------------------------<br></li>
+<li>EPSTRDサービスを再起動。<br>
+※WebメールシステムのサーバIPを指定する行では、&quot;true&quot;指定は絶対に避けるようにし、&quot;default&quot;指定にしてください。その理由は下記を参考にしてください。<br>
+※【effect.dat】の記述方法は下の記事を参考にしてください。IPと&quot;defaut&quot;や&quot;false&quot;などとの間の区切り文字は半角スペースです。<br></li>
+<li>これ以降、192.168.1.*の社内ネットワークPCのメーラーからSMTP接続しても、接続が拒絶され切断されます。</li></ol>
+なお、社外からたとえば自宅からの接続を切断したいと意図した場合、接続してくるIPがはっきり判明している場合は、その下の行に追加していくことで接続自体を拒絶することは理屈上可能です。しかしながら、プロバイダのものだったり、共用しているものである場合は、それらのIPを指定すると、外からの着信メールも拒絶してしまう可能性がありますので、慎重に決めてください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq04-01.html">中継の制限－マシンごとの中継【effect.dat】設定</a><br>
+●<a href="./faq10-22.html">中継の制限【effect.dat】で設定する default と true の違い、only の意味は？ </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

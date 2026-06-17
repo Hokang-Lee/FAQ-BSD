@@ -1,0 +1,128 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-44</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	dd {
+		padding:0;
+		margin:0 0 0.5em 0em;
+		padding:3px;
+		background:#f4f3e8;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>スクリプトで行う定期的なログ削除の自動化の事例</b></FONT>
+<HR>
+<br>
+ログを採取したまま放っておくと、いつしかログファイルでディスクは一杯になってしまうおそれがあり、ログを定期的に削除する必要が出てきます。スクリプトで行う定期的なログ削除の自動化の事例をあげてみました。<br>
+<br>
+<b>ログ削除スクリプトを作って crontab に登録し定期的に実行する</b><br>
+ログ削除スクリプトを作成、そのスクリプトを crontab に登録し毎日定期的に実行することでログ削除の自動化を実現するようにします。<br>
+crontab コマンドは、コマンドの定時実行のスケジュール管理を行うために用いられるOSに用意されているコマンドです。crontab にてスケジュールに基づいた実行を定義しておくことができます。<br>
+以下は、30日前のログについて自動的に削除を行うスクリプトと、毎日深夜のAM1:00になったら crontab コマンドでそのスクリプトを実施する事例です。<br>
+<ol><b><li>ログ削除スクリプトの作成</li></b>
+rootでログインし、ディレクトリを移動します。<br>
+　cd /usr/local/mta/bin/<br>
+<br>
+viエディタで実行するスクリプトを作成します。<br>
+　vi logclean.sh<br>
+<br>
+ <dl>
+ <dd>
+ <b>[logclean.sh] の内容</b>（30日前の過去ログを削除）<br>
+ <hr color="#C0C0C0" align="left" width="94%" noshade size="1">
+ # 30日前日付を算出する 'YYMMDD'<br>
+ MyStr=`date -v-30d '+%y%m%d'`.log<br>
+ <br>
+ # 削除するファイルをフルパス指定 (コメント行は acceptlog を直接指定する場合の指定。第1引数でログディレクトリを指定するには'$1'を記述する)<br>
+ HN=`hostname`<br>
+ #MyFn='/var/spool/epms/acceptlog/'${HN}'/'${MyStr}<br>
+ MyFn='/var/spool/epms/'$1'/'${HN}'/'${MyStr}<br>
+ echo ${MyFn}<br>
+ <br>
+ # ファイル削除実行<br>
+ echo rm -f ${MyFn}<br>
+ rm -f ${MyFn}<br>
+ <hr color="#C0C0C0" align="left" width="94%" noshade size="1">
+ </dd>
+ </dl>
+<br>
+指定された日以前のすべての過去ログを削除したい場合は次のように記述します。<br>
+ <dl>
+ <dd>
+ <b>[logclean2.sh] の内容</b>（30日以前のすべての過去ログを削除）<br>
+ <hr color="#C0C0C0" align="left" width="94%" noshade size="1">
+ # ファイルのタイムスタンプで判断した現行日より30日前の指定<br>
+ MyStr='*.log -mtime +30'<br>
+ <br>
+ # 削除するファイルをフルパス指定 (コメント行は acceptlog を直接指定する場合の指定。第1引数でログディレクトリを指定するには'$1'を記述する)<br>
+ HN=`hostname`<br>
+ #MyFn='/var/spool/epms/acceptlog/'${HN}'/'${MyStr}<br>
+ MyFn='/var/spool/epms/'$1'/'${HN}'/'${MyStr}<br>
+ echo ${MyFn}<br>
+ <br>
+ # 指定日以前のファイル削除一括実行<br>
+ find ${MyFn} | xargs rm<br>
+ <hr color="#C0C0C0" align="left" width="94%" noshade size="1">
+ </dd>
+ </dl>
+<br>
+<b><li>ログ削除スクリプトの実行権設定</li></b>
+作成した logclean.sh に実行権を設定します。<br>
+　chmod 744 logclean.sh<br>
+<br>
+crontab コマンドで指定する前に手動でスクリプトを実行してみて、対象のログ削除命令とその動作がされているか確認してみてもよいでしょう。<br>
+　./logclean.sh acceptlog<br>
+※うまく動かない場合は sh logclean.sh acceptlog でも動作しないか試してみてください。<br>
+<br>
+<b><li>crontab の編集</li></b>
+crontab コマンドで処理時間と実行するスクリプトを指定します。<br>
+　crontab -e<br>
+ <dl>
+ <dd>
+ <b>[crontab -e] での設定内容</b>（毎日AM1:00にacceptlog、inlog、pop3logの過去ログ削除を実行する例）<br>
+ <hr color="#C0C0C0" align="left" width="84%" noshade size="1">
+ 0 1 * * * /usr/local/mta/bin/logclean.sh acceptlog<br>
+ 0 1 * * * /usr/local/mta/bin/logclean.sh inlog<br>
+ 0 1 * * * /usr/local/mta/bin/logclean.sh pop3log<br>
+ <hr color="#C0C0C0" align="left" width="84%" noshade size="1">
+ ※うまく実行できない場合は sh /usr/local/... と記述してみてください。<br>
+ ※他にも対象となるログがある分だけ記述を増やしてください。<br>
+ </dd>
+ </dl>
+crontab -e で指定できる時分の設定内容やその他の設定方法については参考サイトをご参照ください。<br>
+<br>
+<b><li>ログ削除スクリプト実行の確認</li></b>
+<br>
+crontab コマンドで指定された時刻まで待ち、時間後に対象のログが削除されていることを確認します。<br>
+</ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

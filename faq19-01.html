@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-01</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>「imap.idx」「imap.!dx」「imap.$dx」ファイルの役割は何か <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+ルートのフォルダ下に生成される<b>「imap.idx」「imap.!dx」「imap.$dx」など、"[ユーザ名]\imap.xxx" の各ファイルは、</b>該当アカウントがPOP3・IMAP4の併用利用の際、どの時間の受信メールをIMAP4用のinboxフォルダ（"[ユーザ名]\inbox\"）内へ移動またはコピーしたか記録するための<b>新着管理用ファイルです。</b><br>
+該当アカウントがIMAP4のみ使用（つまりPOP3無効）の場合は、IMAP4への受信時[ユーザ名]下にあるメールは、"[ユーザ名]\inbox\"へ全て移動した状態になるため、新着管理用である"imap.xxx"ファイルをもし削除しても、特に影響はありません。<br>
+POP3・IMAP4併用している場合は、[ユーザ名]下にメールデータがPOP3受信用に残されますので、"imap.xxx"ファイルを消してしまうと、[ユーザ名]下のメールがPOP3接続時に消されていない状況下では、残されたメールがすべて新規メール扱いされ、IMAP4受信時に再度"[ユーザ名]\inbox\"へコピーされることになります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-30.html">inboxフォルダ（メールボックスフォルダ）配下に格納されるデータファイルについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

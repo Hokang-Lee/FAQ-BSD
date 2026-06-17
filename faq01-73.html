@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-73</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>一部のメールクライアントでIMAP4を使用するときの注意点 </b></FONT>
+<HR>
+<BR>
+一部のメールクライアントでIMAP4接続すると &quot;aucenticate error&quot; となるとき、次の点に注意して、設定変更を試してみてください。<br>
+<br>
+たとえば、メールクライアントソフトの Shuriken2007 では、IMAP4への受信認証方式がCRAM-MD5のみであり、プレーンの標準方式が実装されていないようです。<br>
+<br>
+一方、他のメールクライアントであるOutlookExpressやThunderbird、Becky!では、IMAP4への受信認証方式は、プレーンの標準方式でも、CRAM-MD5方式でも、どちらも利用できます。<br>
+<br>
+受信認証がCRAM-MD5方式を使ってIMAP4接続するアカウントについては、該当ユーザーを“SMTP AUTH & APOPを使用”する設定に変更する必要があります。メールサーバ全体の設定をSMTP AUTHを有効に設定する必要はなく、メールサーバ全体でSMTP AUTHが有効にされていなくてもかまいません。</small><br>
+<br>
+下記の手順で設定を確認し、無効になっているときは有効に設定してください。<br>
+<ol type="1">
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」からエクスポートする対象ドメインを選択して［ユーザー管理へ］をクリック。<br>
+<li>該当するユーザーを選択し「設定変更」を選択して［操作する］ボタンをクリックする。<br>
+<li>「認証ファイル設定」「認証ファイルを設定する」チェックボックスをオンにし［設定変更する］ボタンクリック。<br>
+<li>E-POST コントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」からエクスポートする対象ドメインを選択して［ユーザー管理へ］をクリック。<br>
+<li>該当するユーザーを選択し［パスワード変更］を選択して［操作する］ボタンをクリックする。<br>
+<li>「変更するパスワード」「再確認パスワード」を入力し、パスワードを再設定。最後に「変更する」ボタンをクリック。<br>
+</ol>このとき更新されるパスワードは、POP3/IMAP4用認証パスワードとともに、メールボックスフォルダ内にて管理される認証ファイル &quot;apop.dat&quot; にも合わせて保存されます。この状態にしておけば、メールクライアントの Shuriken2007 側が、CRAM-MD5方式を使ってIMAP4接続しても、プレーンの標準方式で接続しても、どちらも問題なくつながります。<br>
+<br>
+なお、「認証ファイルを設定する」チェックボックスをオフにした場合、メールボックスフォルダ内の &quot;apop.dat&quot; が削除されるため、暗号のない LOGINコマンドでの応答しかできなくなります。<br>
+<br>
+<small>※IMAP4の認証方式の設定値は次の通り。<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5IMAP4S<br>
+　　　　→ImapAuthType.2 (文字列)<br>
+　　　　 デフォルト:&quot;CRAM-MD5,LOGIN&quot;<br>
+この設定値を記述しなくても、デフォルト値が適用されますので、特に記述する必要はありませんが、認証方式を暗号付き LOGIN にしたい特殊なケースの場合は、&quot;LOGIN&quot;とだけ記述してください。</small><br>
+<br>
+なお、Outlook系のメーラでは、IMAP4プロトコルを使用するときにパスワードをセキュリティ保護する「SPA認証」を設定できますが、E-Post Mail ServerはSPA認証には対応していませんので、Outlook系のメーラを使う場合「SPA認証」はオフにしてください。<br>
+また、Windows Liveメールでは、IMAP4プロトコルでの接続設定時に「セキュリティで保護されたパスワード認証でログオンする」設定が選択できるようになっていますが、これは「SPA認証」と同等の機能かと思われますので、この設定は同様に選択しないようにしてください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

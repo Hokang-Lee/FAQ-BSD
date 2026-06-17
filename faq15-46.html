@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-46</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールボックス保管サイズ制限を E-Postの標準機能を使わず、OS側のハードクオータ設定で行うことは危険で要注意</b></FONT>
+<HR>
+<br>
+メールボックス保管サイズ制限について E-Postの標準機能を使わず、OS側のハードクオータ設定で行って替わりに処理させることは、きわめて危険であることから、要注意事項として説明します。<br>
+OS側のクオータ設定によるサイズ制限が各ユーザーのメールボックスフォルダに設けられた環境については、E-Postシリーズでは想定外のため、動作は一切保証できません。特にハードクオータ設定を任意のフォルダに対して行った場合、ファイルサイズを超えた場合に OS側でシステム的に処理が止められることになりますが、E-Postの全サービス、SMTP受信サービス・SMTP配送サービス・POP3サービス・IMAP4サービスは、そのような状況下での動作を想定しておりません。そのため、要注意事項としてハードクオータ設定をしないようにしてください。<br>
+<br>
+万が一、ハードクオータ設定を各アカウントのIMAP4用のメールボックスフォルダ（※1）に設定した場合は、IMAP4サービスがフォルダ書き込みできないことによりIMAP4受信が止まるなどIMAP4サービス（epstimap4d）への悪影響があることが確認されています。<br>
+・SELECT INBOX命令を出した状態＝「Outlookでは受信トレイを選択した状態」から処理が進まない<br>
+・制限にひっかかっていない他アカウントの処理も進まない etc.<br>
+<blockquote><small>（※1）IMAP4プロトコルで管理されるメールボックスフォルダ<br>
+・「共通ボックス（区別しない）」方式の場合<br>
+　/var/spool/epms/inbox/[ユーザ名]/INBOX/<br>
+・「接続ドメイン/IPで区別する」方式の場合<br>
+　/var/spool/epms/inbox/[ドメイン名]/[ユーザ名]/INBOX/</small></blockquote>
+また万が一、ハードクオータ設定を各アカウントのPOP用のメールボックスフォルダ（※2）＝IMAP4と併用するルートのフォルダに設定した場合は、各サービスがフォルダ書き込みできない危険性が増えます。SMTP配送サービス（epstdd）がフォルダ書き込みできないことによる悪影響が考えられ、メール消失の可能性があり得ます。加えてさらにPOP3受信やIMAP4受信が止まるなどのPOP3サービス（epstpop3d）・IMAP4サービス（epstimap4d）への悪影響が考えられます。<br>
+<blockquote><small>（※2）POP3プロトコルで管理される通常のメールボックスフォルダ＝IMAP4と併用するルートのフォルダ<br>
+・「共通ボックス（区別しない）」方式の場合<br>
+　/var/spool/epms/inbox/[ユーザ名]/<br>
+・「接続ドメイン/IPで区別する」方式の場合<br>
+　/var/spool/epms/inbox/[ドメイン名]/[ユーザ名]/</small></blockquote>
+<br>
+メールボックスサイズ保管制限については、E-Postで設定できるようになっていますので、そちらをご利用いただくようお薦めします。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-76.html">メールボックスの保管サイズ制限について</a><br>
+●<a href="./faq01-95.html">メールボックスの保管サイズ制限の対象外となるメール</a><br>
+●<a href="./faq10-70.html">メールボックスの保管サイズ制限の上限値について</a><br>
+●<a href="./faq10-95.html">メールボックス保管サイズ制限値になったときのエラー応答メッセージについて</a><br>
+●<a href="./faq15-39.html">POP3/IMAP4併用のアカウントでのメールボックスの保管サイズ制限について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

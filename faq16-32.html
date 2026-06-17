@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ16-32</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Enterprise 版で上長承認（BossCheck）機能を利用するときに守っていただく注意点 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Post Mail Server V Enterprise / E-Post SMTP Server V Enterprise シリーズの Enterprise 版で上長承認（BossCheck）機能を利用するときに守っていただきたい点、十分ご理解いただきたい点があります。<br>
+<br>
+E-Post Mail Server V Enterprise / E-Post SMTP Server V Enterprise シリーズでの「上長による承認／却下機能」のきわめて大事な注意書きがあります。「Enterprise 版は Secure Handler 機能と上長承認（BossCheck）機能を同時に使用できない。Secure Handler 機能を使用しているときは上長承認（BossCheck）機能は利用できず、上長承認（BossCheck）機能を使用しているときはSecure Handler 機能は利用できない」としている点です。この Secure Handler 機能と上長承認（BossCheck）機能の２つの機能は排他扱いとなっています。製品ページの機能説明や仕様表の注意書きを改めてご確認ください。<br>
+<br>
+●<a href="../Mail_serverV_SMTP_serverV.html#kinou8" target="_blank">E-Post Mail Server V / E-Post SMTP Server V シリーズ「上長による承認／却下機能」</a><br>
+●<a href="../Mail_serverV_SMTP_serverV.html#point3" target="_blank">E-Post Mail Server V / E-Post SMTP Server V シリーズ 仕様表と(*20)の注意事項</a><br>
+<br>
+Secure Handler 機能を有効にするには、メール承認管理画面（Secure Handler）にあるチェックボックスをオンにするだけですが、必要要件があって上長承認（BossCheck）機能を使う場合は、このSecure Handler 機能をオンにして有効化させることはできないこととなります。排他的になっているという意味はこのことです。<br><br>
+Secure Handler 機能を絶対に使わないという条件を守っていただくのであれば、下記の手順を取る方法で上長承認メニュー通りに上長承認機能が働くようになります。しかしながら、将来Secure Handler 機能を使うかもしれない、やはり使いたいというときには、上長承認（BossCheck）機能の利用は見合わせてください。<br>
+<br>
+<b>■上長承認（BossCheck）機能を問題なく使えるようにするためSecureHandler（セキュアハンドラ）の自動判定を無効に設定する方法</b><br>
+Enterprise版では大部分のユーザーのニーズを考え、Secure Handler 機能が有効に働けるよう、あらかじめ
+SecureHandler（セキュアハンドラ）の自動判定機能がセッティングされています。上長承認（BossCheck）機能を問題なく使えるようにするには、このSecureHandler（セキュアハンドラ）の自動判定機能を無効に設定変更する必要があります。これをしないとせっかくの上長承認がプログラムによって自動的に承認処理されたり否認処理されたりしてしまう結果となります。<br>
+自動判定機能を無効に設定変更するには、標準コンソールやSSHでターミナルにログインし、crontab コマンドを使い、以下の内容行を全て削除し、最後に保存します。<br>
+<br>
+# crontab -e　　　（←viエディタと操作は同じ。dd カーソル行削除 / :w 保存 / :q 閉じる）<br>
+---------------------------------------------------------------------------------------------<br>
+MAILTO=""<br>
+0,5,10,15,25,30,35,40,45,50,55 * * * * cd /usr/local/mta/bin; /usr/local/bin/sudo /usr/local/mta/bin/admiappr cmd=a pw=secret autoaction=1 enter=1 autopass=2<br>
+---------------------------------------------------------------------------------------------<br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

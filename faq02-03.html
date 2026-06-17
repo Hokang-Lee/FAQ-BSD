@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-03</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリスト詳細設定の「未送信レポート先」が「返信しない」設定のとき、配信先SMTPサーバーに受信拒否される</b></FONT>
+<HR>
+<br>
+メーリングリスト詳細設定の「未送信レポート先」設定部分は、エンベロープFROMをどのように書き換えるかという設定にもなっています。そのため、投稿されたメールは、この「未送信レポート先」設定により、変換されて返信先を空白（つまり返信先はないという意味）の通信を行うため、&quot;MAIL FROM:&lt;&gt;&quot;を送信するようになっています。<br>
+※ちなみに、送信元の通知で&quot;MAIL FROM:&lt;&gt;&quot;を送ることは自体は、RFC821では許されています。ただし、SPAMメールやウイルスメールなどではこの点を悪用している状況も多々あります。<br>
+<br>
+相手先サーバーが、SPAMメール対策で送信元空白のときに拒否するポリシーを採用していれば、当然のことながら、相手先は送信せずに破棄することになるので、相手に届かないといった事態も起こり得るわけです。逆に、相手先が&quot;MAIL FROM:&lt;&gt;&quot;が送られてきても拒否しないときは、問題なく送られることになります。<br>
+対処方法としては、「未送信レポート先」を［返信しない］以外の設定にすることですが、さらに踏み込んで、「未送信レポート先」を「返信者を指定」、&quot;存在しないアカウント＠ドメイン&quot;を設定することにより、相手サイトから拒否されることなく、未送信メールも受信しなくてよい設定にすることができます。<BR>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

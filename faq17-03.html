@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-03</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールサーバ異常状態の発生時にフォルダのようすを目視で確認し判断する</b></FONT>
+<HR>
+<br>
+メールサーバが異常に遅くなったとか、送受信できなくなったとか、いわゆる異常状態が発生した場合には、以下のフォルダのようすを目視で確認してください。異常な状態が発生した場合、このフォルダを目視で確認したときに、たとえば膨大な数のファイルやフォルダが存在する状態があるかないかなど、何が起きているかをその場で状況を把握できることがあります。[メール作業用フォルダ] のデフォルトは /var/spool/epms/ です。<br>
+<blockquote>
+・[メール作業用フォルダ]/temp/<br>
+・[メール作業用フォルダ]/incoming/<br>
+・[メール作業用フォルダ]/holding/<br>
+・[メール作業用フォルダ]/domains/<br>
+<br>
+（各フォルダの説明）<br>
+temp・・・SMTP受信サービスが受信したデータの一時作業フォルダ<br>
+　　（受領や受信動作をしていないときは基本は空）<br>
+incoming・・・SMTP受信サービスがメールキューを一時保存するフォルダ<br>
+　　（配送動作に入るときやML配送作業中には一時的に残存するが配送動作がすべて完了しているときは基本は空）<br>
+holding/domains・・・SMTP配送で配送リトライを行うときのメールデータの一時保存フォルダおよびメールアドレスの一時保存フォルダ<br>
+　　（リトライ動作途中では残っていることもある。リトライ動作が完了すれば空）<br>
+</blockquote>
+特に、incoming フォルダならびに holding/domains 両フォルダに膨大な数のファイルやフォルダが確認された場合は、アカウントの不正利用または登録アカウント詐称による不正中継の被害に遭っている可能性があります。<br>
+これについて初期購入時のマニュアルDVDおよび次年度更新用CDに収録している『メールサーバシステム運用ガイド』の44～47ページには、メールアカウントの不正利用やなりすまし被害にあった場合にどのような対応を取るかをまとめています。必ず一度は目を通しておいてください。<br>
+■『E-Post Mail Server V・SMTP Server V メールサーバ システム運用ガイド Rev2.3A』 44～47ページ参照<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq03-14.html">不正中継の踏み台対策</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

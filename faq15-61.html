@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-61</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>中継の制限【effect.dat】での only 指定は特殊な働き方をすることに注意</b></FONT>
+<HR>
+<br>
+中継の制限【effect.dat】で1つのIPアドレスだけに許可を与えるつもりで only を指定しがちですが、only 指定は特殊な働き方をすることに注意が必要です。<br>
+どうしてかと言うと、only 指定は【effect.dat】の最後の行で有効で、しかも記述できるのは１行のみという制約があるからです。特定のIPアドレスからの中継だけを可能にしたいときには「x.x.x.x only」と記述できますが、only 指定は１行しか書けず、しかも記述の最後にする必要があります。<b>only より下の記述がされていても、それらの記述はすべて無効になる</b>ので注意してください。<br>
+<blockquote>（2行目以降がすべて無効になる【effect.dat】の例）<br>
+172.18.0.1 only<br>
+192.168.0.* default<br>
+*.*.*.* norelay<br>
+</blockquote>
+特定のIPアドレスからの接続に対して許可を与える場合、true や default 指定なら複数行指定できることから、以下のような指定をする方がまだ無難です。<br>
+<blockquote>172.18.0.1 true<br>
+192.168.0.100 true</blockquote>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-22.html">中継の制限【effect.dat】で設定する default と true の違い、only の意味は？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-23</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>メールサーバがDNSを参照するときの動きについて</b></FONT>
+<HR>
+<br>
+<a href="./FAQ01-02.html">「外部へメールが配送がされない」</a>では、メールサーバがDNSを参照するときの設定項目を紹介していますが、もう少し詳細な動きを説明します。<br>
+<ul type="square">
+<li>MXレコードの参照･･･>　E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］を開いたとき表示される「基本設定」画面の「DNSサーバー」項目<br>
+<li>Aレコードの参照･･･>　/etc/hostsファイル、あるいは、/etc/resolv.confファイルのnameserver<br>
+</ul>
+E-Post Mail Server V / E-Post SMTP Server V シリーズは、リトライ毎に、MXレコード1→MXレコード2→Aレコードと順番に参照します。<br>
+上の２つの項目のうち、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある「DNSサーバー」設定項目は、MXレコードを取得するためだけに利用され、取得したMXレコードのFQDN名から接続を行うためのIPアドレスの解決を実際に行うには、OSの /etc/resolv.conf ファイルの nameserver設定項目で割り当てられたDNSに依存して、処理が行われるようになっています。<br>
+そのため、E-Post Mail Server V / E-Post SMTP Server V シリーズでは、この２つの項目の「DNSサーバー」項目が正しく設定されていることを前提にしています。<br>
+/etc/resolv.conf ファイルの nameserver項目に外部を参照できないDNSが指定されているときなどは、特に注意してください。<br>
+<br>
+なお、社内（LAN内）に専用のDNSが存在せず、LAN内に立てた別のMTAに正しく送信したいときは、できるだけhostsファイルの記述をしておくことをお薦めします。hostsファイルを記述しているものは、Aレコード参照するときに真っ先にhostsファイルを参照しに行きます。hostsファイルを記述していないときは、/etc/resolv.confファイルのnameserverに設定しているDNSに問い合わせて、名前解決を試みようとします。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-53.html">hostsファイル記述の有用性について</a><br>
+●<a href="./faq01-04.html">クライアントからのメール送信が遅いケースとhostsファイルの必要性</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

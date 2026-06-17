@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-54</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>内部アカウントを自動転送で設定したり、メーリングリストに設定したときに、送信処理に時間がかかってしまう</b></FONT>
+<HR>
+<br>
+内部アカウントへの自動転送を設定しているときや、メーリングリストに登録された内部アカウントがあるとき、E-Postシリーズ製品では、SMTPプロトコルを使ってepstddサービスが送信、epstrdサービスが再度受信する動きをします。そのときは内部アカウントであっても名前解決を必要とします。<br>
+名前解決ができないと、最終段階で何とか送られるものの、送信処理に時間がかかってしまいます。<br>
+これを防ぐためには、参照できるDNSサーバのMXレコードに内部ドメインを記述してあることがいちばんの理想ですが、DNSサーバをうまく参照できないときでも、メールサーバマシンのhostsファイルに、内部ドメイン名を定義しておくことで、epstddサービスは、Aレコードの名前解決として利用します。自動転送やメーリングリストを使った送信時に処理が異常に遅くなるのを防ぎます。<br>
+さらに、もう一つの方法もあります。E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある［ゲートウェイ詳細］ボタンをクリックすることで [gateway.dat]（SMTPゲートウェイテーブル）が編集できるようになります。ここに内部ドメイン名とメールサーバ自身のIPアドレスを明示的に記述しておくと、自動転送やメーリングリストを使った送信時に、DNSサーバやhostsファイルより真っ先に優先されて処理されます。<br>
+DNSサーバとの通信が不安定なときや、hostsファイルに内部ドメイン名を記述しても効果が現れないときは、 [gateway.dat] を記述してください。<br>
+ [gateway.dat] を記述することは、あくまで対策であって、いつでも必須というわけではありません。<br>
+<blockquote>
+【gateway.dat 記述例】<br>
+<hr align="left" width="80%" size="1" noshade>
+abc.co.jp,192.168.1.11,25<br>
+def.co.jp,192.168.1.11,25<br>
+<hr align="left" width="80%" size="1" noshade>
+</blockquote>
+自動転送やメーリングリストを使った送信を含め、送信時に名前解決のために参照されるものを優先度の高い順に記すと、基本は次の通りです。<br>
+上から順番に処理され、見つからなかったものは、次点の内容に基づいて処理されます。<br><ol>
+<li>[gateway.dat]の参照<br>
+<li>DNSサーバのMXレコードを参照<br>
+（※E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］の「DNSサーバー」で設定されたサーバ）<br>
+<li>（Aレコードとして）/etc/hostsファイルを参照<br>
+<li>DNSサーバのAレコードを参照<br>
+（※/etc/resolv.confの「nameserver」の設定で「DNSサーバー」で設定されたサーバ）<br>
+<li>（最終的に上記のものを繰り返し試しても見つからない場合は、作成済みドメインに内部ドメインが設定されているかどうかの判定を行い、送信処理される）<br>
+</ol>
+なお、 [gateway.dat]（SMTPゲートウェイテーブル）変更した後 epstddサービスの再起動は特に必要ではありません。次の配送時から記述した内容が反映されます。<br>
+<br>
+（関連FAQ）<br>
+●<a href="./faq10-53.html">hostsファイル記述の有用性について</a><br>
+●<a href="./faq01-04.html">クライアントからのメール送信が遅いケースとhostsファイルの必要性</a><br>
+●<a href="./faq10-28.html">フォワードするSMTPサーバをドメイン別に振り分け制御する</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

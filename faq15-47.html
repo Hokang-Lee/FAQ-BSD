@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-47</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4使用時のメールボックスフォルダにメールボックス保管サイズ制限を超えてメールデータが格納される理由について</b></FONT>
+<HR>
+<br>
+E-POST コントロールセンター（メールサーバ管理）の［中継の制限］を開いて表示される「中継の制限設定」画面にあるメールボックス保管サイズ制限設定ですが、実はIMAP4使用時には、メールボックス保管サイズ制限を超えてメールデータが格納されるケースが発生します。<br>
+IMAPプロトコルには、POP3プロトコルとは異なり、メールクライアントからメールボックスフォルダへメールデータを保存・格納できるコマンド（APPEND）があります。<br>
+IMAP4使用時のメールボックスフォルダについては、メールクライアントが［送信済み］や［下書き］フォルダをリモート上（IMAP4サーバ）に置くように設定されている場合、IMAP4プロトコルのAPPENDコマンドによって、［送信済み］等のメールデータがサーバのフォルダに保存されることになります。<br>
+それに応じてファイルサイズの総容量、ディスク使用量は増加します。<br>
+IMAP4プロトコル使用時に［送信済み］等のメールデータが追加されていく場合、その動きはSMTPプロトコル経由でないため、E-PostのSMTPサービス（epstrdとepstdd）に組み込まれている機能では関知できません。こうした理由により、IMAP4使用時のメールボックスフォルダには、結果的にメールボックス保管サイズ制限を超えてメールデータが格納される結果となります。<br>
+制限を設けたはずのメールボックスフォルダに大量の［送信済み］データが追加されていくことで、ユーザーもサーバ管理者も気がつかないうちにメールデータを増やしてしまいかねません。IMAP4使用時でメールボックス保管サイズ制限設定を行う場合、そうした動作上の原理を十分留意した上で設定してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-95.html">メールボックスの保管サイズ制限の対象外となるメール</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

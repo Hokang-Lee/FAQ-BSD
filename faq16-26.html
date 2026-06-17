@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ16-26</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>承認依頼メールで件名が長いとき mailto リンクが正常に表示されない</b></FONT>
+<HR>
+<br>
+通常、承認依頼メールで、承認・否認ともに長い mailto リンクが正常に表示されますが、万が一、件名が長いと mailto リンクが正常に表示されず、承認・否認ができないことがあります。件名を短くして送り直すと、リンクが正常に表示される場合は、以下の原因が考えられます。<br>
+<br>
+件名で条件判定している場合はA.に該当しますが、件名で条件判定していない場合はB.を参照してください。<br>
+<ol type="A">
+<b><li>（件名で条件判定する場合）判定できる文字数長さ上限とその理由</b><br>
+承認条件として件名で判定する場合、件名文字数が長いときには、末尾ではなく先頭に付ける等の運用上の注意が必要です。さらに、メールの件名で判定を行う場合の件名に使用できる文字数長さについては、約255byteの制限から由来する全角約85文字程度が最大です。その理由については下記FAQ記事をご覧ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq16-22.html">上長承認（BossCheck）機能で件名判定できる文字数長さについて</a><br>
+<br>
+</li>
+<b><li>（件名で条件判定しない通常の場合）メーラーの仕様に依存</b><br>
+件名で利用できる文字数長さ上限は240～255byte程度ですが、仮に件名が長くなっても長い件名の後尾部分が切り取られるだけで、メールクライアント種類によっては、承認・却下自体は可能です。<br>
+メールの件名で判定しない場合、件名が切られないで表示できる文字列は、約255byte程度→全角約85文字程度であり、承認依頼メールでは、それ以上になると切り取られて表示されます。これは、メールクライアント（メーラー）種類によって異なります。それは上記FAQ記事内でも述べたように、パックする方法がメールクライアントによって異なるためです。特にWebメールでは、上限が短めにされていることが多いようですので注意してください。<br>
+ちなみに、仮にそれ以上の長さに件名が長くなっても、メールクライアントによっては、「承認依頼メール」が上長に送られてきたとき、それ以上の長さの件名が表示されないだけで、承認・却下自体ができないことはないようです。送るメールの件名を300byte、400byteの長さにしてみて、Beckyで承認・却下を行ってみたところ、特に問題はなく可能でした。<br>
+つまり、承認依頼メールmailtoリンクが正常に表示されず、承認・却下自体ができなくなるのは、上長承認(BossCheck)機能側の制限によるものではなく、メールクライアントの機能・性能＝設けているmailtoリンクの長さ上限に依存することになります。<br>
+<br>
+</li>
+<b><li>運用方法と今後について<br></b>
+以上のことから、A.のケースで運用するにあたっては、支障のない約255byte以内→全角85文字程度以内に収めた運用をお薦めします。なお、この仕様は上長承認(BossCheck)機能の制限事項ですが、その倍の511byte÷3≒約170文字分の件名が処理できるよう、制限が緩和されています。<br>
+ただし、mailtoリンクに長さ上限を設けられているメールクライアント側に問題がある場合は、まず先にそちらの機能改善を待つしかないのはいうまでもありません。<br>
+</li></ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

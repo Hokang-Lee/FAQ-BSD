@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-16</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>E-Postアンチスパムオプションや一般のSURBL方式ブラックリストサービス使用開始時の機能確認方法</b></FONT>
+<HR>
+<BR>
+E-Postアンチスパムオプションや一般のSURBL方式ブラックリストサービス使用開始時の機能確認方法について説明します。E-Postアンチスパムオプションサービスをご利用の場合、詳細はサービス付属の取扱い説明書P.22をご覧ください。<br>
+<p align="center">
+例）receivelogのログ事例<br>
+<img src="./img/faq04-16-01.jpg" border="0"></p>
+<ol><li>まずE-Postアンチスパムオプションや一般のSURBL方式ブラックリストサービス使用する上では、SMTP受信詳細ログ（receivelog）を取得することが最低限必要です。機能が働いているかどうかの見きわめ方法について、取得したreceivelogのログ事例をあげながら説明します。<br>
+<li>取得したrecievelogを検索し「<b>=found list</b>」や「<i>=not found list</i>」と表示されている部分を探します。<br>
+・「<b>=found list</b>」と表示されている部分は、ブラックリストサービスのサーバから、問い合わせをした該当ドメイン名が”クロ”だと判断されています。<br>
+・「<i>=not found list</i>」と表示されている部分は、ブラックリストサービスのサーバから、問い合わせをした該当ドメイン名が”シロ”（クロではない）と判断されています。<br>
+<li>「<b>=found list</b>」や「<i>=not found list</i>」と表示されている部分のうち、判定されている対象ドメインは、ブラックリストサービスのサーバ名である.xbl1.xes.ne.jp より前の部分に表示されているドメイン名になります。また一般のSURBL方式ブラックリストサービスを使用する場合も、同様に決められたサーバ名より前の部分に表示されるドメイン名です。<br>
+（例）<br>
+Query_FILTER_RBL(<u>vwxyz.net</u>.xbl1.xes.ne.jp 210.198.120.224,N)=found list<br>
+　　↓<br>
+<u>vwxyz.net</u> のドメイン名が問い合わされ判定される<br>
+<li>「<b>=found list</b>」と表示され“クロ”だと判断された場合、その後、[SPAM]タグを件名に付けたり、特定アドレスに隔離したりという動作については、E-Postのメールフィルタ設定【mail.dat】で設定する Level:xxx での指定により内容が決まります。<br></ol>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-81.html">メールフィルタ（mail.dat）の設定事例</a><br>
+●<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

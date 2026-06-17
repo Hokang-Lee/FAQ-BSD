@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-12</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>メールがループしたときの動きについて</b></FONT>
+<HR>
+<br>
+アカウントの自動転送設定で、転送先にメーリングリストアドレスを設定し、一方メーリングリストの設定でメーリングリストメンバーとして自動転送元のアカウントを設定した場合、いわゆる“メールのループ”が発生します。<br>
+さらに互いに転送先のアドレスとして自動転送を設定したような場合なども“メールのループ”が発生してしまいます。<br>
+その際、E-Postシリーズには無限ループにならない防止策が取られています。では、どのような仕組みと動きでこのループが最終的に止められることになるのでしょうか。<br>
+<br>
+自動転送やメーリングリストの設定などによって、メールのループが発生した場合、無限ループにならないように、防止策になっているのが Received:ヘッダのループ数制限です。その設定値がデフォルトで &quot;20&quot; に設定されています。<br>
+<br>
+ループが発生した場合の動きを順番に追ってみます。<br>
+<br>
+自動転送・メーリングリストによって、内部ドメインのアドレスが指定された場合、配送サービスの epstdd が送信する相手は、SMTP受信サービスである epstrd になります。<br>
+これは制限に引っかからない限り続きます。<br>
+20回を越えようとした時点で、上記のReceived:ヘッダのループ数制限に引っかかり、epstrdは、<b>&quot;554 5.4.6 too many Received: headers.&quot;</b> の応答コードと理由で、相手側、この場合は epstdd に対して拒絶します。<br>
+<br>
+送ったepstddは、永続的エラーである500番台の拒絶応答を受けますので、epstddの「配送詳細」設定ダイアログにある「リトライ回数（受信拒否）」の設定された回数まで、送信リトライを継続します。送信リトライされる総時間や間隔は、その設定回数と「リトライ間隔」「リトライ間隔のまま」の設定内容によって変わってきます。<br>
+<br>
+この間、epstrd は <b>&quot;554 5.4.6 too many Received: headers.&quot;</b> の応答コードと理由で拒絶を続けます。そしてその間、epstdd は、メールキューの incoming フォルダから、リトライ関係のフォルダである domains フォルダと holding フォルダに待避させながら、規定された分だけ、リトライを試みます。<br>
+この時点で incoming フォルダを表示してみると、メールデータがあることが確認されるはずで、リトライを試みている最中であることが確認できます。<br>
+<br>
+規定の送信リトライが終わると、リトライをやめ、配送失敗として処理されます。配送失敗された記録は、faillog に記録されるほか、エラーメールを送信元アドレスに送れるときや、管理者アドレスにもエラーメールを送信する設定になっているときは、エラーメールを送信します。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-79.html">Received:ヘッダのループ数制限＝SMTPホップ数の制限を緩和するには</a><br>
+●<a href="./faq01-65.html">リトライ回数やリトライ期間の設定について</a><br>
+●<a href="./faq01-66.html">「リトライ間隔のまま」チェックボックスの意味について</a><br>
+●<a href="./faq01-67.html">リトライ処理が行われるときの情報とフォルダについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-57</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Active Directory（LDAP）連携でのマルチドメイン設定において、ADにあるセキュリティグループ“domain.jp”とグループ“IMSUsers”との関係性と順位はどうなっているのか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+Active Directory（LDAP）連携でのマルチドメイン設定において、ADにあるセキュリティグループ“domain.jp”とグループ“IMSUsers”との関係性と順位はどうなっているのか、1つずつ確認しながら改めて整理します。<br>
+<br>
+<b>１．前提条件</b><br>
+まず、Active Directory連携では、AD側で作成されたユーザーがそのまま自動的に全員メールユーザーになるわけではありません。<br>
+E-Post Mail Server側は、ADユーザーのうちグループ名「IMSUsers」に所属しているユーザーのみを「メールユーザー」とみなして処理します。<br>
+したがって「IMSUsers」への所属が必須条件となります。<br>
+<br>
+<b>２．“domain.jp”グループの役割</b><br>
+セキュリティグループ「domain.jp」は、そのユーザーがどのメールドメインのユーザーかをE-Post側で区別するための情報として使われます。<br>
+単一ドメイン運用であれば、基本的には「IMSUsers」だけで足ります。<br>
+複数ドメイン運用（マルチドメイン）では、ユーザーの所属メールドメインを判別するために「domain.jp」等のドメイン名グループへの所属を追加する必要があります。<br>
+<br>
+<b>３．関係性と順位について</b><br>
+・第１位：IMSUsers（必須条件）<br>
+・第２位：domain.jp等のドメイン名グループ<br>
+※運用上は、1ユーザーが複数のドメイン名グループに同時所属すると所属ドメイン判定が曖昧になるため、原則として所属先は1つにそろえる運用が安全です。<br>
+<br>
+<b>４．AD側でユーザー登録した後にE-Post上で必要となる操作</b><br>
+基本的にはE-POSTコントロールセンターのメールサーバ管理［ユーザー管理］からユーザーを作成いただくことを推奨しています。そうすることで、ユーザーのメールボックスフォルダ（各ユーザーアカウント用の“ルートのフォルダ”）が自動生成されます。ADのドメインコントローラ側からユーザーを登録した場合は、［ユーザー管理］から確認する操作を必ず行なってください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-36.html">Active Directory（AD）連携時にユーザー追加するときの注意点</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

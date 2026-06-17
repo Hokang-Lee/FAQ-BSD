@@ -1,0 +1,134 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-16</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>取得可能なログと各サービスの関係</b></FONT>
+<HR>
+<br>
+E-Post Mail Serverシリーズ、E-Post SMTP ServerシリーズのStandard製品で取得可能なログと各サービスの関係は、次の通りです。各ログがどのサービスに関連して、どのような情報を取得しているのかを説明します。<br>
+ログは、[メール作業フォルダ]（既定値 /var/spool/epms/）下に下記名称のフォルダ名－コンピュータ名のフォルダ下に作成されます。<br>
+<br>
+<table border=1 cellspacing=0 cellpadding=2>
+ <tr>
+  <td>●マシン接続ログ<br>
+  （<a href="./faq05-03.html">acceptlog</a>）　　</td>
+  <td>接続拒否されたものを含め、epstrdに接続要求したすべてのマシン・IPアドレスを知る</td>
+ </tr>
+ <tr>
+  <td>●受信ログ<br>
+  （<a href="./faq05-04.html">inlog</a>）　　　　　　</td>
+  <td>epstrdで受信実行されたマシン・IPアドレスを知る</td>
+ </tr>
+ <tr>
+  <td>●受信詳細ログ<br>
+  （<a href="./faq05-05.html">receivelog</a>） 　　</td>
+  <td>epstrdで受信実行された内容の詳細を知る</td>
+ </tr>
+ <tr>
+  <td>●送信ログ<br>
+  （<a href="./faq05-07.html">outlog</a>）　　　　　　</td>
+  <td>epstddで外部ドメイン宛に送信実行されたマシン・IPアドレスを知る</td>
+ </tr>
+ <tr>
+  <td>●送信ロー<br>
+  　カルログ<br>
+  （<a href="./faq05-08.html">outlocallog</a>）</td>
+  <td>epstddで内部ドメイン宛に送信実行されたマシン・IPアドレスを知る</td>
+ </tr>
+ <tr>
+  <td>●配送詳細ログ<br>
+  （<a href="./faq05-10.html">senderlog</a>）　　　</td>
+  <td>epstddで配送実行された内容の詳細を知る</td>
+ </tr>
+ <tr>
+  <td>●配送失敗ログ<br>
+  （<a href="./faq05-09.html">faillog</a>）　　　　</td>
+  <td>epstddで配送失敗した結果と理由を知る</td>
+ </tr>
+ <tr>
+  <td>●POP3受信ログ<br>
+  （<a href="./faq05-11.html">pop3log</a>）<small>(*1)</small>　</td>
+  <td>epstpop3dでPOP受信されたマシン・IPアドレスを知る</td>
+ </tr>
+ <tr>
+  <td>●POP3詳細ログ<br>
+  （<a href="./faq05-12.html">receivepop3</a>）<small>(*1)</small></td>
+  <td>epstpop3dでPOP受信された内容の詳細を知る</td>
+ </tr>
+ <tr>
+  <td>●IMAP4ログ<br>
+  （<a href="./faq05-13.html">imap4log</a>）<small>(*1)</small>　</td>
+  <td>epstimap4dでIMAP受信されたマシン・IPアドレスを知る</td>
+ </tr>
+ <tr>
+  <td>●IMAP4詳細ログ<br>
+  （<a href="./faq05-14.html">receiveimap4</a>）<small>(*1)</small></td>
+  <td>epstimap4dでIMAP受信された内容の詳細を知る</td>
+ </tr>
+</table>
+ <p align="left"><small>　　　　(*1) E-Post SMTP ServerにはPOP3、IMAP4サービスがないため、関連するログはありません。</small></p>
+<br>
+<p align="left">▼クリックすると拡大表示します。</p>
+<p align="left"><a href="./img/service&log.gif"><img src="./img/service&log_s.gif" border="0"></a></p>
+<br>
+アンチウイルス機能をもつ Enterprise 版では、加えて下記ログが取得可能です。<br>
+<table border=1 cellspacing=0 cellpadding=2>
+ <tr>
+  <td><small>■<a href="./faq01-71.html">ウイルス検出ログ</a>　</small><br>
+  （fsenglog）</td>
+  <td>ウイルスメールの検出記録を知る　　　　　　　　　　　　　　　　　</td>
+ </tr>
+ <tr>
+  <td><small>■<a href="./faq01-72.html">パターン更新ログ</a>　</small><br>
+  <small>（fsupdlog）</small></td>
+  <td>ウイルスパターンファイル更新（ダウンロードした）記録を知る　　　</td>
+ </tr>
+</table>
+<br>
+上長承認機能（BossCheck）を使用時には次のログが取得可能です。<br>
+<table border=1 cellspacing=0 cellpadding=2>
+ <tr>
+  <td><small>■<a href="./faq16-24.html">承認・却下記録ログ</a>　</small><br>
+  （approval/log）</td>
+  <td>上長承認機能において承認者による承認・却下が行われた記録を知る　</td>
+ </tr>
+</table>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

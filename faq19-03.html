@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-03</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>POP3接続 特定IP以外からの接続を拒絶させたい <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+POP3での接続時において、特定のIPアドレスから接続させることを許可し、その他のIPアドレスからの接続を拒絶する設定を行うには、各プロトコルに用意されている認証接続ロックアウトの機能を活用すれば設定可能です。<br>
+設定方法ですが、下記FAQ記事にあるような、ロックアウト機能を有効にするための設定をしていなくても、設定ファイルを手動作成するだけでも使えます。<br>
+POP3接続拒絶用には、プログラムインストールフォルダ内に"rejectpopip.dat"を手動で作成、そのファイルを編集していく形です。<br>
+<br>
+---（例）【rejectpopip.dat】【rejectimapip.dat】共通--------<br>
+192.168.xx.xxx<font color="pink">[TAB]</font>true<br>
+192.168.yy.yyy<font color="pink">[TAB]</font><br>
+*.*.*.*<font color="pink">[TAB]</font><br>
+-----------------------------------------------------------------<br>
+↑<font color="pink">[TAB]</font>とはタブコード。上記の2,3行目は永続的拒否を意味します。<br>
+<br>
+[特定IPを指定しての接続拒絶設定例]<br>
+--------------------------------------------------------<br>
+192.168.0.2<font color="pink">[TAB]</font><br>
+<br>
+[ワイルカードでの範囲指定しての接続拒絶設定例]<br>
+--------------------------------------------------------<br>
+192.168.0.*<font color="pink">[TAB]</font><br>
+<br>
+[クラスCまでのプレフィックス表記での接続拒絶設定例]<br>
+--------------------------------------------------------<br>
+192.168.0.0/28<font color="pink">[TAB]</font><br>
+<br>
+[特定のアドレスのみ許可してその他を接続拒絶する場合]<br>
+--------------------------------------------------------<br>
+192.168.0.*<font color="pink">[TAB]</font>true<br>
+*<br>
+<br>
+もちろん下記FAQ記事にあるようにロックアウト機能を使いながらでの運用も可能です。<br>
+書式として、上記テーブルに拒絶したいIPアドレスを記述、改行しながら羅列していくだけです。<br>
+動きとしては、対象となるIPからPOP3/IMAP4接続した時点で、拒絶されて強制切断されます。SMTP接続を拒絶する場合も同様に行えます。<br>
+<br>
+認証接続ロックアウトの機能を正式に使うには、レジストリでの設定が必要です。<br>
+設定方法については下記記事をご参照ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-26.html">〔新機能〕POP3認証時の「認証接続ロックアウト機能」について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

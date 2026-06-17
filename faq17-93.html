@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-93</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>アカウント管理方式と［ユーザー管理］から行うユーザーのエクスポートについて <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+［ユーザー管理］から行うことができるユーザーのエクスポートは、タブ区切りテキストファイルで出力されます。その内容は、アカウント管理方式や設定状態によって変わってきます。<br>
+<br>
+<b>１．アカウント管理方式が ActiveDirectory (LDAP) 連携の場合</b><br>
+アカウント管理方式が ActiveDirectory (LDAP) 連携の場合は、ユーザーのエクスポートを行ったときに、パスワード部分は出力できませんので、伏せ字のダミーデータが出力されることになります。このダミーデータ部分はインポート用には使えません。<br>
+---（例）エクスポートされたタブ区切りテキストファイル-----<br>
+<small><font color="gray">アカウント [TAB] パスワード [TAB] フルネーム [TAB] ドメイン名 [TAB] 　…以降省略</font></small><br>
+user1　　<font color="#FF3399">********</font>　　user1@adrenkei.jp　adrenkei.jp<br>
+-----------------------------------------------------------------<br>
+<br>
+<b>２．アカウント管理方式が SoftAccount（E-Post独自アカウント）の場合</b><br>
+アカウント管理方式が SoftAccount（E-Post独自アカウント）の場合は、［ユーザー管理］からユーザーのエクスポートを行うと、パスワード部分は平文データで出力されます。<br>
+---（例）エクスポートされたタブ区切りテキストファイル------------<br>
+<small><font color="gray">アカウント [TAB] パスワード [TAB] フルネーム [TAB] ドメイン名 [TAB] 　…以降省略</font></small><br>
+user1　　<font color="#FF3399">pass1234</font>　　user1@test-sample.jp　test-sample.jp<br>
+------------------------------------------------------------------------<br>
+<br>
+アカウントのエクスポート・インポート機能を使ってのパスワードの変更は、もう一つ別の注意が必要になるため、下記記事を参照ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-87.html">アカウントデータとインポートの仕様について</a><br>
+●<a href="./faq10-26.html">インポート機能を利用したアカウントのパスワード一括変更方法</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

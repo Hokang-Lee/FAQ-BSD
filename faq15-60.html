@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-60</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>自動転送時にエンベロープFROMの送信元が空白＜＞となり、それが理由で拒絶され転送できない場合</b></FONT>
+<HR>
+<br>
+自動転送時にエンベロープFROMの送信元が空白＜＞となり、それが理由で拒絶され転送できないことがあります。たとえばreceivelogに下記のような記録がされて拒絶されているケースです。<br>
+<blockquote>MAIL From: ＜＞<br>
+550 5.1.7 Please, mail from a valid e-mail address.</blockquote>
+まずエンベロープFROMの送信元が空白になっている理由は１について確認してください。<br>
+またSMTP認証を有効にしている場合、２についてもチェックしてください。<br>
+さらに念のため３についても【effect.dat】を確認してください。<br>
+<br>
+<ol><b><li>自動転送時の「不転送レポート先＝返信しない」になっている</b></li><br>
+自動転送を設定しているアカウントについて、アカウント単位で設定する自動転送で「不転送レポート先＝返信しない」になっていると、epstddサービスはエンベロープFROMを ＜＞ に書き換えます。<br>
+次の２にあげる問題と関係しますが、自動転送時の「不転送レポート先」を「返信しない」設定から「送信者」などに変更して試してみます。<br>
+<br>
+<b><li>「SMTP受信詳細」設定の「送信者の信頼度」設定が厳格すぎる</b></li><br>
+「SMTP受信詳細」設定を確認してください。E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開き、表示された「SMTP受信詳細設定」画面の「送信者の信頼度」項目を確認します。<br>
+信頼度設定がいちばん厳格な「AUTHID＝Env＝Head」つまり「SMTP認証ID＝エンベロープ＝FROMヘッダー」になっている場合、上記１の自動転送時の設定から自動転送時にエンベロープFROMを ＜＞ に書き換える動作になっているため、理屈上は「SMTP認証ID ≠ エンベロープ」となり、この「信頼度」設定に引っかかってしまうケースが発生することがあります。信頼度設定を「AUTHID＝Env」つまり「SMTP認証ID＝エンベロープ」などのように一段階下げて試すようにしてください。<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq10-20.html">SMTP認証使用時に、内部アカウントによる送信者の詐称を防ぐには</a><br>
+<br>
+<b><li>中継の制限－「マシンごとの制限」【effect.dat】に &quot;#＜＞ default&quot; の設定行がコメントアウトされたり削除されてしまっていないか</b></li><br>
+中継の制限－「マシンごとの制限」【effect.dat】を確認してください。E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］の中ほど［中継の制限］の［マシンごとの中継］、もしくは［中継の制限］で表示される「中継の制限設定」にある［マシンごとの中継］ボタンをクリックして表示される「effect.dat」を確認します。<br>
+万が一、&quot;#＜＞ default&quot; の設定行がコメントアウトされたり削除されていれば、有効に戻してください。デフォルトでは &quot;#＜＞ default&quot; の設定行が有効です。<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq15-51.html">自動転送時の「不転送レポート先」設定は「エンベロープFROMの書き換え」と等価であることに留意</a><br>
+●<a href="./faq05-22.html">SMTPローカル送信ログ（outlocallog）などのログで fromアドレスが空白になっているケースがあるのはなぜ？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

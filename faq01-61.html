@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-61</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTPゲートウェイとメールサーバの設定ポイント（E-Post Mail Server・E-Post SMTP Server）</b></FONT>
+<HR>
+<BR>
+SMTPゲートウェイとメールサーバをそれぞれどう設定すべきか、どう設定してはいけないか、注意事項がありますので、図解付きで紹介します。<br>
+<p align="center"><img src="img/faq01-61.gif" border="0"></p>
+<ui>
+<li>※１ SMTP ゲートウェイ側では、「全受信メールをSMTP ゲートウェイに転送」チェックボックスをオンにしますが、これは「このサーバ内にはメールボックスがないので、すべて転送せよ」という命令と同義になります。一方、ゲートウェイ先の IP アドレスは、枠内に入力せず、［ゲートウェイ詳細］ボタンで表示される &quot;gateway.dat&quot; ファイル内に[転送するドメイン名, IP アドレス, （ポート番号）]を記述します。<br>
+「SMTP ゲートウェイ」枠内に記入してしまうと、すべてのメールが転送されてしまい、メールサーバとの間でピンポン現象が発生してしまう原因となるので記入しないようにします。<br>
+<li>※２ メールサーバ側では、「全受信メールをSMTP ゲートウェイに転送」チェックボックスを必ずオフにします。万が一、オンにしてしまうと、メールボックスがないという意味になり、転送処理だけがされてしまうので注意してください。<br>
+<li>※３ よりセキュアな設定にするために、SMTPゲートウェイには、メールサーバと同じドメイン名は作らず空白にしておいて、「エイリアス設定」にて、通過させるアカウント単位ごと、エイリアス: user1@&lt;domain.jp&gt;　→　実アドレス: user1@&lt;domain.jp&gt;　の設定を登録します。これによって、スパマーにより詐称で大量配信されたエラーメールの戻り＝バウンスメール対策を取ることができます。<br>
+</ui>
+<br>
+<b>［技術資料(PDF)］</b><br>
+■<a href="../doc/SMTPgatewaysetting2.3.pdf" target="_blank" onClick="window.open("../doc/SMTPgatewaysetting2.3.pdf","_blank")"> SMTPゲートウェイ基本設定と応用</a>　上記の内容を含んで詳細に解説したドキュメント<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-30.html">SMTPゲートウェイとして利用したい</a><br>
+●<a href="./faq17-23.html">Mail Server V でSMTPゲートウェイ構築は可能か？設定方法に違いは？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

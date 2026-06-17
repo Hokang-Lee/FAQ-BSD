@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-30</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>送信されてきた当該メールがPOP3で正常に受信されているかの確認手段 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Postでは、メーラーがPOP3受信した記録は、基本ログであるPOP3ログ（pop3log）とPOP3詳細ログ（receivepop3）に記録されます。両者を比較参照することで、POP3プロトコルでの当該メールが受信されているか否かを判断できます。<br>
+POP3ログとPOP3詳細ログを合わせて記録開始するように設定してください。POP3ログ（pop3log）だけですとメッセージIDの記録がないので確認できませんが、POP3詳細ログ（receivepop3）ではメッセージIDを検索することができます。<br>
+例として、確認したい当該メールのメッセージIDを[B0001589565]とします。POP3詳細ログに下記のような記録が確認できれば、メールデータがメールボックスに置かれていることが確認できます。もし、POP3詳細ログに当該メールデータが見つからない場合、既にメールクライアントが受信済みで削除しているわけでもはない場合は、メールボックスフォルダ以外のフォルダに移動し止め置かれているケースも少し考えなくてはならなくなります。<br>
+－－－－－－－（例）－－－－－－－<br>
+1 B0001589561.MSG<br>
+2 B0001589565.MSG<br>
+3 B0001589571.MSG<br>
+－－－－－－－－－－－－－－－－－<br>
+POP3詳細ログにて当該メールデータ（B0001589565.MSG）を扱っている記録を検索します。POP3詳細ログでメールデータのリスト取得時刻がわかったら、次にPOP3ログでリスト取得時刻に該当する箇所を探します。その時刻において、RETRコマンドでメールを取得している記述があれば、E-PostでPOP3受信がされたと断定することができます。<br>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq05-11.html">POP3ログ（pop3log）について</a><br>
+●<a href="./faq05-12.html">POP3の詳細ログ（receivepop3）について</a><br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

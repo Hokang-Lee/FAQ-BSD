@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-25</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリスト設定での分割数設定について <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+メーリングリスト設定には分割数の設定項目があります。この分割数の設定値は、[均等に分割] を選択した場合のみならず、 [ドメイン単位]を選択した場合も適用されます。<br>
+つまり、[ドメイン単位]の設定でも、分割数"2"となっている場合は、分割されることになります。分割数の設定値は、[ドメイン単位]の場合でも、[均等に分割]の場合でもどちらにも効きます。<br>
+オンラインヘルプには、以下のように規定されています。<br>
+<blockquote>-------------------------------------------------------------------<br>
+<b>12．配送ルール</b><br>
+メーリングリストの配送時に参加アドレスを分配し、効率良く配送する方法を設定します。(デフォルト 配送ルール：ドメイン単位 分割数：2)<br>
+<b>ドメイン単位分割</b><br>
+（特に同一ドメインの参加者の多い場合、処理速度が飛躍的に向上します）<br>
+参加アドレスを「ドメイン単位」÷「分割数」に分配します。その後、同報メールとしてドメイン単位で一括送信できるように送信ファイルを構成します。<br>
+<b>均等に分割</b><br>
+参加アドレスを「分割数」にて指定した数量に分配し、送信ファイルを構成します。<br>
+-------------------------------------------------------------------</blockquote>
+たとえば、ドメインは１つでその同一ドメインの10アドレスをメンバーとしてメーリングリストに含め、「配送ルール：ドメイン単位、分割数：2」とした場合は、メンバーに追加した順番に（管理コンソールのメンバー表示順）に5人と5人で2分割されます。<br>
+<br>
+メーリングリストの均等分割例のもう少し複雑なケースを取り上げます。<br>
+例：メーリングリストのメンバー登録アドレスが [ドメインAのアドレス1]、[ドメインAのアドレス2]、[ドメインAのアドレス3]、[ドメインAのアドレス4]、[ドメインBのアドレス5]の5つであり、「配送ルール：均等分割、分割数：2」とした場合<br><blockquote>
+・[ドメインAのアドレス1]、[ドメインAのアドレス3]、[ドメインAのアドレス5]　＝＞ (B0000012345-001.RCP / B0000012345-001.MSG)<br>
+・[ドメインAのアドレス2]、[ドメインAのアドレス4]　　　　　　　　　　　　　＝＞ (B0000012345-002.RCP / B0000012345-002.MSG)</blockquote>
+以上の各送信先ファイルに仕分けされた後、配送されることになります。<br>
+※上記ファイルのうち、.RCPファイルは実質テキストファイルであり、エンベロープ情報が記載されたファイルです。もう一方の.MSGファイルは、eml形式ファイルと同一のメールデータファイル（メールヘッダと本文）です。<br>
+<br>
+ところで、メーリングリストの配送時に配送すべきアドレスが非常に多く、少しでも負荷を減らしたい場合には、[ドメイン単位]の選択の場合でも、たとえば[分割数]を5以上の値、倍の10といった値に変更します。<br>
+一方、メーリングリストの処理で、分割されないように設定したいとするなら、[ドメイン単位]とした上で[分割数]を1に設定することになります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-44</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>deadやmxcash、viruslogなど特定フォルダに膨大な数のファイルが蓄積されたときのパフォーマンス低下現象について</b></FONT>
+<HR>
+<br>
+メールサーバの日々の運用では、メール作業フォルダにログがたまりすぎないようにしたり、放置されたメールボックスフォルダにメールがたまりすぎないようにして、注意をしていただくことが必要であり、こうしたことは、運用の常識として理解されているものと思われます。<br>
+<br>
+長年にわたって運用を続けている場合、ファイルが蓄積されている可能性があるのは、「メール作業フォルダ」（既定値 /var/spool/epms/）下の次のフォルダです。<br>
+<ul type="disc">
+ <li>deadフォルダ
+ <li>mxcashフォルダ
+ <li>viruslogフォルダ
+</ul>
+deadフォルダは、どこにも配送できなくなったメールデータが格納されるフォルダです。配送失敗したメールは、faillogに記録され、同時に配送エラー通知メールが発信者に戻されますが、この場合にはdeadフォルダに配送失敗したメールデータはたまりません。deadフォルダにはどこにも配送できなくなったメールデータが格納されます。DMやメールマガジンなど大量のメールを送ることの多いサーバのdeadフォルダには、思わぬ数のメールデータファイルが蓄積されていることがあります。<br>
+また、mxcashフォルダは、外部への配送の際、MXレコードを参照するときに、キャッシュファイルを自動作成しておき、２回目からキャッシュファイルを呼び出すことで高速化をはかるものです。mxcashフォルダは、配送時にMXレコードを参照したときのキャッシュファイルが蓄積されますが、こちらもさまざまな外部ドメイン宛へ送信しているところほど、キャッシュファイルが多数蓄積されている可能性があります。現行の仕様では、このキャッシュファイルを更新する機能はある一方で、削除する機能はありません。ファイルが蓄積されすぎてしまったときは、手動で削除する必要があります。<br>
+一方、viruslogフォルダは、メールフィルタ機能を設定している場合に迷惑メールの隔離・保管をするフォルダです。同時にアンチウイルス機能がある Enterprise 版では、検出されたウイルスメールの隔離・保管も行います。メールフィルタ機能を設定している場合は、迷惑メールの隔離・保管のためすぎに注意してください。ファイルが多数蓄積されてきたときは、手動で削除してください。<br>
+<b>これらのフォルダに膨大なファイルが蓄積されていたときの対処方法</b><br>
+<br>
+膨大な数のファイルがたまると、ファイルシステムのパフォーマンス低下を引き起こし、いくら強大なパワーのCPUや豊富なメモリがあっても、サーバマシンのパフォーマンスが極度に下がってしまうことがあります。<br>
+万が一、上記のdeadフォルダやmxcashフォルダ内にたくさんのファイルが蓄積されていることが判明した場合、単純なファイル削除操作を行うと、非常に時間がかかってしまうことが考えられますので、下記の手順で操作をおこなってください。<br>
+<ol type="1">
+ <li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面を開く
+ <li> epstddサービスを停止
+ <li>「メール作業フォルダ」（既定値 /var/spool/epms/）下のdeadフォルダまたはmxcashフォルダを任意の別名にリネーム
+ <li> epstddサービスを再開<br>
+ ※サービスを再開した後、新しく空のdeadフォルダやmxcashフォルダが自動的に作られます。<br>
+ <li>リネームした後でフォルダ内の不要ファイルを削除、フォルダを削除
+</ol>
+viruslogフォルダにたくさんのファイルが蓄積されていることが判明した場合、単純なファイル削除操作を行うと、非常に時間がかかってしまうことが考えられますので、下記の手順で操作をおこなってください。<br>
+<ol type="1">
+ <li> epstrdサービスを停止
+ <li> viruslogフォルダを任意の別名にリネーム
+ <li> epstrdサービスを再開<br>
+ ※サービスを再開した後、新しく空のviruslogフォルダが自動的に作られます。<br>
+ <li>リネームした後でフォルダ内の不要ファイルを削除、フォルダを削除
+</ol>
+<br>
+<b>mxcashフォルダにキャッシュファイルを自動生成しない設定</b><br>
+<br>
+mxcashフォルダに関して、キャッシュファイルを自動生成しない設定が可能です。その場合は次の操作を行ってください。<br>
+<ol type="1">
+ <li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面を開く
+ <li> epstddサービスを停止
+ <li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］を開いて epstdd項目を確認、もしくは［SMTP送信詳細］を開く
+ <li> MXキャッシュファイルを自動生成しない設定にするため［MXキャッシュの更新間隔］を &quot;0&quot; （秒）に変更して、最後に［設定する］ボタンをクリック
+ <li> epstddサービスを再開
+ <br>
+※このとき、送信ごとにDNSサーバのMXレコードへの問い合わせが発生することになりますが、実際には、OSのDNSキャッシュ情報が肩代わりされることになります。<br>
+</ol>
+<br>
+<b>deadフォルダに配送失敗メールデータを保管しない設定</b><br>
+<br>
+deadフォルダに関して、配送失敗のメールデータを蓄積せず保管させない設定が可能です。その場合は次の操作を行ってください。<br>
+以下の通り、設定ファイルを操作して数値10進で作成、値を&quot;0&quot;に設定した後、SMTP配送サービス(epstdd)を再起動してください。<br>
+<small><br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5DS<br>
+　　　　　→SaveDead.1<br>
+　　　　　　　　(数値) Default:1　0:保管しない、1:保管する<br>
+<br></small>
+なお、設定ファイルを設定していないときは、設定値として&quot;1&quot;が設定されているときと同値として扱われ、どこにも配送てきなくなったデータがdeadフォルダに保管される状態です。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-70.html">1フォルダ当たりのファイル数が膨大になるとファイルシステムのパフォーマンスが劇的に落ちるとは？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-13</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールフィルタ設定の Warning: は何のために用意されている？</b></FONT>
+<HR>
+<br>
+メールフィルタ設定【mail.dat】内で Level:100 や Level:110 のパターンを設定して拒絶した場合、拒絶設定されたメールについては、「<b>552 5.7.1Requested mail action aborted: caught by the filter setting.</b>」 という拒絶応答が返されます。その応答結果は、送信元へ返されると同時に、<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>に記載されます。<br>
+しかしながら、メールフィルタ設定【mail.dat】内に複数のパターンが記述されている場合は、receivelog の記録からだけだと、具体的にどのパターンに合致したために拒絶されたのかをくわしく知ることはむずかしくなります。<br>
+メールフィルタ設定【mail.dat】によって拒絶されたり隔離された理由を正しく知るには、Level:110 や Level:510 などの「Level:x1x＝バックアップを取る」設定により、メールデータが [メール作業フォルダ]\viruslog フォルダに保管・隔離されるようにしておくと、保管・隔離されている&quot;.MSG&quot;ファイルといっしょに記録される&quot;.RCP&quot;ファイルの方に、Warningメッセージを挿入できるようになります。事前に Warning: 句の設定が必要ですが、挿入されたWarningメッセージを見ることによってその拒絶理由・隔離理由を知ることができます。<br>
+<blockquote><b>Warning:を加えたメールフィルタ設定【mail.dat】の例</b><br>
+'------------------------------------------------------<br>
+'前段の専用装置が加えたスパム判定ヘッダがあるため隔離<br>
+Virus:reject-header<br>
+Unique-Header:X-SPAM-mail: X-appliance<br>
+Level:110<br>
+Warning:<br>
+&lt;!&gt;WARNING&lt;!&gt;<br>
+拒否ヘッダがあるため隔離しました（パターンA）<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+</blockquote>
+<blockquote><b>SMTP受信詳細ログ（receivelog）と保管・隔離されたメールデータから拒絶理由・隔離理由の調べ方</b></blockquote>
+<ol>
+<li> SMTP受信詳細ログ（receivelog）の記録から <b>552 5.7.1Requested mail action aborted: caught by the filter setting.</b> という拒絶応答が返されている部分を探し見つけ出す。応答部分のすぐ左側は、16進のメモリアドレス値として確認しておく。<br>
+例）03501ce0, 552 5.7.1 Requested mail action aborted: caught by the filter setting.<br>
+　→ 16進のメモリアドレス値＝03501ce0<br>
+<li> 該当行より上（前の時間）を探し、E-Post SMTP受信サービス（epstrd）が該当メールを受領後に発番される&quot;B&quot;で始まるメッセージIDを確認する。異なるスレッドが並行して動作し混在している場合もあるので、16進表記のメモリアドレスを目当てにする。<br>
+例）03501ce0, 354 Start mail input;id &lt;B0000123123&gt; end with &lt;CRLF&gt;.&lt;CRLF&gt;<br>
+　→ メッセージID＝B0000123123<br>
+<li> さらに上（前の時間）を探すと、E-Post SMTP受信サービス（epstrd）が該当メールを受領開始始めたときのエンベロープFROMを「MAIL FROM:」の個所から確認できる。<br>
+例）MAIL FROM:&lt;xxx＠domain.jp&gt;<br>
+<li> [メール作業フォルダ]\viruslog フォルダを確認し、保管・隔離されている該当メッセージIDのファイル名が付けられたファイルを探す。<br>
+例）B0000123123.MSG と B0000123123.RCP<br>
+<li> &quot;.RCP&quot;ファイルをメモ帳で開く。&quot;.MSG&quot;ファイルと一緒に保管される&quot;.RCP&quot;ファイル内に挿入されているWarningメッセージを調べることにより、メールフィルタ設定【mail.dat】のどのパターン部分によって拒絶されたのか、よりくわしい理由を知ることができる。<br>
+</ol>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-81.html">メールフィルタ（mail.dat）の設定事例</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

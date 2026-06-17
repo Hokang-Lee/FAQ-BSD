@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-65</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>「SMTPゲートウェイ」項目に指定されたサーバにフォワード送信する際、20230426差分以降はスレッドを分けずに送信する仕様に変更されました <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+「基本設定」画面には「SMTPゲートウェイ」項目欄があります。この「SMTPゲートウェイ」項目は、アウトバウンド時の送信フォワード先として特定のSMTPゲートウェイなどの上位サーバがある場合に指定しておく個所です。<br>
+epstdd サービスのこれまでのバージョンでは、「SMTPゲートウェイ」項目で設定した上位サーバ宛にフォワードする時点で、異なるドメイン毎にセッション発生させ、1通ずつバラバラにしてフォワード送信するのがデフォルトの動作内容でした。<br>
+具体例をあげると、ユーザーのメーラーから1通のメールを作成し、複数ドメイン混在の宛先で同報送信依頼をした場合、「基本設定」画面にある「SMTPゲートウェイ」項目で設定した上位サーバ宛に送信される時に、異なるドメイン毎にセッションを生成、1通ずつバラバラにしてフォワード送信するのがこれまでの仕様です。つまり、1通メールでも上位サーバにフォワードされるときにセッションごとにバラバラにされます。これが E-Postシリーズ製品のこれまでの仕様でした。<br>
+ちなみに内側のメールサーバとして E-Post Mail Server、上位のSMTPゲートウェイサーバとして E-Post SMTP Server で構成しているとき、1通のメールでも異なるドメインが混在している同報通信の場合、内側のメールサーバから上位のSMTPゲートウェイサーバへフォワード送信される際にセッションごとにバラバラにされることにより、オプション製品である E-Post LGWAN option を E-Post SMTP Server に組み込んでいる構成では、特に有用な仕様として利用されてきました。<br>
+<br>
+こうしたこれまでの仕様に関して、<b>20230426差分以降の最新差分アップデート</b>適用で提供される <b>epstdd v5.10以降</b>、仕様が変更され、1通ずつバラバラでフォワード送信せずまとめてフォワード送信させる動きがデフォルトに変更されました。レジストリ値をとくに作成していないときは、セッション分離しないで1つにまとめてフォワード送信されるデフォルト値が適用されます。<br>
+20230426差分以降の最新差分アップデート適用後も、「SMTPゲートウェイ」項目欄にゲートウェイ先が明記されているときに、従来通りセッションごとにバラバラにしてフォワード送信させたい場合は、下記設定ファイルを作成・編集、値に 0 を入力、epstdd サービスを再起動させます。内側のメールサーバから上位のSMTPゲートウェイサーバに「SMTPゲートウェイ」項目指定で送信フォワードさせているときに、特に E-Post SMTP Server に E-Post LGWAN option を組み込んでいる構成では、内側のメールサーバ E-Post Mail Server について、この設定を差分適用後には必ずしておいてください。<br>
+<br>
+一方で「SMTPゲートウェイ」項目欄にゲートウェイ先が明記されているときに、セッション分離しないで1つにまとめてフォワード送信させたい場合は、レジストリ項目の値に 1 を入力、epstdd サービスを再起動させます。<br>
+<blockquote><small>[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5DS<br>
+　　　　　→IncludeForward.1 (DWORD)<br>
+　　　　　 1:セッション分離しない 0:セッション分離する（デフォルト=1）<br>
+　　　　　※epstdd v5.10以降のみこのレジストリ項目が有効。<br>
+　　　　　※設定を変更した際は、epstdd の再起動が必要。</small></blockquote>
+設定値が有効な必要条件は「SMTPゲートウェイ」項目で上位サーバが一つ指定されている場合です。「テーブル編集」【gateway.dat】で記述されている場合には使えませんのでご注意ください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

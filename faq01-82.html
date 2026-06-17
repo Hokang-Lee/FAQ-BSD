@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-80</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>tempフォルダに一時ファイルを含むメールデータが残っている</b></FONT>
+<HR>
+<br>
+メール作業フォルダ（既定値は/var/spool/epms/）下にあるtempフォルダは、SMTP受信部（epstrd）が受信処理中にデータを受け取る一時処理用フォルダです。<br>
+<br>
+メールサーバやSMTPサーバが通常の動きをしているときは、このtempフォルダは、SMTP受信部（epstrd）が受信処理中に一時的にファイルを作りますが、メールキューであるincomingフォルダに移動する処理が終わると、一時ファイルは順次削除されます。そのため、（受信処理中ではない）平常の状態であれば、このフォルダは空なのが普通です。<br>
+<br>
+ところが、このtempフォルダにファイルがしばらく残ってしまう現象になることがあります。それは、各アカウントについて、自動転送を設定しているときで、受信したものを自動転送する際に、受信後に一時ファイルがtempフォルダに作られた後、しばらくそのままになることがあり、フォルダが空になるまでやや時間がかかるケースがあるためです。これは、E-Post Mail Server・E-Post SMTP Serverシリーズの仕様として、自動転送時にはいったん自マシンのSMTP受信部にフォワードする構造となっていて、自動転送されるメールデータに対し、再度、メールフィルタのチェックをします。それによって、しばらくメールが残っているように見えるわけです。<br>
+<br>
+一時ファイルができるだけ残らないように、早めに処理させる対策としては、次の設定を行います。<br>
+［メールフィルタ］を選択、「チェック不要なIP」ボタンをクリックし、設定ファイル &quot;passfilter.dat&quot; 中に、自マシンのIPアドレスを記述します。それにより、自動転送で再受信されるときのメールフィルタをスキップさせることで、処理時間の短縮を図ることができます。<br>
+<br>
+<br>
+万が一、tempフォルダに過去のファイルが残ってしまっているときは、SMTP受信部（epstrd）を停止させた上で、不要ファイルとして、ファイル削除してください。<br>
+<br>
+ファイルがtempフォルダに残ってしまった理由は、稀有な例を含め、いくつかのケースが考えられます。<br>
+<ul>
+<li>高負荷状態にあるとき、アンチウイルススキャンが完了しない間にepstrdサービスの停止をした。<br>
+<li>高負荷状態にあるとき、メールフィルタによるスキャン途中でepstrdサービスの停止をした。<br>
+<li>メール作業フォルダ下やメールボックスフォルダ下など、任意のフォルダ内にファイルシステムの性能を超える膨大なファイル数が存在し、マシン全体のパフォーマンスの極度な低下が発生、そのような状態下において、受領処理中にepstrdサービスの停止をした。<br>
+</ul>
+この中でも、いちばん下のケースは、非常にまれな事例ですが、長期間の連続運用で、1フォルダに10万個以上のファイルができてしまったケースが報告されていますので、状況次第で起こりうるものと考えてください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

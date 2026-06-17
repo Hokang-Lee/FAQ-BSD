@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-35</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリストに登録されているアドレスに配送されているか、未登録のアドレスに配送されていることはないか、どのようにしてログで確認できるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メーリングリストに登録されているメンバーにだけ配送されているか、登録していないアドレスに配送されていることはないか、という質問を受けたことがあります。<br>
+これについては<b>ログを受領段階と配送段階に分けて追うことで確認できます。</b>まずは大前提の知識として次のポイントをご理解ください。<br>
+<br>
+<b>第一段階：epstrd サービスが行うSMTP受領段階で確認するログ</b><br>
+・マシン接続ログ（acceptlog）<br>
+・SMTP受信ログ（inlog）<br>
+・SMTP受信詳細ログ（receivelog）<br>
+<br>
+<b>第二段階：epstdd サービスが行うSMTP配送段階で確認するログ</b><br>
+・SMTP送信ログ（outlog　外部宛の配送記録）<br>
+・SMTP送信ローカルログ（outlocallog　内部ドメイン宛の配送記録）<br>
+・SMTP配送詳細ログ（senderlog）<br>
+・配送失敗ログ（faillog）<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）について</a><br>
+●<a href="./faq05-08.html">SMTP送信ローカルログ（outlocallog）について</a><br>
+<br>
+次に、これらのログを取得している状態でどのように見きわめるかのポイントを順に示します。<br>
+<b>１．inlogで「メーリングリスト宛に届いた」ことを確認する</b><br>
+第一段階のSMTP受領を記録しているSMTP受信ログ（inlog）を確認し、対象メールがメーリングリストアドレス宛かどうかを確認します。<br>
+<br>
+<b>２．メッセージIDを控える</b><br>
+該当メールに割り当てられたメッセージID（“B”で始まる10桁の連番数字　※c）を控えます。<br>
+<br>
+<b>３．outlog／outlocallogで配送先を追う</b><br>
+第二段階のSMTP配送を記録している2種類の基本ログ<br>
+・SMTP送信ログ（outlog）<br>
+・SMTPローカル送信ログ（outlocallog）<br>
+を確認し、先ほど控えたメッセージIDで検索して実際に配送された宛先を追跡します。<br>
+・外部ドメイン宛　→　outlogに記録が出ます<br>
+・内部ドメイン宛　→　outlocallogに記録が出ます（同一E-Post内のユーザー）<br>
+<u>ここで「登録されていないアドレスに配送されていないか」を確認できます。</u><br>
+<br>
+<b>４．必要に応じてsenderlog／faillogで詳細確認</b><br>
+配送先の内訳や配送処理の詳細、失敗理由まで見たい場合は<br>
+・SMTP配送詳細ログ（senderlog）<br>
+・配送失敗ログ（faillog　配送に失敗したもののみが記録されます）<br>
+<br>
+を同じくメッセージID（※）をキーに追跡します。<br>
+<br>
+<b>※）重要：メーリングリスト配送ではメッセージIDに“枝番”が付く</b><br>
+メーリングリスト配送では、配送先メンバーごと等の処理の都合により、メッセージIDの末尾に枝番が付加されます。<br>
+（例：B1098639542-001.MSG　または　B1098639542-M00000001.MSG）<br>
+そのため、ログ検索時は元のB番号だけでなく、枝番付きのIDも対象にして確認してください。<br>
+メッセージIDの末尾に付く枝番種類については、下記FAQ記事をご覧ください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-43.html">配送できなかったメールをログで確認する方法</a><br>
+●<a href="./faq05-30.html">該当メールをログから探し出す基本的な方法と手順</a><br>
+●<a href="./faq05-18.html">ログに記録されるメッセージIDの後の枝番種類について</a><br>
+●<a href="./faq02-15.html">ログに記録されるメーリングリストの枝番末尾に"e"や"f"の記号がつく</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

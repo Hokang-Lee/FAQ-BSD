@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-50</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>内部アカウントどうしの送信しかない環境のためリトライ回数・リトライ期間を最小限にしたい</b></FONT>
+<HR>
+<br>
+メールサーバを使用している環境条件が、内部アカウントどうしの送信しかない場合で、リトライ回数・リトライ期間を最小限にしたいときは、たとえば次のように設定してください。<br>
+<blockquote>epstdd の［配送詳細］設定<br>
+・「リトライ回数（受信拒否）」デフォルト9回を1回とか2回に<br>
+・「リトライ間隔のまま」チェックボックスをオン<br>
+・「リトライ期間（回線異常）」デフォルト8時間を1時間<br>
+・「リトライ期間（マシン無応答）」デフォルト24時間を2時間<br>
+</blockquote>リトライを不要という設定はできません。いずれの項目も &quot;0&quot; の設定は不可であり、必要最小限の回数や最小の時間（単位:h）を設定します。これはメールサーバがどんな状況の相手にも、安全かつ確実にメールを送り届けるようにするという設計思想や仕様によるものです。<br>
+仮に、リトライ期間（回線異常）とリトライ期間（マシン無応答）についてどちらも最短の1時間を設定した場合、それぞれのリトライ期間設定は下記のそれぞれのケースで適用され、指定時間までリトライが実施されることになります。<br>
+<blockquote>・「リトライ期間（回線異常）」・・接続可能だが一時的な拒絶を表す400番台エラーが返されたとき。<br>
+・「リトライ期間（マシン無応答）」・・ドメインは存在するがマシンへ接続できないとき、あるいは名前解決エラーなど。<br></blockquote>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-97.html">受信拒否時の送信リトライ回数をなぜ &quot;0&quot; にできない？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-26</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>中継の制限－マシン毎の中継【effect.dat】において、スパム対策向けの設定はあるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+マシン毎の中継【effect.dat】の設定に関して、スパム対策向けの特別な設定はありません。<br>
+社外からのSMTP認証付きで送信許可ならびにPOP3/IMAP4認証での受信許可を認めている際、不正利用者がよくやる手口として、機械的な総当たりによるログインIDとパスワードを見破る行為があります。<br>
+たとえば、先にPOP3認証を総当たりで試して、パスワードが見つかると、それを使ってSMTP認証付きで大量送信を行うというような手口です。あるいはDDos攻撃のような単純なサーバ攻撃もあり得ます。<br>
+<br>
+これらを防御するようにしておくため、E-Postに備わっている認証接続ロックアウト機能、さらにIP接続ロックアウト機能の有効設定が推奨されます。<br>
+SMTP/POP3/IMAP4の認証接続ロックアウト機能などを有効にして、同じIPアドレスからの送信や受信が一定期間内に繰り返される場合など、そうしたIPアドレスをブロックすることによる抑制が可能です。<br>
+これらの機能を導入する際は、管理者がよく注意を払う必要があります。たとえば、ユーザーの一人が意図せずに間違えたパスワードでメーラーの設定を何度も行ったりしていると、そうした接続元も一定時間ロックしてしまうことにつながるからです。<br>
+詳細な設定方法や設定内容については下記記事をご参照ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-25.html">〔新機能〕SMTP認証時の「認証接続ロックアウト機能」について</a><br>
+●<a href="./faq17-09.html">〔新機能〕SMTP接続時の「IPロックアウト機能」について</a><br>
+●<a href="./faq15-26.html">〔新機能〕POP3認証時の「認証接続ロックアウト機能」について</a><br>
+●<a href="./faq17-10.html">〔新機能〕POP3接続時の「IPロックアウト機能」について</a><br>
+●<a href="./faq15-27.html">〔新機能〕IMAP4認証時の「認証接続ロックアウト機能」について</a><br>
+●<a href="./faq17-11.html">〔新機能〕IMAP4接続時の「IPロックアウト機能」について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

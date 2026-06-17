@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-20</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP認証使用時に、内部アカウントによる送信者の詐称を防ぐには</b></FONT>
+<HR>
+<br>
+SMTP認証を実施している状況下で、メールサーバ内にアカウント情報がある任意の内部アカウントから、別アカウントのFROM:ヘッダーをメーラーの機能を利用して詐称して送信しようとした場合、通常は（メーラーからは）詐称されない送信元エンベロープ（エンベロープFROM）の情報が、詐称しているかどうかの判別基準になります。しかし、SMTP認証を実施しているときは、ログイン時の認証情報が暗号化されるため、ログを見る管理者からは、詐称の行為そのものが判読できないという問題があります。このようなケースで、内部アカウントによる送信者の詐称や偽称をより厳格に防ぐ手だてとしては、次の通り、「送信者の信頼度」に関する設定を行ってください。<br>
+<ol>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開く。</li>
+<li>「送信者の信頼度」について、<b>「AUTHID」（SMTP認証ID）</b>（デフォルト値）を、<b>「AUTHID=Env」（SMTP認証ID = エンベロープ）</b>（２番目）か、<b>「AUTHID=Env=Head」（SMTP認証ID = エンベロープ = FROM:ヘッダー）</b>（３番目）かのどちらかに変更する。</li>
+<li>[設定する]ボタンをクリック、その後、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面から、epstrdサービスを再起動する。</li>
+</ol>
+「送信者の信頼度」をどちらのレベルにするかについては、運用のポリシーで判断してください。<br>
+より厳密なものは、一見して後半の方だとわかりますが、エイリアス使用時には利用不可になります。エイリアス設定を行ってメール送信を利用している場合、「送信者の信頼度」は次のように扱われますので、設定時には注意が必要です。<br>
+<ul>
+<li><b>「AUTHID=Env」（SMTP認証ID = エンベロープ）</b>（２番目）<br>
+SMTP認証時のUSER-IDと送信元エンベロープとの比較で送信の可否を行います。<br>
+エイリアス設定でメール送信を利用しているとき、エンベロープがエイリアスのケースでは、実アドレスに内部で置き換えて判定しているため、こちらの設定は可（有効）です。</li>
+<p align="center"><img src="img/faq10-20-01.jpg"></p>
+<li><b>「AUTHID=Env=Head」（SMTP認証ID = エンベロープ = FROM:ヘッダー）</b>（３番目）<br>
+SMTP認証時のUSER-IDと送信元エンベロープ、メールヘッダ内のFROM:ヘッダーとの比較で送信の可否を行います。<br>
+エイリアス設定でメール送信を利用しているとき、FROM:ヘッダーについては、エイリアスの判定をしていないため、こちらの設定は不可です。つまり、この設定は、実アドレスでメール送信を使用しているときのみ、設定可ということになります。</li>
+<p align="center"><img src="img/faq10-20-02.jpg"></p>
+</ul>
+なお、送信元エンベロープ（エンベロープFROM）とFROM:ヘッダーが、どのような違いがあり、メールプロトコルの中でどのように使い分けされているかについては、メールについての基本的な仕組みを解説している書籍やサイトの資料を参考にしてください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

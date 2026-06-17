@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-11</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>方式の違いによるメールボックスフォルダの作成位置について</b></FONT>
+<HR>
+<br>
+運用するドメインの管理方法について、「共通ボックス（区別しない）」方式を選択しているか、「接続ドメイン/IPで区別する」方式を選択しているかによって、メールボックスフォルダの位置が変わります。<br>
+この方式を使い分ける状況は、マルチドメインを作成するときのポイントと関連してきます。<br>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、「ドメイン管理」→「ドメインの新規作成・設定変更」→登録済み既存ドメインの［詳細設定を開く］をクリックしてください。<br>
+詳細設定画面で「共通ボックス（区別しない）」方式か、「接続ドメイン/IPで区別する」方式のどちらが選択されているか確認してください。<br>
+メールボックスフォルダが（既定値　/var/spool/epms/inbox/%USERNAME%）に設定されているとき、下記のフォルダ位置でメールボックスフォルダが管理されます。<br>
+<br>
+<b>（POP3プロトコルで管理される通常のメールボックスフォルダ＝IMAP4と併用するルートのフォルダ）</b> ※SMTP Server V シリーズのメールボックスフォルダの位置もこのケースと同等です。ただしSMTP Server V シリーズにはPOP3は実装されていません。<br>
+・「共通ボックス（区別しない）」方式の場合<br>
+　/var/spool/epms/inbox/[ユーザ名]/<br>
+・「接続ドメイン/IPで区別する」方式の場合<br>
+　/var/spool/epms/inbox/[ドメイン名]/[ユーザ名]/<br>
+<br>
+<b>（IMAP4プロトコルで管理されるメールボックスフォルダ）</b><br>
+・「共通ボックス（区別しない）」方式の場合<br>
+　/var/spool/epms/inbox/[ユーザ名]/inbox/<br>
+・「接続ドメイン/IPで区別する」方式の場合<br>
+　/var/spool/epms/inbox/[ドメイン名]/[ユーザ名]/inbox/<br>
+<br>
+※つまり、IMAP4で管理されるメールボックスフォルダは、POP3に対して、それぞれのケースで１階層深いフォルダが使用されることになります。<br>
+<br>
+詳細は製品付属のマニュアルをご覧ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-62.html">メールクライアントから接続するユーザーIDに＠以降が必要なケース</a><br>
+●<a href="./faq10-10.html">マルチドメイン設定のポイント</a><br>
+●<a href="./faq10-12.html">ドメインの管理方法を共通ボックス方式から接続ドメイン/IPで区別する方式へ移行するとき</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

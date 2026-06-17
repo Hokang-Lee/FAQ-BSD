@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-35</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4用メールボックスフォルダへのメール格納タイミングについて</b></FONT>
+<HR>
+<br>
+メールサーバのIMAP4用メールボックスフォルダは、POP3用メールボックスフォルダ位置より一段深い階層にありますが、メールがIMAP用メールボックスフォルダへ格納されるタイミングについて説明します。<br>
+<br>
+ユーザーアカウントがIMAP4プロトコルで接続されない時点では、メールデータは、上の階層にあるPOP3用のメールボックスフォルダのある位置（/var/spool/epms/inbox/[ドメイン名]/[アカウント名] または /var/spool/epms/inbox/[アカウント名]）に&quot;B&quot;で始まる.MSGファイルとして着信します。この時点では仮置きされてとどまっている状態です。<br>
+IMAP4用のメールボックスフォルダ（/var/spool/epms/inbox/[ドメイン名]/[アカウント名]/inbox または  /var/spool/epms/inbox/[アカウント名]/inbox）の位置にメールデータが格納されるのは、IMAP4プロトコルで接続し、該当ユーザーへのアクセスがあった時点になります。このとき、メールデータである.MSGファイルは、移動（またはコピー）され、&quot;0000000123-000010.MSG&quot; のようなファイル名となります。前半部分には &quot;uid&quot; ファイルで管理された連番がふられ、後半部分は未読既読や転送などのステータスを表示するビット部分となります。<br>
+ちなみに、メールデータが移動処理されるかコピー処理されるかは、各アカウント設定の「POP3無効」のチェックボックスの設定に依存します。「POP3無効」オンなら移動として処理され、「POP3無効」オフならコピーとして処理されます。<br>
+<br>
+実際の動きがわかりにくい場合は、メーラーやtelnetコマンドでIMAP4プロトコルで該当アカウントに接続してみて、その時点でIMAP4用メールボックスフォルダへの移動（またはコピー）が行われるか、確認してみるとよいでしょう。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-11.html">方式の違いによるメールボックスフォルダの作成位置について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-84</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>Active Directory（LDAP）連携時の連動項目は？</b></FONT>
+<HR>
+<br>
+E-Post Mail Server / E-Post SMTP Serverシリーズにおいて、ユーザー管理をActive Directory（LDAP）連携させたときの連動項目は、下表のようになります。<br>
+ここでは、Active Directoryドメインコントローラと、E-Post Mail Server V との間でユーザー管理の連携を行った場合の連動項目です。<br>
+<br>
+<table border=1 cellspacing=0 cellpadding=2 width=600>
+ <tr>
+   <th bgcolor="#CCCCCC">アカウント関連の<br>
+     操作内容
+   </th>
+   <th bgcolor="#CCCCCC">連携の<br>
+     有無
+   </th>
+   <th bgcolor="#CCCCCC">Active Directory<br>
+     ユーザーとコンピュータ
+   </th>
+   <th bgcolor="#CCCCCC">連動
+   </th>
+   <th bgcolor="#CCCCCC">Web管理メニュー（ユーザー管理）
+   </th>
+ </tr>
+ <tr>
+   <th>
+     アカウント<br>新規作成
+   </th>
+   <td align="center">
+     あり
+   </td>
+   <td>・Window2000より前の<br>
+     　ユーザーログオン名<small><font color="#cc0000">（※1）</font></small><br>
+     ・表示名
+   </td>
+   <td align="center">
+     <img src="./img/yajirushi01.gif">
+     <br><br><br>
+     <img src="./img/yajirushi01.gif">
+   </td>
+   <td>
+     ・アカウント<br>
+     <br>
+     ・フルネーム
+   </td>
+ </tr>
+ <tr>
+   <th>
+     アカウント<br>名前変更
+   </th>
+   <td align="center">
+     あり
+   </td>
+   <td>・Window2000より前の<br>
+     　ユーザーログオン名<small><font color="#cc0000">（※1）</font></small><br>
+     ・表示名
+   </td>
+   <td align="center">
+     <img src="./img/yajirushi01.gif">
+     <br><br><br>
+     <img src="./img/yajirushi01.gif">
+   </td>
+   <td>
+     ・アカウント<br>
+     <br>
+     ・フルネーム
+   </td>
+ </tr>
+ <tr>
+   <th>
+     POP3<br>パスワード
+   </th>
+   <td align="center">
+     あり<br>片方向
+   </td>
+   <td>・パスワード<br>
+    （パスワードのリセット）<br>
+   </td>
+   <td align="center">
+     <img src="./img/yajirushi02.jpg">
+   </td>
+   <td>
+     ・パスワード<small><font color="#cc0000">（※2）</font></small><br>
+   </td>
+ </tr>
+ <tr>
+   <th>
+     IMAP4<br>パスワード
+   </th>
+   <td align="center">
+     あり<br>片方向
+   </td>
+   <td>・パスワード<br>
+    （パスワードのリセット）<br>
+   </td>
+   <td align="center">
+     <img src="./img/yajirushi02.jpg">
+   </td>
+   <td>
+     ・パスワード<small><font color="#cc0000">（※2）</font></small><br>
+   </td>
+ </tr>
+ <tr>
+   <th>
+     SMTP認証<br>パスワード<small></small><br>
+     （PLAIN/LOGIN）<br>
+   </th>
+   <td align="center">
+     あり<br>片方向
+   </td>
+   <td>・パスワード<br>
+    （パスワードのリセット）<br>
+   </td>
+   <td align="center">
+     <img src="./img/yajirushi02.jpg">
+   </td>
+   <td>
+     ・パスワード<small><font color="#cc0000">（※2）（※3）</font></small><br>
+   </td>
+ </tr>
+ <tr>
+   <th>
+     SMTP認証<br>パスワード<small></small><br>
+     （CLAM-MD5）<br>
+   </th>
+   <td align="center">
+     なし
+   </td>
+   <td>　　　　　－－　　　　　<br>
+   </td>
+   <td align="center">
+     　　　　　
+   </td>
+   <td>
+     ・認証ファイルに設定されて<br>　いるSMTP認証パスワード<small><font color="#cc0000">（※4）</font></small><br>
+   </td>
+ </tr>
+ <tr>
+   <th>
+     <small>フルネーム</small>
+   </th>
+   <td align="center">
+     あり
+   </td>
+   <td><small>・表示名</small><br>
+   </td>
+   <td align="center">
+     <img src="./img/yajirushi01.gif">
+   </td>
+   <td>
+     ・フルネーム<br>
+   </td>
+ </tr>
+ <tr>
+   <th>
+     <small>ホームディレクトリ</small>
+   </th>
+   <td align="center">
+     あり
+   </td>
+   <td><small>・ホームフォルダ（ローカルパス）</small><br>
+   </td>
+   <td align="center">
+     <img src="./img/yajirushi01.gif">
+   </td>
+   <td>
+     ・ホーム<br>
+   </td>
+ </tr>
+ <tr>
+   <th>
+     <small>ドメイン名</small>
+   </th>
+   <td align="center">
+     なし
+   </td>
+   <td><small>・所属するグループ</small><br>
+   </td>
+   <td align="center">
+     &nbsp;
+   </td>
+   <td>
+     ・ドメイン<small><font color="#cc0000">（※5）</font></small><br>
+   </td>
+ </tr>
+</table>
+<br>
+<small>※1) 「Active Directoryユーザーとコンピュータ」にある2003以降の「ユーザーログオン名」は連動項目とはなりません。電子メールの項目、また姓や名の項目も対象外です。<br>
+※2) パスワードを変更するには、ドメインコントローラ側の「Active Directoryユーザーとコンピュータ」で「パスワード」（パスワードのリセット）で変更作業を行います。<font color="#cc0000">E-POSTコントロールセンターのメールサーバ管理からのパスワード変更操作は無効で、Active Directoryのドメインコントローラ側で行う操作のみ有効となりますので注意してください。またE-POSTコントロールセンターのメールサーバ管理からのアカウントインポートでもパスワードの登録はできません。</font><br>
+※3) <font color="#cc0000">SMTP認証方法を PLAIN 方式か LOGIN 方式に限定すれば、「Active Directoryユーザーとコンピュータ」で管理されるパスワードと連動項目となる設定が可能です。E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を選択後、SMTP認証方法を（CRAM-MD5を除く）PLAIN方式かLOGIN方式、あるいはその両方を有効に設定し、メールクライアントからの接続方式も同様にしてください。</font><br>
+※4) <font color="#cc0000">SMTP認証方法を CRAM-MD5 方式に設定している場合、利用されるSMTP認証パスワードは「Active Directoryユーザーとコンピュータ」で管理されるパスワードと連動項目とはなりません。E-Post Mail Server 側が管理する &quot;apop.dat&quot; などの認証ファイルに設定されているSMTP認証パスワードとマッチングされます。</font>その認証ファイルは次の操作で作成されます。E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」後に［ユーザー管理へ］をクリック。該当するユーザーを選択し［設定変更］を選択して「認証ファイルを設定する」チェックボックスをオン。続いて［パスワード変更］を実行してパスワードを入力します。その際、該当ユーザーのメールボックスフォルダに &quot;apop.dat&quot; という認証ファイルが作成・保存されます。<br>
+※5) <font color="#cc0000">Windows版E-Postシリーズでは設定したメールドメイン名の付いたローカルセキュリティグループに所属する形となり連動項目となりますが、BSD版E-Postシリーズでは連動項目ではありません。Active Directory（LDAP）連携時には、IMSUsersグループに所属する全てのユーザーが連携される形となるため、マルチドメイン設定はできません。</font><br>
+</small>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

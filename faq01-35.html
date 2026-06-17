@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-35</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>部外者からPOP3/IMAP4の接続を制限するには</b></FONT>
+<HR>
+<br>
+部外者(外部ネットワーク)からPOP3/IMAP4の接続を制限するには、以下のような方法が考えられます。運用の環境によって適切な設定を検討してください。<br>
+<ol>
+ <li type="1">ルータやファイヤウォールなどのネットワーク機器の設定でPOP3/IMAP4ポートへの接続自体を無効にする。</li>
+ → 設定は各製品のマニュアルなどを参照してください。<br>
+ <br>
+ <li type="1">OS側ののファイヤウォール設定などで接続元IPを限定する。</li>
+ → 設定はFreeBSDのドキュメント・関連資料などを参照してください。<br>
+ <br>
+ <li type="1">POP3やIMAP4の設定で接続を制限する。</li>
+  <ol>
+   <li type="a">POP3/IMAP4に接続するクライアントがルータやファイヤウォールなどの内側にあり、ローカルIPからの接続に限定する</li>
+   E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック<br>
+   　→［全設定］を［開始する］→［全設定（サーバー環境設定）］EPSTPOP3D部分もしくは［POP3詳細］<br>
+   　　→IP設定のうち [一覧のアドレスに応答する] 選択<br>
+   E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック<br>
+   　→［全設定］を［開始する］→［全設定（サーバー環境設定）］EPSTIMAP4D部分もしくは［IMAP4詳細］<br>
+   　　→IP設定のうち [一覧のアドレスに応答する] 選択<br>
+   このPOP3/IMAP4サーバーに静的に割り当てたIPアドレスが例えば192.168.0.2の場合、192.168.0.2を設定しておく。同時にローカル内部のメールクライアント側の接続先IPも同じIPアドレスへ変更する。<br>
+<br>
+   <li type="a">POP3サービス（またはIMAP4サービス）の接続ポートを変更してデフォルトの接続ポートを制限する</li>
+   例）POP3のポート番号を110から1110に変更<br>
+   使用ポートを変えるには次のように設定します。このときはメールクライアント側も接続ポートを変更します。<br>
+   E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック<br>
+   　→［サービス制御］ボタンをクリック<br>
+   　　→表示される「サービス制御」画面からEPSTPOP3Dの[停止]ボタンをクリックしてサービスを停止<br>
+   E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック<br>
+   　→［全設定］を［開始する］→［全設定（サーバー環境設定）］EPSTPOP3D部分もしくは［POP3詳細］<br>
+   　　→EPSTPOP3Dのポート番号を1110に変更<br>
+   　　　→［設定する］ボタンをクリック<br>
+   E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック<br>
+   　→［サービス制御］ボタンをクリック<br>
+   　　→表示される「サービス制御」画面からEPSTPOP3Dの［開始］ボタンをクリックしてサービスを再開<br>
+  </ol>
+</ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-01</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<hr>
+<font size="5" color="#000000"><b>内部ドメインのアカウントに対し受信拒否される</b></font>
+<hr>
+<br>
+内部ドメインのアカウントに対し受信拒否されてしまう場合、以下の点を確認してください。<br>
+<ul>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ドメイン管理］を選び、［ドメインの新規作成・設定変更］をクリック、「既設ドメインの設定変更」で表示されたドメイン一覧に接続するドメイン名が間違いなく登録されていますか？<br>
+<li>［LDAP(AD)連携やOS アカウント管理の場合］<br>
+&quot;IMSUsers&quot;メールグループを各メールユーザーに割り当ていますか。万が一、&quot;IMSUsers&quot;以外のメール用ローカルグループを設定している場合、以下の共有設定ファイル情報の内容とローカルグループ名が完全に一致していますか？<br>
+<br>
+<small>[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→MailGroup.2<br>
+　　　(Default IMSUsers) OS Accountの場合メールローカルグループ名<br>
+　　　(ファイル拡張子&quot;.2&quot;は文字列の型を表わす。レジストリの文字列型に該当)<br></small>
+</ul>
+なお、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を選択すると表示される「VRFY,EXPNコマンドに応答する。」チェックボックスを一時的にオンにして VRFY コマンドへの応答を有効に変更した上で調べる方法もあります。<br>
+epstrd が内部ドメインのアカウントに対して正しく認識しているかどうかは telnet クライアントから VRFY コマンドを入力することにより次のようにして確認できます。<br>
+<ul>
+S:サーバ側からの応答<br>
+C:クライアント側からの入力　※下線部は任意名<br>
+<hr>
+<font color="brown">telnet <u>domain.jp</u> smtp[Enter]</font><br>
+S:220 [domain.jp] E-POST ESMTP Receiver v5 (5.00) Bld9CABHFAEAB Wed, 20 Dec 2017 06:46:21 +0900<br>
+C:<font color="brown">VRFY <u>user</u>[Enter]</font><br>
+S:250 &quot;user＠domain.jp&quot; ... User ok<br>
+（あるいは）<br>
+S:550 &quot;user＠domain.jp&quot; ... User unknown.<br>
+<hr>
+サーバからの応答が、それぞれどちらの内容であるかを判断してください。<br>
+<br>
+<li><b>&quot;User ok&quot;</b>を出していれば、内部ドメインのアカウントとしてEPSTRSが認めているので、<b>受信許可</b>されます。<br>
+<li><b>&quot;User unknown.&quot;</b>を出していれば、指定された内部ドメインのアカウントとして設定が正しくなされていないので、<b>受信拒否</b>されます。<br>
+</UL>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

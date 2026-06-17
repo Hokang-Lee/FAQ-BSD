@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-89</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールヘッダの一部がそのまま本文に表示されてしまうことがある</b></FONT>
+<HR>
+<br>
+メールヘッダの一部がそのまま本文に表示されてしまうという事象の報告をサポートで受けたことがあります。このような現象について推測できる原因について述べます。<br>
+<br>
+メール本文中にメールヘッダの最初かあるいは途中からの部分が本文に表示されてしまうメールが届いた事例では、人為的なものが原因ではなく、送信メールクライアントあるいはその途中で通過するメールゲートウェイ製品によって、ヘッダの途中に区切りを示す [CR][LF] コードが不用意に挿入されてしまったらしいことが原因でした。<br>
+このようなコードが、メールデータの途中に挿入されてしまっているのかどうかを調べるには、受信された該当メールを.eml形式などでファイル出力し、バイナリエディタでそのファイルを開き、区切りを示す [CR][LF] コードがヘッダの途中に不用意に入れられていないか等をチェックしてみるという方法があります。<br>
+<br>
+E-Post側では、メールヘッダの途中にこのような区切りを示す [CR][LF] コードを挿入したり、途中でカットするというような動きは行っていません。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-76.html">経路上にある装置によりヘッダ途中に空白行が挿入されメール本文が文字化けする現象について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

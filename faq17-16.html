@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-16</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4メーラー側でメールメッセージを任意の別フォルダに移動すると日付順に並ばないことが起きる <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+IMAP4を利用しているメーラー側の操作で、受信トレイに該当するINBOXに届いているメッセージを任意の別フォルダに移動し、移動先フォルダのメッセージ一覧を取得すると、日付順に並ばないことが起きるという報告を受けたことがあります。<br>
+<br>
+この事象は実際にはIMAP4クライアント機能をもつメーラーの機能による差異があります。<br>
+<br>
+メーラー側の操作によって、INBOXなどの任意のフォルダから異なる任意のフォルダなどへファイル移動を行った際、メールサーバ側では移動した際のファイル作成順にファイルが保存される形となります。つまり、受信トレイであるINBOXには、メールが届いた順に保存されている状態であって、任意の別フォルダへ移動をおこなった際には、メールが届いた順とは一致せず、ファイルが移動された日時によって並べられることとなり、日付順に並ばないことは起こり得ることになります。ただし日付順に並ぶか並ばないかはメーラーによって挙動が異なるようです。<br>
+<br>
+通常のメーラーではメール一覧を常に要求しているわけでなく、該当フォルダの差分を取得して表示する仕組みを取っているため、ファイルの作成や更新日付が過去のものであっても、任意のフォルダに新たに移動されたメールがある場合の一覧取得方法としては、積み上げされて表示されている結果となり、日付順に並んで表示されるのか、ファイルの移動した日時に従って表示されるのかは、メーラーの機能・作りによって大きく異なることがわかっております。<br>
+<br>
+ちなみに、Outlook 2016・Becky!・Outlook Express・RainLoop（Webメール）でのメールのメッセージを任意の別フォルダへの移動して実際どのようになるのかを確認してみました。<br>
+<ul><li>Outlook 2016とOutlook Expressは、別フォルダへの移動後でもメールの受信日付順に並び替えられ常に表示されます。</li>
+<li>Becky!では別フォルダへの移動直後はいったん新しい行（1行目）に表示されますが、Becky!側の一覧表示で受信日付または送信日付でソートし直せば、日付順で並び替えられて表示されるようになります。</li>
+<li>RainLoop（Webメール）では、日付順に並び替える機能がないため、別フォルダ移動の日時により表示が決まり、結果として日付順に並ばないことが発生します。</li></ul>
+従って、IMAP4クライアント機能をもつメーラーの画面から、メールのメッセージを別フォルダへの移動した際、日付順に並ぶかどうかはメーラー側の機能に大きく左右すると考えます。<br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

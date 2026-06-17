@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-53</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>/etc/hostsファイル記述の必要性と有用性について</b></FONT>
+<HR>
+<br>
+/etc/hostsファイルの記述を必須としていることについて、他社製メールサーバではあえて書く習慣はないため、疑問を抱かれることがあります。E-Postシリーズ製品では、下記の理由から、/etc/hostsファイルを記述し、内部ドメイン名を明示的に定義していただくようお願いしています。/etc/hostsファイルに記述するのはE-Postで作成済みドメイン名であって、CIFSやNFSのコンピュータ名ではありません。間違えないようにしてください。<br>
+<blockquote>
+　（/etc/hostsファイルの記述例）<br>
+　192.168.1.11　abc.co.jp hostname<br>
+　192.168.1.12　def.co.jp hostname<br>
+</blockquote>
+<ul>
+ <li><b>内部アカウントどうしの送信で受領がスムーズに処理されるようにするため</b><br>
+ 内部アカウントどうしのメール送信で受領される段階のとき、epstrdサービス（SMTP受信サービス）は、プログラムのその仕組み上、受領時にDNSへの逆引き問合わせを行う部分があります。/etc/hostsファイルに内部ドメイン名を定義しておくと、逆引きして利用し、受領がよりスムーズに行われるようになります。<br>
+ <br>
+ <li><b>内部アカウント宛への自動転送やメーリングリスト使用時にも処理できるようにするため</b><br>
+ 内部アカウントへの自動転送を設定しているときや、メーリングリストに登録された内部アカウントがあるとき、E-Postシリーズ製品では、SMTPプロトコルを使ってepstddサービスが送信、epstrdサービスが再度受信する動きをします。そのときは内部アカウントであっても名前解決を必要とします。名前解決ができないと、最終段階で何とか送られるものの、処理に時間がかかります。<br>
+ DNSサーバに内部ドメインが定義されていないときや、LAN内にDNSサーバがないときなど、/etc/hostsファイルに内部ドメイン名を定義しておくと、epstddサービスは、Aレコードの名前解決として利用します。自動転送やメーリングリストを使った送信時に処理が異常に遅くなるのを防ぎます。<br>
+ <br>
+</ul>
+ちなみに、/etc/hostsファイルは、SSH等によりコンソールへログインし次のように入力すれば、参照・編集が可能です。<br>
+　# vi /etc/hosts<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-04.html">クライアントからのメール送信が遅いケースと/etc/hostsファイルの必要性</a><br>
+●<a href="./faq10-54.html">内部アカウントを自動転送で設定したり、メーリングリストに設定したときに、送信処理に時間がかかってしまう</a><br>
+●<a href="./faq01-42.html">HELOコマンドで送出するホスト名がFQDN（ホスト名＋ドメイン名）になっていない</a><br>
+●<a href="./faq10-31.html">Received:ヘッダに該当しない別のドメイン名が表示される</a><br>
+●<a href="./faq15-04.html">POP3/IMAP4利用時にも/etc/hostsファイル記述を必須とする理由について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

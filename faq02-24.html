@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-24</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリスト機能により流されたメール題名がAndroid系携帯端末の特定メーラーで文字化けする現象について</b></FONT>
+<HR>
+<br>
+E-Postのメーリングリスト機能によって流されたメールの題名の一部分が、Android系携帯端末の特定メーラーで文字化けが発生してしまう現象について過去に問い合わせがありました。<br>
+E-Postは基本的には通常のメール送信ではメールサーバ側で題名を構成し直すことはしていませんが、メーリングリスト機能に限っては付加表題機能実装のため、題名を再構成して、分割パックしない形（分割しない形）をとっています。分割パックしない形での題名の再構成こそしていますが、原因と疑われるような文字コード指定を変更したり文字列を変換することなどは一切していません。<br>
+実際、Android系携帯端末の特定メーラーで文字化けするというメールに関して、Windows対応の主要メーラーでは事象は発生していません。これはWindowsのメーラーが題名部分について、分割パックされたMIMEエンコード指定だけでなく、分割パックされていないMIMEエンコード指定についても、問題なく読みとってきれいにデコードしているためです。<br>
+くわしく述べると、SMTPプロトコルの仕様を規定しているRFC5322では、題名の最大長は998文字以内としています。(MUST)（2.1.1）さらに78文字以下にするのは(SHOULD)とされています。RFCで最低限守るべき内容（MUST）は明示されていても、推奨されるべき内容については、サーバ側とクライアント側がそのすべてをカバーするべきなのかしないでよいのかについて、どうしても不明瞭な部分が存在します。それがこの問い合わせ案件の原因となる、Subjectの最大長さの規定であり、MIMEエンコードとデコードの仕様規定の問題です。<br>
+規定が不明瞭だったり、MUSTで規定されていないものについては、メールサーバ、メールクライアントそれぞれの対応度が不十分な部分はどうしても存在してしまうというのが、メールサーバソフトを供給するベンダーとしての基本的考えです。<br>
+このタイプの問い合わせ案件のため、E-Post側でできる対応は何かないかということで、EPSTRD v4.98以降の最新版ではこの対応策を含んでいます。最新モジュールでは、「メーリングリスト機能を使った送信時に付加表題項目の指定がないものは題名文字の展開処理をスキップするように変更」されています。ユーザーが新たに設定する箇所はありません。具体的な処理内容は次の通りです。<br>
+<ul><li>「付加表題＆カウント」の指定なし　→　題名を加工（再構成）しない<br>
+<li>「付加表題＆カウント」の指定あり　→　題名を加工（再構成）する<br></ul>
+「付加表題＆カウント」の指定がされているものは、これまで通り、題名のMIMEエンコードを再構成し、パックしないで一つにまとめた加工をします。それに対し指定がされていないものは、題名のMIMEエンコードを再構成しません。メールサーバで題名を再構成していないので、元のメールの題名が文字化けを起こしていない限りは、E-Postのメーリングリスト機能経由で送られた場合でも文字化けせずそのまま表示されるものと考えます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-87.html">E-Postシリーズでの文字コードの取り扱いについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

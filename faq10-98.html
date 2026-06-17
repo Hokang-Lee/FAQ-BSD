@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-98</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールリレーサーバ＝SMTPゲートウェイとして利用しているとき、正常にリレーされない</b></FONT>
+<HR>
+<br>
+メールリレーサーバ＝SMTPゲートウェイとして利用しているとき、うまくリレーされない場合は、設定そのものに基本的な問題があると考えられます。以下に要点を整理します。<br>
+<ol>
+<li><b>「メール用作業フォルダ」「メールボックスフォルダ」の設定内容が正しくない</b><br>
+「メール用作業フォルダ」「メールボックスフォルダ」の設定がおかしくなっていたり、正しい設定になっていない可能性があります。<br>
+<b>（対策）</b><br>
+(1) E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］を開いて表示される「メール用作業フォルダ」項目を計画通りの正しい設定にする。<br>
+　<b>既定値　/var/spool/epms/</b><br>
+(2) E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］を開いて表示される「メールボックスフォルダ」項目を計画通りの正しい設定にする。<br>
+　<b>既定値　/var/spool/epms/inbox/%USERNAME%</b><br>
+(3) ［設定する］ボタンをクリックする。<br>
+(4) E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面から各サービスを［停止］したあと［開始］させ、サービス再起動する。<br>
+(5) 設定が変更されているどうか、上記の画面を再度開いて確認する。<br>
+※一連の操作によって、「メール用作業フォルダ」「メールボックスフォルダ」の設定位置が変わるかもしれません。フォルダ位置が変わった場合、コンソールにログインし、元のフォルダ位置から正しいフォルダ位置に向けて、以前のログやメールデータ、関連ファイルなどをすべて移動するなりして整合性を図ってください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-10.html">メールサーバーで使用しているフォルダについて</a><br>
+<br>
+</li>
+<li><b>E-POST コントロールセンター（メールサーバ管理）の［ユーザー管理］でアカウントが一つも作成されていない</b><br>
+アカウントが一つも作成されていないと、無制限ライセンスが必要状態となり、ライセンス切れの状態になっている可能性があります。<br>
+ライセンス範囲に入れるために最低でもダミーアカウントは必要です。<br>
+<b>（対策）</b><br>
+E-POST コントロールセンター（メールサーバ管理）を開き、ドメインが作成されていなければドメインを作成し、利用する正しいアカウントを最低でも一つ作成してください。<br>
+ダミーであっても、一つ以上のアカウントが必須です。<br>
+<b>（参考ガイド）</b><br>
+●<a href="../epmsent_construct_guide/kouchiku10.html">構築ガイド－10.アカウントを登録しよう</a><br><b>（関連FAQ）</b><br>
+●<a href="./faq10-11.html">方式の違いによるメールボックスフォルダの作成位置について</a><br>
+ドメインを作成するときには、「共通ボックス方式」および「接続ドメイン/IPで区別する方式」の２種類が選べますが、E-Postシリーズでの推奨設定は、マルチドメイン設定時でも過不足のない「接続ドメイン/IPで区別する方式」の方です。<br>
+アカウントは、リレーしようとしている送信元にあるアカウント情報を設定してください。送信元からのメール送信要求があった場合、アカウントがなくても、無条件で受け付けたい要求事項があるときには、【effect.dat】を設定します。（→４．へ）<br>
+<br>
+</li>
+<li><b>「SMTPゲートウェイ」欄に記入されていて、「テーブル編集」がうまく使われていない</b><br>
+フォワード先が一種類固定の場合は「SMTPゲートウェイ」でもかまいませんが、やりたい内容によっては「テーブル編集」【gateway.dat】で設定した方がよい場合があります。<br>
+<b>（対策）</b><br>
+フォワード先が一種類しか存在しない場合は「SMTPゲートウェイ」でよいですが、内容によっては「テーブル編集」【gateway.dat】で設定した方がよい場合があります。なお、「テーブル編集」に書かれていない宛先のドメイン宛の場合は、DNSのMXレコードや/etc/hostsファイルを参照して配送される動きとなります。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-28.html">フォワードするSMTPサーバをドメイン別に振り分け制御する</a><br>
+ちなみに、「全受信メールをSMTPゲートウェイに転送」チェックボックスがオンにされている状態は、このサーバにメールボックスがないことを意味します。メールボックスに着信しないのであればこれでもかまいませんが、そうでない場合は設定の見直しが必要です。<br>
+<br>
+</li>
+<li><b>【effect.dat】に禁則事項である自ドメイン名がtrue指定されている（不正利用・なりすましの危険性）</b><br>
+【effect.dat】に自ドメイン名をtrue指定することは禁則事項であり、問題があります。<br>
+<b>（対策）</b><br>
+【effect.dat】にtrue指定するケースでは、IPアドレスを指定する方法が中心となります。【effect.dat】に自ドメイン名のtrue指定、たとえば「domain.jp true」という指定をしてしまった場合は、なりすましに会う危険が高くなりますので、必ず該当部分をカットしてください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-22.html">中継の制限【effect.dat】で設定する default と true の違い、only の意味は？</a><br>
+<br>
+逆に、特定の機器や装置などからの送信要求をアカウントが存在していなくても無条件に受けたい場合は、【effect.dat】に「[IPアドレス]  true」の指定を記述すると、無条件に受け付け、配送するようになります。SMTP認証を有効に設定しているときでも、指定IPアドレスからの送信要求については無条件に受け付けるようになります。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-80.html">特定の機器や装置からの送信依頼をSMTP認証なしで受け付けたい</a><br>
+</li>
+</ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

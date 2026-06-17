@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-05</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SSL/TLS証明書適用後の通信をコマンドで確認する方法 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Post Mail ServerシリーズにSSL/TLS通信を設定し、SSL/TLS証明書を適用した後、SSL/TLS通信の正常/異常を確認するには、通常の場合にはメーラーで行うと思いますが、コマンドラインで確認する方法があります。<br>
+FreeBSDには openssl がデフォルトでインストールされています。SSL/TLS通信での可否は、コマンドラインから openssl にオプションを付けることにより確認可能です。<br>
+<br>
+---------------------------------------------------------------------<br>
+基本例<br>
+---------------------------------------------------------------------<br>
+<b>[SMTP]</b><br>
+openssl s_client -connect [server-address]:465 -verify 1<br>
+openssl s_client -connect [server-address]:25 -verify 1 -starttls smtp<br>
+あるいは<br>
+openssl s_client -connect [server-address]:587 -verify 1 -starttls smtp<br>
+<br>
+<b>[POP3]</b><br>
+openssl s_client -connect [server-address]:995 -verify 1<br>
+openssl s_client -connect [server-address]:110 -verify 1 -starttls pop3<br>
+<br>
+<b>[IMAP4]</b><br>
+openssl s_client -connect [server-address]:993 -verify 1<br>
+openssl s_client -connect [server-address]:143 -verify 1 -starttls imap<br>
+---------------------------------------------------------------------<br>
+※E-Post側でそれぞれの待ち受けポートを可能に設定していることが前提です。<br>
+※疎通できればその後 telnetコマンドで同様の通信確認ができます。途中で中断するときは quit で抜けてください。<br>
+※証明書を作ったときの正しいCA証明書を指定しないと Verify return code: 20 や Verify return code: 21 などのエラーが表示されます。<br>
+<br>
+エラーを出さないで確認したい場合にはルート証明書などをさらに -CAfile オプションで指定してください。<br>
+---------------------------------------------------------------------<br>
+ルート証明書を指定する書式と例<br>
+---------------------------------------------------------------------<br>
+openssl s_client -connect [server-address]:[port番号] -verify 1 -CAfile [証明書ファイル]<br>
+<br>
+openssl s_client -connect [server-address]:465 -verify 1 -CAfile rootcacert_r1.cer<br>
+openssl s_client -connect [server-address]:995 -verify 1 -CAfile rootcacert_r1.cer<br>
+openssl s_client -connect [server-address]:993 -verify 1 -CAfile rootcacert_r1.cer<br>
+---------------------------------------------------------------------<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-40.html">SMTP/POP3/IMAP4 over SSL/TLS設定方法 </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

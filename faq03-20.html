@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ03-20</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>仮想マシンソフトウェア環境への導入時の注意</b></FONT>
+<HR>
+<br>
+Hyper-VやVMWareESXなど、仮想マシンソフトウェアを利用した環境への導入時には、次の注意が必要です。<br>
+<br>
+仮想マシンソフトウェア上でメールサーバに割り当てた仮想マシンへのCPU割当数については、むやみに数を増やすのではなく、デフォルトの"1"のままでご使用になることを現状ではお薦めいたします。<br>
+下記のような理由から、CPU数を増やしても、処理が速くなるなどの効果は、まず期待できないことが予想されます。<br>
+<ul>
+<li>メールサーバ、特にE-Post Mail Server Standardでは、CPUの負荷が過大になることは少なく、常にボトルネックはディスクI/O（ファイルI/O）にあります。ただし、アンチウイルス機能のあるEnterprise版ではメモリ消費量とCPUの負荷が問題になることがあります。<br>
+<br>
+<li>ネットワーク共有ドライブを使うクラスタ構成では、Ehternetアダプタなどネットワークがボトルネックになる可能性が高くなります。仮想マシンソフトウェアの仮想アダプタや仮想ネットワークもそこに含まれます。<br>
+<br>
+<li>そのため、大量配送を行うメールシステムの要求があった場合には、「メール作業フォルダ」にネットワーク共有ドライブを使うクラスタ構成ではなく、ローカルドライブを使うシングル構成で構築・運用していただくことをお薦めしています。ちなみに、最速なメールシステムを追求するのであれば、「メール作業フォルダ」に半導体ディスクを使用する形態がベストと言えるでしょう。<br>
+</ul>
+なお、仮想マシンへのCPU割当数を意図的に増やした上で、大量配信テストを行うと、配信が滞ったり、処理が限りなく遅くなったり、停止しまうような現象が一部で報告されています。<br>
+<br>
+</ol></font>
+<br>
+<br>
+</BODY>
+</HTML>

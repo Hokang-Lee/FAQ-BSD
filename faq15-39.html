@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-39</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>POP3/IMAP4併用のアカウントでのメールボックスの保管サイズ制限について</b></FONT>
+<HR>
+<br>
+POP3/IMAP4併用のユーザーアカウントでメールボックスの容量制限設定を行う場合、メールボックスのサイズ制限設定（全体および個別設定とも）は、SMTPサービスによって、POP3用のメールボックスとIMAP4用メールボックス＋サブフォルダのメールデータファイル（.MSG）のサイズ合計によりチェックされ働きます。<br>
+<br>
+E-Postシリーズの仕様では、SMTP受信時のメールボックスのサイズ制限設定（全体および個別設定とも）機能は、各ユーザーアカウントでPOP3/IMAP4併用設定にしている場合、SMTPサービスによって、POP3用のメールボックスフォルダ＋IMAP4用のメールボックスフォルダとサブフォルダにある全メールデータファイル（拡張子.MSG）のサイズ合計でチェックが行われます。このとき、メールデータファイル（拡張子.MSG）のサイズ合計が、制限設定値を超えると判断されれば、SMTP受信サービス（epstrd）により、&quot;450 4.2.2 Sorry. e-mail address box is full.&quot; のエラー応答で拒絶されることになります。<br>
+あくまでSMTPでメールを受領する時点で、ユーザーアカウントのメールボックスへ保存されるときに働く制限機能ですので、POP3およびIMAP4の動作時にメールボックスサイズ制限機能が働くわけではありません。<br>
+<br>
+また、POP3/IMAP4用の各種制御系ファイル、POP3/IMAP4用の各種設定ファイルは対象から除外しており、拡張子.MSGのメールデータファイルのみのサイズ合計を見ています。<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

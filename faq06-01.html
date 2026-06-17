@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ06-01</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>万が一サービスが停止したときにサービスを自動的に再開させる方法</b></FONT>
+<HR>
+<br>
+万が一何らかの理由でサービスが停止したときでも、サービスが停止しないよう自動的に再開させるようにするには、以下のようなスクリプトを作成し、サービスを監視することにより、自動的に再開を行えるようになります。<br>
+<ol>
+<li>任意のファイル名の監視用スクリプトを作成し以下のプログラムを入力します。</li>
+<br>
+例）vi /usr/local/mta/bin/watchdog.sh<br>
+#!/bin/sh<br>
+<br>
+while :<br>
+# echo &quot;watchdoc services ...&quot;<br>
+do<br>
+for x<br>
+do<br>
+# echo $x<br>
+service $x status | grep &quot;not&quot; && service $x start # || echo &quot; safe.&quot;<br>
+done<br>
+sleep 120<br>
+done<br>
+<br>
+<li>スクリプトに実行権を与えます。</li>
+<br>
+chmod 0755 /usr/local/mta/bin/watchdog.sh<br>
+<br>
+<li>スクリプトをバックグラウンドで実行します。引数は監視したいサービス名を半角スペースにて羅列します。</li>
+<br>
+smtpサービスのみの監視の場合）/usr/local/mta/bin/watchdog.sh epstrd epstdd &<br>
+smtp/pop3サービスの監視の場合）/usr/local/mta/bin/watchdog.sh epstrd epstdd epstpop3d &<br>
+smtp/imap4サービスの監視の場合）/usr/local/mta/bin/watchdog.sh epstrd epstdd epstimap4d &<br>
+smtp/pop3/imap4サービスの監視の場合）/usr/local/mta/bin/watchdog.sh epstrd epstdd epstpop3d epstimap4d &<br>
+<br>
+<li>動作確認のため監視しているサービスを一旦停止させます。<br>
+<br>
+例）epstrdを停止</li>
+service epstrd stop<br>
+<br>
+<li>しばらく待つと（スクリプトの設定では120秒間隔）監視時間に停止しているサービスが開始されます。</li>
+<br>
+epstrd is not running.（epstrdのサービスが停止していることを発見）<br>
+Starting epstrd.　　　（epstrdのサービスを開始）<br>
+<br>
+<li>監視スクリプトの停止は、&quot;ps ax | grep watchdog.sh&quot; を実行し対象のプロセスをkillします。(以下は実行例)</li>
+<br>
+ps ax | grep watchdog.sh<br>
+2957  0  I     0:00.01 /bin/sh ./watchdog.sh epstrd epstdd epstpop3d epstimap4d<br>
+kill 2957<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

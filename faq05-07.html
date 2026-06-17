@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-07</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>SMTP送信ログ（outlog）について</b></FONT>
+<HR>
+<br>
+SMTP送信ログ（outlog）は、外部ドメインへの配送を実行し、送信先のMTA（SMTPサーバ）が受領した記録です。<br>
+<ol><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ログ］を開き［SMTP送信ログ］チェックボックスの状態を確認します。
+<li>チェックボックスがオンの設定のままのときはそのままで、［SMTP送信ログ］チェックボックスがオフのときはオンに変更してから［設定する］ボタンクリックします。
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面からSMTP配送サービス（epstdd）を［停止］→［開始］で再起動します。</ol>
+ログ記録は、［メール作業フォルダ/outlog/コンピュータ名］フォルダ下に日付単位で作成されます。<br>
+<br>
+SMTP送信ログ（outlog）の内容は、以下の通りです。<small>
+<hr align="center" width="98%" size="1" noshade>
+ &lt;メッセージID＠マシン名&gt;　&lt;sent on [記録日時]&gt;　&lt;to 宛先メールサーバ&gt;　&lt;from 送信元アドレス&gt;　&lt;to 送信先アドレス&gt;<br>
+<hr align="center" width="98%" size="1" noshade>
+ B0000055688＠xxxxx.xxx.xxx sent on [01/Nov/2017:10:29:51] to xxxx.xxx.jp from xxx＠xxxx.xxx.jp to xxxx＠xxxx.jp <br>
+<hr align="center" width="98%" size="1" noshade></small>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

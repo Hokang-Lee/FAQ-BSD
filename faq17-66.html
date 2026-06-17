@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-66</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールボックスへメールを保管する際、&quot;X-UIDL: [ファイル名]&quot; のヘッダを挿入するようにしたい <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+epstdd v5.10以降のバージョンでは、メールボックスへメールを保管する際、&quot;X-UIDL: [ファイル名]&quot; のヘッダを挿入するオプションが追加されました。<br>
+以下の20230426差分以降の最新差分アップデートを適用後、以下の設定ファイルを作成、値に 1 を入力し、epstdd サービスを再起動させます。以後、メールボックスへメールを保管する際、&quot;X-UIDL: [ファイル名]&quot; のヘッダがヘッダ先頭行に挿入されるようになります。X-UIDL 値としてメールごとのユニークIDの変数を記載する機能としてお使いになれます。<br>
+[ファイル名]は&quot;B&quot;で始まる連番のメッセージIDを冠した拡張子.MSGのメールデータファイル名となります。<br>
+<blockquote><small>[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5DS<br>
+　　　　　→XUIDL.1  (DWORD  Default 0)<br>
+　　　　 &quot;X-UIDL: [ファイル名]&quot; のヘッダを挿入 0:無効 1:有効（追加する）（デフォルト=0）<br>
+　　　　※epstdd v5.10以降のみこのレジストリ項目が有効。<br>
+　　　　変更後は epstdd サービスの再起動が必要。</small></blockquote>
+この機能を使うには、20230426差分以降の最新差分アップデートを適用してください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

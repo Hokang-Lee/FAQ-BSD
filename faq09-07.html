@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ09-07</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Web管理ツール-メールサーバ管理のメニューと操作パスワードについて</b></FONT>
+<HR>
+<br>
+Web管理ツール-メールサーバ管理の構成メニューと操作パスワードの関係は次のようになっています。ちなみにWeb管理のメールサーバ管理画面をダイレクトに呼び出すには、アクセスするURLを <b>http://[メールサーバIP]/epms</b> で指定します。<br>
+メールサーバ管理の既定画面では、フレームで構成されており、左フレームに大きく３つに分かれたメニューが表示されます。これらの３つのメニューは、図のような階層的な権限での管理ができるようにそれぞれ構成されています。<br>
+<p align="center"><img src="./img/faq09-07-01.jpg" border="0"></p>
+・システム管理者メニュー …<b>Ａ</b><br>
+・ドメイン管理者メニュー …<b>Ｂ</b><br>
+・ユーザー管理メニュー …<b>Ｃ</b><br>
+<p align="center"><img src="./img/faq09-07-02.jpg" border="0"></p>
+このままの表示にしておいた場合、個々のユーザーがメールサーバ全体の設定やドメイン全体の設定を変更しては困りますので、システム管理パスワード（操作パスワード）とドメイン操作パスワードを設定しておきます。<br>
+<br>
+<b>Ａ．システム管理パスワードを設定する</b><br>
+<br>
+システム管理メニューを操作するため「Ａ」のシステム管理パスワードを設定するには、次のように行います。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定］を選択して［開始する］ボタンをクリックします。<br>
+「システムセキュリティ」欄の「システム管理パスワード」を入力、最後に画面下の「設定する」ボタンをクリックします。<br>
+<p align="center"><img src="./img/faq09-07-03.jpg" border="0"></p>
+設定されたこのパスワードは、Web管理ツール「システム管理者メニュー」を操作するときの「システム管理パスワード」となります。<br>
+<br>
+<b>Ｂ．ドメイン操作パスワードを設定する</b><br>
+<br>
+ドメイン管理者メニューを操作するため「Ｂ」のドメイン操作パスワードを設定するには、次のように行います。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ドメイン管理］をクリックします。<br>
+［ドメインの新規作成・設定変更］をクリック、「既設ドメインの設定変更」で表示されたドメイン一覧からドメインを選択、［詳細設定を開く］ボタンをクリックします。<br>
+「操作パスワード」を入力、最後に「詳細設定する」ボタンをクリックします。<br>
+<p align="center"><img src="./img/faq09-07-04.jpg" border="0"></p>
+設定されたこのパスワードは、Web管理ツール「ドメイン管理者メニュー」を操作する際、「ドメインの選択」画面で「ドメイン」名とともに、入力しなくてはいけない「操作パスワード」となります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

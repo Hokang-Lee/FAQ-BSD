@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-28</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>フォワードするSMTPサーバをドメイン別に振り分け制御する</b></FONT>
+<HR>
+<br>
+外部（インターネット）から、いったん E-Post SMTP Server V / E-Post Mail Server V で受信したメールを、ドメイン別に振り分けて、フォワードするSMTPサーバを指定させたいときは、下記の設定を行います。<br>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある［ゲートウェイ詳細］ボタンをクリックし、表示される &quot;gateway.dat&quot; を編集します。<br>
+&quot;gateway.dat&quot; 内にドメイン毎のフォワード先のIPかFQDNを記述し、［設定］ボタンをクリックすることで保存されます。なお、&quot;gateway.dat&quot; を編集した後のサービスの再起動は不要です。<br>
+<ul>
+〈書式〉<br>
+<b>「対象（運用）ドメイン」,「ゲートウェイ先(FQDN or IP)」,「接続ポート番号」</b><br>
+<small>（※）「対象ドメイン」は受信するメールの［エンベロープTO］で指定されている内容が判断されます。</small><br>
+<br>
+（例１）<br>
+<hr align="left" width="80%" size="1" noshade>
+*.abc.jp,smtp01.domain.jp,25<br>
+*.def.jp,smtp02.domain.jp,25<br>
+<hr align="left" width="80%" size="1" noshade>
+<small>（※）上記の3行目はありませんが、もしこれを明示的に書いた場合は　*,[DNSサーバのIP],25　という設定内容を記述したときとほぼ等価になります。つまり言い換えれば、上の2行で指定された以外のドメインはすべて、hostsファイルやDNSサーバを参照した上で、送信先を決める動きになります。<br></small>
+（例２）<br>
+<hr align="left" width="80%" size="1" noshade>
+*,smtp.domain.jp,25<br>
+<hr align="left" width="80%" size="1" noshade>
+<small>（※）上記のように「対象ドメイン」としてワイルドカード指定がされている場合は、［エンベロープTO］で指定されるすべてのドメイン、つまりすべてのメールをフォワードさせる指定となります。通常、「テーブル編集」【gateway.dat】＞「SMTPゲートウェイ」項目の優先順位で配送されますが、この指定があるときは結果的にすべてのメールが対象となりますので、「SMTPゲートウェイ」項目は参照されません。<br></small>
+</ul>
+なお、&quot;gateway.dat&quot; の前段階として、［基本設定］にある「全受信メールをSMTPゲートウェイへ転送」チェックボックスがオフのときは、内部ドメイン・アカウントがあるかないかが事前に判定されます。また、同チェックボックスの設定内容にかかわらず、エイリアス指定があるかないかも必ず事前にチェックされます。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

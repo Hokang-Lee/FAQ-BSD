@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-28</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリストアドレスを送信元として利用することはできるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メーリングリストアドレスを送信元として利用することはできるかどうか、質問を受けたことがあります。<br>
+<br>
+E-Post側の機能にはメーリングリストアドレスを送信元に利用できるようにする機能はありません。少しトリッキーになるもののメール送信時にメールクライアント（メーラー）に用意されているFromヘッダーの書き換え編集する機能を使うことより、メーリングリストアドレスを送信元として利用すること自体は可能です。あくまでこれはヘッダー（Fromヘッダー）のみです。<br>
+一方、サーバ側が利用する本来の送信者情報であるエンベロープFROMの方は書き換えることは普通はしませんし、そうした機能も特別には用意しておりません。<br>
+<br>
+メールクライアント（メーラー）に用意されているFromヘッダーを書き換える機能は、ほとんどのメーラーに用意されているようです。たとえば、Outlookですと、新規メール編集画面の「オプション」－「差出人」にFromヘッダーで別のメールアドレスを指定できる機能があります。（Outlook2019で確認）<br>
+メールクライアント（メーラー）にFromヘッダーを書き換える機能が用意されている場合、「差出人」の指定部分でメーリングリストアドレスを指定して送ってみることはやり方としてできそうです。試してみると、Fromヘッダーはメーリングリストアドレスに書き換えられて送信できます。ただし送信先サーバによっては、FromヘッダーとエンベロープFROMの情報が食い違っていると判断し、受信拒否したり迷惑メールとして判定されるおそれは少なからずあります。<br>
+この方法を実施する場合は、実際に想定している送信先に問題なく送ることができるか、届いたメールに返信を行ってみて運用上特別な支障はないか、試しにいろいろ実験してみていただくことをお薦めいたします。<br>
+<br>
+なお、このとき、E-Post側で設定しているメーリングリスト詳細設定の内容では「&quot;FROM&quot;では利用しない」をオフ、「Reply-To:ヘッダーを付加する」をオン、にそれぞれ設定しておきます。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-63</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4受信メールについて、メールサーバ側のメールデータとメーラー側で表示されるメールとを突き合わせ、該当メールを特定する方法</b></FONT>
+<HR>
+<br>
+IMAP4受信メールについて、メールサーバ側で管理されているメールデータと、Outlookなどのメーラーで表示されているメール一覧とを突き合わせチェックし、該当メールを特定するには、次の方法で行います。<br>
+<br>
+<b>（メールサーバ側）</b><br>
+メールボックスフォルダ内に格納されているメールデータをメモ帳で開き、E-Post Mail Serverが記録した最終Receivedヘッダから、epstrdサービスが採番した”B”で始まるメッセージID番号を調べます。下記の赤い四角部分が該当します。<br>
+<a href="./img/faq10-63-001.jpg"><img src="./img/faq10-63-001s.jpg" border="0"></a>
+<br>
+<br>
+<b>（Outlook側）</b><br>
+受信トレイに表示されているメール一覧から「メッセージオプション」を表示させ、「インターネットヘッダー」内に表示されている最終Receivedヘッダから、epstrdサービスが採番した”B”で始まるメッセージID番号を調べます。上記と一致しているものは該当メールであると判断できます。<br>
+<a href="./img/faq10-63-002.jpg"><img src="./img/faq10-63-002s.jpg" border="0"></a>
+<br>
+メールデータが該当するメールであるかどうかの判断基準は、時刻やサイズでは決め手にならず、Receivedヘッダに記録されているメッセージIDによって判断するのが最良の方法になります。<br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-77</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>epstdd サービスが配送失敗時に生成するエラーメール &quot;Delivery failure&quot; はどういう形になるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+epstdd サービスが配送失敗時に生成するエラーメール &quot;Delivery failure&quot; はどういう形になるか質問を受けたことがあります。<br>
+E-Postのメールサーバ・SMTPサーバの epstdd サービスが配送失敗時に生成するエラーメールの題名 &quot;Delivery failure&quot; ですが、添付ファイルを（MIME）として含む形となり、下記の2つが添付されます。<br>
+<blockquote>１．&quot;Delivery report&quot; という名称での記録<br>
+２．&quot;送信できなかったメール&quot;</blockquote>
+ちなみに、送信エラーの生成メール（バウンスメール）、いわゆるリターンのエラーメールの表示方法は、以下のレジストリ項目と設定値で決定されます。デフォルトではマルチパート形式で、この時に質問の表示形式のテキスト情報と、送れなかったメールの2種の添付が（MIMEで）含まれるエラーメールが生成されます。マルチパート形式以外のレポートがよい場合は、設定ファイルを作り、設定値を入力します。<br>
+------------------------------------------------------------<br>
+<small>メール作業フォルダ<br>
+　->reg<br>
+　　->epost<br>
+　　　->ims<br>
+　　　　->EPST5DS 　　　　　　(ディレクトリ)<br>
+　　　　　→ReturnMailForm.1  (DWORD default 2)<br>
+　　　　　0:テキスト, 1:添付ファイル, 2:マルチパートレポート<br>
+　　　　　[エラー返信時バウンスメール構成内容の選択オプション]</small><br>
+------------------------------------------------------------<br>
+　※設定ファイルを作成したり、設定値を変更した場合は、epstddサービスの再起動が必要になります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-15.html">E-Post Mail Server V ／E-Post SMTP Server V で使用している設定ファイル〔BSD版〕</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

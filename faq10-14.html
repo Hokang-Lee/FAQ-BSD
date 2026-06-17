@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-14</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP使用時のメールボックスフォルダと「POP3無効」チェックボックスの関係について</b></FONT>
+<HR>
+<br>
+IMAPプロトコル使用時のメールボックスフォルダの仕様は下記の通りです。<br>
+<br>
+<b>１．E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーを選択して［設定変更］を選び［操作する］ボタンをクリックし表示される「アカウントの設定変更」画面<br>
+「POP3無効」チェックボックスがオフのとき<br></b>
+<br>
+POP3用メールボックスフォルダ（/var/spool/epms/inbox/[ドメイン名]/[ユーザ名]/）および、IMAP4用メールボックスフォルダ（/var/spool/epms/inbox/[ドメイン名]/[ユーザ名]/inbox/）の両方にメールデータが残ります。<br>
+つまりメールデータはフォルダ間でコピーされます。<br>
+※このとき、メールクライアントから、該当ユーザーアカウントに対してPOP3でもIMAP4でも両方の接続が可能です。<br>
+<br>
+<b>２．E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーを選択して［設定変更］を選び［操作する］ボタンをクリックし表示される「アカウントの設定変更」画面<br>
+「POP3無効」チェックボックスがオンのとき<br></b>
+<br>
+POP3用メールボックスフォルダにはメールデータは残らず、IMAP4用メールボックスフォルダ（/var/spool/epms/inbox/[ドメイン名]/[ユーザ名]/inbox/）のみにメールデータが残ります。<br>
+つまりメールデータはフォルダ間で移動されます。<br>
+言い換えると、POP3用メールボックスフォルダ（/var/spool/epms/inbox/[ドメイン名]/[ユーザ名]/）には、メールデータは残らない仕様です。<br>
+※このとき、メールクライアントから、該当ユーザーアカウントに対してPOP3による接続はできなくなります。<br>
+<br>
+なお、これらはあくまでも、メールデータがメールボックスフォルダに格納されるときの動きになります。<br>
+途中から、１→２に設定を変更したときは、以前のメールデータ（拡張子.MSGのファイル）がPOP3用メールボックスフォルダに残ります。不要なメールデータを手動で削除する必要があります。<br>
+そのとき、拡張子.MSG以外のファイルに、メール制御系の設定ファイル、メールフィルタ設定ファイルなどがメールボックス内に残っているケースがあります。<br>
+間違えてそれらの設定ファイル群を削除してしまわないように気をつける必要があります。<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

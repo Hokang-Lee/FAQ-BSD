@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-01</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>POP3接続セッション数制限設定時の制限値に達したときの動きについて</b></FONT>
+<HR>
+<br>
+POP3接続セッション数の制限設定をしている場合には、制限値に達したときには下のようなエラー応答がE-Postからクライアントに対して返され、接続が切断されます。<br>
+<br>
+<b>-ERR exceeds an accepting limit. </b><br>
+<br>
+これらのエラー応答は、接続セッション確立前であることから、POP3ログ及びPOP3詳細ログには記載されません。<br>
+ちなみに接続セッション数の制限設定をしているかどうかは、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［POP3詳細］を開き、「接続セッション数」の設定内容を確認してください。<br>
+接続セッション数が &quot;0&quot; であれば“無制限”を意味します。この設定状態のときはメモリ上限まで接続できますが、接続セッション数として任意の数値が設定されているときは、数値を大きく変更することにより、制限が緩和されることになります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

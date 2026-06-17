@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-16</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリストメンバーに自動応答設定をしたアカウントが存在する場合、応答させないようにするには</b></FONT>
+<HR>
+<br>
+メーリングリスト加入メンバーに自動応答設定をしたアカウントが存在しているとき、メーリングリストの設定で「未送信レポート返信先」を「送信者に戻す」設定をしている場合に、自動応答設定をしているアドレスからの自動応答メールが戻ってくることになり、あまり好ましいものではありません。<br>
+<br>
+こうしたことから、メーリングリストの配信先に自動応答設定をしたアカウントが存在する場合、組み合わせ次第では、ループを発生させてしまう可能性があります。<br>
+<br>
+メーリングリスト加入メンバーに自動応答設定をしたアカウントがある場合、どういった対策をとればよいのか説明します。以下にＡ、Ｂ２つの対策方法を考え、簡単なテストで試してみました。その理由についても説明しています。<br>
+<br>
+<b>（方法Ａ）</b><br>
+<ol>
+<li>メーリングリスト [ML＠domain.jp] の設定のうち、「未送信レポート返信先」を「返信者を指定」に設定。自動応答設定をしていない任意のアドレスを指定する。<br>
+（例）mladmin＠domain.jp</li>
+<li>アカウント [abc＠domain.jp] の自動応答設定のうち、［非応答アドレス編集］ボタンで呼び出す [noreply.txt] に上記１で設定したアドレスを記述する。<br>
+</ol>
+<b>（理由と背景説明）</b><br>
+<ul>上記１の設定でメーリングリストの配信が行われるとき、「未送信レポート返信先」を「返信者を指定」にして任意のアドレスが指定されているとき、E-Postは、エンベロープFROMをそのアドレスに書き換える機能として働きます。<br>
+すなわち、メーリングリストの配送は、常にエンベロープレベルで from mladmin＠domain.jp　to [配信先アドレス] と処理されることになり、このメールを受けた自動応答設定のアドレスは、［非応答アドレス編集］ボタンで呼び出す [noreply.txt] で設定されているため、応答を返さない、という理屈です。<br>
+なお、ここでの mladmin＠domain.jp は、自動転送設定をしていないことが大前提です。<br>
+</ul>
+<b>（方法Ｂ）</b><br>
+<ol>
+<li>メーリングリスト [ML＠domain.jp] の設定のうち、「未送信レポート返信先」を「返信しない」に設定。<br>
+<li>アカウント [abc＠domain.jp] の自動応答設定のうち、［非応答アドレス編集］ボタンで呼び出す [noreply.txt] は特に設定しない。<br>
+</ol>
+<b>（理由と背景説明）</b><br>
+<ul>上記１の設定では、メーリングリストの配信が行われるとき、「未送信レポート返信先」を「返信しない」にしているとき、E-Postは、エンベロープFROMを&lt;&gt;（アドレス空欄）に書き換える機能として働きます。<br>
+このとき、メーリングリストの配送は、常にエンベロープレベルで from &lt;&gt;　to &lt;配信先アドレス&gt;  と処理されることになり、このメールを受けた自動応答設定のアドレスは、エンベロープFROMが空欄のため、応答を返すことができないという理屈です。<br>
+</ul>
+ちなみに、メーリングリスト詳細設定にある「Reply-To:ヘッダを付加する／付加しない」設定は、どちらのケースも特に影響はしないようです。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

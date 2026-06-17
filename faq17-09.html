@@ -1,0 +1,99 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-09</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>〔新機能〕SMTP接続時の「IPロックアウト機能」について <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+E-Postシリーズに従来から実装されていた接続ロックアウト機能について、DDos攻撃のような連続無差別攻撃に対して有効なセキュリティ対策を強化するため、SMTP認証接続時の認証接続ロックアウト機能に加える形で、新たにIPロックアウト機能が追加されました。<br>
+IPロックアウト機能では一定の時間（サンプリング間隔）の間に設定回数以上の連続した接続に対し、設定されたロックアウト時間の間、接続を拒絶します。このIPロックアウト機能により、特定のIPアドレスから繰り返されるDDos攻撃のような連続無差別攻撃に対しても、接続そのものを自動的に遮断できるようになります。その結果、サーバーの負荷を高めずにセキュリティ対策を強化できます。<br>
+このIPロックアウト機能は、2019年2月以降のSMTPサービスモジュールに実装されています。IPロックアウト機能を使用するには、以下を参照してください。<br>
+<br>
+<b>【基本機能と仕様】</b><br>
+<ol><li>SMTP接続時の「IPロックアウト機能」は、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開き、画面下部にある<b>「IPロックアウトまでの接続回数」</b>項目や<b>「IPロックアウト判定間隔」「ロックアウト期間」</b>項目を設定します。続いて［SMTP認証ロックアウト］ボタンクリックでテーブル情報ともなっている設定ファイル <b>&quot;rejectsmtpip.dat&quot;</b> を確認したり編集できるようになっています。<br>
+<li>SMTP接続時に一定の時間（サンプリング間隔）の間に設定回数以上の連続接続に対し、設定されたロックアウト時間の間、接続を拒絶します。SMTP接続時に特定の同一IPアドレスからの接続回数が設定された回数に達したとき、接続元IPアドレスと接続時間情報（シリアル値）を <b>&quot;rejectsmtpip.dat&quot;</b> ファイルにテーブル情報として追記で記録します。右端に表記される <font color="#cc0000"><b>&quot;iplock&quot;</b></font> はIPロックアウト機能による拒絶の目印となります。<br>
+<li><b>&quot;rejectsmtpip.dat&quot;</b> ファイルはプログラムインストールフォルダ（既定値 /usr/local/mta/bin/）内に自動生成され、その内容は［SMTP認証ロックアウト］ボタンクリックで確認できます。<br>
+<li>設定された<b>「ロックアウト期間」</b>＝接続拒絶期間の間、epstrd サービスは該当IPアドレスからの接続を一切拒絶し、接続時に強制切断します。これにより認証までに至らないSMTP接続のDDos攻撃に対して強力な威力を発揮します。<br>
+<li>設定された<b>「ロックアウト期間」</b>＝接続拒絶期間をすぎると、自動的に再度接続が可能となります。再び一定時間（サンプリング間隔）の間に設定回数以上の連続接続があると、再度テーブル情報に記録、同様の拒絶動作が繰り返されます。<br>
+<li>メールサーバ管理者が <b>&quot;rejectsmtpip.dat&quot;</b> ファイルを編集し、記録された接続時間情報（シリアル値）部分をカット、接続元IPアドレスだけを残すと、該当IPアドレスからの接続は、永続的に拒絶されます。
+<li>メールサーバ管理者が <b>&quot;rejectsmtpip.dat&quot;</b> ファイルを編集し、記録された接続元IPアドレスおよび接続時間情報（シリアル値）部分を行ごと削除すれば、該当IPアドレスからの接続はリセット扱いされます。
+<li>メールサーバ管理者が <b>&quot;rejectsmtpip.dat&quot;</b> ファイルを編集し、接続を許可したい接続元IPアドレスを &quot;true&quot; 指定する方法で該当IPアドレスからの接続を永続的に許可するようになります。</ol>
+<b>【設定方法】</b><br>
+<ol><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面から epstrd サービス停止。<br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開き、画面下部にある<b>「IPロックアウトまでの接続回数」</b>項目を設定。設定値 &quot;0&quot; のときは認証ロックアウト機能は無効になっていることを表わしている。認証ロックアウトを有効にするには、&quot;0&quot; 以外の任意の回数、たとえば10回なら &quot;10&quot; を入力。<br>
+<li>続いて<b>「IPロックアウト判定間隔」</b>（サンプリング間隔）項目を秒単位で設定。設定するには任意の秒数、たとえば1秒なら &quot;1&quot; を入力。<br>
+<li>続いて<b>「ロックアウト期間」</b>項目を秒単位で設定。設定値 &quot;0&quot; のときはIPロックアウト期間無効＝期間無制限を表す。設定するには任意の秒数、たとえば5分なら &quot;300&quot; を入力。<br>
+<li>最後に最下の［設定する］ボタンをクリック。
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面から epstrd サービス開始。<br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開くと表示される［SMTP認証ロックアウト］ボタンをクリック。<b>&quot;rejectsmtpip.dat&quot;</b> ファイルが表示され、設定直後は空の状態であることを確認。<br>
+<li>IPロックアウト機能で拒絶された情報は、<b>&quot;rejectsmtpip.dat&quot;</b> 内に以下の順で記載されテーブル情報の形でデータ蓄積される。このファイルはSMTP認証接続時の認証接続ロックアウト機能と共用。 <font color="#cc0000"><b>&quot;iplock&quot;</b></font> の表記されているものはIPロックアウト機能による拒絶の目印となる。<br>
+<small><blockquote>接続元IPアドレス<font color="pink">[TAB]</font>接続時間情報（シリアル値）<font color="pink">[TAB]</font>iplock<br>
+<img src="./img/faq17-09-01.jpg" width="540"></blockquote></small><br>
+なお <b>&quot;rejectsmtpip.dat&quot;</b> データは蓄積されていく一方ですので、ある程度日数が経過した古いテーブル情報は削除する、同一IPアドレスからの接続は一つにまとめシリアル値部分をカットすることにより永続的拒絶とするなど、システム管理者が定期的に手動で整理する必要があります。<br>
+このSMTP接続時の「IPロックアウト機能」は2019年2月以降のSMTPサービスモジュールになっていることを確認して使用してください。<br>
+</ol>
+<br>
+<b>【参考】「IPロックアウト機能」の設定ファイル「指定時間内でのIP毎の同時接続可能数・回数」「サンプリング間隔」「ロックアウト期間」設定ファイル</b><br>
+以下の設定ファイルをviエディタで作成、下記のように設定値を記述することでも可能です。設定後はサービスの再起動が必要です。<br>
+<small><ul><li>指定時間内でのIP毎の同時接続可能数・回数設定ファイル &quot;IPLockOut.1&quot;<br>
+　[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5RS<br>
+　　　　　→IPLockOut.1 (数値) 指定時間内でのIP毎の同時接続可能数<br>
+　　　　　　（デフォルト=0:制限なし）例：10回→10,30回→30<br>
+<li>サンプリング間隔設定ファイル &quot;IPLockOutSPTime.1&quot;<br>
+　[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5RS<br>
+　　　　　→IPLockOutSPTime.1 (数値) サンプリング間隔（秒単位）<br>
+　　　　　　（デフォルト=0）例：1秒→1<br>
+<li>IPロックアウト期間設定ファイル &quot;IPLockOutTime.1 &quot;<br>
+　[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5RS<br>
+　　　　　→IPLockOutTime.1  (数値) ロックアウト期間（秒単位）<br>
+　　　　　（デフォルト=0）例：例・300秒→300,60秒→60<br>
+</ul></small>
+&quot;IPLockOut.1&quot; の任意回数（例・10[回]とか30[回]など）の設定とともに、&quot;IPLockOutSPTime.1&quot; のサンプリング間隔設定（例・1[秒]など）で機能が有効に働くようになります。また &quot;IPLockOutTime.1&quot; は上2つの設定によるロックアウト時間を設定します。（例・300[秒]とか60[秒]など）。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-25.html">SMTP認証時の「認証接続ロックアウト機能」について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

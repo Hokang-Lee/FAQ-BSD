@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-98</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTPサービスのマルチセッションやマルチスレッドの動作を検証試験したいときの考え方</b></FONT>
+<HR>
+<br>
+E-Postシリーズにおいて、SMTPサービスのマルチセッションやマルチスレッドを有効に設定し、スレッド数を指定した場合、スレッド数分のメールが同時処理されるかどうかの動作検証をしたい場合は、以下のような考え方に基づいて試験を実施することをお薦めします。<br>
+<br>
+<b>１．E-PostのSMTPサービスは2段階に分かれていることを考慮すべき</b><br>
+E-PostのSMTPサービスは、SMTPのプロセスに応じてSMTP受信プログラム（epstrd）と、SMTP配送プログラム（epstdd）との2段階に分かれています。大量メールの処理をするということを想定した場合、受領段階での処理と配送段階での処理それぞれを考慮しなくてはいけません。<br>
+SMTP受信プログラム（epstrd）では、メール１件で１セッション確立されます。TOやCCにたくさん同報していたとしても、受領段階では１セッションにすぎません。<br>
+試験を行うのであれば、メールクライアントプログラムの方で、１つ１つのメール受領後にセッションを切断することが望ましく、RSETコマンドでセッションを切らないで継続受領させることは避けた方がよいといえます。セッション数を数えるテストにならないからです。<br>
+SMTP配送プログラム（epstdd）では呼び方はスレッドとなりますが、事実上セッションと同一です。ただしこちらは待ち受け型サービスではなく自律的なサービスです。処理のようすを判定するには下記の３であげた方法を参考にして考える必要があります。<br>
+<br>
+<b>２．SMTP受信プログラム（epstrd）の接続セッション数の考え方</b><br>
+SMTP受信プログラム（epstrd）の最大接続セッション数は［SMTP受信詳細］にある「接続セッション数」設定に依存します。デフォルトは&quot;0&quot;で無制限となり、物理的なメモリ上限もしくはOSに実装されているSocketの許す上限までとなります。<br>
+制限を加える場合には「接続セッション数」で任意の数を設定しますが、任意の数を設定すると最大その数まで接続が可能となり、設定数を超えたところから接続が制限され切断される動きになります。<br>
+たとえば、スレッド数の&quot;10&quot;を「接続セッション数」に設定した場合、Windowsマシンのコマンドプロンプトか、メールサーバマシンのターミナルからtelnetコマンドでSMTPに次々接続していくと10個目まで接続できますが、11個目の接続をしようとしたときにその11個目の接続が拒否され切断されます。<br>
+ちなみにnetstatコマンドで確認できるのは、SMTP受信プログラム（epstrd）がデフォルト25番ポートで待ち受けますので、ポートを消費したり解放したりといったようすを確認することができます。<br>
+一方のSMTP配送プログラム（epstdd）の処理内容は、netstatコマンドでは確認できません。なぜなのかは次の３でふれます。<br>
+<br>
+<b>３．SMTP配送プログラム（epstdd）のスレッド数の考え方</b><br>
+［SMTP送信詳細］にあるepstddの「マルチスレッドで epstddを実行する」項目、および「スレッド数」項目はSMTP配送プログラム（epstdd）に関しての設定となります。<br>
+「スレッド数」での設定は最大値ですが、仮に設定した「スレッド数」いっぱいまで、めいいっぱい配送を試みるかどうかを試験で確認するには、仕組み上からしてかなり難しいと言えます。<br>
+たとえば、最初にepstddを止めておいて、epstrdだけ稼働した状態にしておき、たくさん受領が終わった状態にしておくと、メールキューのincomingフォルダ内に送信用メールデータがたまった状態になります。その状態から、一気にepstddサービスを再開すると、めいいっぱい配送を試みることになります。しかしおそらく設定した「スレッド数」いっぱいまで使って配送を試みる状態を作り出すことはめったに起きず、非常に難しい試験となりそうです。<br>
+この方法で試験を行うとすれば、メールキューのincomingフォルダに作成されたファイルがどのぐらいのタイミングで掃けていくか、その時間を測り、１メールあたりの平均処理速度を算出するといった手法になるのではないかと考えます。<br>
+なお、incomingフォルダは、[メール作業用フォルダ]下にあります。incomingフォルダにファイルを一時的にためた状態にする場合、1000を超え、10000に近い数字に及んでしまうと、今度はOSの持つファイルシステムのパフォーマンスが極端に低下するという別の問題が発生します。そのため、この方法で試験するときは、数百レベルのファイルがたまるレベルにとどめておくことが望ましいです。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-55.html">「接続セッション数」の意味と望ましい設定値について</a><br>
+●<a href="./faq01-78.html">メールキュー（incoming）フォルダに生成される一時ファイルについて</a><br>●<a href="./faq01-43.html">大量のメールを一括送信する場合、配送キューにファイルが大量に溜まることで配送処理が悪化してしまうのを防ぐには</a><br>
+●<a href="./faq15-70.html">1フォルダ当たりのファイル数が膨大になるとファイルシステムのパフォーマンスが劇的に落ちるとは？</a><br>
+●<a href="./faq15-58.html">配送サービスepstddのスレッド数はどの程度まで上げても大丈夫か</a><br>
+●<a href="./faq15-83.html">ゲートウェイ装置がある環境でepstddのスレッド数を増やしたところ逆に遅延が発生するおそれがある場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+</body>
+</html>

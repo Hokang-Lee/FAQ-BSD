@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-68</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>自動転送先アドレスに自動応答を設定しているアドレスを指定すると両アドレス間で無限ループになる</b></FONT>
+<HR>
+<br>
+下記のように、自動転送機能を使って、転送先アドレスに自動応答を設定しているアドレスを指定すると、そのままでは両アドレス間で無限ループが発生してしまいます。<br>
+<br>
+（例）<br>
+　　　　　　　　　　（受　信）　↓<br>
+・自動転送設定アカウント　…　tensoumoto＠test-sample.jp<br>
+　　　　　　　　　　（自動転送）↓ <font color="red">両者間でループ発生</font> ↑（自動応答）<br>
+・自動応答設定アカウント　…　tensousaki＠test-sample.jp<br>
+<br>
+自動転送の設定も、自動応答の設定も残したままで、両アドレス間の無限ループを避けるためには、自動応答を設定しているアカウント側で自動応答設定について、次の変更を加えてください。<br>
+<br>
+<b>　[送信元アドレスを記録する。] -&gt;　チェックボックスをオン<br>
+　　[同じアドレスには次回応答しない。] -&gt;　チェックボックスをオン</b><br>
+<br>
+この設定によって、自動転送を利用しているアカウントからの自動応答をしないようになり、ループを防げます。<br>
+これにより、[非応答アドレス編集]で呼び出せる&quot;noreply.txt&quot;に記録がされるのと、送信元アドレスを記録する設定をしたことで&quot;replied.txt&quot;への記録がされるようになります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

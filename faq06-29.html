@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ06-29</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	pre {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:1.6em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>E-Postシリーズで SPF、DKIMの設定を行う基本的方法について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Post V シリーズで SPF、DKIMの設定を行う基本的方法について説明します。<br>
+<br>
+まず、SPFですが、送信側の義務としてDNSにSPFレコードを記述することは、必要最低限の措置です。送信側としてSPFレコードを記述するのは、E-Postシリーズ本体の設定とは関係なくすぐに設定可能です。<br>
+SPFレコードの記述方法は、一般的なDNSの作業になりますので、E-Post独自の手順はなくあくまで共通の方法となります。SPFレコードの記述方法についての一般解説を参照し、真っ先に記述することを推奨します。<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq10-85.html">スパム扱いされないで確実に配送するためにDNSのSPFレコードやDMARCレコード記述を推奨</a><br>
+<br>
+一方、DKIMですが、DNSのレコードに記述するには、電子署名された公開鍵証明書のアップが必要になり、同時に送信時のメールヘッダーに秘密鍵情報を記載する必要があります。そのために E-Post V シリーズ専用のツールが必要です。<br>
+E-Post V シリーズに対応した２種類のツールを次年度更新時のCDに収録しています。２種類のうちどちらかのツールを使って、DKIM用の公開鍵証明書をDNSに掲載することと、秘密鍵の暗号化情報をメールヘッダーに記載するよう設定してください。<br>
+２種類のツールのうち、EPSTDMARC を導入すれば、DKIMのチェックが可能な送信ドメイン認証アドオンツール EPSTDKIM や、SPFのチェックが可能な送信ドメイン認証（SPF）アドオンツールの組み込みは不要になります。送信ドメイン認証 DMARC へ対応したヘッダ記載（シグネチャ及び判定ヘッダ）機能と履歴ファイル作成機能があり、メール受信時にはこのプログラムのみで SPF/DKIM/DMARC/ARC の4つすべての判定結果のヘッダへの記載が可能になるほか、かつメール送信時はDKIM用のシグネチャヘッダの記載を実施することができるようになります。くわしくはツールの setup-dmarc_readme.html、setup-dkim.html をご覧ください。<br>
+<br>
+・送信ドメイン認証（DMARC）アドオンツール EPSTDMARC<br>
+・送信ドメイン認証（DKIM）アドオンツール EPSTDKIM<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

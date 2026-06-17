@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-87</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>E-Postシリーズでの文字コードの取り扱いについて</b></FONT>
+<HR>
+<br>
+E-Post Mail Server・E-Post SMTP Serverシリーズでの文字コードの取り扱いについては、次のような仕様になっています。<br>
+<ol>
+<li>メールサーバはクライアントから送信されてきたメールや相手MTAから送信されてきたメールの文字コードを変更したり、さわることはしないとの考え方を原則としており、E-Post Mail Server・E-Post SMTP Serverシリーズでは、メールの文字コードを自動的に変換したり、置き換えたりすることは基本的にありません。<br>
+あくまでメールの文字コードは送信元に依存し、送信時のメールクライアント側の指定内容・作成コードに従います。<br>
+</li><br>
+<li>上記を原則としますが、E-Post側で文字コードを決めなくてはならない機能部分、メールを自動生成する必要がある場面では、下記のような例外があります。</br>
+ <ul type="square">
+ <li>ブラウザで操作するE-POST コントロールセンター（メールサーバ管理）で自動応答メールの件名および本文を登録したときには、iso-2022-jp に自動的に変換して保存するという動きになります。</li>
+ <li>メールサーバ側で自動生成する &quot;Delivery failure&quot; のようなエラーメールを送信するときは、Content-typeヘッダがないので us-ascii で生成されます。</li>
+ <li>メールサーバ側で自動生成するメーリングリストの応答についても、Content-typeヘッダがないので us-ascii で生成されます。</li>
+ <li>上長承認または、セキュアハンドラを有効にした場合、承認メールの生成と送信が自動的に行われますが、このとき、Mailtoリンクの文字列についての文字コードを設定ファイルにより、生成コードが変えられるようになっています。</li>
+ </ul>
+これらの機能以外、基本的にあらゆる場面では、E-Postシリーズ側では、文字コードを自動的に変換したり、置き換えたりすることはしません。<br></li></ol>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-04.html">E-Postシリーズは UTF-8 / 8bit Encoding のメールを文字化けせず正しく送受信できますか？</a><br>
+●<a href="./faq02-24.html">メーリングリスト機能により流されたメール題名がAndroid系携帯端末の特定メーラーで文字化けする現象について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

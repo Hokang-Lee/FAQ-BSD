@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-57</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Webサーバ・メールサーバ・DNSを切り替えるとき、サーバのホスト名変更、DNSのMXレコード変更は可能か <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+Webサーバ・メールサーバ・DNSを切り替えるとき、サーバのホスト名変更は可能か、あるいはDNSのMXレコード変更は可能か、という質問を受けたことがあります。<br>
+<br>
+メールサーバ・SMTPサーバのホスト名変更自体は可能です。場合によれば、メールドメインの名の変更も可能です。ホスト名自体の変更やメールドメイン名変更をする際は、事前にE-Postサービスを停止した上で行ってください。<br>
+また、DNSのMXレコードが、正しいメールサーバ（SMTPサーバ）のIPアドレスを示してさえいれば、メールサーバのホスト名が変わっても問題はありません。DNSサーバのAレコード、CNAMEレコード、MXレコードをそれぞれのサーバに正しく振り向けるように変更する必要があるのは言うまでもありません。ちなみにDNSの書き替え方法は弊社サポートの範囲外ですので関連するマニュアルや説明ドキュメントをご覧ください。<br>
+<br>
+ところでログの記録位置には留意してください。ログは[メール作業用フォルダ]/[各ログ]/[ホスト名]/の下に日付ごとに記録されます。<br>
+（例・/var/spool/epms/acceptlog/hogehoge/）<br>
+ホスト名自体を変更することで、旧ホスト名ではなく新ホスト名フォルダの下にログが記録されることとなります。<br>
+<br>
+また、ホスト名変更作業とつながりがあることとして、E-Postシリーズではメールドメイン名をhostsファイルに記述していることを必須にしていますので、メールドメイン名の変更やIPアドレスの変更があれば、hostsファイルも記述変更を忘れないようにしてください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq03-36.html">E-Post稼働後にIPアドレスとコンピュータ名を変更する際の影響と注意点について</a><br>
+●<a href="./faq10-53.html">hostsファイル記述の必要性と有用性について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

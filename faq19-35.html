@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-35</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>POP3利用でサーバにメールのコピーを残す場合、一定期間後に削除は可能か <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メールボックスフォルダのメールデータを削除するのは、すべてメールクライアントからの命令に依存します。（POP3ではDELE命令）<br>
+POP3受信の場合、メールクライアント側の設定に保存期間（サーバに残す期間）を設定できるものが大多数ですので、その設定を行うことで、クライアントからサーバにDELE命令が発せられ、該当メールデータを削除することになります。<br>
+サーバ側からメールデータを削除するには、管理者がメールデータファイルを手動で削除するか、あるいは別方法としてスクリプトを用意しておいて、一定期間経過したものを削除実行するよう、crontab コマンドであらかじめ登録しておくという手法になります。<br>
+スクリプトについては、一定期間経過したログを削除するスクリプト事例を下記記事にあげています。それを参考にしながら、同様の手法で各ユーザーのメールボックスに保管されているメールデータに対して削除実行を指示してください。なおメールデータの拡張子は .MSG です。<br>
+メールボックスフォルダの位置は、設定によって変わりますので、下記記事を参考にしてください。<br>
+<b>（参考FAQ）</b><br>
+●<a href="./FAQ05-44.html">スクリプトで行う定期的なログ削除の自動化の事例</a><br>
+●<a href="./FAQ10-11.html">方式の違いによるメールボックスフォルダの作成位置について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+
+<br>
+
+</body>
+</html>

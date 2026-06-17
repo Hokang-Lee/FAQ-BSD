@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ09-10</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Web管理ツールからユーザーアカウントのパスワードを変更する場合の注意点</b></FONT>
+<HR>
+<br>
+Web管理ツールからユーザー管理でアカウントを管理する場合は注意が必要です。<br>
+SMTP認証パスワードとPOP3/IMAP4のパスワードとが別々に管理されているアカウントについて、Web管理ツールから該当ユーザー（アカウント）のパスワードを変更した場合、両方のパスワードがいっしょに同じ内容で変更されてしまいます。<br>
+現状ではWeb管理ツールからは、SMTP認証パスワードとPOP3/IMAP4のパスワードとを別々にパスワード管理することはできません。<br>
+また、Web管理ツールからは、該当ユーザーアカウントのメールボックスフォルダを開くことはできず、SMTP認証パスワードが格納されている&quot;apop.dat&quot;ファイルを編集することはできませんので、別々にパスワード管理する操作方法が用意されておりません。コンソールにログインし、該当ユーザーアカウントのメールボックスフォルダ（既定値 /var/spool/epms/inbox/[ドメイン名]/[ユーザー名]）内にある&quot;apop.dat&quot;ファイルをダイレクトに書き換えれば、とりあえず別々の管理はできます。ちなみに&quot;apop.dat&quot;ファイルの中身は平文で入力します。<br>
+<br>
+Web管理ツールからユーザー管理でアカウントのパスワードを変更する場合には、SMTP認証パスワードとPOP3/IMAP4のパスワードが同じ場合は何も問題がありません。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

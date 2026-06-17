@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-81</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!--Google Analytics start-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22937858-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!--Google Analytics end-->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>エラー応答 &quot;503 5.5.1 Error: authentication not enabled.&quot; が返されるときの意味 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+epstrdサービスによりエラー応答 &quot;503 5.5.1 Error: authentication not enabled.&quot; が返されるときの意味について説明します。<br>
+このエラーは、メールサーバ側の全体設定である、「サービス制御」にある「SMTP認証方法」を &quot;NO&quot; に設定していて、さらにセキュリティレベルも &quot;非認証有効&quot; にしているとき、つまり全体でSMTP認証そのものを無効にしているときを前提にします。<br>
+通常なら、メールサーバ全体でSMTP認証は無効ですから、クライアントからEHLOされた後、メールサーバからはSMTP-AUTHの有効であることを何も返しません。<br>
+これに対して、全体設定でSMTP認証を有効に設定している場合は、メールサーバからは &quot;250 AUTH PLAIN LOGIN CRAM-MD5&quot; といった応答を返します。<br>
+このとき前者のケース、つまりメールサーバ側がSMTP-AUTH有効であることを返していない状況で、メールクライアントからAUTHで認証しようとすると、SMTP認証自体が無効ですから、特殊なエラー応答である &quot;503 5.5.1 Error: authentication not enabled.&quot; が返されることになります。<br>
+ところで、大部分のメールクライアントは、メールサーバ側のSMTP認証が有効かそうでないかの応答を見て、認証有効であればAUTHで認証しようとし、認証無効であれば認証なしで送信依頼に入ります。このあたりの動きの違いは、メールクライアントの特性にもよります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a><br>
+●<a href="./faq10-01.html">EPSTRS応答コード一覧</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

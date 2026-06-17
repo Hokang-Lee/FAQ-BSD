@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-49</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>大量配送時での大量リトライと大幅な遅延について</b></FONT>
+<HR>
+<br>
+大量配送を行ったとき、大量のリトライが発生し、大幅な遅延が発生することがあります。<br>
+<br>
+大幅な遅延が発生する要因にはさまざまなことが予想されますが、中でも、典型的なのが、相手先のサーバが「グレイリスト方式」を採用しているケースや、相手先の「送信ドメイン認証」の設定が影響しているケースです。このとき、400番台コードで表される“一時的な拒絶”が大量に発生し、その分のリトライが倍数的に発生、（大量配送をしていない）通常のメールが、大量リトライの巻き添えを食らう形で大幅に遅延する結果になることがあります。<br>
+<blockquote>
+※相手先からどういうコードが返されているかは、以下の部分などで確認できます。<br>
+・送信エラーのリターンメール<br>
+・<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a><br>
+・<a href="./faq05-09.html">配送失敗ログ（faillog）</a><br>
+・domainsフォルダにある&quot;Domain.mri&quot;ファイル（※リトライ中のみ）<br>
+</blockquote>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-67.html">リトライ処理が行われるときの情報とフォルダについて</a><br>
+<br>
+通常、相手先サーバのポリシー的理由で一時的拒絶を大量に受けたとき、送信メールが多量に溜まり、リトライ処理が大量に発生します。E-Post Mail Server／E-Post SMTP Serverシリーズでは、リトライ送信が順次処理される最中でも、新しいメールの送信リクエストを受け付け、処理しようとします。ただし、新規のメール送信も、リトライ送信時も、同じメールキューフォルダ＝incomingフォルダで作業されます。その結果、新規のメール送信も、リトライ送信も、順次送信されるまで待たされることになり、見かけ上送信できていないように見えるほどの送信遅延が発生します。<br>
+<br>
+相手先サーバのポリシー的理由で相手先のサーバが「グレイリスト方式」を採用しているケースや、相手先の「送信ドメイン認証」の設定が影響しているケースでは、下記にあげる方法や対策をとることで、改善することがあります。<br>
+<br>
+まず、相手先サーバが「グレイリスト方式」などでメールを制限している場合は、一度目の接続で必ず拒絶されるので、手立てとしては、リトライでしか受け付けられないことを知っておく必要があります。さらに、こちら側がリトライ間隔を不用意に延ばしたり、縮めていたりすると、延々と受け付けられない可能性があります。安全・確実さを考えたデフォルト値をベースにして、調整してください。<br>
+<blockquote>
+※E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP送信詳細］を開いて表示される「SMTP送信詳細設定」画面デフォルト値<br>
+「リトライ間隔」＝120秒、「リトライ間隔のまま」＝オフ<br>
+「リトライ回数（受信拒否：500番台コード）」＝9回<br>
+「リトライ期間（回線異常：400番台コード）」＝8時間<br>
+「リトライ期間（マシン無応答：コードなし）」＝24時間<br>
+</blockquote>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-98.html">複数MXレコードへの対応とグレイリスト方式への対策について</a><br>
+<br>
+次に、相手先サーバの「送信ドメイン認証」の設定が影響している場合には、こちら側のDNSにSPFレコードを記載すると、改善することがあります。DNSをチェックし、SPFレコードを記述しているか確認してください。場合によっては、相手先によって受信が制限されない可能性、つまり優先して接続してくれる効果があるかもしれません。<br>
+<br>
+相手先サーバのポリシーは、普通はなかなか聞き出すことはできませんが、ある程度の類推ができるときもあります。グレイリスト方式と、送信ドメイン認証については、参考までに他サイトの情報を引用します。<br>
+<br>
+<b>（参考情報）</b><br>
+　<a href="https://www.imc.gifu-u.ac.jp/service/email/greylisting.html" target="_blank">グレイリスト方式（グレイリスティング方式）</a><br>
+　<a href="http://www.itmedia.co.jp/enterprise/articles/0603/24/news006.html" target="_blank">送信ドメイン認証の基礎知識〔ITmedia〕</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

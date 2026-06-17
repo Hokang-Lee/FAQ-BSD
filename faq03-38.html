@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ03-38</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>ExpressMailなど他社製メールサーバから移行作業を行う手順の概要について <font color="#ff0000">new!</font></b></FONT><br>
+<HR>
+<br>
+ExpressMailなど他社製メールサーバから移行作業を行う手順の概要について記します。これはあくまで理論的なものです。弊社では、他社製品の仕様を把握しておりません。細かい操作内容や疑問点などは各自で解決してください。<br>
+<ol>
+<b><li>メールボックスデータの移行の考え方について</b></li>
+まず、ExpressMail（Sendmail＋MDA）のメールボックスに格納されているメールデータを移行するにあたって、下記の点を確認する必要があります。<br>
+Sendmail＋MDAで使用してきたメールボックスの保管形式が１メール／１ファイル単位の形式（Maildir方式）の場合、ファイルの拡張子をたとえば、&quot;.mm&quot;を&quot;.MSG&quot;にリネームすることにより、E-Postシリーズでもそのままメールデータとして利用が可能です。<br>
+ちなみに、E-Post Mail Server V シリーズのメールボックス（POP3）での保管形式は、拡張子が&quot;.MSG&quot;となっていて、１メール／１ファイル単位です。このファイルは実際には&quot;.eml&quot;ファイルと同じものです。<br>
+しかし、メールボックスがMailbox形式だったり、すべてのユーザーのデータがいっしょに混在して入っていたりすると、特別なコマンドを使用して取り出したりする作業が必要なケースもあります。特にIMAP4を利用するMDAの場合は、そのような形式になっていると聞いています。<br>
+現状のSendmail＋MDAで使用してきたメールボックスがどのような形になっているか調べてみて、移行可能な状態になっているか、まずは確認することが必要です。<br>
+<br>
+<b>（参考）</b><br>
+■<a href="../epmsent_construct_guide/kouchiku04.html" target="_blank">メールサーバ構築ガイド｜04.E-Post Mail Serverのローカルメール配信形式</a><br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-11.html">方式の違いによるメールボックスフォルダの作成位置について</a><br>
+<br>
+<b><li>アカウントデータの移行の考え方について</b></li>
+一方、メールアカウント情報に当たるアカウントデータについては、E-Postシリーズでは、メールドメイン名ごとにタブ区切りテキストファイル経由にてインポートが可能です。タブ区切りテキストファイルの各フィールドごとの書式については次の記事を参照してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-88.html">インポート・エクスポートするテキストファイルの書式について</a><br>
+<br>
+<b><li>メールサーバ本体設定内容の移行の考え方について</b></li>
+E-Postシリーズと他社製品とは設計思想がまったく異なりますので、設定ファイルの書式や設定内容が共通のものは一切ないものと考えてください。その考え方に沿って、E-Postシリーズではどのように設定するのか、その設定方法の詳細はどうなのか、メールサーバ構築ガイドなどを参照し、十分検証した上で設定値を検討、作業するようにしてください。<br>
+また、メールボックスのメールデータ移行作業が正常にできるかどうか、アカウントデータの移行作業ができるかどうかなど、テストアカウントで十分試験してから本番の作業に臨むことを推奨します。<br></ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

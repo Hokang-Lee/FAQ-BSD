@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-32</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlogに&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;が記録される場合の対処策 <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+senderlogに<b>&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;</b>が記録されている場合、相手側サーバの無応答のほか、通信経路上のトラブルつまり回線上で通信ができないケースや回線が混雑のため通信タイムアウトが発生しているケースの可能性があります。これについては[対処方法その1]を参考にしてください。この応答コードは、無通信タイムアウトに達した場合や、セッションを相手が切った場合など、特別な応答がないために、E-Postが内部処理において自動作成した応答コード＆メッセージです。<br>
+<br>
+そのほか、送信時にSTARTTLS通信を有効に設定している状況下で、かつ多方面へ大量配送を行っているケースに限定されますが、送信スレッド内でいったんSTARTTLS開始による暗号化通信のメール送信が行われると、その後の同じ継続スレッドのメールデータ送信は接続相手によりプレーン送信が必要な場合でも、勝手に暗号化通信の &quot;SMTP over SSL&quot; として処理を行ってしまい、&quot;451 Requested action aborted: error in processing. (code=0/0)&quot; を記録して回線が切断される不具合が見つかっています。これについては下の[対処方法その2]を参考にしてください。<br>
+<br>
+<b>[対処方法その1]</b><br>
+この応答コードが記録されている場合、無通信接続タイムアウト時間を長くしてようすを見てください。無通信接続タイムアウト時間は、デフォルトで20分の設定です。以下の通り、設定ファイルを操作してDWORD値10進で作成、値を手動で登録することで調整可能です。ちなみに、簡単セットアップ（設定ウィザード）を実行すると、デフォルト値の設定が適用されますが、キーの値を特に設定していない場合もデフォルト値が適用されます。<br>
+------------------------------------------------------------<br>
+<small>メール作業フォルダ<br>
+　->reg<br>
+　　->epost<br>
+　　　->ims<br>
+　　　　->EPST5DS 　　　　　　(ディレクトリ)<br>
+　　　　　->SendDataTimeout.1　(数値)sec 送信１回当りのタイムアウト時間<br>
+　　　　　　　　　　　　　　　キー値がない場合＝デフォルト 1200sec<br>
+　　　　　->RecvDataTimeout.1　(数値)sec 応答１回当りのタイムアウト時間<br>
+　　　　　　　　　　　　　　　キー値がない場合＝デフォルト 1200sec<br></small>
+------------------------------------------------------------<br>
+上記の値をそれぞれ長めに設定し、設定ファイルを終えた後、epstddサービスを再起動してください。<br>
+<br>
+<b>[対処方法その2]</b><br>
+epstdd v5.11以前では、epstddサービスが抱えていた不具合として、送信スレッド内でいったんSTARTTLS開始による暗号化通信のメール送信が行われると、その後の同じ継続スレッドのメールデータ送信は接続相手によりプレーン送信が必要な場合でも、勝手に暗号化通信の &quot;SMTP over SSL&quot; として処理を行ってしまい、&quot;451 Requested action aborted: error in processing. (code=0/0)&quot; を記録して回線が切断される不具合がありました。<br>
+この問題については下記項目で修正されています。20231223差分以降の最新差分アップデートを適用してください。<br>
+<br>
+------------------------------------------------------------<br>
+<small>　epstdd v5.12 2023.09.27<br>
+　1. 送信スレッド内でSTARTTLSでメール送信後の次のメールデータの送信を自動で &quot;SMTP over SSL&quot; として処理を行ってしまう不具合の修正。<br></small>
+------------------------------------------------------------<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-37</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Outlook (2016) をPOP3メールクライアントに使っているときに 0x800CCC92 のエラーが表示されることがある <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+Outlook (2016) をPOP3メールクライアントに使っているときに、0x800CCC92 のエラーが表示され、メールデータが受信できない現象報告がありました。<br>
+pop3log（POP3ログ）を調べたところ、&quot;[useraccount]'s logon overlap.&quot; が記録されており、メールサーバがエラーを返していることが確認されました。特定のユーザーアカウントで、POP3二重ログインしようとする使用環境が原因であることがわかりました。<br>
+POP3プロトコルでは、二重ログインそのものが禁止されています。E-Postシリーズの仕様というだけでなく、そもそもプロトコル上許されていません。<br>
+サーバ側の絶対的な回避策としては、そもそも二重ログインが許されていないPOP3を使わず、多重ログインが許されているIMAP4を使うようにすることをお薦めいたします。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-69.html">POP3サービス使用時に特定のユーザーが二重ログイン状態になってしまったとき</a><br>
+●<a href="./faq10-76.html">メールクライアントのPOP3受信タイミングが短いケースで logon overlap のエラーが持続してしまう場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

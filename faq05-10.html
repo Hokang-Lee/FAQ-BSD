@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-10</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>配送時の詳細ログ（senderlog）について</b></FONT>
+<HR>
+<br>
+配送時の詳細ログ(senderlog)は、内部ドメイン<font color="#A52A2A">（※）</font>や外部ドメインへの配送動作の詳細記録です。<br>
+配送時の詳細ログについての記録方法は、次の手順で行ってください。<br>
+<ol><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ログ］を開き［配送時の詳細ログ］チェックボックスの状態を確認します。
+<li>チェックボックスがオンの設定のままのときはそのままで、［配送時の詳細ログ］チェックボックスがオフのときはオンに変更してから［設定する］ボタンクリックします。
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面からSMTP配送サービス（epstdd）を［停止］→［開始］で再起動します。</ol>
+※ただし、内部ドメインどうしの配送動作は、ほとんどの状況下でデフォルトの出力設定（短い出力設定）では記録されません。設定ファイルを変更することによって、長めの出力設定時に送信先だけが記録されるようになります。詳細については下記リンクにある「配送時の詳細ログ（senderlog）の仕様とログの長/短出力設定」を参照してください。<br>
+<br>
+ログ記録は、［メール作業フォルダ/senderlog/コンピュータ名］フォルダ下に日付単位で作成されます。下記は senderlog の基本的パターンを事例化したものです。接続相手は同じ E-Postシリーズを想定しています。<br>
+<br>
+<small>
+<hr align="center" width="98%" size="1" noshade>
+　メッセージID　  送受信内容・内部処理ステータス
+<hr align="center" width="98%" size="1" noshade>
+　[B0000097013] [yyy.yyy.jp] GetTryServer:()<br>
+　[B0000097013] [yyy.yyy.jp] GetTryServer:(ltime(12709270733)-otime(12709270733))/240=(0)<br>
+　[B0000097013] [yyy.yyy.jp] GetTryServer:()<br>
+　　　　　　　　　：　　　　　　<br>
+　[B0000097013] ConnectHost(xxx.xxx.jp)<br>
+　　　　　　　　　：　　　　　　<br>
+　[B0000097013] SendMailMess:[11:02:55:144] 220 xxx.xxx.jp E-POST ESMTP Receiver ......<br>
+　[B0000097013] SendMailMess:HELO yyy.yyy.jp<br>
+　[B0000097013] SendMailMess:[11:02:55:160] 250 xxx.xxx.jp Hello [192.168.xx.xx], pleased to meet you<br>
+　[B0000097013] SendMailMess:MAIL From: &lt;yyy＠yyy.yyy.jp&gt;<br>
+　[B0000097013] SendMailMess:[11:02:55:222] 250 2.0.0 &lt;yyy＠yyy.yyy.jp&gt;... Sender ok.<br>
+　[B0000097013] SendMailMess:RCPT To: &lt;xxx＠xxx.xxx.jp&gt;<br>
+　[B0000097013] SendMailMess:[11:02:55:222] 250 2.0.0 &lt;xxx＠xxx.xxx.jp&gt;... Recipient ok.<br>
+　[B0000097013] SendMailMess:DATA<br>
+　[B0000097013] SendMailMess:[11:02:55:238] 354 Start mail input;id &lt;B0000286009&gt; end with &lt;CRLF&gt;.&lt;CRLF&gt;<br>
+　[B0000097013] SendData complete.<br>
+　[B0000097013] SendMailMess:[11:02:56:009] 250 2.0.0 Message received ok.<br>
+　[B0000097013] SendMailMess:QUIT<br>
+　　　　　　　　　：　　　　　　<br>
+　　　　　　　　　：　　　　　　<br>
+<hr align="center" width="98%" size="1" noshade></small>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-19.html">配送時の詳細ログ（senderlog）の仕様とログの長/短出力設定</a><br>
+●<a href="./faq05-20.html">senderlog と faillog に記載された配送失敗の理由が異なる</a><br>
+●<a href="./faq05-25.html">senderlog にscrambleRCP()の行がたくさん出力されているのは</a><br>
+●<a href="./faq05-33.html">senderlogにデータ送信途中で&quot;socket error code=54&quot;や&quot;=53&quot;のようにWINSOCKのエラーコードが記録される場合</a><br>
+●<a href="./faq05-32.html">senderlogに&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;が記録される場合の対処策</a><br>
+●<a href="./faq05-26.html">senderlogに&quot;421 Service Temporarily Unavailable&quot;と&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;が記録される理由について</a><br>
+●<a href="./faq05-34.html">senderlogに送信リトライのたび&quot;socket error code=60&quot;のエラーが記録される場合</a><br>
+●<a href="./faq10-04.html">socketエラーコード表</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

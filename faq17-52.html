@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-52</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールサーバ基本動作チェックと切り分けの観点 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メールサーバ基本動作チェックと切り分けを行う際、telnetクライアントを使うことで、メーラーがなくてもSMTPの送信テスト・POP3受信テスト・IMAP4受信テストを行えます。順番として最初にメールサーバマシン自体から試し、次に各クライアントPCから試すという方法を取ることができます。メールサーバの設定に問題があるのか、名前解決やファイヤーウォールを始めとする通信環境など、どこに問題があるのかを切り分けるには好都合です。<br>
+構築と導入、さらに検証試験をするときには、telnetクライアントが組み込まれてあるので、telnetコマンドをぜひ使うようにしていただくことをお薦めします。下記の項目に従って調べてください。<br>
+<ol>
+<b><li>メールサーバマシン自体からtelnetコマンドを使って、SMTP接続してテスト送信を試し、POP3接続してPOP3受信、IMAP4接続してIMAP4受信がそれぞれできるかどうかを試す。</li></b>
+(1) メールサーバマシンにはtelnetクライアントが組み込まれている。<br>
+(2) 管理者権限でコンソールを開き telnetコマンドを試す。Tera Termなどを使ってSSHによるコンソールログインでも可。<br>
+(3) telnetコマンドの使い方事例は、メールサーバ構築ガイドに書かれているので詳細はそちらを参照のこと。（SMTP認証しないテストアカウントを作って試すのがやりやすい）<blockquote><a href="/epmsent_construct_guide/kouchiku11.html" target="_blank">メールサーバ構築ガイド｜11.メールを送ろう</a><br>
+<a href="/epmsent_construct_guide/kouchiku13.html" target="_blank">メールサーバ構築ガイド｜13.POP3・IMAP4でメールを取り出そう</a></blockquote>(4) telnetコマンドでSMTP接続やPOP3接続、さらにIMAP4接続を試すとき、telnet [メールドメイン名] smtp や telnet [メールドメイン名] pop3、telnet [メールドメイン名] imap4 だけでなく、telnet [IPアドレス] smtp や telnet [IPアドレス] pop3、telnet [IPアドレス] imap4 も試してみる。<br>
+(5) メールサーバマシン自体からSMTP接続やPOP3接続、さらにIMAP4接続が問題ないようであれば、今度はクライアントPCにtelnetクライアントを追加し、同様にtelnetコマンドでの接続テストを試してみる。<br>
+<br>
+<b><li>問題がどこにあるのかを切り分けする観点について。</li></b>
+仮にメールサーバマシン自体から telnetコマンドによる接続テストが正常に行えることが確認できた場合、その次にクライアントPCから接続テストを試したとき、たとえば、telnet [IPアドレス] pop3 では接続できても、telnet [メールドメイン名] pop3 で接続できないときは、名前解決ができない状態であることが予想されるので、内部用DNSに記述するとか、クライアントPC内のhostsファイルに記述するとか検討してみる。<br>
+メーラーでの設定で言えば、接続先サーバに名前解決の必要な [メールドメイン名] を設定するのではなく、 [IPアドレス] で設定できるか試してみる。<br></ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

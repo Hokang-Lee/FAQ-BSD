@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-07</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>グローバルサイン認証局の証明書を利用したSSL設定事例</b></FONT>
+<HR>
+<br>
+グローバルサインのクイックSSLで発行されたテスト証明書（SHA2[sha256]）を使った場合でのSSL設定の手順例です。<br>
+<ol type=1><b><li>ダウンロード</li></b>
+<ol type=a>
+<li>キーを作成するには、あらかじめWindowsマシン上で作業を行う。<br>
+<li><a href="../download.html#tool" target="_blank">「ダウンロード」公開ページ</a>に用意されている openssl.exe（Openssl 1.0.2d）を組み込んだ <b>SSL-Key-SHA2a.zip</b>もしくは<b>SSL-Key-SHA2.zip</b> をダウンロードし、解凍する。<br>
+</ol>
+<b><li>CSRの作成</li></b>
+<ol type=a>
+<li>Windowsマシン上からコマンドプロンプトを開き、解凍されたファイルの中から openssl.exe があることを確認する。<br>
+<li>秘密鍵を生成する。<br>
+openssl genrsa -des3 -out ssl.globalsign.com.key 2048<br>
+<li>作成した秘密鍵からパスフレーズを解除した秘密鍵（pem）を取りだす。<br>
+openssl rsa -in ssl.globalsign.com.key -out mykey.globalsign.pem<br>
+<li>グローバルサインに提供するCSRを作成する。<br>
+openssl req -config openssl.cnf -new -key ssl.globalsign.com.key -out ssl.globalsign.com.csr<br>
+</ol>
+<li><b>グローバルサインSSL証明書申し込み</b></li>
+<ol type=a>
+<li>グローバルサインSSL証明書の申し込み手続きを行う。<br>
+（例）45日間無料使用できる <a href="https://jp.globalsign.com/ssl-shop/testcert.html" target="_blank">グローバルサインのテスト用SSLサーバ証明書発行サービス</a><br>
+<li>上記２で作成したCSRの内容をコピー＆ペーストで貼り付け、証明書発行を依頼する。<br>
+</ol>
+<b><li>証明書ファイル作成</li></b>
+<ol type=a>
+<li>グローバルサインから受領した証明書について、メール本文から任意のテキストファイル【mycert.globalsign.pem】にコピー＆ペーストしてWindowsマシンで保存する。<br>
+<li>メール本文で受け取った「◆証明書 SHA256」と「◆中間CA証明書」をそれぞれ【mycert.globalsign.pem】へ続けてコピー＆ペーストしてWindowsマシンで保存する。<br>
+<blockquote>【mycert.globalsign.pem】の内容<br>
+-----BEGIN CERTIFICATE-----<br>
+　　　：<br>
+-----END CERTIFICATE-------<br>
+-----BEGIN CERTIFICATE-----<br>
+　　　：<br>
+-----END CERTIFICATE-------</blockquote></ol>
+<b><li>SSL設定</li></b>
+<ol type=a>
+<li>E-POSTコントロールセンターのシステム管理にあるアップロードファイルを指定する機能か、またはSSHなどを使ってメールサーバマシンのコンソールにログインし、プログラムインストールフォルダの既定値である /usr/local/mta/bin フォルダに向けて、上記４でできた証明書ファイル Windowsマシンで【mycert.globalsign.pem】と、秘密鍵ファイル Windowsマシンで【mykey.globalsign.pem】をコピーする。
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SSL設定］を開く。<br>
+<li>次の項目欄について秘密鍵ファイルと証明書ファイルを置いているフォルダについて、それぞれフルパス指定で設定する。<br>
+証明書ファイル欄の例　/usr/local/mta/bin/mycert.globalsign.pem<br>
+秘密鍵ファイル欄の例　/usr/local/mta/bin/mykey.globalsign.pem<br>
+<li>最後に［設定する］ボタンをクリック。</ol>
+<br>
+<b><li>E-Postサービス再起動</li></b>
+<ol type=a>
+<li>E-Post各サービスを再起動する。(epstrd、epstdd、epstpop3d、epstimap4d)<br>
+<li>メールクライアントでの送受信テストを行う。（※）<br>
+（※）たとえばメールクライアントにWindows Liveメールを使っているとき「証明書のCN名が渡された値と一致しません」と表示される場合、Windows Liveメール側のメールアカウントのサーバ名と証明書のCN（common name）が違っていることが原因です。メッセージを表示させないようにするには、メールアカウントで指定したサーバ名を見直し、正しいFQDNを設定することにより、その後は表示されなくなります。なお、認証局の証明書を利用する場合は、IPアドレスでの指定はNGです。<br>
+</ol></ol>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-40.html">SMTP/POP3/IMAP4 over SSL/TLS設定方法</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

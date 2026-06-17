@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-02</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP受領だけ可能にしSMTP配送を一時的に停止させたいときの手順について</b></FONT>
+<HR>
+<br>
+SMTP受領だけ可能にし、SMTP配送を一時的に停止させたいときの手順は下記のように行います。<br>
+この手順を行えばSMTP受領だけはするものの、SMTP配送処理やE-Post内に作成済みドメインのメールボックス格納処理を一時停止するようになります。外部への配送アウトバウンドメールも止められる一方、外部から内部へのインバウンドメール、内部どうしのメールもすべてメールキューに蓄積され、一時的に止めることになりますので注意してください。<br>
+ここではSMTP配送を一時的に停止する期間を7日として例にあげます。<br>
+<ol><b><li>epstdd配送詳細設定の現在設定を控えておく</b></li>
+epstdd配送詳細設定のリトライ期間（回線異常、マシン無応答）現在の設定をメモに控えておく。<br>
+<b><li>SMTP配送を一時的に停止する</b></li>
+epstrdサービスは稼働したまま、epstddサービスを停止状態にする。<br>
+epstddサービスを停止状態にすると、メールキューである[メール作業用フォルダ]\incoming フォルダにメール作業データがどんどん蓄積（スプール）されるので、それを目視で確認しておく。<br>
+<b><li>epstdd配送詳細設定のリトライ期間設定を7日相当の時間に延ばす</b></li>
+epstddサービス停止状態のまま、epstdd配送詳細設定のリトライ期間（回線異常、マシン無応答）設定を7日×24時間=168時間以上となるように設定しておく。<br>
+<b><li>SMTP配送を再開する</b></li>
+SMTP配送停止から7日後、epstddサービスを開始状態にする。<br>
+epstddサービスを開始すると、メールキューである[メール作業用フォルダ]\incoming フォルダにメール作業データがどんどん掃けて、減っていくので、それを目視で確認可能。<br>
+このときリトライ関係フォルダのholding/domainsもそれ相応に使われることとなる。<br>
+<b><li>epstdd配送詳細設定を元に戻し通常運用</b></li>
+incoming/holding/domainsの各フォルダが空になった時点で、epstdd配送詳細設定のリトライ期間（回線異常、マシン無応答）設定について控えを確認しながら元の設定状態に戻す。<br>
+通常運用に戻すため、再びepstddサービスを停止＆開始させ、再開させる。<br></ol>
+この例では、メール流量の多さ、メールキューとなるメールデータの蓄積しすぎには十分気をつけてください。<br>
+仮に7日間でたまるメールデータ数が1万を超えるようであれば、この手順でSMTP配送を再開したときの動作がOSのファイルシステムの問題ゆえにパフォーマンスが一時的に低下し、掃けるまで非常に時間がかかることとなります。10万前後に及ぶようなメールデータ数を蓄積することはかなり危険を伴います。SMTP配送を停止する期間を見直してください。<br>
+1日止めておいた状態を先に試し、incomingフォルダにたまったファイルを確認すると、×7の計算で、フォルダにたまるデータ数の目安がある程度わかります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

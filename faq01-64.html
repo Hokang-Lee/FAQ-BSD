@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-64</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>配送処理とDNS参照について</b></FONT>
+<HR>
+<BR>
+配送処理（およびリトライ処理）が行われるときのDNS参照の手順は、次のような仕様で行われます。<br>
+<ol>
+<li><b>MXレコード参照によるMTAへの送信（※1）<br></b>
+MXレコードのキャッシュ情報があればキャッシュ情報を優先します。<br>
+MXレコードのキャッシュ情報によって送信が失敗したときは、DNSサーバに対して改めてMXレコードの参照を行います。<br>
+<br>
+<li><b>上記の手順が失敗した場合、＠以降のドメイン名をAレコードとして送信（※2）<br></b>
+E-Post Mail Server・E-Post SMTP Serverは自分でDNS参照を行わず、OSに設定されたDNSサーバへの参照をOSに任せます。<br>
+</ol>
+この1と2の手順をリトライごとに繰り返します。<br>
+<br>
+（注）<br>
+<b>※1</b> MXレコードを参照するDNSサーバは、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある「DNSサーバー」で設定された内容に従います。<br>
+<br>
+<b>※2</b> Aレコードを参照するDNSサーバは、E-Post Mail Server・E-Post SMTP Serverの設定情報には依存せず、/etc/resolve.conf で設定しているDNSの設定に従います。<br>
+<br>
+<b>（参考）</b><br>
+相手先がMXレコードを記述しているかどうかを確認するには、一般的な方法として、Windowsマシンのコマンドプロンプトか、メールサーバマシンのターミナルから次のコマンドで確認します。<br>
+<br>
+　nslookup　-type=mx　domain.jp<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

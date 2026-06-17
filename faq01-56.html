@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-56</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>設定したセッション数と必要メモリ容量の関係は？</b></FONT>
+<HR>
+<br>
+E-Post Mail Serverシリーズ、E-Post SMTP Serverシリーズ製品のプログラム内部で処理される「セッション」単位（1スレッド当たり）の必要メモリ容量は次の通りです。（プログラム本体の必要メモリ容量は除く）<br>
+なお、現行は以下に示した通りになりますが、将来のプログラムのバージョンアップによっては、変動することがありますので、ご了承ください。<br>
+<br>
+<b>（E-Post Mail Server／E-Post SMTP Serverシリーズ）</b><br>
+<br>
+●　SMTP受信部サービスプログラム（epstrd）<br>
+　… 約60KB ＋（メールフィルタパターン数×約4KB）<br>
+　※URLBLサイトを1つ指定しているときは、フィルタパターン1個と数えます。<br>
+<br>
+●　SMTP配送部サービスプログラム（epstdd）<br>
+　…約16KB<br>
+<br>
+<b>（E-Post Mail Serverシリーズ）</b><br>
+<br>
+●　POP3サービスプログラム（epstpop3d）<br>
+　… 約400KB<br>
+<br>
+●　IMAP4サービスプログラム（epstimap4d）<br>
+　…約110KB<br>
+<br>
+<b>（アンチウイルス機能－E-Post Mail Server with AntiVirus／E-Post SMTP Server with AntiVirus）</b><br>
+<br>
+●　アンチウイルスパターンファイルをメモリ展開するための容量（fsengs）<br>
+　…<u>約240～300MB</u>（アンチウイルス機能有効時）<br>
+　※高速化のためにアンチウイルスパターンファイルを事前に読み込み、メモリ上に展開しています。<br>
+　<br>
+●　アンチウイルススキャン実行時の容量<br>
+　…約10MB（<u>1スレッド当たり</u>・アンチウイルス機能スキャン実行時）<br>
+　※100セッション（100スレッド）同時にアンチウイルスを実行しているときは、1GBのメモリ容量が必要となる計算になります。<br>
+　<br>
+　つまり、アンチウイルス機能を有効にしているとき、まず次のメモリ容量がベースとして必要です。<br>
+　・アンチウイルスパターンファイルをメモリ展開するための容量　約240～300MB<br>
+<br>
+　さらにそれに加えて、SMTP受信時にアンチウイルススキャンを実行しているとき、1スレッド当たりの必要メモリ容量は、下記の合計になります。<br>
+　・SMTP受信部サービスプログラム（epstrd）　約60KB<br>
+　・メールフィルタパターン数×約4KBの小計<br>
+　・アンチウイルススキャン実行　約10MB<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

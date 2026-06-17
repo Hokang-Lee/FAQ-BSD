@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-64</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>メールの宛先同報数の制限を実施するには</b></FONT>
+<HR>
+<br>
+メールの宛先同報数として、たとえば100件以上の宛先が指定されているときに送信拒否（SMTP受領拒否）をしたい場合、次の設定を行うことで可能です。<br>
+同報数の制限を実施したいとき、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［中継の制限］を開いて表示される「中継の制限設定」にある「”ＣＣ，ＢＣＣ”（同報）の受領 」項目に設定値を入力、［設定する］ボタンクリック後、各サービスを再起動してください。<br>
+100件以上のときに拒否したいときは 100 の数値を設定します。以降、クライアントからのメール送信要求時に、同報数100以上の指定がされているときは、SMTP受領時に拒絶されるようになります。<br>
+ただしこの設定は、アウトバウンド方向もインバウンド方向も共通に働きますので十分留意してください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

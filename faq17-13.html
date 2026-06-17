@@ -1,0 +1,132 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-13</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SSL/TLS通信使用時にTLS1.3のみ有効にさせる方法について <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+E-PostシリーズのSSL/TLS暗号化通信については、openssl のライブラリを使用しています。openssl のライブラリはデフォルトでのコンパイルであり、デフォルトに含まれている暗号化方式はすべて利用可能な状態となっています。メールサーバの暗号化通信のセキュリティを高めるため、旧来のSSLを禁止するだけにとどまらず、TLSのバージョンまで限定する必要があるときには、以下のように行います。<br>
+<br>
+<img src="./img/faq17-13-001s.jpg" align="right">E-Post Mail Server / E-Post SMTP Serverシリーズに実装されているSMTP受信サービス・SMTP配送サービスでのSSL/TLS暗号化通信においてTLSのバージョンまで限定する必要があるとき、下記にあげた SecureLayOption 設定により、TLS1.3での通信のみ有効にさせることが可能になります。ちなみに、FreeBSD 12.0の旧環境では、openssl のライブラリが openssl 1.x系ですが、2025年7月販売のFreeBSD 14.2の新環境では openssl 3.x系 となります。<br>
+<br>
+なお、FreeBSD 14.2の新環境で openssl のライブラリバージョンが openssl 3.x系であれば、SecureLayOption 以外に SecureLevel という値を設定する方法もあります。こちらは通信のセキュリティを強化するためのポリシーを簡単に設定できる仕組みです。具体的には、暗号化アルゴリズムや鍵の強度、プロトコルのバージョンなどに関する最低基準を定義します。これにより、セキュリティ要件を満たさない接続を拒否することができます。詳細は下記設定項目と設定値を参照してください。<br>
+それから上記に対応できる openssl.exe を組み込んだ <b>SSL-Key-SHA2a.zip</b>もしくは<b>SSL-Key-SHA2.zip</b> をダウンロードして &quot;CERTIFICATE.BAT&quot; バッチファイルから「公開鍵証明書」と「秘密鍵」を作成しておくようにしてください。<br>
+<br>
+epstrdについて、TLS1.3での通信のみ有効にする方法は下記を設定します。 SecureLayOption.1 設定ファイルがない場合は Default:3 で扱われており SSL2.0 及び SSL3.0 の使用は無効です。TLS1.3 のみ有効にさせる設定を行うためには、SecureLayOption.1 に 31(10進)〔1f(16進)〕を設定、epstrd サービスの再起動を行う手順です。この設定が有効なのは、epstrd v5.01以降になっていることが必要です。<br>
+次にもう一つの設定方法です。SecureLevel.1 設定ファイルがない場合は、Default:0 で扱われ レベル0（SecureLevel=0）に設定されていて、TLS1から1.3までが有効範囲です。レベル1（SecureLevel =1）に変更すると、TLS1.2、TLS1.3 のみ有効となります。この設定が有効なのは、epstrd v5.16以降になっていることが必要です。（できればFreeBSD 14.2の新環境）<br>
+E-Post V シリーズでは、設定ファイル自体がなければDefault値が適用されるという動きになっています。手動で設定ファイルを作成、その後値を入力してください。<br>
+<blockquote><small>
+[epstrd]<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5RS<br>
+　　　　->SecureLayOption.1　　<font color="blue">v5.01～</font><br>
+　　　　(DWORD  Default:3) 1:SSL2.0禁止 2:SSL3.0禁止 3:SSL2.0-3.0禁止(SSL3.0以前禁止) 4:TLS1.0禁止<br>
+　　　　 7:TLS1.0,SSL2.0-3.0禁止(TLS1.0以前禁止) 8:TLS1.1禁止 15:TLS1.1以前禁止 16:TLS1.2禁止 31:TLS1.2以前禁止<br>
+　　　　※10進指定によるもの。<b>&quot31&quotの指定でTLS1.2以前が禁止となり、TLS1.3以降のみの許可となる。</b><br>
+　　　　　ちなみに&quot15&quotの指定でTLS1.1以前が禁止、TLS1.2以降の許可となる。<br>
+　　　　→SecureLevel.1　　<font color="blue">v5.16～</font><br>
+　　　　　(DWORD default:0)(レベル:0～5）SSL_CTX_set_security_levelの設定に相当<br>
+　　　　※いずれも変更後のサービス再起動が必要。<br>
+</small></blockquote>
+epstddについて、TLS1.3での通信のみ有効にするには、以下のファイルを新規に作成し、値を設定します。SecureLayOption.1 設定ファイルがない場合は Default:3 で扱われており SSL2.0 及び SSL3.0 の使用は無効です。TLS1.3 のみ有効にさせる設定を行うためには、SecureLayOption.1 に 31(10進)〔1f(16進)〕を設定、epstdd サービスの再起動を行う手順です。この設定が有効なのは、epstdd v5.01以降になっていることが必要です。<br>
+次にもう一つの設定方法です。SecureLevel.1 設定ファイルがない場合は、Default:0 で扱われ レベル0（SecureLevel=0）に設定されていて、TLS1から1.3までが有効範囲です。レベル1（SecureLevel =1）に変更すると、TLS1.2、TLS1.3 のみ有効となります。この設定が有効なのは、epstdd v5.14以降になっていることが必要です。（できればFreeBSD 14.2の新環境）<br>
+E-Post V シリーズでは、設定ファイル自体がなければDefault値が適用されるという動きになっています。手動で設定ファイルを作成、その後値を入力してください。<br>
+<blockquote><small>
+[epstdd]<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5DS<br>
+　　　　->SecureLayOption.1　　<font color="blue">v5.01～</font><br>
+　　　　(DWORD  Default:3) 1:SSL2.0禁止 2:SSL3.0禁止 3:SSL2.0-3.0禁止(SSL3.0以前禁止) 4:TLS1.0禁止<br>
+　　　　 7:TLS1.0,SSL2.0-3.0禁止(TLS1.0以前禁止) 8:TLS1.1禁止 15:TLS1.1以前禁止 16:TLS1.2禁止 31:TLS1.2以前禁止<br>
+　　　　※10進指定によるもの。<b>&quot31&quotの指定でTLS1.2以前が禁止となり、TLS1.3以降のみの許可となる。</b><br>
+　　　　　ちなみに&quot15&quotの指定でTLS1.1以前が禁止、TLS1.2以降の許可となる。<br>
+　　　　→SecureLevel.1　　<font color="blue">v5.14～</font><br>
+　　　　　(DWORD default:0)(レベル:0～5）SSL_CTX_set_security_levelの設定に相当<br>
+　　　　※いずれも変更後のサービス再起動が必要。<br>
+</small></blockquote>
+E-Post Mail Server シリーズに実装されているPOP3サービス・IMAP4サービスでのSSL/TLS暗号化通信においてTLSのバージョンまで限定する必要があるとき、下記にあげた SecureLayOption 設定により、TLS1.3での通信のみ有効にさせることが可能になります。ちなみに、FreeBSD 12.0の旧環境では、openssl のライブラリが openssl 1.x系ですが、2025年7月販売のFreeBSD 14.2の新環境では openssl 3.x系 となります。<br>
+<br>
+epstpop3dについて、TLS1.3での通信のみ有効にするには、以下のファイルを新規に作成し、値を設定します。SecureLayOption.1 設定ファイルがない場合は Default:3 で扱われており SSL2.0 及び SSL3.0 の使用は無効です。TLS1.3 のみ有効にさせる設定を行うためには、SecureLayOption.1 に 31(10進)〔1f(16進)〕を設定、epstdd サービスの再起動を行う手順です。この設定が有効なのは、epstpop3d v5.01以降になっていることが必要です。<br>
+次にもう一つの設定方法です。SecureLevel.1 設定ファイルがない場合は、Default:0 で扱われ レベル0（SecureLevel=0）に設定されていて、TLS1から1.3までが有効範囲です。レベル1（SecureLevel =1）に変更すると、TLS1.2、TLS1.3 のみ有効となります。この設定が有効なのは、epstpop3d v5.06以降になっていることが必要です。（できればFreeBSD 14.2の新環境）<br>
+E-Post V シリーズでは、設定ファイル自体がなければDefault値が適用されるという動きになっています。手動で設定ファイルを作成、その後値を入力してください。<br>
+<blockquote><small>
+[epstpop3d]<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5POP3S<br>
+　　　　->SecureLayOption.1　　<font color="blue">v5.01～</font><br>
+　　　　(DWORD  Default:3) 1:SSL2.0禁止 2:SSL3.0禁止 3:SSL2.0-3.0禁止(SSL3.0以前禁止) 4:TLS1.0禁止<br>
+　　　　 7:TLS1.0,SSL2.0-3.0禁止(TLS1.0以前禁止) 8:TLS1.1禁止 15:TLS1.1以前禁止 16:TLS1.2禁止 31:TLS1.2以前禁止<br>
+　　　　※10進指定によるもの。<b>&quot31&quotの指定でTLS1.2以前が禁止となり、TLS1.3以降のみの許可となる。</b><br>
+　　　　　ちなみに&quot15&quotの指定でTLS1.1以前が禁止、TLS1.2以降の許可となる。<br>
+　　　　→SecureLevel.1　　<font color="blue">v5.06～</font><br>
+　　　　　(DWORD default:0)(レベル:0～5）SSL_CTX_set_security_levelの設定に相当<br>
+　　　　※いずれも変更後のサービス再起動が必要。<br>
+</small></blockquote>
+epstimap4dについて、TLS1.3での通信のみ有効にするには、以下のファイルを新規に作成し、値を設定します。SecureLayOption.1 設定ファイルがない場合は Default:3 で扱われており SSL2.0 及び SSL3.0 の使用は無効です。TLS1.3 のみ有効にさせる設定を行うためには、SecureLayOption.1 に 31(10進)〔1f(16進)〕を設定、epstdd サービスの再起動を行う手順です。この設定が有効なのは、epstimap4d v5.01以降になっていることが必要です。<br>
+次にもう一つの設定方法です。SecureLevel.1 設定ファイルがない場合は、Default:0 で扱われ レベル0（SecureLevel=0）に設定されていて、TLS1から1.3までが有効範囲です。レベル1（SecureLevel =1）に変更すると、TLS1.2、TLS1.3 のみ有効となります。この設定が有効なのは、epstimap4d v5.12以降になっていることが必要です。（できればFreeBSD 14.2の新環境）<br>
+E-Post V シリーズでは、設定ファイル自体がなければDefault値が適用されるという動きになっています。手動で設定ファイルを作成、その後値を入力してください。<br>
+<blockquote><small>
+[epstimap4d]<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5IMAP4S<br>
+　　　　->SecureLayOption.1　　<font color="blue">v5.01～</font><br>
+　　　　(DWORD  Default:3) 1:SSL2.0禁止 2:SSL3.0禁止 3:SSL2.0-3.0禁止(SSL3.0以前禁止) 4:TLS1.0禁止<br>
+　　　　 7:TLS1.0,SSL2.0-3.0禁止(TLS1.0以前禁止) 8:TLS1.1禁止 15:TLS1.1以前禁止 16:TLS1.2禁止 31:TLS1.2以前禁止<br>
+　　　　※10進指定によるもの。<b>&quot31&quotの指定でTLS1.2以前が禁止となり、TLS1.3以降のみの許可となる。</b><br>
+　　　　　ちなみに&quot15&quotの指定でTLS1.1以前が禁止、TLS1.2以降の許可となる。<br>
+　　　　→SecureLevel.1　　<font color="blue">v5.12～</font><br>
+　　　　　(DWORD default:0)(レベル:0～5）SSL_CTX_set_security_levelの設定に相当<br>
+　　　　※いずれも変更後のサービス再起動が必要。<br>
+</small></blockquote>
+<b>（参考）</b><br>
+SecureLevel について [OpenSSL ドキュメント3.0]（英語）<br>
+<a href="https://docs.openssl.org/3.0/man3/SSL_CTX_set_security_level/#default-callback-behaviour" target="_blank">https://docs.openssl.org/3.0/man3/SSL_CTX_set_security_level/#default-callback-behaviour</a><br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-40.html">SMTP/POP3/IMAP4 over SSL/TLS設定方法</a><br>
+●<a href="./faq15-06.html">SSL/TLS設定で認証局が発行するSHA2（sha256）の証明書に対応しているか</a><br>
+●<a href="./faq17-28.html">opensslコマンドでTLSバージョンを指定して疎通確認する方法について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+</body>
+</html>

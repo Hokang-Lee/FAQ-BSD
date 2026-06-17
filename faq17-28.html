@@ -1,0 +1,145 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-28</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>opensslコマンドでTLSバージョンを指定して疎通確認する方法について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+「ダウンロード」公開ページ</a>に用意してある <b>SSL-Key-SHA2a.zip</b>もしくは<b>SSL-Key-SHA2.zip</b> をダウンロードし、解凍して得られるWindows用の openssl.exe コマンドを使用することで、SSL/TLS通信を使った疎通確認、さらにTLSバージョンを指定しての疎通を確認することができます。<br>
+<br>
+465番ポートを指定しTLSバージョンを特に指定しないSSL/TLS通信での疎通確認は、Windowsマシンからコマンドプロンプトを開き openssl.exe  コマンドで次の書式により確認できます。&quot;CERTIFICATE.BAT&quot; バッチファイルで証明書ファイルを作成した場合は中間証明書は作成されませんので、&quot;-CAfile cacert.pem&quot; というオプションを付けて確認します。またFreeBSDには openssl がデフォルトでインストールされていますので openssl コマンドから同様に確認できます。疎通可否が確認できたら、quitコマンドで抜けられます。<br>
+<b>［書式］</b><br>
+openssl s_client -connect &quot;サーバIP&quot;:465 -CAfile cacert.pem<br>
+<b>［実行例］</b><br>
+openssl s_client -connect 192.168.xx.xx:465 -CAfile cacert.pem<br>
+<br>
+465番ポートを指定しTLSのバージョンを限定し1.3でつながるかどうか決めうちして確認するには、さらにオプションを追加します。TLS1.2や1.1などの確認方法もそれに準じます。疎通が確認できたら、quitコマンドで抜けられます。<br>
+<b>［書式］</b><br>
+openssl s_client -connect &quot;サーバIP&quot;:465 -CAfile cacert.pem -tls1_3<br>
+openssl s_client -connect &quot;サーバIP&quot;:465 -CAfile cacert.pem -tls1_2<br>
+openssl s_client -connect &quot;サーバIP&quot;:465c -tls1_1<br>
+<br>
+疎通可の確認事例については下記を参考にしてください。<br>
+<b>［TLSバージョン指定で疎通可の確認事例］</b><br>
+<table border=0 cellspacing=0 cellpadding=2 width="540"><tr bgcolor="#808080"><td><font color="#ffffff"><b>openssl s_client -connect 192.168.xx.xx:465 -CAfile cacert.pem -tls1_3</b><br>
+<small><br>
+CONNECTED(00000140)<br>
+depth=1 C = JP, ST = Tokyo, L = Shinjuku-ku, O = E-Post, OU = Sup, CN = E-Post, emailAddress = xxxx＠yyyy.jp<br>
+verify return:1<br>
+depth=0 C = JP, ST = Tokyo, O = E-Post, OU = Sup, CN = E-Post, emailAddress = xxxx＠yyyy.jp<br>
+verify return:1<br>
+---<br>
+Certificate chain<br>
+ 0 s:C = JP, ST = Tokyo, O = E-Post, OU = Sup, CN = E-Post, emailAddress = xxxx＠yyyy.jp<br>
+   i:C = JP, ST = Tokyo, L = Shinjuku-ku, O = E-Post, OU = Sup, CN = E-Post, emailAddress = xxxx＠yyyy.jp<br>
+---<br>
+Server certificate<br>
+-----BEGIN CERTIFICATE-----<br>
+     ･･･（中略）･･･<br>
+-----END CERTIFICATE-----<br>
+subject=C = JP, ST = Tokyo, O = E-Post, OU = Sup, CN = E-Post, emailAddress = xxxx＠yyyy.jp<br>
+issuer=C = JP, ST = Tokyo, L = Shinjuku-ku, O = E-Post, OU = Sup, CN = E-Post, emailAddress = xxxx＠yyyy.jp<br>
+---<br>
+No client certificate CA names sent<br>
+Peer signing digest: SHA256<br>
+Peer signature type: RSA-PSS<br>
+Server Temp Key: X25519, 253 bits<br>
+---<br>
+SSL handshake has read 1743 bytes and written 316 bytes<br>
+Verification error: unable to verify the first certificate<br>
+---<br>
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384<br>
+Server public key is 2048 bit<br>
+Secure Renegotiation IS NOT supported<br>
+Compression: NONE<br>
+Expansion: NONE<br>
+No ALPN negotiated<br>
+Early data was not sent<br>
+Verify return code: 21 (unable to verify the first certificate)<br>
+---<br>
+---<br>
+Post-Handshake New Session Ticket arrived:<br>
+SSL-Session:<br>
+    Protocol  : TLSv1.3<br>
+    Cipher    : TLS_AES_256_GCM_SHA384<br>
+    Session-ID: ･･･（中略）･･･<br>
+    Session-ID-ctx:<br>
+    Resumption PSK: ･･･（中略）･･･<br>
+    PSK identity: None<br>
+    PSK identity hint: None<br>
+    SRP username: None<br>
+    TLS session ticket lifetime hint: 7200 (seconds)<br>
+    TLS session ticket:<br>
+    ･･･（中略）･･･<br>
+    Start Time: 1601993644<br>
+    Timeout   : 7200 (sec)<br>
+    Verify return code: 21 (unable to verify the first certificate)<br>
+    Extended master secret: no<br>
+    Max Early Data: 0<br>
+---<br>
+read R BLOCK<br>
+---<br>
+Post-Handshake New Session Ticket arrived:<br>
+SSL-Session:<br>
+    Protocol  : TLSv1.3<br>
+    Cipher    : TLS_AES_256_GCM_SHA384<br>
+    Session-ID: ･･･（中略）･･･<br>
+    Session-ID-ctx:<br>
+    Resumption PSK: ･･･（中略）･･･<br>
+    PSK identity: None<br>
+    PSK identity hint: None<br>
+    SRP username: None<br>
+    TLS session ticket lifetime hint: 7200 (seconds)<br>
+    TLS session ticket:<br>
+    ･･･（中略）･･･<br>
+    Start Time: 1601993644<br>
+    Timeout   : 7200 (sec)<br>
+    Verify return code: 21 (unable to verify the first certificate)<br>
+    Extended master secret: no<br>
+    Max Early Data: 0<br>
+---<br>
+read R BLOCK<br>
+220 yyyy.jp E-POST ESMTP Receiver (5.1x) x64 Bld:CABJGAFHB Tue, 06 Oct 2020 23:14:04 +0900<br></small>
+<b>quit</b><br></font></td></tr></table>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-13.html">SSL/TLS通信使用時にTLS1.3のみ有効にさせる方法について</a><br>
+●<a href="./faq17-64.html">SSL/TLSやSTARTTLSのTLSバージョンやChipherの表記をヘッダに記録するようにしたい</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+</body>
+</html>

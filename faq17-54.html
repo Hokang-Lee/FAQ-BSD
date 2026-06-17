@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-54</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>外部ドメインと同じ名前の内部ドメインを作成した場合の基本的な動作内容について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+外部ドメインと同じ名前の内部ドメインを作成した場合の基本的な動作内容について質問を受けたことがあります。<br>
+結論から言いますと、E-Postシリーズは外部ドメインと同じ名前の内部ドメインを作成すること自体、禁止してはおりません。しかしながら、公開された外部ドメインと同じ名前の内部ドメインを E-Post 内に作った場合、宛先を内部ドメインの任意アカウントに指定すれば、当然のこととして最初のSMTP受領時に宛先に指定した内部ドメインユーザーの有無チェックが先に入ります。これはSMTP受領段階で行う epstrd サービスの仕事です。<br>
+下記例にある「外部ドメインと同名ドメインを内部ドメインに登録した場合」[内部ドメインアカウントから内部ドメインアカウントのメール送信と等価]を参照してください。<br>
+仮に宛先に指定された内部ドメインの任意アカウントの有無チェックの際に存在が確認できなかった場合、epstrd サービスは User unknown として受領を拒絶します。これは E-Post の仕様です。<br>
+もし、内部ドメインに任意アカウントの有無チェックで存在が確認できた場合は、epstrd サービスは拒絶することはなく、受領（Received OK）します。そしてその次の段階である epstdd サービスが最初に【gateway.dat】を参照し、記述がなければDNSを参照して外部に向かって配送を試みます。そのときは結果的には名前が同じ内部ドメインが登録されていても、外部ドメイン宛にメールを配送できることになります。<br>
+<br>
+===============================================<br>
+外部ドメインと同名ドメインを内部ドメインに登録した場合<br>
+[内部ドメインアカウントから内部ドメインアカウントのメール送信と等価]<br>
+===============================================<br>
+内部ドメインに user01＠[domain.jp] のみ登録されているとき<br>
+　→宛先に指定した user02＠[domain.jp] 宛への送信失敗<br>
+※宛先内部ドメインアカウントの有無チェックで user02 が存在しないため epstrdサービスが受領時に拒絶<br>
+-----------------------------------------------------------------------<br>
+内部ドメインに user01＠[domain.jp] とuser02＠[domain.jp] が登録されているとき<br>
+　→宛先に指定した user02＠[domain.jp] 宛への送信成功<br>
+-----------------------------------------------------------------------<br>
+<br>
+公開済み外部ドメインと同じ名前のドメインをわざわざ内部ドメインに作るケースは、いずれにしても特殊なケースであり、通常の形態ではないことは言うまでもありません。そういう意味では「送信元と送信先が同じドメイン名の場合、送信先のユーザーも内部ドメイン内に作成しておく必要がある」運用をしなくてはなりませんが、これはいたしかたないように考えます。<br>
+<br>
+ちなみに、通常のケースでは、内部ドメイン名と外部ドメイン名は異なりますから、外部ドメイン宛のメールは、受領時には宛先である内部ドメインの任意アカウントの有無チェックは行われず、epstddサービスが普通に配送する対象になります。通常の形なので例示する必要はないと思いますが、あえて例を示すと、下記のように「通常のケースで内部ドメイン名と外部ドメイン名が異なる場合」[内部ドメインアカウントから外部ドメインアカウントのメール送信]となります。<br>
+<br>
+===============================================<br>
+通常のケースで内部ドメイン名と外部ドメイン名が異なる場合<br>
+[内部ドメインアカウントから外部ドメインアカウントのメール送信]<br>
+===============================================<br>
+内部ドメインに account＠[abcdefg.jp] が登録されているとき<br>
+　→宛先に指定した user02＠[domain.jp] 宛への送信成功<br>
+-----------------------------------------------------------------------<br>
+<br>
+また、仮に「中継の制限」－［マシンごとの制限］【effect.dat】でメールサーバマシン自体のIPアドレスを true 指定した場合でも、上記の通り、宛先に内部ドメインの存在しないアカウントを指定した際に宛先内部ドメインアカウントの有無チェックで受領を拒絶しますので、たとえ【effect.dat】で指定されていても、許可はされず、受領時に拒絶される結果になります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

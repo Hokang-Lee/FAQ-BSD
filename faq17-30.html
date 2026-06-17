@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-30</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>STARTTLS通信において送信先が受け入れず届かない。原因はクライアント証明書と言われた･･･ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Post V シリーズ（配送プログラムのepstddサービス）から、相手SMTPへのメール送信時時にSTARTTLSを使ったSTARTTLS通信において、送信したメールが送信先が受け入れず届かないという場合、何より先に senderlog を調べる必要があります。E-Post側では送信完了しているのか、それとも相手が拒絶した理由と500番台か400番台のエラーコードが記録されていることはないか、あるいは、通信切断がどこかで発生しているかとか、そうでないかといった確認も必要です。もし通信切断があった場合は、拒絶した理由とエラーコードがまったく出ないケースもあれば、socket errorなどのエラーが出ているケースなどがあります。<br>
+<br>
+仮に、senderlog上の記録で正常に送信が完了し、相手に届け終わっているようであれば、相手SMTPが複数あり、複数の経路のうちの一つで起きているのかどうかといったことも確認することが必要なケースもあります。<br>
+<br>
+このユーザー様からの問い合わせ案件では、先方からクライアント証明書を設定すべきだという指摘がされましたが、E-Post V シリーズ（配送プログラムのepstddサービス）から、相手SMTPへのメール送信時時にSTARTTLSを使った通信をする際に、E-Post側の証明書は不要で、先方の指摘は間違いです。なぜなら、この時のSTARTTLSでのネゴシェーションは、相手SMTP側で保持しているものが利用されるからです。<br>
+<br>
+また、相手側SMTPが対応しているSTARTTLSでの暗号化TLSバージョンはどのバージョンであるか、暗号化のTLSバージョンを確認しておく必要があります。<br>
+考えられるバージョンとしては、SSL3.0/TLS1.0/TLS1.1/TLS1.2/TLS1.3 ですが、最近ではセキュリティの観点から、SSL3.0は既に無効化されており、できればTLS1.3であることが望ましいこととされている状況です。<br>
+相手側SMTPのデフォルトの対応バージョンがどれかは、openssl コマンドを使って、STARTTLSでの SMTP接続を確認してみることが可能です。FreeBSDには openssl がデフォルトでインストールされています。SSL/TLS通信での可否は、コマンドラインから openssl にオプションを付けることにより確認可能です。<br>
+<br>
+[SMTP側がデフォルトでの暗号化TLSバージョンでの通信する場合]<br>
+openssl s_client -connect [接続先smtp]:[25 or 587] -starttls smtp<br>
+<br>
+[暗号化TLSバージョンを指定する場合]<br>
+openssl s_client -connect [接続先smtp]:[25 or 587] -starttls smtp -ssl3<br>
+openssl s_client -connect [接続先smtp]:[25 or 587] -starttls smtp -tls1<br>
+openssl s_client -connect [接続先smtp]:[25 or 587] -starttls smtp -tls1_1<br>
+openssl s_client -connect [接続先smtp]:[25 or 587] -starttls smtp -tls1_2<br>
+openssl s_client -connect [接続先smtp]:[25 or 587] -starttls smtp -tls1_3<br>
+<br>
+opensslコマンドを使って接続を確認する方法は下記記事も参考にしてください。こちらは構築した自サーバで確認している事例ですが、同様のコマンド確認は外部サーバに対しても使えます。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-05.html">SSL/TLS証明書適用後の通信をコマンドで確認する方法</a><br>
+<br>
+次はTLSバージョンを指定してTLS通信疎通を自サーバで確認する事例です。STARTTLS通信時にもTLSバージョン指定が同様にできます。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-28.html">opensslコマンドでTLSバージョンを指定して疎通確認する方法について<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-55</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>E-Post V 製品と接続実績のあるSaaSのメールリレーサービスはあるか？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Postのサポート案件にて SendGrid で接続導通した実績があります。
+「Azure内のマシンから直接SMTP送信することがAzureの仕様で原則禁止されているため、送信時の配送に SendGridを使用し、その前段にE-Postを置くという構成」をユーザー様が検証する際、epstdd の配送詳細設定時にSendGridのシステム側が発生した非常に長い（70文字=70byte固定）パスワードを設定できないかというサポート案件でした。（2021年）<br>
+この件を受けて2021年4月のアップデートでは、epstdd についてのレジストリでSMTP認証パスワードを最長127byteまで設定可能にするよう改修を行いました。<br>
+－－－－－－－－－－－－－－－－－<br>
+[epstdd]修正履歴より<br>
+　v5.04 2021.02.27<br>
+　1.SMTP認証時のパスワード領域上限数を、63byteから127byteに拡張した。<br>
+　(SendGrid SMTP認証対策)<br>
+－－－－－－－－－－－－－－－－－<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-34.html">SMTP認証を有効にして外部MTAに送信要求をそのままフォワードさせる方法</a><br>
+●<a href="./faq17-86.html">SendGrid へのSMTP認証付き送信フォワードする際、70文字の長いパスワードを設定できるか</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

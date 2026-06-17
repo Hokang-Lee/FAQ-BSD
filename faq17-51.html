@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-51</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>MXキャッシュ情報をクリアする方法 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+MXキャッシュ情報をクリアする場合、特定ドメインのキャッシュ情報だけでよい場合は、該当するMXキャッシュファイルを削除すればよいです。すべてのMXキャッシュ情報をクリアする場合は、epstddサービスを停止してから、メール作業フォルダ（/var/spool/epms/）下の &quot;mxcash&quot; フォルダを任意名にリネームした上で、epstddサービスを再開するという方法も取れます。epstddサービスを再開すると、空の &quot;mxcash&quot; フォルダが自動的に生成されます。<br>
+また、MXキャッシュ更新間隔の設定変更をした場合など、手動でのE-Postを停止・再開させればよいです。
+epstddサービスは配送処理を担う自律的なサービスですので、ほんの数秒の間、サービスを一時的に止めても、クライアントや相手側のサーバからの受領に応答しないなどの影響は特にありません。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-18.html">送信先のMXレコードが変更されて以降も更新前の情報にもとづいて送られることがある</a><br>
+●<a href="./faq15-91.html">MXキャッシュデータはどう更新されどういうときに削除されるのか</a><br>
+●<a href="./faq15-19.html">MXキャッシュデータの更新が設定されている既定の24時間より長くかかっているのはなぜ？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

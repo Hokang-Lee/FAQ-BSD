@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-04</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリストで制御コマンドが正しく動作しないとき</b></FONT>
+<HR>
+<br>
+メーリングリストでJOINやLISTなどの制御コマンドが正しく動作しないとき、次の点を確認してください。<br>
+<ol>
+<li>制御コマンドを要求する宛先として、mllist<b>-request</b>@domain.jp のように"<b>-request</b>"を付け忘れていないか確認する<br>
+JOINやLISTなどの制御メールを本文に書いて送信するとき、メーリングリストのアドレスを仮に「mllist@domain.jp」とすると、制御メールの送信先は、「mllist-request@domain.jp」にする必要があります。<br>
+<br>
+<li>管理者への転送と管理者アカウントの２つの設定を確認する<br>
+メーリングリストの詳細設定で「入会要求を管理人へ転送」チェックボックスをオンにしているにもかかわらず、管理者アカウントを入れていない状態になっていないか確認してください。<br>
+<br>
+<li>制御の結果応答メール（Journal）の設定を確認する<br>
+メーリングリストの詳細設定で「結果応答しない」チェックボックスをオンにしているときは、サーバからの結果がJournalとして結果応答メールが返ってきません。「結果応答しない」チェックボックスがオフになっているか確認してください。<br>
+</ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

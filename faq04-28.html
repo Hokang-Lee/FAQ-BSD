@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-28</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	pre {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:1.6em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールフィルタ設定で Subject:ヘッダーが UTF-8 の base64エンコードされた文字列を判定しフィルタ条件として指定する場合 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メールフィルタ設定において、Subject:ヘッダー、つまり件名が文字セット「UTF-8」、エンコード方式「Base64」でエンコードされている文字列を判定し、フィルタ条件として指定するとき、以下の要点で行います。<br>
+メールが文字セット「UTF-8」、エンコード方式「Base64」でエンコードされている場合、メールデータの Subject:ヘッダー部分は先頭が &quot;Subject: =?utf-8?B?&quot; で始まり、末尾が &quot;?=&quot; で終わっているのが特徴です。実際のメールデータをエディタで開いてみると確認できます。<br>
+メールフィルタ機能で実際にマッチングさせる文字列を指定する場合、base64エンコードツールを使ってエンコードさせた文字列を指定する必要があります。<br>
+たとえば平文で &quot;ABCDEF&quot; を意味する文字列ならば、「UTF-8」の文字セット、「Base64」でエンコードすると &quot;QUJDREVG&quot; となりますが、【mail.dat】内に記述する Virus: から VirusEnd: までのサブルーチンの間の &quot;Subject:&quot; 指定部分については、以下のようにします。<br>
+先頭が &quot;Subject: =?utf-8?B?&quot; で始まり、続いてエンコードした文字列 &quot;QUJDREVG&quot; 、最後に &quot;?=&quot; を付け加えます。なおこのほかサブルーチン内には Level:500 や Level:600 など、Level:xxx でメールフィルタの挙動を必ず指定してください。<br><blockqote>
+--------------------------------------<br>
+Subject: =?utf-8?B?QUJDREVG?=<br>
+--------------------------------------<br></blockquote>
+なお、メールフィルタ機能で特定文字列を見つけるときの動作内容ですが、「Base64」でエンコード＆パックした指定の場合は部分一致として動き、「Base64」でエンコード＆パックしないで平文で指定した場合は前方一致として働きます。この点だけ注意してください。<br>
+<ol><li>「Base64」でエンコード＆パックした指定の場合：比較処理は &quot;*文字列*&quot;（部分一致）です。<br>
+　Subject: =?utf-8?B?[base64エンコードした文字列]?=</li>
+<li>「Base64」でエンコード＆パックしないで平文で指定した場合：上記の比較処理は &quot;文字列*&quot;（前方一致）です。<br>
+　Subject: [文字列]<br></li></ol>
+<b>（参考情報）</b>日本語メールの仕組み<br>
+<a href="https://sendgrid.kke.co.jp/blog/?p=10958" target="_blank">https://sendgrid.kke.co.jp/blog/?p=10958</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

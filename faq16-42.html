@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ16-42</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	pre {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:1.6em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Secure Handler 機能で使用している設定ファイル</b></FONT>
+<HR>
+<PRE>
+<B>■共有情報－[メール作業ディレクトリ]/regディレクトリ内の設定ファイルで設定</B>
+    <small><font color="darkgreen">※設定ファイルの拡張子種類は、次の通り値の型を表わす。
+       （ .0 = BINARY,  .1 = 数値,  .2 = 文字列及びその他の形式 ）
+     ※秒数や回数、サイズなどの数値値は原則としてすべて10進数表記で設定。</font>
+
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）
+　→reg
+　　→epost
+　　　→ims
+　　　　→MailApprovalReversType.1     (DWORD  Default 0)  0:送信しない, 1:送信元, 2:送信先指定
+                                                  セキュアハンドラによる承認依頼メール送信エラー時の通知先
+　　　　→MailApprovalReversFrom.2    (SZ  Default NULL) 上記2を指定した場合の送信先
+
+</small>
+</pre>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

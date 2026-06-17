@@ -1,0 +1,108 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-12</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP認証実施時に中継の制限【effect.dat】に &quot;norelay,0&quot; を指定したときの処理順序について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+SMTP認証を実施している環境で中継の制限【effect.dat】に &quot;norelay,0&quot; の指定行を記述することにより、SMTP認証が通っても外部からの送信要求をさせないで拒絶することができます。このとき、SMTP認証の成否確認が先か、あるいは【effect.dat】で指定されるリレー禁止の制限が先か、処理順序について説明します。<br>
+<br>
+<b>１．中継の制限【effect.dat】に &quot;norelay,0&quot; を指定したとき想定されるリレー違反の拒絶以外のエラー応答について</b><br>
+<br>
+以下のような【effect.dat】の設定を行っている前提で外部からの接続を行ったときに、想定しているリレー違反の拒絶ではなく、SMTP AUTHがらみのエラー応答が返されるケースがあります。この理由についてはメールクライアントからの接続時に、EHLO 後にAUTH コマンドで接続していないか、あるいは単純にHELOコマンドで接続した（ESMTPを有効にしていない設定）のいずれかの状況であることが考えられます。<br>
+<blockquote><b>（前提となる使用環境）</b><br>
+・ SMTP認証を認証ファイルレベルで導入、該当アカウントはSMTP AUTH必須<br>
+・ 中継の制限【effect.dat】の事例<br>
+　---------------------------------------------------------------------------------<br>
+　192.168.*.* default　←ローカル内にある全クライアントPCはデフォルト条件<br>
+　*.*.*.* norelay,0　　←外部を含むその他すべてからの送信要求・リレーは<br>
+　　　　　　　　　　　　 たとえSMTP AUTHで認証成功しても拒絶<br>
+　---------------------------------------------------------------------------------<br>
+</blockquote>
+<b>２．SMTP認証を実施している環境で【effect.dat】に &quot;norelay,0&quot; を指定したときの実際の動きについて</b><br>
+<br>
+SMTP認証を実施している環境で、【effect.dat】に &quot;norelay,0&quot; を指定しているときには、以下のような動きになります。<br>
+<br>
+<b>(1). クライアントから EHLO コマンド後にAUTH コマンドで接続していないか、単なる HELO コマンドを出して接続した場合、EHLOおよびAUTHを使った認証が先に必要となるため、送信要求や中継依頼の前に拒絶する</b><br>
+<br>
+メールクライアント側でESMTP（拡張SMTP）を有効にしない設定で単なるHELOコマンドで接続したとき、あるいは、メールクライアント側でESMTP（拡張SMTP）を有効に設定していてもEHLOコマンド後にAUTHコマンドで接続しないとき、いずれも <b><font color="#ff0000">503 5.0.0 Need EHLO before AUTH</font></b> のエラー応答が先に返されます。<br>
+receivelog（SMTP受信詳細ログ）を取得すれば、ログから下記に抜粋するような内容が確認できます。<br>
+※ESMTP（拡張SMTP）を有効にする／しないは、メールクライアント種類によって設定ができるもの、設定がまったくできないものがあります。Outlook系ではSMTP認証を有効にするときにセットになっているようです。<br>
+<blockquote>---------------------------------------------------------------------------------<br>
+<b>（HELOで拒絶される例）</b> S:メールサーバ側、C:クライアント側<br>
+S: 220 xxxx.jp E-POST ESMTP Receiver (5.xx) <br>
+C: HELO [xxx.xxx.xxx]<br>
+S: 250 xxxx.jp  Hello [xxxx.xxx.xxx], pleased to meet you<br>
+C: MAIL FROM: &lt;xxx＠xxxx.jp&gt;<br>
+S: <font color="#ff0000">503 5.0.0 Need EHLO before AUTH</font><br>
+---------------------------------------------------------------------------------<br>
+---------------------------------------------------------------------------------<br>
+<b>（EHLOするがAUTHせず拒絶される例）</b> S:メールサーバ側、C:クライアント側<br>
+S: 220 xxxx.jp E-POST ESMTP Receiver (5.xx) <br>
+C: EHLO [xxx.xxx.xxx]<br>
+S: 250 xxxx.jp  Hello [xxxx.xxx.xxx], pleased to meet you<br>
+C: MAIL FROM: &lt;xxx＠xxxx.jp&gt;<br>
+S: <font color="#ff0000">503 5.0.0 Need EHLO before AUTH</font><br>
+---------------------------------------------------------------------------------</blockquote>
+<b>(2). クライアントから EHLO コマンド後にAUTHコマンドで認証成功しても、その後【effect.dat】に記述されている &quot;noreray,0&quot; に引っかかり、送信要求・中継リレーを拒絶する</b><br>
+<br>
+クライアント側でSMTP認証を設定、EHLOコマンド後にAUTHコマンドで 235 2.0.0 Authentication successful. で認証成功の記録があっても、&quot;RCPT TO:&quot; の指定時に中継の制限【effect.dat】に指定された条件に引っかかり、<b><font color="#ff0000">550 5.7.1 Sorry xxx＠xxxx.jp, I don't allow unauthorized relaying.</font></b> のエラー応答が返され、【effect.dat】に指定した意図通りに送信要求や中継リレーが拒絶されます。<br>
+receivelog（SMTP受信詳細ログ）を取得すれば、ログから下記に抜粋するような内容が確認できます。<br>
+<blockquote>
+---------------------------------------------------------------------------------<br>
+<b>（EHLO後にAUTHで認証成功するが中継の制限の指定条件で拒絶される例）</b><br>
+　S:メールサーバ側、C:クライアント側<br>
+S: 220 xxxx.jp E-POST ESMTP Receiver (5.xx) <br>
+C: EHLO [xxx.xxx.xxx]<br>
+S: 250 xxxx.jp  Hello [xxxx.xxx.xxx], pleased to meet you<br>
+C: AUTH CRAM-MD5　（※CRAM-MD5での例）<br>
+S: 334 [Base64エンコード：'認証キー情報'］<br>
+C: [Base64エンコード（メールアドレスと暗号化パスワード）］<br>
+S: 235 2.0.0 Authentication successful.<br>
+C: MAIL FROM: &lt;xxx＠xxxx.jp&gt;<br>
+C: RCPT TO: &lt;xxx＠xxxx.jp&gt;<br>
+S: <font color="#ff0000">550 5.7.1 Sorry xxx＠xxxx.jp, I don't allow unauthorized relaying.</font><br>
+---------------------------------------------------------------------------------</blockquote>
+<br>
+　　　　　　　　　☆　　　　　　　　　　☆<br>
+<br>
+以上のことから、ここであげたケースでは、EHLOやAUTHコマンドなどの確認、SMTP認証の成否確認があって、認証が通ったならその後に【effect.dat】のリレー禁止の制限が適用されるという順で処理されるという理解をしてください。<br>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq10-60.html">中継の制限【effect.dat】でSMTP認証と関連する &quot;norelay,2&quot; オプション</a><br>
+●<a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a><br>
+●<a href="./faq10-35.html">SMTP AUTH有効時のログ記録からログインID（Username）などを知るには</a><br>
+●<a href="./faq10-01.html">epstrd（SMTPレシーバー）応答コード</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

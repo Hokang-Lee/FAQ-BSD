@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-12</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>ドメインの管理方法を共通ボックス方式から接続ドメイン/IPで区別する方式へ移行するとき <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+運用中ドメインの管理方法について、「共通ボックス（区別しない）」方式で運用していた状態から、「接続ドメイン/IPで区別する」方式へ途中で移行するときは、あらかじめE-Post全サービスを停止しておいてから行うことが前提ですが、「接続ドメイン/IPで区別する」の下にある各「IPアドレス」を設定し、「ディレクトリ名」にドメイン名を入力しても、実際にはドメイン名のディレクトリが自動作成されないことがあります。自動作成されないときは、下記で説明されている指定場所にドメイン名のディレクトリを手動で作成してください。<br>
+その後、「共通ボックス」方式で運用していたアカウント（ユーザー名）のフォルダを「接続ドメイン/IPで区別する」方式で運用されるドメイン名のディレクトリ下に丸ごとコピーしてやります。<br>
+このアカウント（ユーザー名）ディレクトリは、メールボックスフォルダであり、その中には拡張子.datや.ctlなどの制御系ファイル、拡張子.MSGのメールデータファイルが格納される場所です。<br>
+E-Post全サービスを再開し、「接続ドメイン/IPで区別する」方式へ移行したドメインにあるアカウントのメールが問題なく送受信できることを確認できたら、「共通ボックス」方式で運用していたアカウント（ユーザー名）のディレクトリを削除してください。<br>
+ちなみに、最初から「接続ドメイン/IPで区別する」方式で設定したときには、ドメイン名のディレクトリは自動作成されます。<br>
+<br>
+一方、「接続ドメイン/IPで区別する」方式で運用していた状態から、「共通ボックス（区別しない）」方式へ途中で移行するときは、ドメイン名のディレクトリはそのまま残りますので、アクセスされなくなったことを確認した上で、フォルダを削除してください。もちろんその前に、メールデータがメールボックスフォルダ内に残っているときは、コピーするか移動する必要があります。<br>
+<br>
+メールボックスフォルダが（既定値　/var/spool/epms/inbox/%USERNAME%）に設定されているとき、下記のフォルダ位置でメールボックスフォルダが管理されます。<br>
+<br>
+<b>（POP3プロトコルで管理される通常のメールボックスフォルダ）</b><br>
+・「共通ボックス（区別しない）」方式の場合<br>
+　/var/spool/epms/inbox/[ユーザ名]/<br>
+　　　　　　　　　↓<br>
+・「接続ドメイン/IPで区別する」方式の場合<br>
+　/var/spool/epms/inbox/<b>[ドメイン名]</b>/[ユーザ名]/<br>
+<br>
+<b>（IMAP4プロトコルで管理されるメールボックスフォルダ）</b><br>
+・「共通ボックス（区別しない）」方式の場合<br>
+　/var/spool/epms/inbox/[ユーザ名]/inbox/<br>
+　　　　　　　　　↓<br>
+・「接続ドメイン/IPで区別する」方式の場合<br>
+　/var/spool/epms/inbox/<b>[ドメイン名]</b>/[ユーザ名]/inbox/<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-11.html">方式の違いによるメールボックスフォルダの作成位置について</a><br>
+●<a href="./faq15-30.html">inboxフォルダ（メールボックスフォルダ）配下に格納されるデータファイルについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

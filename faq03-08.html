@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ03-08</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+<!--Google Analytics end-->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールサーバマシンにアンチウイルスソフトを同居させるときの注意点<font color="red">（重要）</font></b></FONT><br>
+<HR>
+<br>
+E-Post Mail Server／SMTP Serverを導入・構築したサーバマシンに対し、サードパーティ製アンチウイルスソフトをインストールして、サーバマシンに対するウイルス検出を行う場合、「メール作業フォルダ」下のすべてのフォルダ、及び「メールボックスフォルダ」下のフォルダの常時監視＝リアルタイムスキャンは絶対に行わないようにアンチウイルスソフトを設定してください。<br>
+ <ul>
+ 〔E-Post Mail Server／SMTP Server全シリーズ共通〕<br>
+ <b>メール作業フォルダ（メール用作業ディレクトリ）（既定値 &quot;/var/spool/epms/&quot;）</b><br>
+ <b>メールボックスフォルダ（既定値 &quot;/var/spool/epms/inbox/%USERNAME%&quot;）</b><br>
+ </ul>
+ここであげた対策を取らないまま、サードパーティ製アンチウイルスソフトによって「メール作業フォルダ」「メールボックスフォルダ」下にあるフォルダの常時監視やスキャンを行った場合、メール送受信処理との間で各フォルダ内にあるファイルの競合（＝ファイルの取り合い）が発生し、メール送受信時に予期しない問題が発生する可能性があります。これは常時監視を行うようなバックアップソフトなどでも同様なことが言えます。<br>
+<br>
+さらに、アンチウイルスソフトを入れている自分のクライアントPCから、システム管理者がネットワークごしにメールサーバのドライブを開いたときにも、そのおそれがあります。ネットワークドライブもリアルタイムスキャン対象からはずしてください。<br>
+<br>
+以上のことがらのように、万が一、ファイルの取り合いの事象が発生すると、最悪のケースでは、サービスプログラムがアプリケーションエラーを起こして停止してしまう原因になります。サービスが止まらないまでも、メールデータが詰まってしまう現象になったり、クライアントへの応答速度が極度に遅くなったり、CPU占有率が50%以上で高止まりする現象や、負荷が小さい状態にもかかわらずCPU占有率が100%近くに上がったりする現象として現れる事例が報告されています。<br>
+<br>
+こうしたことを防ぐために、上記にあげた通り、メール作業フォルダとメールボックスフォルダに対して、アンチウイルスソフトの常時監視対象外とする設定作業を必ず行ってください。それでも動きがおかしいときは、アンチウイルスソフトの関連サービスプログラムをすべて完全に停止させてみて動きを確認してください。<br>
+<br>
+また、<font color="red">アンチウイルス機能を持ったEnterprise 版では、加えて次のフォルダを添付ファイルを一時展開する作業フォルダとして使用</font>します。サードパーティ製アンチウイルスソフトによる常時監視や定期検出をする対象から必ずはずしてください。<br>
+<ul>
+〔Enterprise シリーズの場合〕<br>
+ <b>一時展開する作業フォルダ（既定値 &quot;/tmp/Fastscan/&quot;）</b> <small>※2</small><br>
+</ul>
+さらに「プログラムインストールフォルダ」下のパターンファイル保管フォルダやパターン更新ログフォルダについても、サードパーティ製アンチウイルスソフトによる常時監視や定期検出をする対象からはずすことを推奨します。やはりファイルの競合が発生する可能性があります。<br>
+<ul>
+〔Enterprise シリーズの場合〕<br>
+ <b>パターンファイル保管フォルダ（既定値 &quot;/usr/local/Fastscan/bin/database&quot;）</b><br>
+ <b>パターン更新ログフォルダ（＜メール作業用フォルダ＞（/var/spool/epms）下の &quot;fsupdlog&quot;）</b><br>
+ <small></small><br>
+</ul>
+また、アンチウイルスソフトがSMTPプロトコルのデータ、POP3プロトコルのデータを自動的にスキャンして検出するような設定を行っている場合、ソフトの動作によっては、送受信の時間が極端に遅くなる場合がありますので注意してください。<br>
+<br>
+なお、受信・送信ポート番号を細かく指定変更できるプロキシタイプのソフトウェアを同じマシンに共存させる場合は、原理的に言って、リアルタイムスキャンによるファイルの取り合いが発生しないことから、ここであげた注意は不要かと思われます。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

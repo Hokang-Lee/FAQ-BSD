@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-49</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>リトライ期間を無期限に設定することは可能か</b></FONT>
+<HR>
+<br>
+epstddの詳細設定には、次の送信リトライ期間を設定する項目があります。<br>
+<blockquote>・リトライ期間（回線異常）<br>
+・リトライ期間（マシン無応答）<br>
+</blockquote>このリトライ期間項目について無期限の期間を設定することはできません。基本的に設定は不可です。<br>
+極端な話し、リトライ期間の設定に対して、たとえば3桁数値や4桁数値の長大な時間をソフトウェア上は設定できます。しかしそうした設定をすることによって及ぼされる結果のリスクは膨大であり、常識を超えたリトライ期間の時間を設定すべきではないと考えます。<br>
+たとえば、もしE-Postが延々とリトライを繰り返していたら、相手側のMTAは通常なら攻撃と見なして接続自体を切ったり、完全な拒絶をしても何ら不思議ではありません。あるいは、それに伴ってブラックリストサービスの永久リストに入れられる可能性すらあります。ブラックリストサービスには、全世界的に使われているものもあるので、一度でもリストに入ってしまうと、解除してもらうことはきわめて困難なケースが考えられます。<br>
+基本的にリトライを行う常識的な期間は、長くても1日間か2日間で、それを超えてリトライを続けているものは、異常をきたしているか、攻撃とみなされてもしかたがないと考えます。<br>
+また、リトライを延々と続けていることによって、E-Postのリトライ関係フォルダ（holdingとdomainsフォルダ）にいつまでもデータがたまる結果となり、フォルダの中に格納されていくデータが数千～数万レベルになってしまうと、サーバの動作自体に支障をきたすようになります。<br>
+OSのファイルシステムが抱える問題として、１フォルダあたりに大量のデータファイルやフォルダが蓄積していくとパフォーマンスが極端に低下、やがて身動きすらしなくなります。しかしそのときCPU負荷が高まるわけではありません。CPU負荷は高まらないのに、ファイルを処理するときのサーバ自体の動きが止まったような動きになります。
+いずれにしても、こうした危険性やシステムの不安を高めるおそれがある長大なリトライ期間を設定することは、やはり避けた方が賢明であると考えています。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-20</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP認証付きフォワードする際、受信対象の内部アカウントすべてを登録しなくてすむエイリアス設定での回避方法とそのときの注意点</b></FONT>
+<HR>
+<br>
+SMTP認証付きで外部サーバにフォワードするには、次の記事にもある通り、運用する内部ドメインのユーザーアカウントについて、送信元ユーザーアカウントはもちろん、受信対象のユーザーアカウントもすべて登録する必要がある旨説明しています。とはいえ、運用する内部ドメインのすべてのユーザーアカウントを登録することが困難な場合もあります。受信対象の内部アカウントすべてを登録しなくても、注意事項付きでエイリアス設定によって回避させる方法があります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-34.html">SMTP認証を有効にして外部MTAに送信要求をそのままフォワードさせる方法</a>
+<br>
+<br>
+受信対象となるユーザーアカウントが、E-Post内にすべて登録されていない場合でも、SMTP認証付きで外部サーバへ送信ができる方法は以下の通りです。<br>
+<ol>
+<li> E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［エイリアス管理］を開く。<br>
+<li>「エイリアス」と「実アドレス」にそれぞれ以下の記述をして、設定を追加する。<br>
+　　＊＠[自ドメイン]　　　→　　＊＠[架空の外部ドメイン],0<br>
+　　　　　　　　　　　　　　例）＊＠local.test,0<br>
+※「架空の外部ドメイン」は実在していなくてかまわない。<br>
+※「,0」の指定は送信先レシピエントを実アドレスに置き換えない意味のオプション。<br>
+</li></ol>
+ちなみにこの方法は、E-Postのエイリアス設定に内部ドメインとして使っているドメイン名をワイルドカードにて設定することで、E-Postに“外部”と思わせる少々トリッキーな方法です。なお、この設定を行う場合には、注意点があります。それは上記のように、エイリアス設定を　*＠[自ドメイン] →*＠[架空の外部ドメイン],0　と設定した場合、E-PostのSMTP認証方法のセキュリティレベルが［認証ファイル］になっているとき、エンベロープFROMのアドレスが未登録のアカウント名であっても、このエイリアス設定により外部ドメインの中継許可対象としてE-Postはメールを受領してしまうことです。未登録アカウントが送信元として利用されてしまう可能性があるのです。<br>
+<br>
+実際には、ゲートウェイ先の外部サーバは、SMTP認証を必要としていることが前提ですから、仮に未登録アカウントが送信元として利用され送信されたとしても、中継の実施時には、エンベロープFROMの未定義アカウントはSMTP認証不能であり、外部サーバから拒絶される結果となります。<br>
+その結果、E-Postでは所定のリトライ処理が行われ、リトライ終了後に送信エラーとして最終的には破棄されます。つまり、メールは外部サーバにフォワードできず、外部にも実際には送れないが、E-Post内においてリトライ後の配送失敗として処理される結果となります。<br>
+<br>
+この問題に対処する方法として、以下のように<b>「SMTP認証方法」の［セキュリティレベル］を［認証ファイル］から［認証専用］に変更</b>します。未登録アカウントが送信元として利用されたくない場合や、SPAMメールの踏み台被害を受けないようにするには、［セキュリティレベル］を［認証専用］として運用するのが望ましいと言えます。<br>
+<ol>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開く。<br>
+<li>「SMTP認証方法」の［セキュリティレベル］を［認証専用］に変更。<br>
+<li>［設定する］ボタンをクリック。<br>
+<li>epstrdサービスを再起動。<br>
+</li></ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

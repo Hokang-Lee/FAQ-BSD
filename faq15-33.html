@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-33</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>Active Directory（LDAP）への問い合わせ負荷の軽減方法について</b></FONT>
+<HR>
+<br>
+Active Directory（LDAP）連携時に、各ユーザーアカウントからの同時アクセスが多いとき、つまりドメインコントローラへの問い合わせが集中するときにエラーが起こりやすいような場合、問い合わせ負荷が大きいためにドメインコントローラとの間に通信トラブルが起きていることが予想できます。Active Directoryのドメインコントローラへの問い合わせ負荷軽減のため、次の設定ファイルを設定すれば、キャッシュ機能が働くことで軽減効果が見込まれます。<br>
+この設定ファイルを設定すると、ADへの問い合わせキャッシュ機能が有効になり、AD側への問い合わせ負荷が軽減できます。設定値を 60（秒）ぐらいから始めて、延ばしてみるなどの設定を試してみてください。<br>
+<br>
+<b>■[epstrd] (E-POST SMTP Receiver)</b><br>
+メール作業フォルダ<br>
+　reg<br>
+　　->epost<br>
+　　　->ims<br>
+　　　　 →EPST5RS<br>
+　　　　　→ADCashLiveTime.1<br>
+　　　　　　 (DWORD  Default 0)sec　AD連携のアカウント情報問合せ時の<br>
+　　　　　　キャッシュ機能有効時間（0:キャッシュ無効）<br>
+<br>
+<b>■[epstpop3d] (E-POST POP3 Server)</b><br>
+メール作業フォルダ<br>
+　reg<br>
+　　->epost<br>
+　　　->ims<br>
+　　　　 →EPST5POP3S<br>
+　　　　　→ADCashLiveTime<br>
+　　　　　　 (DWORD  Default 0)sec　AD連携のアカウント情報問合せ時の<br>
+　　　　　　キャッシュ機能有効時間（0:キャッシュ無効）<br>
+<br>
+<b>■[epstimap4d] (E-POST IMAP4rev1 Server)</b><br>
+メール作業フォルダ<br>
+　reg<br>
+　　->epost<br>
+　　　->ims<br>
+　　　　 →EPST5IMAP4S<br>
+　　　　　→ADCashLiveTime<br>
+　　　　　　 (DWORD  Default 0)sec　AD連携のアカウント情報問合せ時の<br>
+　　　　　　キャッシュ機能有効時間（0:キャッシュ無効）<br>
+<br>
+以上の設定ファイルを設定したり設定値を書き換えた場合は、その後各サービスの再起動が必要です。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

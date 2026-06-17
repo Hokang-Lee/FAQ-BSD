@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-47</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>E-Post関連サービスがCPU負荷100％となっており送受信とも遅い、考えられることは？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-PostでCPUが100％高負荷状態が続いている状態で考えられる原因と対策を下記にあげます。<br>
+<br>
+<b>1. アンチウイルスソフトの除外設定がされていない</b><br>
+======================================<br>
+epstrd, epstdd, epstpop3d, epstimap4d など、E-Post関連サービスプログラムのCPU高負荷状態が続いている場合、アンチウイルスソフトやセキュリティソフトを同居させているケースで、メール作業用フォルダ（既定値 /var/spool/epms/）やメールボックスフォルダなどをリアルタイムスキャンの対象から除外設定すべきところ、除外設定していないときに発生する事象として知られています。（下記FAQ記事参照）<br>
+アップデート適用時などで勝手に除外が解除されてしまうこともあるようです。必ずチェックしてください。一般的に言って、SMTP/POP3サービスがCPU100％高負荷状態になる場合はまずほとんどのケースで他アプリとのファイルアクセスの競合などが考えられます。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq03-08.html">メールサーバマシンにアンチウイルスソフトを同居させるときの注意点</a><br>
+●<a href="./faq03-29.html">アンチウイルスソフトをメールサーバマシンに入れる場合、除外設定を必須とする理由について</a><br>
+<br>
+<b>2. メールボックスフォルダに大量のメールデータが蓄積されている</b><br>
+==========================================<br>
+POP3プロトコル利用時、メールボックスフォルダに大量のメールデータを残しているユーザーはいないでしょうか？また、こちら側は意図しないのに大量のジャンクメールを送りつけられ、大量のメールデータが格納されてしまったメールボックスフォルダはありませんか？<br>
+もし、POP3サーバ利用時に大量のメールデータを残したまま運用されていることがあれば、それは御法度になります。SSHターミナルか標準コンソールからログインし、全ユーザーのメールボックスフォルダに入っているファイル数を確認してください。また、メールボックスフォルダ以外に、下記の記事で示すフォルダにも大量のデータが残り続けている状況になっていないかも確認してください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-73.html">メールボックスにメールデータを残す運用をしているときの注意点</a><br>
+●<a href="./faq15-90.html">メールボックスに放置されている大量のメールデータを削除するときの注意点</a><br>
+●<a href="./faq15-68.html">POP3メールボックスでメールデータ残存数が多いとパフォーマンス低下によるlogon overlap エラーが起きるおそれ</a><br>
+●<a href="./faq10-76.html">メールクライアントのPOP3受信タイミングが短いケースで logon overlap のエラーが持続してしまう場合</a><br>
+●<a href="./faq15-70.html">1フォルダ当たりのファイル数が膨大になるとファイルシステムのパフォーマンスが劇的に落ちるとは？</a><br>
+●<a href="./faq10-44.html">deadやmxcash、viruslogフォルダなど特定フォルダに膨大な数のファイルが蓄積されたときのパフォーマンス低下現象について</a><br>
+<br>
+<b>3. スパムやジャンクメールの踏み台、不正利用されている</b><br>
+==============================================<br>
+メール作業用フォルダ（既定値 /var/spool/epms/）下のincomingフォルダ（メールキュー）およびリトライ関係フォルダ（domains/holding/lists）もフォルダ内を目視で確認してください。ここでは、通常時、それなりの数のデータファイルが生成されては、消えている状態が普通ですが、膨大な数のファイルがたまったりしていないでしょうか？<br>
+膨大な数のファイルがたまっているときは、メールの不正利用の可能性を考える必要もあり、緊急対応が望まれます。念のため、外部からの不正利用者がいる可能性も念頭に置いて調査してください。<br>
+<br>
+E-PostのSMTPサービスで急激なCPU高負荷が起きるのは、一般的に言ってファイルアクセスの競合を発生させるようなアプリやツールによって、ファイルの取り合いが起こることによるものがほぼ全てのケースです。上記にあげたサードパーティ製アンチウイルスソフトやセキュリティソフトのリアルタイムスキャンや定期スキャンの除外設定がはずれていないかを十分確認してください<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-78.html">メールキュー（incoming）フォルダに生成される一時ファイルについて</a><br>
+●<a href="./faq01-67.html">リトライ処理が行われるときの情報とフォルダについて</a><br>
+●<a href="./faq17-49.html">メールの不正利用・なりすまし被害に遭った場合の一連の手順</a><br>
+●<a href="./faq05-50.html">inlog、acceptlog、outlog、faillog等のログのファイルサイズが異様に膨れ上がっている</a><br>
+●<a href="./faq01-08.html">作成されていないアカウントで受理され、勝手な送信を許している</a><br>
+●<a href="./faq03-14.html">不正中継の踏み台対策</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

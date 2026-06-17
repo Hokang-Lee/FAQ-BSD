@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ16-29</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>ヘッダに記録される情報から承認依頼メール・保留通知メールを区別する方法</b></FONT>
+<HR>
+<br>
+ヘッダに記録される情報から、承認依頼メール・保留通知メールを区別する方法です。<br>
+BossCheck Serverによってヘッダに記録される&quot;B&quot;で始まるMessage-Id:内の連番数字に&quot;.1&quot;や&quot;.2&quot;の枝番がふられます。&quot;.1&quot;の枝番は BossCheck 機能が「承認依頼メール」を生成し、&quot;.2&quot;の枝番は BossCheck 機能が「保留通知メール」を生成していることをそれぞれ表します。<br>
+<br>
+<hr width="75%" border="1" align="left">
+[承認依頼メールのヘッダ情報一部抜粋]<br>
+「承認依頼者」から「上長」へ<br>
+<hr width="75%" border="1" align="left">
+（途中略）<br>
+Date: Fri, 05 Feb 2016 11:15:00 +0900<br>
+Message-Id: &lt;B0000123123.1＠domain.jp&gt;<br>
+　　　　　　　↑※&quot;Bxxxxxxx.1＠&quot; は承認依頼メールとして BossCheck機能が生成<br>
+<hr width="75%" border="1" align="left">
+<br>
+<hr width="75%" border="1" align="left">
+[保留通知メールのヘッダ情報一部抜粋]<br>
+「上長」から「承認依頼者」へ<br>
+<hr width="75%" border="1" align="left">
+（途中略）<br>
+Date: Fri, 05 Feb 2016 11:15:00 +0900<br>
+Message-Id: &lt;B0000123123.2＠domain.jp&gt;<br>
+　　　　　　　↑※&quot;Bxxxxxxx.2＠&quot; は保留通知メールとして BossCheck機能が生成<br>
+<hr width="75%" border="1" align="left">
+<br>
+SMTP受信ログ（inlog）も合わせてチェックするとよいでしょう。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

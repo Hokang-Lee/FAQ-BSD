@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-83</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>ゲートウェイ装置がある環境で epstdd のスレッド数を増やしたところ逆に遅延が発生するおそれがある場合</b></FONT>
+<HR>
+<br>
+ゲートウェイ装置がある環境では、E-Post側の epstdd サービスのマルチスレッドを有効にした状態でスレッド数の設定を増やしたことによって、逆に遅延が発生するケースがあります。<br>
+スレッド数を増やすことで、メール配送に遅延が発生する可能性について考えた場合、ゲートウェイにしているサーバがSMTP受領する処理能力程度、場合によっては数多くのスレッドで接続することをDDos攻撃状態になってしまっていることも考慮に入れておかなくてはいけません。このようにE-Postから外部宛のメールは、ゲートウェイ装置側が同時発生した多すぎる接続要求に耐え切れなくなるおそれが生じます。つまり、マルチスレッドを有効にして、数十スレッドの同時接続が発生した場合に、ゲートウェイ装置側が DDos攻撃を受けたような状態となって、受領処理をさばききれない状況です。<br>
+この状況を調べるには、E-Post側のログで outlog や senderlog を調べ、相手先接続状況を調べる一方、ゲートウェイ装置側のSMTP受信ログを調べ、その両方をつきあわせるような形で対比すれば、おそらくようすがわかります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-58.html">配送サービス epstdd のスレッド数はどの程度まで上げても大丈夫か</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

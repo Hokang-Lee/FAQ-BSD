@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-33</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>外部からメールが届かない、着信していない <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+外部の相手側からメールが届かない、着信していないという場合、問題を切り分けしていく方法を示します。<br>
+<b><ol><li>名前解決に問題がないかの確認</li></b>
+外部ネットワークから接続するときに、名前解決に問題がないかまず確認します。<br>
+外部のSMTPサーバがメールを自身のSMTPサーバへ届けるためには、〈アカウント〉＠〈ドメイン〉の〈ドメイン〉部分を参照して、このドメインを設定しているDNSサーバの情報より、どのマシンへ接続するかを判定しています。<br>
+外部から自身のSMTPサーバへ届かない場合は、自身が公開しているDNSサーバの下記のいずれかについて、「外部のネットワーク」からAレコードおよびMXレコードが正しく参照できるかを確認してください。<br>まずAレコード登録の有無を調べるには、Windowsマシンのコマンドプロンプトか、メールサーバマシンのターミナルから pingコマンドにて〈ドメイン〉を調べ、応答が返るか否かをチェックします。外部のネットワークから確認するようにします。<br>
+次に外部のネットワークからMXレコード登録の有無を調べるには、Windowsマシンのコマンドプロンプトか、メールサーバマシンのターミナルから nslookupコマンドを使い、自身のドメインについて、MXレコードが返されるかどうかを確認します。こちらも必ず外部のネットワークから確認するようにします。<br>
+<blockquote>
+（コマンド入力例）nslookup -type=mx domain.jp<br>
+</blockquote>
+
+<b><li>相手側から実際に接続された記録があるか、こちらが何らかの理由で拒絶していないかの確認</li></b>
+相手側から実際に接続されたことがあるか、それとも接続された形跡がまったくないか、接続後にこちらのメールサーバ（E-Post）が何らかの理由で拒絶してしまっていないかという確認作業は、基本的にログから行います。<br>
+<blockquote>
+・<a href="./faq05-03.html">acceptlog（接続マシンログ）</a><br>
+・<a href="./faq05-05.html">receivelog（SMTP受信詳細ログ）</a><br>
+</blockquote>
+相手側に実際に接続されたことがあれば、acceptlog（接続マシンログ）に記録されます。接続後の結果は、abortかokかのどちらかです。仮に一つも記録が見つからない場合、一度も接続された形跡がないということになります。この場合、メールサーバ以前の名前解決や経路上の問題ということになってしまいます。<br>
+acceptlog（接続マシンログ）にabortされている記録がある場合、その詳細理由を知るにはreceivelog（SMTP受信詳細ログ）を調べます。拒絶の理由（エラー番号とエラー応答内容）が出ていればその内容を確認します。出ないケースもありますので、詳細は下記のFAQ記事を参照してください。<br>
+receivelog（SMTP受信詳細ログ）は重要なログですので、取得されていないときは関連記事をご参考の上、取得するようにしてください。<br>
+</ol>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-03.html">接続マシンログ（acceptlog）について</a><br>
+●<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）について</a><br>
+●<a href="./faq05-24.html">接続マシンログ（acceptlog）で abort されている理由を知るには</a><br>
+●<a href="./faq17-20.html">acceptlogにメッセージIDが出ているのにreceivelogに見つからないケースがある理由</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

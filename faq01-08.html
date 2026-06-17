@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-08</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>作成されていないアカウントで受理され、勝手な送信を許している</b></FONT>
+<HR>
+<br>
+作成されていないアカウントで受理され、勝手な送信を許している事態が起きている場合、以下の設定をしていないか確認してください。<br>
+<br>
+<b>「マシン毎の中継」（effect.dat）の設定でドメイン名を指定してしまっている</b><br>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］の中ほど［中継の制限］の［マシンごとの中継］、もしくは［中継の制限］で表示される「中継の制限設定」にある［マシンごとの中継］ボタンをクリックして表示される「effect.dat」を確認してください。デフォルト状態では、「作成済みアカウントユーザーのみ（受理を）許可する設定」になっており、本来なら作成されていないアカウントで受理されたり、勝手に送信を許したりすることはありません。<br>
+しかし、「マシン毎の中継」（effect.dat）の設定で、作成済みドメイン名を下記のように記述してしまうと、内部ドメイン名を"true"設定してしまうことになり、内部ドメイン名を使って接続されるものは、無条件に受理され、しかもどんなアカウント名でも、SMTP認証ありなしに関わらず無条件送信できることになります。これは適当なアカウントユーザーでの“なりすまし送信”をそのまま許してしまうことになります。<br>
+<HR width="95%" size="1" noshade>
+　この事態を招いている悪い例）<br>
+　　domain.jp　true<br>
+　　または<br>
+　　domain.jp<br>
+<HR width="95%" size="1" noshade>
+このような設定は、意図があれば別ですが、通常時には決してしないように十分な注意が必要です。もし該当する行があればしっかり削除しておきましょう。<br>
+<br>
+（関連FAQ）<br>
+●<a href="./faq03-14.html">不正中継の踏み台対策</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

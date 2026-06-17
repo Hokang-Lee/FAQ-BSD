@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-07</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>メールフィルタ設定でワイルドカードは使えないか</b></FONT>
+<HR>
+<BR>
+メールフィルタ設定ファイルの【mail.dat】では、ワイルドカードを記述してもそのままでは無効になります。<br>
+特定のサブドメイン名を宛先にしたメールを通す／通さない（拒絶する）方法としては、以下の方法があります。<br>
+下記の設定事例は、サブドメイン宛へのメールを拒絶している例です。<br>
+<blockquote>'
+------------------------------------------------------<br>
+Virus:AbortAddress[1]<br>
+To:＠sub.domain.jp<br>
+Level:100<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+Virus:AbortAddress[2]<br>
+To:＠SUB.DOMAIN.JP<br>
+Level:100<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+</blockquote>
+<ul><b>（説明）</b><br>
+<li>To:やFrom:の指定時にワイルドカードを指定する意図で"＊"を記述しても、<u>メールフィルタ設定では"＊"をワイルドカードとして処理しません</u>。上記のように<u>"＠"以降を記述することにより、ワイルドカードを“指定したもの”として扱います</u>。<br>
+<li>Level:100を指定したときは、単純に拒絶だけしてデータを残しません。Level:110の指定をしたときは、viruslogというフォルダにメールデータを格納し、同時に拒絶する動きになります。<br>
+<li>Levelの数字は、過去バージョンの互換性保持のため2桁の数字を設定しても有効に働きますが、現行のE-Postシリーズは3桁の数字で設定します。<br>
+<li>ドメイン名を記述するとき、小文字・大文字が区別されますので、より厳重にするには例のように両方のパターン記述が必要です。<br>
+<li>メールフィルタ機能は、ヘッダレベルであり、よりセキュアなレベルとして考えられるエンベロープレベルでの判定ではありません。信頼できる内部ユーザーが使う分にはOKですが、メーラーでヘッダの書き換えを簡単に行うことができる現状では、悪意のあるユーザーに対する防止策としては十分ではありません。その点は理解してください。<br>
+<li>なお、上記のケースにも当てはまらず、どうしてもワイルドカードを意味する"＊"をあえて記述しなければならないような場合については、通常は公開しておりませんが、設定ファイルで設定する方法が用意されています。<br></ul>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

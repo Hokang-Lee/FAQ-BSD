@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-26</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>インポート機能を利用したアカウントのパスワード一括変更方法</b></FONT>
+<HR>
+<br>
+インポートを利用してアカウントのパスワード一括変更方法を行うには、以下の点に注意して作業を行ってください。<br>
+・全ユーザーのうち、一部のユーザーのパスワードを一括変更する例。<br>
+<ol>
+<li>E-POSTコントロールセンターのメールサーバ管理から、指定ドメイン内の全ユーザーについて、任意のファイル名でエクスポートする。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［エクスポート］を選択して、［操作する］ボタンをクリックします。<br>
+<br>
+<li>出力されたファイルを編集し、一部のユーザー分のパスワードを平文で変更する。パスワードを変更しないユーザーのレコードは消さないでそのまま残しておく。<br>
+<br>
+<li>SSHなどを使いコンソールへログインし、標準で（/var/spool/epms/db/）に置かれているアカウントデータファイル（ドメイン名.idx）をリネームするか、別の場所へ移動する。<br>
+（※）この操作が必須な理由は、<b>インポートしたときに、存在するアカウントのデータが重複すると、上書きされない仕様であるため</b>です。下記FAQを参照。<br>
+<br>
+<li>SMTP認証を有効にしている場合で、デフォルトのPOPパスワードとSMTP認証パスワードが同じになっているときは特別な操作は不要ですが、POPパスワードとSMTP認証パスワードを異ならせているケースでは、あらかじめメールボックスフォルダ下にある &quot;apop.dat&quot; ファイルをバックアップしておき、後から上書きコピーする。<br>
+（※）SMTP認証を有効にしているときは、認証ファイルとして各ユーザーのメールボックスフォルダに &quot;apop.dat&quot; ファイルができています。インポート時に「認証ファイルを設定する。」が有効になっているアカウントについては、自動的に &quot;apop.dat&quot; ファイルを生成する仕様です。<br>
+そのときの認証ファイルに記録されるパスワードは、POPパスワードと同じになります。<br>
+<br>
+<li>指定ドメイン内の全ユーザーに対し、インポートを実行する。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［アカウントインポート］のボタンをクリックしインポート用のファイル選択して、［インポート］ボタンをクリックします。<br>
+</ol>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-87.html">アカウントデータとインポートの仕様について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

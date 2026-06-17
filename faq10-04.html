@@ -1,0 +1,508 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-04</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>socket エラーコード表</b></FONT>
+<HR>
+<br>
+<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>や<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>を取得している場合、SMTPプロトコルレベルではなく、Socketエラーが記録されることがあります。<br>
+何が起きているかは、Socketエラーの内容を見きわめることで、ある程度の類推が効くケースもあります。<br>
+下記の socket エラーコード表は、FreeBSDが公開している内容の一部です。<br>
+Socketエラーが記録されているときには、この表を参考にしてください。<BR>
+<BR>
+<TABLE border=1  cellspacing=0 cellpadding=2>
+<TR bgcolor="#CCCCCC">
+ <TH width="180">エラーコード/名称</TH>
+ <TH width="450">意味</TH>
+</TR>
+<TR>
+ <TD>4<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EINTR</A>
+ </TD>
+ <TD>Interrupted system call<BR>
+ <b>システムコールの割り込みが発生した。</b><br>
+ socket 1.1 のブロッキング関数呼び出しが、CancelBlockingCall() によって中断された。
+ </td>
+</TR>
+<TR>
+ <TD>9<BR><A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2"></A> </TD>
+ <TD>Bad file descriptor<BR>
+ <b>無効なファイルハンドル。</b><br>
+ ソケット関数に渡されたファイルハンドル（ソケットハンドル）が不正である。
+ </td>
+</TR>
+<TR>
+ <TD>13<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EACCES</A>
+ </TD>
+ <TD>Permission denied<BR>
+ <b>アクセスが拒否された。</b><br>
+  <table border="0" cellpadding="0" cellspacing="0" width="90%">
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top">connect()：ブロードキャストアドレスで接続しようとしたソケットの SO_BROADCASTオプション が有効になっていない。</td>
+   </tr>
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top">sendto()：ブロードキャストアドレスに送信しようとしたソケットの SO_BROADCASTオプションが有効になっていない。</td>
+   </tr>
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top">accept()：受付しようとした接続要求がすでにタイムアウトになっている、もしくは取り消されている。</td>
+   </tr>
+  </table msthemelist>
+ </td>
+</TR>
+<TR>
+ <TD>14<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EFAULT</A>
+ </TD>
+ <TD>Bad address<BR>
+ <b>無効なバッファアドレス</b><br>
+ 関数に渡されたバッファを指すポインタが無効なアドレス空間を指している。またはバッファのサイズが小さすぎる。
+ </td>
+</TR>
+<TR>
+ <TD><font color=red>22</font><BR><A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EINVAL</A> 
+ </TD>
+ <TD>Invalid argument<BR>
+ <b>無効な引数が渡された。</b><br>
+  <table border="0" cellpadding="0" cellspacing="0" width="90%">
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top">listen()を呼び出さずにaccept()を呼び出した。</td>
+   </tr>
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top">バインド済みのソケットに対してbind()しようとした。</td>
+   </tr>
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top">listen()で待機中のソケットでconnect()しようとした。</td>
+   </tr>
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top">関数に渡されたパラメータに無効な値が含まれている。</td>
+   </tr>
+  </table msthemelist>
+ </td>
+</TR>
+<TR>
+ <TD>24<BR><A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EMFILE</A> 
+ </TD>
+ <TD>Too many open files<BR>
+ <b>使用中のソケットの数が多すぎる。</b><br>
+ 同時に利用できるソケット数の最大に達しており、新たにソケットを作成できない。
+ </td>
+</TR>
+<TR>
+ <TD>36<BR><A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EINPROGRESS</A> 
+ </TD>
+ <TD>Operation now in progress<BR>
+ <b>すでにブロッキング手続きが実行されている。</b><br>
+ ブロッキング関数が実行中であるか、サービスプロバイダがコールバック関数を処理中である。socketでは<br>
+ １つのプロセスで同時に複数のブロッキング操作をすることはできないため、前回呼び出した操作が完全に<br>
+ 終了するまで次の操作を開始することはできない。
+ </td>
+</TR>
+<TR>
+ <TD>37<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EALREADY</A> 
+ </TD>
+ <TD>Operation already in progress<BR>
+ <b>要求された操作は既に実行中、または実行済み。</b><br>
+  <table border="0" cellpadding="0" cellspacing="0" width="90%">
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">キャンセルしようとした非同期操作が既にキャンセルされている。</td>
+   </tr>
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">connect()を呼び出したが、既に前回の呼び出しによって接続処理中である。</td>
+   </tr>
+  </table msthemelist>
+ </td>
+</TR>
+<TR>
+ <TD><font color=red>38</font><BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ENOTSOCK</A> 
+ </TD>
+ <TD>Socket operation on non-socket<BR>
+ <b>指定されたソケットが無効である。</b><br>
+ ソケットハンドルとして無効な値がソケット関数に渡された。
+ </td>
+</TR>
+<TR>
+ <TD>39<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EDESTADDRREQ</A> 
+ </TD>
+ <TD>Destination address required<BR>
+ <b>操作の実行に送信先アドレスが必要。</b><br>
+  <table border="0" cellpadding="0" cellspacing="0" width="90%">
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">接続先アドレスを渡さずにconnect()を呼び出した。</td>
+   </tr>
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">送信先アドレスを渡さずにsendto()を呼び出した。</td>
+   </tr>
+  </table msthemelist>
+ </td>
+</TR>
+<TR>
+ <TD>40<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EMSGSIZE</A> 
+ </TD>
+ <TD>Message too long<BR>
+ <b>メッセージサイズが大きすぎる。</b><br>
+ 送信、または受信しようとしたメッセージが、基盤となるプロトコルのサポートしている最大メッセージ<br>
+ サイズを超えている。ioctlsocket()でバッファサイズを増やすことで回避可能なこともある。
+ </td>
+</TR>
+<TR>
+ <TD>41<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EPROTOTYPE</A> 
+ </TD>
+ <TD>Protocol wrong type for socket<BR>
+ <b>ソケットは要求されたプロトコルに適合していない。<br></b>
+  <table border="0" cellpadding="0" cellspacing="0" width="90%">
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">socket()を呼び出すときに指定したプロトコルタイプがソケットタイ<br>
+    プと適合していない。メッセージ型プロトコルでストリームソケットを作成しようとした場合など。
+  </table msthemelist>
+ </td>
+</TR>
+<TR>
+ <TD>42<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2#ENOPROTOOPT">ENOPROTOOPT</A> 
+ </TD>
+ <TD>Bad protocol option<BR>
+ <b>不正なプロトコルオプション。</b><br>
+ 指定したソケットオプションまたはioctlsocket()での操作が、そのプロトコルではサポートされてない。<br>
+  <table border="0" cellpadding="0" cellspacing="0" width="90%">
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">ストリームソケットに SO_BROADCAST を指定しようとした。</td>
+   </tr>
+  </table msthemelist>
+ </td>
+</TR>
+<TR>
+ <TD>43<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EPROTONOSUPPORT</A> 
+ </TD>
+ <TD>Protocol not supported<BR>
+ <b>プロトコルがサポートされていない。</b><br>
+ サポートされていないプロトコルを指定した、またはプロトコルのサポートしていない操作を実行しようとした。
+ </td>
+</TR>
+<TR>
+ <TD>44<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ESOCKTNOSUPPORT</A> 
+ </TD>
+ <TD>Socket type not supported<BR>
+ <b>指定されたソケットタイプはサポートされていない。</b>
+ </td>
+</TR>
+<TR>
+ <TD>45<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EOPNOTSUPP</A> 
+ </TD>
+ <TD>Operation not supported on socket<BR>
+ <b>要求された操作はサポートされていない。</b><br>
+  <table border="0" cellpadding="0" cellspacing="0" width="90%">
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">バンド外データを送信/受信しようとしたソケットでそれがサポートされていない。</td>
+   </tr>
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">非接続型(UDPなど)ソケットでaccept()を呼び出した。</td>
+   </tr>
+  </table msthemelist>
+ </td>
+</TR>
+<TR>
+ <TD>46<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EPFNOSUPPORT</A> 
+ </TD>
+ <TD>Protocol family not supported<BR>
+ <b>プロトコルファミリがサポートされていない。</b>
+ </td>
+</TR>
+<TR>
+ <TD><font color=red>47</font><BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EAFNOSUPPORT</A> 
+ </TD>
+ <TD>Address family not supported <BR>
+ by protocol family<BR>
+ <b>アドレスファミリがサポートされていない。</b>
+ </td>
+</TR>
+<TR>
+ <TD>48<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EADDRINUSE</A> 
+ </TD>
+ <TD>Address already in use<BR>
+ <b>アドレスは既に使用中である。</b><br>
+  <table border="0" cellpadding="0" cellspacing="0" width="90%">
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">bind()しようとしたアドレスは、既にほかのソケットで使われている。<br>
+    同じローカルアドレスを複数のソケットで使うためには、SO_REUSEADDRソケットオプションをTRUEにする必要がある。</td>
+   </tr>
+  </table msthemelist>
+ </td>
+</TR>
+<TR>
+ <TD><font color=red>49</font><BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EADDRNOTAVAIL</A> 
+ </TD>
+ <TD>Can't assign requested address<BR>
+ <b>無効なネットワークアドレス。</b><br>
+ ソケット関数に渡されたネットワークアドレスに無効な部分がある。
+ </td>
+</TR>
+<TR>
+ <TD><font color=red>50</font><BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ENETDOWN</A> 
+ </TD>
+ <TD>Network is down<BR>
+ <b>ネットワークがダウンしている。</b><br>
+ ネットワークシステムが何らかの障害を起こし、機能停止しているため要求された操作が実行できない。
+ </td>
+</TR>
+<TR>
+ <TD>51<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ENETUNREACH</A> 
+ </TD>
+ <TD>Network is unreachable<BR>
+ <b>指定されたネットワークホストに到達できない。</b><br>
+ EHOSTUNREACHと同義で使われている。
+ </td>
+</TR>
+<TR>
+ <TD>52<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ENETRESET</A> 
+ </TD>
+ <TD>Net dropped connection or reset<BR>
+ <b>ネットワーク接続が破棄された。</b><br>
+ キープアライブを行っている接続で、何らかの障害のためタイムアウトが検出され接続が閉じられた。
+ </td>
+</TR>
+<TR>
+ <TD><font color=red>53</font><BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ECONNABORTED</A> 
+ </TD>
+ <TD>Software caused connection abort<BR>
+ <b>ネットワーク接続が破棄された。</b>
+ </td>
+</TR>
+<TR>
+ <TD><font color=red>54</font><BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ECONNRESET</A> 
+ </TD>
+ <TD>Connection reset by peer<BR>
+ <b>ネットワーク接続が相手によって破棄された。</b><br>
+ </td>
+</TR>
+<TR>
+ <TD><font color=red>55</font><BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ENOBUFS</A> 
+ </TD>
+ <TD>No buffer space available<BR>
+ <b>バッファが不足している。</b><br>
+ メモリ不足のためsocketが操作に必要なバッファを確保することができない。または、バッファを必要と<br>
+ する関数呼び出しで、小さすぎるバッファが渡された。
+ </td>
+</TR>
+<TR>
+ <TD>56<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EISCONN</A> 
+ </TD>
+ <TD>Socket is already connected<BR>
+ <b>ソケットは既に接続されている。</b><br>
+  <table border="0" cellpadding="0" cellspacing="0" width="90%">
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">接続中のソケットに対してconnect()、listen()、bind()等の操作を行おうとした。</td>
+   </tr>
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">接続中のソケットでsendto()を実行しようとした。</td>
+   </tr>
+  </table msthemelist>
+ </td>
+</TR>
+<TR>
+ <TD>57<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ENOTCONN</A> 
+ </TD>
+ <TD>Socket is not connected<BR>
+ <b>ソケットは接続されていない。</b><br>
+  <table border="0" cellpadding="0" cellspacing="0" width="90%">
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">接続されていないソケットでsend()、getpeername()等の接続されたソケットを必要と<br>
+    する操作を実行しようとした。
+    </td>
+   </tr>
+  </table msthemelist>
+ </td>
+</TR>
+<TR>
+ <TD>58<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ESHUTDOWN</A> 
+ </TD>
+ <TD>Can't send after socket shutdown<BR>
+ <b>ソケットはシャットダウンされている。</b><br>
+ 既にシャットダウンされて送信/受信が停止されているソケットで、送信または受信の操作を実行しようとした。
+ </td>
+</TR>
+<TR>
+ <TD>60<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ETIMEDOUT</A> 
+ </TD>
+ <TD>Operation timed out<BR>
+ <b>接続要求がタイムアウトした。</b><br>
+ connect()を呼び出して接続を試みたが、（相手の応答がない等で）処理がタイムアウトになり接続要求がキャンセルされた。
+ </td>
+</TR>
+<TR>
+ <TD>61<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ECONNREFUSED</A> 
+ </TD>
+ <TD>Connection refused<BR>
+ <b>接続が拒否された。</b>
+ </td>
+</TR>
+<TR>
+ <TD>62<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ELOOP</A> 
+ </TD>
+ <TD>Too many levels of symbolic links<BR>
+ <b>ループ。</b>
+ </td>
+</TR>
+<TR>
+ <TD>63<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ENAMETOOLONG</A> 
+ </TD>
+ <TD>File name too long<BR>
+ <b>名前が長すぎる。</b>
+ </td>
+</TR>
+<TR>
+ <TD>64<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EHOSTDOWN</A> 
+ </TD>
+ <TD>Host is down<BR>
+ <b>ホストがダウンしている。</b><br>
+ ETIMEDOUTと同義。
+ </td>
+</TR>
+<TR>
+ <TD>65<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EHOSTUNREACH</A> 
+ </TD>
+ <TD>No Route to Host<BR>
+ <b>ホストへの経路がない。</b><br>
+ ネットワークの構造上到達できないホストに対して操作を実行しようとした。またはアドレスが不正である。
+ </td>
+</TR>
+<TR>
+ <TD>66<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ENOTEMPTY</A> 
+ </TD>
+ <TD>Directory not empty<BR>
+ <b>ディレクトリが空ではない。</b>
+ </td>
+</TR>
+<TR>
+ <TD>67<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EPROCLIM</A> 
+ </TD>
+ <TD>Too many processes<BR>
+ <b>プロセスの数が多すぎる。</b><br>
+  <table border="0" cellpadding="0" cellspacing="0" width="90%">
+   <tr>
+    <td valign="baseline" width="12">・</td>
+    <td valign="top" width="%">Startup()：既にsocketが管理できる最大プロセス数に達しており処理が実行できない。</td>
+   </tr>
+  </table msthemelist>
+ </td>
+</TR>
+<TR>
+ <TD>68<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EUSERS</A> 
+ </TD>
+ <TD>Too many users<BR>
+ <b>ユーザの数が多すぎる。</b>
+ </td>
+</TR>
+<TR>
+ <TD>69<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">EDQUOT</A> 
+ </TD>
+ <TD>Disc Quota Exceeded<BR>
+ <b>ディスク割り当てを超過。</b>
+ </td>
+</TR>
+<TR>
+ <TD>70<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">ESTALE</A> 
+ </TD>
+ <TD>Stale NFS file handle<BR>
+ <b>実行しようとした操作は廃止されている。</b>
+ </td>
+</TR>
+<TR>
+ <TD>71<BR>
+ <A HREF="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2#EREMOTE">EREMOTE</A> 
+ </TD>
+ <TD>Too many levels of remote in path<BR>
+ <b>リモート。</b>
+ </td>
+</TR>
+</table>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

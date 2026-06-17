@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-19</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>数名のアカウントの送信メールを特定の別アカウントに転送したい <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+数名のアカウントユーザの送受信メールを特定アカウントへ転送したい場合、アカウント単位の自動転送機能では受信メールが対象なので、できれば送信メールも転送したいが、どういう方法があるのか質問を受けたことがあります。たしかにE-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］の［ユーザー管理］設定可能な自動転送機能では、受信メールのみの転送で、送信メールは対象外です。<br>
+<br>
+E-POSTコントロールセンターのメールサーバ管理からの「ログ設定」画面にある「以下のアドレスへ受信メールの複写を転送する」部分は「全メール複写機能」と呼んでいます。この機能は簡易アーカイブ的に使われることを想定しており、基本は複写転送アドレスを設定すると、全ユーザーの送受信メールが対象になって複写転送が行われます。ところで、「全メール複写機能」の複写転送アドレス設定にはユーザーズマニュアルやヘルプには書かれていませんが、以下のような隠し機能が搭載されています。<br>
+<blockquote>
+------------------------------------------------------------------------<br>
+ログ設定の複写転送機能でエンベロープのFROM別にカーボンコピー可能な追加機能。<br>
+書式:[エンベロープのFROM]|[CCアドレス]<br>
+------------------------------------------------------------------------<br>
+</blockquote>
+この全メール複写機能を使う際、書式 &quot;|&quot;で区切って、[エンベロープのFROM]|[複写先アドレス]という指定方法で、対象となるエンベロープFROMのアドレス指定をすることが可能です。この設定をすることで対象となるアカウントの送信メールだけが複写転送されるよう指定できます。たとえば以下のような設定をします。<br>
+<blockquote>
+（指定例）<br>
+user1＠domaintest.jp|kanri＠domaintest.jp<br>
+user2＠domaintest.jp|kanri＠domaintest.jp<br>
+</blockquote>
+ちなみに、ここでの「エンベロープFROM」の指定条件の意味は、送受信両方を意味するものではありません。メールコマンドにて「エンベロープFROM」がこのアカウントで指定されたときに、複写先アドレスに複写されるという意味です。この「エンベロープFROM」指定がない場合は、E-Post内部の送受信通過メール全ての記録のみになります。<br>
+<br>
+<b>（制限事項および注意事項）</b><br>
+複写転送アドレス設定部分に上記のような設定を行ってエンベロープFROMのアドレス指定を行う場合、気をつけていただくべき制限事項や注意事項があります。<br>
+<ul><li>複写転送アドレス設定部分は本来、単一または数個のアドレスを入力することを想定しているため、この設定文字列部分の合計は4096byte以内という制限があります。オーバーしないよう注意してください。</li>
+<li>複写転送アドレス設定部分に指定するアドレスやドメインの一部にワイルドカード '*' を使用することはできません。</li>
+<li>各アカウントに備わっている受信メールの自動転送機能を併用して使用するとき、転送のループが発生しないよう十分注意する必要があります。</li>
+</ul>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

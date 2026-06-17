@@ -1,0 +1,134 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-81</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>メールフィルタ【mail.dat】の設定事例</b></FONT>
+<HR>
+<br>
+メールフィルタ機能を使うには次の操作を行います。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［メールフィルタ］を選択。続いて「メールフィルタ（機能）を使用する」チェックボックスをオンになっていることを確認して［メールフィルタ］ボタンをクリックして表示される「mail.dat」を編集します。「メールフィルタ（機能）を使用する」チェックボックスをオンオフしたときはその後 epstrd の再起動が必要になります。<br>
+メールフィルタ機能による設定パターンは上から下にかけて昇順に処理されます。フィルタ項目内は「トークン一致」で、項目間は「and条件」で処理されます。<br>
+設定パターン中に処理レベル（Level:xxx）の指定は必須です。処理レベルでは、たとえば Level:100 を設定すると、単純に拒絶を返す処理が行われ、Level:110 を設定すると、拒絶を返すとともに、拒絶したメールを viruslog フォルダに残す処理になります。<br>
+拒絶した時は、E-Post Mail Server側から、接続してきたMTAもしくはクライアントに対して、'552 Requested mail action aborted: caught by the filter setting.' が返されます。<br>
+ちなみに、&quot;mail.dat&quot; にあまりたくさんのパターンを記述すると、epstrd サービスプログラムの負荷が増大しますので、注意してください。負荷を減らす面から言えば、できるだけ少ないパターンの記述ですませることが理想的です。効率のよい<b>SURBLサイト</b>を１つ登録し利用することができれば、URLを本文に記述していないメールは判別不能ですが、それ以外の大多数のスパムメールは判定できます。その分、記述パターンを思い切って減らせます。<br>
+なおメールフィルタの機能強化が図られており、従来からの Level:1xx～Level:3xx に加えて、Level:4xx～Level:7xx が新しく追加されています。詳細はヘルプ、ユーザーズマニュアルを参照してください。<br>
+<ul>
+<li><b>n=0xx</b>　通過させる。
+<li><b>n=1xx</b>　拒否する。
+<li><b>n=2xx</b>　本文の先頭に警告メッセージの添付を行い通過させる。
+<li><b>n=3xx</b>　Subject:へ&quot;Tag:&quot;で指定した文字列の挿入を行い通過させる。
+<li><b><font color="red">n=4xx</font></b>　ヘッダとして&quot;Tag:&quot;で指定した文字列の挿入を行い通過させる。
+<li><b><font color="red">n=5xx</font></b>　&quot;Forward:&quot;で指定したアドレスへ転送する。
+<li><b><font color="red">n=6xx</font></b>　Subject:へ&quot;Tag:&quot;で指定した文字列の挿入を行い、&quot;Forward:&quot;で指定したアドレスへ転送する。
+<li><b><font color="red">n=7xx</font></b>　ヘッダとして&quot;Tag:&quot;で指定した文字列の挿入を行い、&quot;Forward:&quot;で指定したアドレスへ転送する。
+</ul>
+以下に、現実的によく使われそうなメールフィルタ機能の &quot;mail.dat&quot; の設定事例としていくつかの例を記します。<br>
+<br>
+【ケース１】メール文中のURLを元に<b>SURBLサイト</b>を参照、スパムメールと判定されたメールの件名に&quot;[SPAM]&quot;を追加して、通過させる設定例<blockquote>
+'------------------------------------------------------<br>
+ Virus:RBL multi.surbl.org<br>
+ RBL:multi.surbl.org<br>
+ Level:300<br>
+ Tag:[SPAM]<br>
+ VirusEnd:<br>
+'------------------------------------------------------</blockquote>
+【ケース２】メール文中のURLを元にSURBLサイトを参照、スパムメールと判定されたメールの件名に&quot;[SPAM]&quot;を追加して、指定された任意アドレスに転送、メールを隔離する設定例<blockquote>
+'------------------------------------------------------<br>
+ Virus:RBL multi.surbl.org<br>
+ RBL:multi.surbl.org<br>
+ Level:600<br>
+ Tag:[SPAM]<br>
+ Forward:spamhld＠domain.jp<br>
+ VirusEnd:<br>
+'------------------------------------------------------</blockquote>
+【ケース３】件名が空白のとき拒絶する設定例<blockquote>
+'------------------------------------------------------<br>
+ Virus:SubjectBlank<br>
+ Subject:#blank<br>
+ Level:100<br>
+ VirusEnd:<br>
+'------------------------------------------------------</blockquote>
+【ケース４】ヘッダーのMessage-ID:に任意文字列があるときに拒絶する設定例<blockquote>
+'------------------------------------------------------<br>
+ Virus:Message-ID<br>
+ Unique-Header:Message-ID:xxxxxxx<br>
+ Subject:<br>
+ Level:100<br>
+ VirusEnd:<br>
+'------------------------------------------------------</blockquote>
+【ケース５】件名が任意文字列を含むなど条件一致するときに、メールに任意のヘッダー&quot;X-SPAM:TRUE&quot;を追加する設定例<blockquote>
+'------------------------------------------------------<br>
+ Virus:Add Header &quot;X-SPAM:TRUE&quot;<br>
+ Level:400<br>
+ Subject:xxxxxxxx<br>
+ Tag:X-SPAM:TRUE<br>
+ VirusEnd:<br>
+'------------------------------------------------------</blockquote>
+【ケース６】任意のヘッダー&quot;X-SPAM:TRUE&quot;があるときに任意アドレスに転送する設定例<blockquote>
+'------------------------------------------------------<br>
+ Virus:Mail Forward by &quot;X-SPAM:TRUE&quot;<br>
+ Level:500<br>
+ Forward:spamhld＠domain.jp<br>
+ Unique-Header:X-SPAM:TRUE<br>
+ VirusEnd:<br>
+'------------------------------------------------------</blockquote>
+【ケース７】件名が任意文字列を含むなど条件一致するときに、メールに任意のヘッダー&quot;X-SPAM:TRUE&quot;を追加し、任意アドレスに転送する設定例<blockquote>
+'------------------------------------------------------<br>
+ Virus:Add Header &quot;X-SPAM:TRUE&quot; AND Mail Forward <br>
+ Add Header &quot;X-SPAM:TRUE&quot;<br>
+ Level:700<br>
+ Subject:xxxxxxxx<br>
+ Tag:X-SPAM:TRUE<br>
+ Forward:spamhld＠domain.jp<br>
+ VirusEnd:<br>
+'------------------------------------------------------</blockquote>
+【ケース８】件名が&quot;Trojaner-Info Newsletter&quot;であり、かつ添付ファイルが含まれるときに拒絶し、viruslogフォルダに残す設定例<blockquote>
+'------------------------------------------------------<br>
+ Virus:W32/Yarner.A@MM　<small>←フィルタの開始（必須）とタイトル（任意）</small><br>
+ Subject:Trojaner-Info Newsletter <small>←メッセージソースベースで見た件名</small><br>
+ Body:　　　　　　　　<small>←本文比較する内容の始まり</small><br>
+ --<br>
+ Content-　　　　　　<small>←メッセージソースベースで添付ファイルを示す記述</small><br>
+ BodyEnd:　　　　　　<small>←本文比較する内容の終わり</small><br>
+ Level:110　　　　　　<small>←処理レベル　Level:110はviruslogに残し拒絶を返す</small><br>
+ Warning:<br>
+'  ---------------- warning ---------------------<br>
+ This mail has the possibility that a virus is<br>
+ attached which is called &quot;W32/Yarner.A@MM&quot;.<br>
+'  ----------------------------------------------<br>
+ WarningEnd:　　　　<small>←受信メールに挿入する警告文（任意）</small><br>
+ VirusEnd:　　　　　　<small>←フィルタの終了（必須）</small><br>
+'------------------------------------------------------</blockquote>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-46</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>「管理者にもエラーメールを送信する」チェックボックスについて</b></FONT>
+<HR>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］を開いて「管理者アカウント」項目を確認すると、「管理者にもエラーメールを送信する」チェックボックス項目があります。デフォルトではチェックボックスがオフになっています。<br>
+オンにしたときと、オフのままのときの違いは、下記のようになります。「管理者にもエラーメールを送信する」部分の「エラー」とは、宛先不明や User Unknown. などの相手先サーバの拒絶を含めたメール不達に関するものであり、サービスプログラムなどのシステム的な問題などについて警告を発する類のものではないことを理解してください。<br>
+<br>
+まず、チェックボックスをオンにした場合は、宛先不明や User Unknown. などのリターンがあったときに E-Post Mail Server システム内で管理されている postmaster アカウントより、エラーメールが自動生成され、指定された管理者と送信者の両方に届けられます。送信者以外に管理者も、宛先不明や User Unknown. などを知ることができます。<br>
+<br>
+次に、チェックボックスがオフのままの場合は、宛先不明や User Unknown. などのリターンがあったときに E-Post Mail Server システム内で管理されている postmaster アカウントより、エラーメールが自動生成され、送信者自身に届けられます。送信者が、宛先不明や User Unknown. などを知ることができます。<br>
+<br>
+運用する際、チェックボックスをオンにするか、オフにするかは、状況とポリシーに依存します。メール不達をすべて把握しておこうというならチェックボックスはオンで運用するとよいでしょうし、常にすべてを把握するほどではないという判断でしたらチェックボックスはオフでよいと思います。このことは管理者の負担にもかかわります。<br>
+<br>
+いずれも、メール不達の原因を正しく探ろうとした場合、<a href="./faq05-09.html">配送失敗ログ（faillog）</a>、<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>などを取得しておき、ログから精査する必要があることは変わりありません。<br>
+<br>
+チェックボックスをオンにした場合、管理者アカウントでしっかりメールを受信し読むことが大前提です。当然ですが、管理者アカウント宛に来たメールを一切読まないで放置することは避けてください。思わぬ量のバウンスメールが来る可能性があります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

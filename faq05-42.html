@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-42</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4詳細ログ（receiveimap4）は常時取得すべきでしょうか？</b></FONT>
+<HR>
+<br>
+IMAP4詳細ログを取得する場合は、下記のFAQ記事の通りですが、IMAP4詳細ログを取得するようにした場合、パフォーマンス面で若干の負荷が加わることが想定されます。またIMAP4詳細ログは生成されるサイズが大きいですので、ログファイルのメンテナンスにはより一層気をつける必要があります。<br>
+そのため、多くのユーザー様には、以下のようなスタンスのポリシーを取っていただくことをお薦めしています。<ul><li type="disc">通常運用時にはIMAP4基本ログだけ取得するようにする。<br>
+<li>何らかの問題発生時に、基本ログに加え、IMAP4詳細ログも合わせて取得するようにする。<br>
+<li>原因がわかって問題がなくなったときには、またIMAP4基本ログだけ取得するようにする。<br>
+</ul>もちろん、常に通常運用時にもIMAP4詳細ログを取ってはいけないということではありません。IMAP4接続時に何か問題があったときにすぐ解明できるよう、常に取得されているユーザーもあるようです。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-14.html">IMAP4詳細ログについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

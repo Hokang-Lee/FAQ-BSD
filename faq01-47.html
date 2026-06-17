@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-47</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリストが配送が止まったように見える、または遅配する</b></FONT>
+<HR>
+<br>
+メーリングリストの配送が止まったように見える、または遅配する場合は、以下のような状況が考えられます。<br>
+<ol>
+<li>メールのリトライ関係フォルダ（holdingやdomainsフォルダ）に処理中の大量のリトライデータが蓄積されている可能性</li>
+このようなとき、大量に残っているリトライ処理が優先され、メーリングリストの配送処理が後回しになる可能性があります。ちなみにリトライ関係フォルダ（holdingやdomainsフォルダ）はメール作業用フォルダ（デフォルト /var/spool/epms/）直下にあります。<br>
+[対策]<br>
+・SMTP配送サービス(epstdd)を停止し、その後、リトライ関係フォルダの内容を退避するか、リトライ関係フォルダ（holdingやdomainsフォルダ）を別名にリネームし、epstddサービスを再開します。メーリングリストの配送が行われることが確認できれば、その後、待避していたリトライデータを正しいリトライ関係フォルダに戻すことで、リトライ処理途中であったメールデータを再度リトライ処理に回すことができます。<br>
+・SMTP配送サービス(epstdd)の配送スレッド数が小さな値になっている場合は、設定値を見直して、大幅に増やします。スレッド数を書き換えたときは、いったん［適用］ボタンをクリックしてから、epstddサービスの再起動を行います。なお、配送スレッド数と消費メモリとの関係は、下記FAQを参考にしてください。<br>
+<br>
+（関連FAQ）<br>
+●<a href="./faq01-56.html">設定したセッション数と必要メモリ容量の関係は？</A><br>
+<br>
+<li>メールキューフォルダ（incomingフォルダ）の上限設定のせいでメール転送などの際にメーリングリストアカウントが含まれている場合に受信制限がかかっている可能性</li>
+メールキューフォルダ（incomingフォルダ）に溜まり過ぎないよう存在するメール数の上限値の設定がデフォルトで有効にされています。ちなみにメールキューフォルダ（incomingフォルダ）もメール作業用フォルダ（デフォルト /var/spool/epms/）直下にあります。<br>
+[対策]<br>
+メールキューの上限値の設定を大幅に増やして緩和するか、あるいは状況によっては制限なしの設定にしてください。具体的な設定方法は、下記のFAQを参考にしてください<br>
+<br>
+（関連FAQ）<br>
+●<a href="./faq01-43.html">大量のメールをクライアントから一括送信し、配送キューに溜まると、SMTPレシーバーの応答が一時的に遅くなる</A><br>
+<br>
+<br>
+<li>メーリングリストに含まれている内部アカウントのドメイン名が名前解決できない</li>
+内部アカウント宛への自動転送設定を行っていたり、メーリングリストに内部アカウントが含まれている場合は、E-Postシリーズ製品は内部ドメイン名であっても名前解決を必要とします。<br>
+[対策]<br>
+・内部ドメイン名が設定済みDNSサーバMXレコードから参照できるかどうか確認し、うまく参照できていないときは、内部ドメイン名に関するMXレコードを記述する。<br>
+・/etc/hostsファイルを明示的に記述する。<br>
+・SMTPゲートウェイ項目の［ゲートウェイ詳細］ボタンで編集できる【gateway.dat】（SMTPゲートウェイテーブル）を明示的に記述する。<br>
+これらの詳細な説明や、具体的な設定方法は、下記のFAQを参考にしてください<br>
+<br>
+（関連FAQ）<br>
+●<a href="./faq10-53.html">hostsファイル記述の有用性について</a><br>
+●<a href="./faq10-54.html">内部アカウントを自動転送で設定したり、メーリングリストに設定したときに、送信処理に時間がかかってしまう</a><br>
+</ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

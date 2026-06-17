@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-65</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>リトライ回数やリトライ期間の設定について</b></FONT>
+<HR>
+<BR>
+応答別に分けた設定リトライ回数・設定リトライ期間内で、設定されたリトライ間隔に基づいてリトライが行われます。<br>
+<br>
+リトライが終了した時点で、送信元にエラーメールが戻る形になります。<br>
+リトライ回数・リトライ期間の意味をまとめると次の通りです。<br>
+<br>
+<b>●「リトライ回数（受信拒否）」</b>　…　送信先が拒絶理由を応答してきた場合（恒久的なエラーを意味する<b>500番台</b>コード）の送信エラーメールを発行するまでのリトライ回数　（デフォルト９回）<br>
+<br>
+<b>●「リトライ期間（回線異常）」</b>　…　送信先への接続が可能にもかかわらず、通信タイムアウトなどの理由を応答してきた場合（一時的なエラーを意味する<b>400番台</b>コード）の送信エラーメールを発行するまでのリトライ期間　（デフォルト８時間）<br>
+<br>
+<b>●「リトライ期間（マシン無応答）」</b>　…送信先ドメインは存在するがマシンへ接続できないなどの理由（※）により送信エラーメールを発行するまでのリトライ期間　（デフォルト２４時間）<br>
+<br>
+（※）このとき、マシン無応答の時間が過ぎた場合、つながらないのでエラーコードがありません。<br>
+そのため、必ず下記のようなDNSの名前解決エラーとしてエラー理由を一律で返す結果となります。エラー理由は、<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>に記録されます。<br>
+<br>
+（例）　&quot;Unable to deliver to destination domain Cannot resolve xxxxx.jp&quot;<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

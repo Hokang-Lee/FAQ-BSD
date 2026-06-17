@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-24</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	pre {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:1.6em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールフィルタ【mail.dat】の内容に従って拒絶したり隔離したとき応答は返されないのでしょうか？</b></FONT>
+<HR>
+<br>
+メールフィルタ【mail.dat】の内容に従って拒絶したり隔離したとき、送信元へ応答が返されるのか、それとも送信元へ応答が何も返されないのかについては、メールフィルタ【mail.dat】で指定される &quot;Level:xxx&quot; の内容によります。<br>
+<br>
+&quot;Level:1xx&quot; での拒否は、送信元へ500番台での永続的拒絶応答が返されます。<br>
+&quot;552 5.7.1 Requested mail action aborted: caught by the filter setting.&quot;<br>
+<br>
+対して &quot;Level:5xx、6xx、7xx&quot; の設定は、&quot;Forward:&quot; で指定したアドレスへ転送（隔離）を行いますので、送信元への拒絶応答は返されず、受領okした旨が返されます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-81.html">メールフィルタ【mail.dat】の設定事例</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

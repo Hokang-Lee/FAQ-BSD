@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ03-29</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>アンチウイルスソフトをメールサーバマシンに入れる場合、除外設定を必須とする理由について</b></FONT><br>
+<HR>
+<br>
+サードパーティのアンチウイルスソフト（ウイルス対策ソフト）をメールサーバマシンにインストールする場合、メール作業用フォルダ配下と、メールボックスフォルダ配下のすべてを除外設定させることを必須にしていますが、その理由は次の通りです。<br>
+<br>
+除外設定を必須としている最大の理由は、ファイルの取り合いが発生することによる不測の事態を防止するためです。<br>
+メールサーバが行う基本的な処理の流れと、ファイルの生成・移動・削除などの処理の概略を説明しますと、メールが受領された段階で、[メール作業フォルダ]\temp に &quot;B&quot; で始まるメッセージIDを冠したメールデータファイルが作業ファイルとともに一時的かつ瞬時に生成されます。その後、メールキューである [メール作業フォルダ]\incoming に移動したあと、内部アカウント宛ならば、各アカウントごとの [メールボックスフォルダ] に格納するという一連の流れになっています。この間の一連の処理は、2つのSMTPサービスプログラム（epstrdとepstdd）の連携により非常に高速に行われます。<br>
+もし仮に、インストールした第三者のアンチウイルスソフト側が除外設定をしていない場合、上記プロセスの処理中か前後のタイミングで一時生成されたファイルをアンチウイルスソフトがその場でスキャンします。有害なものだと判断した場合、アンチウイルスソフトはそうしたファイルを隔離したり強制移動しようとしますが、これはメールサーバ側からすれば“横取り”されてしまう事態になります。メールサーバ側はこうした事態、つまりファイルの“取り合い”や“横取り”をまったく想定しておりません。ファイルの取り合いが発生し、ファイルの横取りに遭遇してしまうと、サービスの処理が滞って遅くなるという現象が起きる可能性があるだけでなく、最悪の場合、サービスが停止してしまう事態になる可能性もあります。<br>
+メールデータのウイルス検査をしたいという要件がある場合、Standard 版のメールサーバにアンチウイルスソフトをインストールし、スキャンさせるというのはソリューションとしては最悪です。もしアンチウイルスソフトを入れる場合は、メール作業用フォルダ配下と、メールボックスフォルダ配下のすべてを検索対象から除外設定をしない限りは、使えないことをお断りしています。<br>
+<br>
+メールデータのウイルス検査をしたい要件があるとき、考えられるソリューションは以下の通りです。<br>
+<blockquote>－弊社製品で用意しているもの<br>
+・Enteprise 版をお薦め。アンチウイルス機能が実装されているのと、不審な怪しいメールも未知のウイルスメールもすべて止める Secure Handler 機能がプラスされている。<br>
+<br>
+－弊社製以外の他の方法として提案しているもの<br>
+・ファイルスキャンタイプのウイルス対策ソフトではなく、ポート経由で検査するゲートウェイタイプのものを利用する。<br>
+・前段にウイルス対策のアプライアンスを別途用意する。<br>
+・クライアント側で処理をする。<br>
+</blockquote>
+<b>（参考FAQ）</b><br>
+●<a href="./faq03-08.html">メールサーバマシンにアンチウイルスソフトを同居させるときの注意点（重要）</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

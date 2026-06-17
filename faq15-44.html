@@ -1,0 +1,113 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-44</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールクライアントに Outlookシリーズを使用するときはIMAP4のIDLE命令とBroadcastフラグを無効設定にすることを推奨</b></FONT>
+<HR>
+<br>
+メールクライアントに Outlook 2010/2013 などの Microsoft Office Outlook シリーズを使用してIMAP4サービスを利用するとき、特に負荷が高まりやすい大規模環境では、できれば E-Post IMAP4サービス側でIDLE命令とBroadcastフラグの2つを無効に設定することをお薦めします。その理由は下記の通りです。<br>
+過去にあったユーザー様からのご報告で、Outlookシリーズでの特有の現象として、以下のような現象が発生したことがあり、結果的にそれぞれE-Post側でいろいろな対応策や防止策を取った経緯があります。<br>
+現行の最新モジュールにはそれらの対応機能はすべて含まれております。<br>
+設定しないでデフォルトで対応が施されているもの、設定が必要なものがあります。<br>
+<ol>
+<b><li>IDLE命令に関するもの</li></b>
+Outlook側が一つのセッションでIDLE命令を出すだけでなく、勝手にセッションを増やし続け、無尽蔵にセッションを増やしてSocketの上限まで増やすことにより、Outlook側で同期中メッセージのまま、IMAP受信できなくなることが多発しました。<br>
+これを受けてE-Post側で取った対策は次の内容です。<br>
+<ol type=a><li>→Outlook側からIDLE命令を出し増やしたセッションに対し、E-Post側で無通信のセッションをタイムアウトデフォルト:30分 で切断するようにしその時間を変更できるようにした。<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5IMAP4S<br>
+　　　　　→IDLETimeout.1<br>
+<li>→E-Post側でIDLE命令を無効に設定できるようにした。<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5IMAP4S<br>
+　　　　　→IDLECmd.1<br>
+<li>→IDLE命令実施中の監視間隔 デフォルト:5秒 を変更できるようにした。<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5IMAP4S<br>
+　　　　　→IDLELoop.1<br>
+<li>→IDLE命令使用時に利用されるBroadcastフラグを無効に設定できるようにした。<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5IMAP4S<br>
+　　　　　→Broadcast.1<br>
+</ol><br>
+<b><li>NOOP命令に関するもの</li></b>
+Outlook2013側から発せられるNOOP命令に対して、E-Postからフォルダポーリングの状態を逐一応答して返していると、突如としてOutlook 2013側がNOOP命令を異常に連続発信させることが多発しました。NOOP命令の頻度は異常で１秒間の間に平均6.4回もNOOP命令が突然大量に発信される現象となり、あたかも攻撃のようになってサーバに過負荷状態を引き起こす事象が判明したことがあります。<br>
+<ol type=a start=5><li>→E-Post側でNOOP命令のポーリングに対し無効にするオプションを設け、有効時でもフォルダポーリング実行をフォルダ内に変化・変更があった場合のみに限ってデフォルト有効とした。これによりOutlook 2013側からNOOP命令を頻発することがなくなる。<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5IMAP4S<br>
+　　　　　→NOOPPoll.1<br>
+　　　NOOP命令内でのフォルダポーリング実行の有無 0:Disable, 1:Enable (デフォルト:1)<br>
+</ol></ol>
+IMAP4でメールクライアントにOutlookシリーズを使用している環境では、弊社サポートから提案として、上記 2.e であげたNOOP命令のポーリングは有効なまま、<b>上記 1.b と 1.d であげたIDLE命令と同時に不要になるBroadcastフラグの2つを無効に設定することを推奨</b>します。<br>
+これによりOutlook側が不用意にIDLE命令を発信し、かつ無尽蔵にセッションを増やし続けるのを防止・抑止できるほか、負荷が高まりやすい大規模環境では、メールサーバの負荷軽減に役立ちます。一方、NOOP命令のポーリングは有効のままになっていますので、Outlookでのメールの新着チェックなどは問題なく行われます。<br>
+<br>
+IDLE命令とBroadcastフラグを無効に設定するには、下記の設定ファイル値を作成します。<br>
+変更後は、epstimap4dの再起動が必要です。<br>
+<blockquote>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5IMAP4S<br>
+　　　　　→IDLECmd.1<br>
+　　　　(数値  Default 1) 0:Disable, 1:Enable<br>
+　　　　IDLE命令の有効/無効オプション<br>
+　　　　<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5IMAP4S<br>
+　　　　　→Broadcast.1<br>
+　　　　(数値  Default 1) 0:Disable, 1:Enable<br>
+　　　　同一フォルダの操作情報を接続中の各セッションに同報する<br>
+　　　　Broadcastフラグの有効/無効オプション<br>
+</blockquote>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

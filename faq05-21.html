@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-21</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>ログのサイズ見積もりについて</b></FONT>
+<HR>
+<ul>
+<li>ログは、大きく基本ログと詳細ログにわかれます。<br>
+<li>基本ログは１件１行または１件２行をベースにします。１行の基本ログはメール１件で130～150バイト、２行仕様の基本ログはその倍程度と考えてください。<br>
+<li>一方、詳細ログはプロトコルのやり取りまで詳細に出力しますので、１メールあたりに関する記録ログの長さはつねに変化します。<br>
+<li>E-Postシリーズには、ログの自動削除機能はありません。メンテナンスは管理者が手動でおこなうか、自動削除させるようなスクリプト＋バッチファイルを記述するような方法で対処することを弊社としては提案しています。<br>
+あくまでWindows版での例ですがメールサーバ構築ガイド<a href="../epmsent_construct_guide/kouchiku15.html#logclr">■15.ログを採ってみよう－スクリプトで行う定期的なログ削除の自動化</a>を参考にしてください。<br>
+</ul>
+<ul>（基本ログ１件＝１行タイプ）<br>
+<li type="square">SMTP受信ログ（inlog）<br>
+<li type="square">SMTP送信ログ（outlog）<br>
+<li type="square">SMTP送信ローカルログ（outlocallog）<br>
+<li type="square">配送失敗ログ（faillog）<br>
+</ul>
+<ul>（基本ログ１件＝２行または１行タイプ）<br>
+<li type="square">接続マシンログ（acceptlog）<br>
+</ul>
+<ul>（基本ログ１件＝数行タイプ）<br>
+<li type="square">POP3ログ（pop3log）<br>
+<li type="square">IMAP4ログ（imap4log）<br>
+</ul>
+<ul>（詳細ログ＝可変、任意の長さ）<br>
+<li type="square">SMTP受信詳細ログ（receivelog）<br>
+<li type="square">配送時の詳細ログ（senderlog）<small>※長／短出力設定によって大きく変化</small><br>
+<li type="square">POP3詳細ログ（receivepop3）<br>
+<li type="square">IMAP4詳細ログ（receiveimap4）<br>
+</ul>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

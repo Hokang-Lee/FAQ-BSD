@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-80</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>POP-AUTH（SASL）を利用したいときには</b></FONT>
+<HR>
+<br>
+2018年7月公開の最新差分アップデートならびにそれ以降のモジュールでの実装された機能として、POP認証方式におけるAUTH（POP-AUTH）がサポートされました。これはSASL（Simple Authentication and Security Layer）と呼ばれる認証方式で、E-Postでは便宜上POP-AUTHと呼んでいます。<br>
+POP認証方式におけるAUTH（POP-AUTH）を利用するには、メールクライアント側の対応が必要で、現状での対応メールクライアントは、ThunderbirdやBecky!などに限られており、OutlookやWindows Mailなどの対応はまだされていないようです。<br>
+このPOP認証方式におけるAUTH（POP-AUTH）機能をE-Postで有効にしたいときは、レジストリを変更、以下のキーを作成しその後 epstpop3d サービスを再起動します。<br>
+<ol>
+<li>epstpop3d のバージョンは、v4.40以降で利用可能になります。<br>
+<li>以下のファイルを新規に作成し、それぞれ値や文字列を設定します。<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5POP3S<br>
+　　　　→AUTH.1<br>
+　　　　　DWORD値（Default:1) POP-AUTHの有効無効 デフォルト 1:有効 0:無効<br>
+　　　　→AUTHAUTHMode.2<br>
+　　　　　文字列（Default:&quot;PLAIN LOGIN CRAM-MD5&quot;) 利用可能なPOP-AUTHの種類<br>
+<li>設定後、epstpop3d を再起動します。</li></ol>
+<br>
+<ol><b>［Thunderbird側の設定例］</b><br>
+<li>［ツール］－［アカウント設定］－［サーバー設定］<br>
+<li>POPメールサーバの「セキュリティ設定」にある「認証方式」から「暗号化されたパスワード設定」を選択<br></ol>
+<ol><b>［Becky!側の設定例］</b><br>
+<li>［ツール］－［メールボックスの設定］<br>
+<li>「基本設定」タブにある「認証方式」として「CRAM-MD5」を選択<br></ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

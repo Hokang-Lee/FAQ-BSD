@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-51</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlogに &quot;553-SPF (Sender Policy Framework) domain authentication&quot; が記録され送信先から拒絶されている <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+senderlogを確認したとき、下記のように &quot;553-SPF (Sender Policy Framework) domain authentication&quot; が記録、送信先から永続的なエラーが返されて拒絶されているケースが報告されています。<br>
+<blockquote>
+「553-SPF (Sender Policy Framework) domain authentication」<br>
+（※日本語訳 553-SPF（送信者ポリシーフレームワーク）ドメイン認証が失敗）<br>
+</blockquote>
+これをメッセージ通りに受け取れば、DNSのSPFレコードをチェックしSPFドメイン認証が通らなかったために拒絶しているということになります。<br>
+対応策としては、こちら側のDNSのSPFレコードをしっかり記述しているか、指定内容は正しいか、設定されているIPアドレス以外のIPアドレスから送信されたようなことはないか、といったことを確認してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-85.html">スパム扱いされないで確実に配送するためにDNSのSPFレコードやDMARCレコード記述を推奨</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

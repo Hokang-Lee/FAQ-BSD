@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-96</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b> Desknets（Denbun）からのアクセス時、IMAP4サービスのCPU負荷を下げるための方策について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+IMAP4対応のWebメール、特に Desknets（Denbun）を使用している場合は、１アカウントから同時に多数のセッションを張ろうとし、しかもすべての処理をIMAP4サーバ側で任せる形を取るため、E-Post IMAP4サービス（epstimap4d）のCPU占有率が高くなりがちです。負荷を下げるための方策をあげてみます。<br>
+<br>
+<b>1．IMAP4対応のWebメール側の設定見直し</b><br>
+一般的にIMAP4対応のWebメールを使用する際、以下の設定項目があるときは設定見直しをしてください。<br>
+・セッションの制限設定があるときはその設定をする<br>
+・ユーザーが一定時間アクセスしていないときにはセッションを自動切断する設定をする<br>
+<br>
+<b>2．E-Post IMAP4サービス側の同時接続セッション数見直し</b><br>
+Desknets（Denbun）を使用しているときには、１アカウントからも同時に多数のセッションが張られる動作をするため、E-Post IMAP4サービス（epstimap4d）のCPU占有率が高くなりがちです。<br>
+以下の設定を試してください。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、 ［全設定］を［開始する］→［全設定（サーバー環境設定）］EPSTIMAP4D部分、もしくは［IMAP4詳細］を［開始する］<br>
+表示される［IMAP4詳細］の「接続セッション数」の値&quot;0&quot;を変更（※）。<br>
+設定変更後は epstimap4d サービスを［停止］→［開始］で再起動する。<br>
+<small>※デフォルト値の&quot;0&quot;は無制限を意味しますので、最初は厳しめである&quot;10&quot;の設定から試し&quot;15&quot;,&quot;20&quot;,&quot;25&quot;,&quot;30&quot;というように&quot;5&quot;ずつ上げていってCPUの負荷具合を確認してください。<br>
+※この設定変更により、CPUの負荷が下がる一方で、接続セッション数が制限されるとメールクライアントからの同時接続数に制限がかけられ、アクセスしようとしたWebメール側のいくつかのセッションが待たされる結果になります。ようすを見ながら適切な設定値を探してください。</small><br>
+<br>
+<b>3．E-Post IMAP4サービス側の無通信タイムアウトやIDLEタイムアウト見直し</b><br>
+E-Post IMAP4サービス（epstimap4d）の無通信タイムアウトおよびIDLEタイムアウトの時間設定は、デフォルトで1800秒=30分になっています。Desknets（Denbun）を使用しているときには、ログアウトしないでそのままつなぎっぱなしにするため、このデフォルト設定値だと長すぎる可能性があります。<br>
+無通信タイムアウトおよびIDLEタイムアウトの時間設定それぞれに対し、設定値を変更することで、もっと短い時間（たとえば30秒や60秒程度）でセッション切断するようにすれば、CPUの負荷軽減に効果ありそうです。設定を試しながら適切な設定値を探してください。<br>
+<small>[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5IMAP4S<br>
+　　　　　→Timeout.1<br>
+　　　　　　無通信状態タイムアウト値 デフォルト:1800秒（=30分）<br>
+　　　　　→IDLETimeout.1<br>
+　　　　　　アイドルタイムアウト値：NOOP命令のみのセッションで新着が指定時間内にないときセッション切断<br>
+　　　　　　デフォルト:1800秒（=30分）, 値&quot;0&quot;のとき:タイムアウトしない<br>
+※設定ファイルがないときは、上記ファイル名を作成、値を10進で入力します。設定変更後は epstimap4d サービスを［停止］→［開始］で再起動するようにします。<br>
+※Desknets（Denbun）を使用しているとき、デフォルト値の&quot;1800&quot;秒は長すぎる可能性があるため、最初は&quot;30&quot;秒から試し&quot;60&quot;,&quot;90&quot;,&quot;120&quot;というように&quot;30&quot;ずつ上げていってCPUの負荷具合を確認してください。</small><br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-44.html">メールクライアントに Outlookシリーズを使用するときはIMAP4のIDLE命令とBroadcastフラグを無効設定にすることを推奨</a><br>
+●<a href="./faq15-99.html">Outlookが作成するフォルダ「削除済みアイテム」内に大量のデータを残したまま運用しているとIMAP4サーバ負荷が高まる</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

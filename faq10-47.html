@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-47</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>ドメイン名を付けないアカウント名のみのアドレスに送信したメールの扱いについて</b></FONT>
+<HR>
+<br>
+E-Post Mail Serverシリーズでは、メールクライアントから、ドメイン名を付けないアカウント名のみのアドレスを指定され、送信すべきメールデータを受領した場合、内部ドメインと自動判断して、内部ドメインアカウントのメールボックスフォルダに格納しようとします。<br>
+<blockquote>
+（例）<br>
+To: suzuki　　　　　　　…ドメイン名を付けずアカウントのみ　→　内部ドメインと自動判断<br>
+To: suzuki＠domain.jp　…ドメイン名付きのメールアドレス　　→　通常（内部ドメインか外部ドメインか判定）<br>
+</blockquote>
+さらに、マルチドメイン設定で運用している場合、ドメイン名で区別されるフォルダ内には格納できない仕様です。いわゆる「共通ボックス」フォルダ位置のメールボックスフォルダに格納されます。フォルダが作成されていないときは、アカウント名だけのメールボックスフォルダを自動で作成します。<br>
+<br>
+このような動きをするのは、メールの利用範囲をイントラネットに限定し、グループウェア的に使っているユーザー環境を意識して、安全策を取った仕様となっているためです。<br>
+初期のE-Post Mail Serverシリーズが、シングルドメイン設定しか対応していなかった頃の安全仕様の名残とも言えます。<br>
+<br>
+どちらにしても、このような安全策が取られていることを知らずに、内部から内部宛に送るつもりで、ドメイン名を付けないアカウント名のみのアドレスを指定してメールクライアントから送っていると、フォルダ位置が異なるため、いつまで経ってもメールが届かないというような予期しない結果に出くわすことになります。<br>
+意図してドメイン名を省略して送信することは、一部の限られた運用形態で使われるケースがあるにしても、ドメイン名を付けた正式なメールアドレスで送信していただくことが、通常の利用方法であり、大前提であることは言うまでもありません。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-42</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>STARTTLSを実施するときのサーバ証明書について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+STARTTLSを実施するときのサーバ証明書について質問を受けたことがあります。<br>
+メールクライアント－メールサーバ（SMTPサーバ）間でSTARTTLSを実施してメール送信依頼を行う際に、メールサーバに適用するサーバ証明書について、サーバ側のみ証明書が必要である認識でよいか、またそのときのサーバ証明書について教示してほしいという質問でした。<br>
+<br>
+これについては以下のように理解してください。<br>
+メールクライアントからSTARTTLSを有効にしてメール送信依頼を行う際、メールサーバであるE-Post側のSMTP受領時に、E-Postから利用可能なSSL/TLSのキーが設定されていることが必要ですが、メールクライアントからの送信時には、いったんメールサーバがSMTP受領することになりますので、サーバ側のみ証明書が必要である認識でよいと思います。<br>
+ちなみに、STARTTLSを実施してメール送信依頼を受けてSMTP配送する際には、E-Post側ではEPSTDSサービスの「詳細設定」ダイアログボックスの設定とレジストリの設定が必要になります。相手先のサーバに依存する形でSTARTTLSでの通信が有効になるか無効になるかが決まります。<br>
+<br>
+サーバ証明書の設定手順については、SSL/TLS設定と同様ですので、関連記事をお読みください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-59.html">STARTTLSを有効にするためのE-Postでの仕様と設定について</a><br>
+●<a href="./faq15-55.html">E-Postから相手側SMTPへ送信時にSTARTTLSで通信させる設定について</a><br>
+●<a href="./faq01-40.html">SMTP/POP3/IMAP4 over SSL/TLS設定方法</a><br>
+●<a href="./faq15-07.html">グローバルサイン認証局の証明書を利用したSSL/TLS設定事例</a><br>
+●<a href="./faq10-58.html">SSL/TLS設定で中間CA証明書を設定するには</a><br>
+●<a href="./faq15-06.html">SSL/TLS設定で認証局が発行するSHA2（sha256）の証明書に対応しているか</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

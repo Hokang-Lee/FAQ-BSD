@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-61</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlogに接続先から&quot;454.4.7.1 : Relay access denied&quot;の応答が記録されていた <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+配送がうまくいかなかったメールの原因を調べるために、senderlogを調べたところ、接続先MTAまたは相手先サーバの応答なのか「454.4.7.1 : Ready access denied」の応答が記録されていたが、これはどう見たらよいか質問が寄せられました。<br>
+<br>
+senderlogに記録された「454 4.7.1 : Relay access denied」のエラー応答は、E-Postから発行されたものではなく、接続先相手サーバからのエラー応答ということになります。また、エラー応答コード400番台は&quot;一時的拒絶&quot;の意味を示します。調べてみると、Postfix系のサーバがこの種のエラー応答を出しているようです。<br>
+配送時の接続経路上に、何かゲートウェイサーバを置いているとか、ファイヤーウォールのようなものがある場合、そうした機器類からエラー応答が返されている可能性はないかを確認すべきでしょう。<br>
+<br>
+一方でsenderlogには、送信リトライのたび、&quot;socket error code=10060&quot;のWINSOCKのエラーコードが記録されているとも、報告されました。具体的には「ConnectHost: winsock connect failed. (socket error code=10060)」の形で記録されていたものですが、これらは接続要求がタイムアウトして回線が切断されたことを意味します。これは前記の「454 4.7.1: Relay access denied」でエラー応答が返されていることと、無縁ではないものと類推されます。<br>
+<br>
+接続相手側からエラー応答が返されるときは、前記のエラー応答が記録されており、接続相手側からしばらく応答が返ってこないときは、通信中のタイムアウトとして回線が切れてしまったために&quot;socket error code=10060&quot;というWINSOCKのエラーコードが記録されたと推測できました。これらのことから、まず何より配送時の接続経路上にある機器類の設定を調べてみるべきでしょう。<br>
+<br>
+ちなみに、senderlogなどログ全般に記録されている&quot;B0001234567&quot;などの&quot;B&quot;で始まる連番はE-Postが自動発番しているメッセージID番号を意味します。また枝番の&quot;-Rxxxx&quot;&quot;-Exxx&quot;の意味はそれぞれリトライ、エラーメールを表しています。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-34.html">senderlogに送信リトライのたび&quot;socket error code=10060&quot;のエラーが記録される場合</a><br>
+●<a href="./faq05-18.html">ログに記録されるメッセージIDの後の枝番種類について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

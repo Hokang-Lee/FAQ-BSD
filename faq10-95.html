@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-95</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールボックス保管サイズ制限値になったときのエラー応答メッセージについて</b></FONT>
+<HR>
+<br>
+E-Postシリーズではメールボックスの保管サイズ制限値を設定できます。<br>
+全体共通設定はSSHでコンソールへrootでログインし、以下の設定ファイルを作成し数値(10進)で設定します。<br>
+<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→nMailInBoxSizeHigh.1  (数値 Default 0 上位32ビット分のサイズデータ)<br>
+　　　　→nMailInBoxSize.1      (数値 Default 0 下位32ビット分のサイズデータ)<br>
+<br>
+各アカウント単位の設定は、E-POSTコントロールセンター（メールサーバ管理）の［ユーザ管理］から設定を行いますが、いずれかの設定でメールボックスの保管サイズ制限値になったときには、該当アカウントで制限値を超えるメールの着信はできず、受領時に拒絶されます。返されるエラー応答メッセージは次の内容です。<br>
+<blockquote>
+450 4.2.2 Sorry. e-mail address box is full.<br>
+（意味）RCPT TO:命令での送信先の受領拒否応答（ローカルユーザメールボックスが制限容量を超えている）<br>
+</blockquote>
+拒絶されるエラー応答メッセージは、receivelog（SMTP受信詳細ログ）のログ中に記載されます。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

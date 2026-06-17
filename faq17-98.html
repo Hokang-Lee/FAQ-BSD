@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-98</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4接続専用アカウントの場合、「POP3無効」チェックボックスを必ずオンにして運用すること <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+(A) IMAP4接続専用アカウントの場合、ユーザーアカウント管理での設定は必ず「POP3無効」チェックボックスをオンにした状態で運用してください。<br>
+<br>
+仮にIMAP4接続専用のユーザーアカウントであるにもかからず、「POP3無効」チェックボックスがオフのままの状態で使い続けると、大量のメールデータがこのルートフォルダに溜まったままになります。<br>
+もし、マシンパフォーマンスの極端な低下が起きている場合は、この「ルートフォルダ」に万を軽く超える大量のデータが溜まっていることもあるためご確認ください。<br>
+IMAP4接続専用のユーザーアカウントであるにもかからず、「POP3無効」チェックボックスがオフのままの状態であることが確認できたときには、対処策として「POP3無効」チェックボックスをオンに変更する作業が必要となりますが、ここで作業のタイミングを気をつける必要があります。<br>
+IMAP4での該当アカウントがアクセスしてきた時に、ルートフォルダに溜まったままになっている万を軽く超える大量のメールデータを一気に削除する処理が行われることになりますので、そのときは思うようなファイルシステムのパフォーマンスが発揮されず、サーバにきわめて大きな負荷がかかると思われます。<br>
+IMAP4接続専用のユーザーアカウントにおいて、「POP3無効」チェックボックスをオンに変更する作業は、タイミングをずらしながら少しずつ行っていかないと、サーバ全体に大きな負荷を与えるのではないかと想像できますので、段取りを考えながら作業してください。<br>
+ほぼ同じ状況下での「POP3無効」チェックボックスをオンにする記事がありますので、下記もご確認ください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-97.html">IMAP4使用中にメールボックスのルートに"Bxxxxxxxxxx.MSG"ファイルが大量にたまっている</a><br>
+<br>
+(B) 一方、POP3/IMAP4併用接続にしているユーザーアカウントの場合、「POP3無効」および「IMAP4無効」チェックボックスはオフのままでかまいません。<br>
+<br>
+(C) また、POP3接続専用にしているユーザーアカウントの場合、「IMAP4無効」チェックボックスはオンに設定します。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

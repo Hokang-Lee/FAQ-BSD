@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-36</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>Active Directory（LDAP）連携時にユーザー追加するときの注意点</b></FONT>
+<HR>
+<br>
+ユーザー管理のActive Directory（LDAP）連携を行っているとき、ユーザーアカウントを追加登録する際の注意点があります。以下の操作手順のいずれかを守ってください。<br>
+ドメインコントローラ側の「Active Directoryユーザーとコンピュータ」からユーザーアカウントを作成する方法を取る場合は、ユーザーのメールボックスフォルダが自動生成されない状況が発生するため、その後一定の手順が必要です。IMAP4使用時には、IMAP4でログインしても、各ユーザーアカウント用のメールボックスフォルダに該当する<b>“ルートのフォルダ”</b>がまだ存在しない場合には、プロトコルで発するコマンドによっては問題となる場合があります。<br>
+<ul>--------------------------------------------------------------------------------------<br>
+〔POP3プロトコルで管理されるメールボックスフォルダ＝“ルートのフォルダ”〕<br>
+・Active Directory（LDAP）連携時のため「共通ボックス（区別しない）」方式<br>
+　/var/spool/epms/inbox/[ユーザ名]/<br>
+<br>
+〔IMAP4プロトコルで管理されるメールボックスフォルダ〕<br>
+・Active Directory（LDAP）連携時のため「共通ボックス（区別しない）」方式<br>
+　/var/spool/epms/inbox/[ユーザ名]/INBOX/<br>
+--------------------------------------------------------------------------------------<br>
+</ul>
+<b>〔ユーザーアカウントを追加登録する操作方法について〕</b><br>
+<ul><li>Active Directory（LDAP）連携時、ドメインコントローラ側の「Active Directoryユーザーとコンピュータ」からユーザーアカウントを作成する場合、登録したパスワードはメールサーバ側との連動項目となります。このとき<font color="#cc0000">作成したユーザーをあらかじめ &quot;IMSUsers&quot; グループに加えておく操作が必要</font>になります。<br>
+ただし<font color="#cc0000">ドメインコントローラ側の操作だけでは該当ユーザーのメールボックスフォルダは作成されない</font>ことに注意してください。該当ユーザーのメールボックスフォルダが作成されるようにするためには、E-POST コントロールセンター（メールサーバ管理）の［ユーザー管理］で該当ユーザーアカウントが表示されることを確認、<font color="#cc0000">該当ユーザーアカウントを選択して［設定変更］を選び、「アカウントの設定変更」画面で［設定操作する］ボタンをクリックして</font>ください。この操作によりメールボックスフォルダ（各ユーザーアカウント用の“ルートのフォルダ”）が自動作成されます。<br>
+<li>Active Directory（LDAP）連携時、メールサーバ側であるE-POST コントロールセンター（メールサーバ管理）からユーザーアカウントを作成する場合、<font color="#cc0000">作成したユーザーは自動的に &quot;IMSUsers&quot; グループに加わった状態</font>になります。E-POST コントロールセンター（メールサーバ管理）の［ユーザー管理］からユーザーアカウントを作成していけば、ユーザーのメールボックスフォルダ（各ユーザーアカウント用の“ルートのフォルダ”）についても自動生成されます。<br>
+ただし、<font color="#cc0000">メールサーバ側からのパスワードの登録は不可のため、ドメインコントローラ側の「Active Directoryユーザーとコンピュータ」から該当ユーザーのパスワードを設定する</font>ようにしてください。<br>
+<li>E-POST コントロールセンター（メールサーバ管理）の［ユーザー管理］のアカウントインポート機能を使って、タブ区切りテキストファイルからインポートを行った場合も、ユーザーのメールボックスフォルダが自動作成される一方、パスワードは登録されません。ドメインコントローラ側の「Active Directoryユーザーとコンピュータ」から、該当ユーザーのパスワードを設定してください。<br>
+</ul>
+<b>〔コンソールからの確認手順〕</b><br>
+<ol><li>SSH等でコンソールにログイン。<br>
+<li>lsコマンドで /var/spool/epms/inbox/ 下にユーザーアカウントのメールボックス、つまりユーザーアカウント名のディレクトリが存在するか確認。<br>
+<li>必要に応じてSMTP送受信テストを行ったり、POP3・IMAP4の接続・受信テストを行う。またSMTPプロトコルで該当アカウント宛にメール着信させる方法でも、メールボックスフォルダが自動生成される。<br>
+</ol>
+ちなみに、下記の設定ファイルを記述することにより、IMAP4で接続した場合に該当ユーザーのメールボックスのルートフォルダ（POP3で使う場所と同じ）が存在しないときでも、ルートフォルダが自動生成される設定が可能になります。<br><blockquote><small>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→AutoCreateFolder.1　(DWORD  Default 1) 1:作成する 0:作成しない<br>
+　　　　IMAP4ログイン時にルートフォルダ（POP3で使う場所と同じ）が存在しない場合フォルダを自動作成する<br></small></blockquote>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

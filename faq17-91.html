@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-91</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>「IPロックアウト機能」の対象となるかならないかの違いについて <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+「IPロックアウト機能」の対象となるかならないかの違いについて、内部ドメインローカルユーザーからの送信・メーリングリスト・自動転送時にはそれぞれどうなのか、質問が寄せられたことがあります。
+IPロックアウト機能は、epstrdサービスを制御して機能を利用します。IPロックアウト機能は、「送信元IP」から「一定時間内」で「指定数以上の接続がある場合」 の「禁止」を行います。ですのでSMTP経由、つまりepstrdサービスが受領するのであれば「ローカルエリア内のIP」や「メールサーバ自身のIP（ローカルIP含む）」であっても、受領するepstrdサービスを制御して同じように機能します。<br>
+<br>
+<b>・内部ドメイン ローカルユーザーからの送信</b><br>
+この場合、SMTPを経由してepstrdサービスがいったん受領するのでIPロックアウト機能の対象になります。<br>
+<b>・ローカルユーザー宛の自動転送</b><br>
+アカウント単位で自動転送設定されている自動転送のメールは、いったんSMTP受信サービス（epstrd）が受領する形となるため、IPロックアウト機能の対象になります。（下記FAQ記事参照）<br>
+<b>・ローカルユーザー宛のメーリングリスト</b><br>
+メーリングリストに参加しているローカルユーザー宛の場合は、SMTP経由せずに各ユーザーアカウントのフォルダ（メールボックスフォルダ）にメールデータがファイルコピーされます。そのためIPロックアウト機能の対象にはなりません。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-41.html">内部ドメイン宛アドレスに自動転送を行ったときに遅延する場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

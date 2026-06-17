@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-78</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>SMTPゲートウェイのフォワード先への送信を確認するには</b></FONT>
+<HR>
+<br>
+SMTPゲートウェイを設定した後、全てのメールが設定したSMTPゲートウェイのフォワード先への送信ができているかを確認するために、記録ログをチェックする場合、以下の考え方になります。<br>
+<br>
+まず、基本ログである<a href="./faq05-07.html">SMTP送信ログ（outlog）</a>を見れば、SMTP送信が成功した記録として確認できます。<br>
+<br>
+一方、<a href="./faq05-09.html">配送失敗ログ（faillog）</a>に万が一、記録があった場合は、それは配送に失敗した記録ということになります。ケースとしては、たとえばSMTPゲートウェイのフォワード先が応答しなかった場合、既定のリトライを試した後、最終的に配送をあきらめる事態がこれになり、faillogに記載されていくことになります。<br>
+<br>
+SMTP配送が成功した・失敗した両方が細かく記載されるのが、<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>です。通常うまく行っているときには、このログを見ることは特に必要ありませんが、万が一、トラブルが発生し、何らかの理由で配送が失敗していることがわかったとき、失敗の原因をくわしく探るにはこのsenderlogを見ることがベスト、ということになります。<br>
+<br>
+仮にリトライを試していた場合でも、そのすべてが記録されていますし、通信回線や通信環境が不良を起こしているようなケースでは、Socket Errorの記録が残るようなケースもあります。このように、何らかのエラーが発生したり配送失敗が起きたときには、senderlogをもとに調べることになります。<br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

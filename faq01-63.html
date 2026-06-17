@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-63</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>自動応答メールの文字コードが西ヨーロッパ言語になっていてメーラで文字化けする</b></FONT>
+<HR>
+<BR>
+自動応答設定を行うと、作成される自動応答メールの文字コードが西ヨーロッパ言語になり、一部のメーラで文字化けしてしまうことがあります。自動応答設定で作成される応答メールの文字コードは、デフォルトで &quot;us-ascii&quot; 状態になっており、日本語JISコード等での応答メール設定を行う場合は、以下の２つのいずれかの方法で、文字コード指定をする必要があります。<br>
+<br>
+<b>［方法１］設定ファイル値で自動応答メールのデフォルトの文字コード &quot;iso-2022-jp&quot; を変更する方法</b><br>
+<br>
+以下のとおり、設定ファイル値（文字列値）&quot;DefaultCode.2&quot; を手動で作成します。&quot;DefaultCode.2&quot; の値データには、&quot;iso-2022-jp&quot; を入力します。ちなみにデフォルトではこの設定ファイル値は未作成で &quot;us-ascii&quot; として動作しています。<br>
+<ul>
+<hr align="left" width="80%" size="1" noshade><small>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5RS<br>
+　　　　→DefaultCode.2<br>
+　　　　 (※文字列値として &quot;iso-2022-jp&quot; を入力）<br></small>
+<hr align="left" width="80%" size="1" noshade>
+</ul>
+設定ファイルを書き換えた後、epstrdおよびepstddのサービスを再起動します。<br>
+<br>
+<b>［方法２］ユーザーアカウント毎のメール制御ファイルである &quot;ims.ctl&quot; で文字コードを指定する方法</b><br>
+<br>
+ユーザーアカウント毎のメール制御ファイルである &quot;ims.ctl&quot; ファイルは、各ユーザーごとのメールボックスフォルダ内に置かれて管理されます。<br>
+　（共通ボックス方式のとき）<br>
+　/var/spool/epms/inbox/[ユーザー名]/　　または<br>
+　（接続ドメイン/IPで区別する方式のとき）<br>
+　/var/spool/epms/inbox/[ドメイン名]/[ユーザー名]/<br>
+のディレクトリにアクセスしてください。<br>
+&quot;ims.ctl&quot; が既にあるときその &quot;ims.ctl&quot; をエディタで開きます。&quot;ims.ctl&quot; がないときは &quot;ims.ctl&quot; を新規作成してエディタで開きます。ちなみに、自動応答または自動転送（転送指定）の設定がされたことがなければ、&quot;ims.ctl&quot;ファイルは作成されていません。<br>
+続いて、下記の通り &quot;ims.ctl&quot; に記述します。この方法ではユーザー単位で文字コードを指定することが可能です。<br>
+<ul>
+【ims.ctl】<br>
+<hr align="left" width="80%" size="1" noshade>
+[AutoProcess]<br>
+Charset=iso-2022-jp<br>
+<hr align="left" width="80%" size="1" noshade>
+</ul>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-11</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4で運用されているフォルダ名をデコードしてログなどから見きわめる方法</b></FONT>
+<HR>
+<br>
+IMAP4が管理するフォルダ名の文字コードは、全角文字でフォルダが作られている場合、RFCの規定（RFC2060参照）により、&quot;UTF-7 符号化の修正版&quot;で表現された文字として管理されます。<br>
+<blockquote>
+（例）下書き　　　　　→　&Tgtm+DBN- <br>
+　　　送信済みトレイ　→　&kAFP4W4IMH8wyDDsMKQ- <br>
+</blockquote>
+そのため、コンソールから直接フォルダを表示させるときや、IMAP4の基本ログ・詳細ログを見るときには、フォルダ名やサブフォルダ名、特に全角文字のフォルダ名が&quot;UTF-7 符号化の修正版&quot;になっているため、そのままではどのフォルダか特定することができません。<br>
+たとえば、ログに「SELECT &quot;&MMkw6TDVMMg-&quot;」と記録されていても、どのフォルダを選択しているか一目ですぐわからないことになります。<br>
+<br>
+フォルダ名を判読するには、「IMAP4用のUTF-7をデコードする」ツールや、文字コードのエンコード・デコード機能のサービスを提供しているサイトなどを使い、デコードして判読してください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

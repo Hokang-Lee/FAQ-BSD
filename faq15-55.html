@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-55</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>E-Postから相手側SMTPへ送信時にSTARTTLSで通信させる設定について <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+E-Post Mail Server・E-Post SMTP Serverシリーズから、送信先のMTA・メールサーバへ配送するとき、相手側SMTPがSTARTTLSで受付可能と応答する状況、つまりSTARTTLSでの通信が有効であると応答する場合、E-Post側で送信時にSTARTTLSで通信させる設定は次のように行います。<br>
+<ol><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP送信詳細］を開く。</li>
+<li>「SMTP送信詳細設定」画面が表示されるので、<u>「ESMTPで送信」チェックボックスをオン。SMTP認証方式は標準的には「NO」を選択しておく。USERIDとPASSWORDは空欄のままにする。</u>ここの設定は、相手側サーバの状況によって設定を見直し変更が必要なこともあるので注意。<br>
+</li>
+<p align="center"><img src="./img/faq15-55-01.jpg" border="0"></p>
+<li>［設定する］ボタンをクリックする。</li>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面から epstddを［停止］→［開始］の順でクリックし再起動する。</li></ol>
+以上の手順により、E-Postから送信先のMTA・メールサーバへ配送するとき、相手側SMTPがSTARTTLSでの通信が有効である場合に、STARTTLSでの通信によって送信が行われるようになります。<br>
+また、以下のレジストリ値がないデフォルト状態では、相手SMTP側への送信時には自動的にSTARTTLSで送信されることは有効になっていますが、あえて明示的に有効設定しておくとよいでしょう。また、このレジストリ値を変更し、仮に無効に設定した場合は、相手SMTP側への送信時には常にSTARTTLSが使われないように送信することになります。<br>
+<blockquote><small>[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5DS<br>
+　　　　→UsedSTARTTLS.1 (DWORD) 0:無効 1:有効（デフォルト=1）<br>
+　　※設定を変更した際は、epstdd の再起動が必要</small></blockquote>
+<br>
+ところで、epstdd v5.13以前のバージョンでは、”STARTTLS有効”と相手MTAが応答しながら、実際にESMTPでの送信を行ってみた際にSTARTTLS通信での送信で失敗する場合、リトライ再送時には繰り返しSTARTTLS通信での送信を試みるようになっていました。<br>
+しかし、epstdd v5.13以降は"STARTTLS有効"と相手MTAが応答しながら、ESMTPでの送信でSTARTTLS通信での送信で失敗する場合、リトライ再送時にはデフォルトでSTARTTLSなしで送信を試みるように改善されています。<br>
+レジストリ項目を書いていないデフォルト状態ではリトライ時には切り替える動き、つまり「STARTTLS通信→STARTTLSなしでの送信」というように切り替える動きになりますが、レジストリを明示的に記述し設定値を"0"にすれば、切り替えない設定、つまり「STARTTLS通信」を繰り返しリトライする動きにすることも設定が可能です。<br
+<br>
+<br>
+-------------------------[epstdd]（修正履歴より）---------------------------<br>
+epstdd v5.13 2023.11.04<br>
+　1.STARTTLSで暗号化ネゴシェーションに失敗するドメインリストの作成と失敗先<br>
+　へのプレーン送信への自動切替する機能を追加した。<br>
+<blockquote><small>[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5DS<br>
+　　　　->RecodeBadSTLSDomain (DWORD)　（デフォルト 1 ）1:切替する, 0:切替しない。<br>
+　　※設定を変更した際は、epstdd の再起動が必要</small></blockquote>
+----------------------------------------------------------------------------<br>
+<br>
+念のためにモジュールバージョンを確認するには、「バージョン情報」の COMPONENT LIST 以下をご覧ください。<br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

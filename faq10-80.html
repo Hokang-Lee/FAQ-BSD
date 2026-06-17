@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-80</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>アカウント部分が20文字を超えるアドレスを使えるようにするには </b></FONT>
+<HR>
+<br>
+「ユーザー管理」から登録できるアカウント名の長さ制限は、デフォルトで最大で20文字まですが、方法１で紹介する設定方法で、アカウント管理方法が Soft account方式（E-Post方式）の場合に限って、20文字を超えたアカウントでも登録できるようになります。ちなみに、「ユーザー管理」は、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリックして入ります。<br>
+一方、アカウント名の長さを伸長するのでなく、方法２のエイリアス設定を使うことで回避する設定方法があります。こちらはアカウント管理方法の状態に左右されません。合わせて紹介します。<br>
+<br>
+<b>■方法１－20文字を超える長いアカウント名を使える設定を行う</b><br>
+<br>
+以下の設定を行うことにより、20文字を超える長いアカウント名をE-POST コントロールセンター（メールサーバ管理）の［ユーザー管理］ボタンをクリックし、[ドメインの選択]から登録でき、使用することができるようになります。<br>
+ただし、アカウント管理方法が Soft account方式（E-Post方式）の場合に限ります。ここでの方法は、アカウント管理をActive Directory連携させている場合やOSアカウントと連携させている場合はご利用になれません。<br>
+<ol>
+<li>以下のフォルダに設定ファイルを作成してください。サービス停止は不要です。<br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→AccountLength.1 （デフォルト値=20 最大値=64）<br>
+　　　　→FullnameLength.1（デフォルト値=30 最大値=64）<br>
+<li>設定ファイル内には必要に応じて最大byte数を記述します（デフォルト値=20 最大値=64）。ファイル内行末は改行しないでください。<br>
+　例：40文字の場合＝&quot;40&quot;<br>
+<table border="1" cellspacing="0" cellpadding="2" width="480">
+ <tr>
+  <td><small>
+  <b>●参考：20文字を超えるアカウントを使用するための設定</b><br>
+　[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→AccountLength.1 （デフォルト値=20 最大値=64）<br>
+　　　　→FullnameLength.1（デフォルト値=30 最大値=64）<br>
+  　※拡張子(.1)は、数値であることを表します。<br>
+  　※FullnameLength.1ファイルの指定サイズは、AccountLength.1の指定サイズに影響され、ホーム項の入力サイズも影響されます。<br>
+  　　ルール) FullnameLength.1 = min(74 - (AccountLength.1 - 20), 30)<br>
+  　　ホーム項: min(50, 56 - (AccountLength.1 - 20) - (FullnameLength.1 - 30));<br>
+  　　∴ AccountLength.1 = 64(最大) のとき FullnameLength.1 = 30(最大)<br>
+  　　ホーム欄: 16(最大)<br></small>
+  </td>
+ </tr>
+</table>
+<li>必要に応じて下記のHTMLファイルを編集してください。<br>
+　/usr/local/www/apache24/data/epms/admman/user/join.html<br>
+　/usr/local/www/apache24/data/epms/domman/user/join.html<br>
+<br>
+　（変更例 29行目：アカウントの項目）<br>
+　―――――――――――――――――――――――――――――――――――――――――――<br>
+　修正前 &lt;INPUT TYPE="text" NAME="id" SIZE="21" MAXLENGTH="20" &gt;<br>
+　↓<br>
+　修正後 &lt;INPUT TYPE="text" NAME="id" SIZE="30" MAXLENGTH="29" &gt;<br>
+　―――――――――――――――――――――――――――――――――――――――――――<br>
+　※index_l_user.html 中にある MAXLENGTH="20"部分も長い値に書き換える必要があります。<br>
+</ol>
+<b>■方法２－20文字を超える長いアカウント名をエイリアスで回避する方法</b><br>
+<br>
+アカウント名が最大20文字の制限のままでも、エイリアスを設定する以下の方法をとれば、＠より左のアカウント部分が20文字以上のアドレスでも、SMTP受信と送信の双方が可能になります。<br>
+<br>
+メールクライアント側の「電子メールアドレス」欄に、20文字を超える長いアカウント部分をもつメールアドレスを設定しておきます。<br>
+SMTP受信はもちろん、SMTP送信時で外部宛に配送するメールも長いアカウント名を使ったメールアドレスで送信されます。<br>
+ただし、POP3ログインユーザー名・SMTP認証ログインユーザー名については、実アドレス側の20文字以内の実際のアカウントを指定したままにします。<br>
+<br>
+　（設定例）<br><small>
+　―――――――――――――――――――――――――――――――――――――――――――<br>
+　〈エイリアス〉　　　　　　　　　　　　　　　　　　　　　〈実アドレス〉<br>
+　kakaricho_01234567890123456789＠test-sample00.jp　kakaricho＠test-sample00.jp<br>
+　―――――――――――――――――――――――――――――――――――――――――――<br></small>
+<br>
+Ａ．20文字を超える30文字の長いアカウント部分をもつメールアドレスをTo宛先にして送信されてきたものをE-Postで受信したときのヘッダ<br>
+<p align="left"><img src="./img/faq10-80-01.gif" border="0"></p>
+　▼同じくそのときのSMTP受信ログ（inlog）記録<br><small>
+　―――――――――――――――――――――――――――――――――――――――――――<br>
+　&lt;B0000319052＠test-sample00.jp&gt;　[14/Nov/2014:16:25:45]　192.168.0.xx　[192.168.0.xx]<br>
+　　user4＠test-sample00.jp　kakaricho_01234567890123456789＠test-sample00.jp<br>
+　―――――――――――――――――――――――――――――――――――――――――――<br>
+　　〈↑From　　　　　　　〉　〈↑To　30文字の長いアカウント部分　　　　　　　〉<br></small>
+<br>
+Ｂ．20文字を超える30文字の長いアカウント部分をもつメールアドレスをFrom差出人にしてE-Postから送信されたもの相手が受信したヘッダ<br>
+<p align="left"><img src="./img/faq10-80-02.gif" border="1"></p>
+　▼同じくそのときのSMTP受信ログ（inlog）記録<br><small>
+　―――――――――――――――――――――――――――――――――――――――――――<br>
+　&lt;B0000319053＠test-sample00.jp&gt;　[14/Nov/2014:16:31:31]　192.168.0.xx　[192.168.0.xx]<br>
+　　kakaricho_01234567890123456789＠test-sample00.jp　user4＠test-sample00.jp<br>
+　―――――――――――――――――――――――――――――――――――――――――――<br>
+　　〈↑From　30文字の長いアカウント部分　　　　　　〉　〈↑To　　　　　　　　〉<br></small>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

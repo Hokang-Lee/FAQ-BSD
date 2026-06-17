@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-48</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>エラー時のリターンメール内にある&quot;Reporting-MTA&quot;ヘッダについて <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+エラー時のリターンメール内にある&quot;Reporting-MTA&quot;ヘッダについて、これまでデフォルトのホスト名が表示され、単一の名称での出力がされて変更できませんでしたが、20220508以降の最新差分アップデートを適用することにより、epstdd v5.08以降では、メール受領時のFQDNがセットされるように改善されました。<br>
+以下の設定ファイルを作成、1をセットすることで&quot;Reporting-MTA&quot;ヘッダにメール受領時のFQDNがセットされるようになります。設定ファイルがないデフォルト状態では、従来通りデフォルトのホスト名が表示されます。<br>
+<blockquote><small>[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5DS<br>
+　　　　　→MTAIPOn.1  (DWORD) 0:しない 1:する（デフォルト=0）<br>
+　　※設定を変更した際は、epstdd の再起動が必要</small></blockquote>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-31.html">Received:ヘッダに該当しない別のドメイン名が表示される</a><br>
+●<a href="./faq10-53.html">hostsファイル記述の必要性と有用性について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

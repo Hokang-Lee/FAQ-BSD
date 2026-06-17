@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ16-22</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>上長承認（BossCheck）機能で件名判定できる文字数長さについて</b></FONT>
+<HR>
+<br>
+上長承認(BossCheck)機能で件名判定ができる文字数長さの上限については、以下の仕様の通りです。<br>
+件名文字数が長くならない運用を心がけるか、あるいは、件名が長くなりがちな場合には、見つけだすキーワードを件名の先頭部分に入れる運用を心がけるようにしてください。<br>
+<br>
+<b>１．メールの件名で判定できる文字数長さについて</b><br>
+上長承認(BossCheck)機能にて、メールの件名で判定できる実質的な文字数長さについては、余裕をみて<b>おおよそ85文字程度</b>と考えてください。この85文字程度という制限は、下記のようなメーラーで作成される件名の仕組みや、上長承認機能の機能や仕様から導き出されたものです。<br>
+<br>
+<b>２．件名の文字数長さ制限の根拠</b><br>
+上長承認(BossCheck)機能における現時点の仕様では、<b>Subject:ヘッダ上での記述上255byteを超えるものは無視、つまり切り捨てられて判定</b>されます。<br>
+この上限の単位は、メールクライアントで表示される文字数ではなく、ヘッダのソースベースで見た長さです。<br>
+例えば、iso-2022-jpでパックされていれば、メールヘッダ上の&quot;=?iso-2022-jp?B?&quot;から&quot;?=&quot;まで、パックされる全てをあわせた合計文字数です。<br>
+この「パック」する手法は、メーラーの種類によってまちまちなのが実情です。メーラーによっては、入力した題名の文字列を１行でパックするもの、あるいはトークン毎にパックし、行を変えたりするものとさまざまです。<br>
+下に示すサンプル画像は、後者の例に近いBecky!による作成メールのヘッダーソースです。<br>
+メーラーによってもおおきく前後しますが、改行されずひとまとめで、iso-2022-jpなどでパックされていると想定した場合、全体の制限255byteに対して、<b>実質3分の1程度の計算</b>になり、おおよそ<b>85文字くらいが上限値</b>となると考えてください。85文字くらいというのは、ざっくり余裕をみて、それ位までなら確実では・・という趣旨です。<br>
+<p align="center"><a href="./img/faq16-22-001.jpg"><img src="./img/faq16-22-001s.jpg"></a></p>
+<b>３．運用上のお願い</b><br>
+以上のことから、上長承認(BossCheck)機能で件名判定を利用する場合、件名の文字数が長くなりがちな場合には、見つけだすキーワードを件名の末尾ではなく、先頭に付けるような運用上の工夫をお願いします。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

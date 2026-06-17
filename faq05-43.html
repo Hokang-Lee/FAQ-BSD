@@ -1,0 +1,117 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-43</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>配送できなかったメールをログで確認する方法 <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+配送できなかったメールをログにおいて確認する方法とそれに付随する解説をまとめました。<br>
+内部から外部へのメールを送ろうとして配送できなかったメールを確認する場合、大きくは２段階、まずepstrdが行うSMTP受領時、続いてepstddが行うSMTP配送時と２回に分けてログを調べることが大事です。<br>
+<br>
+・SMTP受領段階・・・epstrdサービス<br>
+・SMTP配送段階・・・epstddサービス<br>
+<br>
+<b>（１）epstrdが行うSMTP受領段階について</b><br>
+<br>
+第一段階の epstrd が行うSMTP受領段階がうまく行っているのかを調べるには、acceptlog（マシン接続ログ）→inlog（SMTP受信ログ）、ないしはacceptlog（マシン接続ログ）→receivelog（SMTP受信詳細ログ）を順に追って調べます。<br>
+メール送信では、SMTP受領段階で失敗したり拒否されるものがあります。E-Postに機能実装されている「中継の制限」に引っかかるものや「送信先制限」設定に引っかかるものなど、epstrdサービスで行われ、詳細な理由は、epstrdの応答コードとともに、receivelogに記載されます。さらに受領段階で失敗するものの多くにSMTP認証によるものがあります。epstrdサービスで認証失敗か認証成功かが判断され、ok/abortの成否はacceptlogに載り、abortの詳細理由はreceivelog（SMTP受信詳細ログ）にepstrdの応答コードとともに載るという仕組みです。<br>
+とにかくacceptlogで'abort'されている記録がある場合は、その詳細理由や原因を知るためにはreceivelogの内容を調べる必要があります。acceptlogで見つけた同じ&quot;B&quot;で始まるメッセージIDでreceivelogを検索し調べます。<br>
+ちなみに、acceptlogで'ok'されている記録があるときは問題なく受領されていることを表します。inlogに記載されているものはすべて'ok'で受領されたものばかりです。<br>
+受領が問題なかったことが確認できれば続く（２）の配送段階での処理内容を調べます。<br>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq05-24.html">接続マシンログ（acceptlog）で abort されている理由を知るには</a><br>
+●<a href="./faq17-20.html">acceptlogにメッセージIDが出ているのにreceivelogに見つからないケースがある理由</a><br>
+<br>
+<b>（２）epstddが行うSMTP配送段階について</b><br>
+<br>
+第一段階が問題なく受領okが確認でき、問題なことがわかれば次は第二段階です。<br>
+第二段階のSMTP配送段階では、senderlog（配送時の詳細ログ）やfaillog（配送失敗ログ）を調べます。前段階の受領はうまく行っているのに、結果的にうまく送信ができていないようなときは、配送段階に何らかの問題があったと想定し、下記にあげるログからその理由と原因を調べます。<br>
+仮に配送段階に問題がなく、相手側のサーバが受信している記録がsenderlogから見つかったときは、こちら側には問題はなく、相手側サーバの問題があるという判断切り分けをして調べます。調べるログは、senderlog（配送時の詳細ログ）やfaillog（配送失敗ログ）です。引き当てるには第一段階のacceptlogやinlogで確認できた&quot;B&quot;で始まるメッセージID番号で引き当てるか、前出ログで確認できた時間をもとに見ていきます。<br>
+（※事例にあげるメッセージIDおよび送信元ドメイン、宛先ドメインは架空のもの）<br>
+<br>
+<b>【配送失敗ログ－faillogの例】</b><br>
+B0000123123＠test-sample00.jp send fail on [16/May/2018:11:18:39] <br>
+from info＠test-sample00.jp to user1＠test-sample01.jp <font color="#ff0000">※1</font> [Unable to deliver to destination domain] <font color="#ff0000">※2</font><br>
+B0000123123＠test-sample00.jp send fail on [16/May/2018:11:18:39] <br>
+from info＠test-sample00.jp to user2＠test-sample01.jp <font color="#ff0000">※1</font> [Unable to deliver to destination domain] <font color="#ff0000">※2</font><br>
+<small>※１）仮に宛先をメールクライアントからTO,CC,BCCを区別して送信した場合でも、ログではエンベロープTOの内容に基づいて記録されるため、TO,CC,BCCの区別はされません。<br>
+※２）記載される配送失敗の理由はリトライの最終回においての失敗理由が記載されます。リトライ途中の理由はここに記載されず、senderlogを見る必要があります。言い換えるとここに記載される理由が本当の配送失敗理由だとは限りません。</small><br>
+<br>
+配送失敗時にsenderlog（配送時の詳細ログ）やfaillog（配送失敗ログ）に記録される失敗理由の中に記載されるエラーコードは、E-Post側でなく接続相手先のSMTP(MTA)が発行したものとなります。規約上、500番台は永続的拒否、400番台は一時的拒否を意味します。<br>
+400番台だから一時的なものと思っても、実際には永続的な拒絶状態にあるものが存在します。また、相手が出すエラーコードのないケースも多くあります。たとえば、名前解決ができなかったもの、名前解決できても接続先サーバが無応答であったもの、これらはすべて接続がなかったので、faillogに記載されるエラーコードはありません。<br>
+また、一方で考慮しておくべき点もあります。それは接続できなかったり、一時的拒絶や永続的拒絶を受けた相手には、E-Post側の配送詳細設定に基づいてリトライ動作が行われることです。これらはみなsenderlog（SMTP配送詳細ログ）に記録されますが、リトライのたびに失敗理由が異なるケースもあり得る話しです。<br>
+faillogには、リトライした後の最終回で最後に失敗した理由が記載されることになりますので、リトライ途中の理由とは異なるケースが理論的にあります。そういう意味でfaillogの失敗理由や相手のエラーコードだけを見ておればよいということにもなりません。関連記事を紹介します。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-20.html">senderlog と faillog に記載された配送失敗の理由が異なる </a><br>
+●<a href="./faq15-29.html">送信できなかったエラーメールの内容とfaillogの内容が異なる</a><br>
+<br>
+<b>【配送時の詳細ログ－senderlogの例その１】</b><br>
+[11:08:39:119] [B0000123123-R0001] <font color="#ff0000">※3</font> [test-sample01.jp] GetTryServer:()<br>
+　　　（中略）　　　　<br>
+[11:09:11:404] [B0000123123-R0001] <font color="#ff0000">※3</font> ConnectHost:<br>
+ socket connect failed. (socket error code=61) <font color="#ff0000">※4</font> <br>
+<small>※３）メッセージIDの後の枝番付き&quot;<b>-R0001</b>&quot;はリトライを表わします。<br>
+※４）socket error code=61は、相手先MTAへの接続ができないケース。socket error code=60なら、DNSサーバを参照できなかったりDNSサーバの動作状況に問題があるケースです。</small><br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-18.html">ログに記録されるメッセージIDの後の枝番種類について</a><br>
+●<a href="./faq05-34.html">senderlogに送信リトライのたび&quot;socket error code=60&quot;のエラーが記録される場合</a><br>
+●<a href="./faq10-04.html">socket エラーコード表</a><br>
+<br>
+<b>【配送時の詳細ログ－senderlogの例その２】</b><br>
+[11:18:39:184] [B0000123123-R0001] [001]:ReturnMail Start:domain:<br>
+[test-sample00.jp] smtp server:[192.168.0.xx]<br>
+[11:18:39:200] [B0000123123-R0001] [001]:ReturnMail Completed.<br>
+[11:18:39:231] [B0000123123-R0001-E001] [test-sample00.jp] GetTryServer:() <font color="#ff0000">※5</font> <br>
+[11:18:39:231] [B0000123123-R0001-E001] [test-sample00.jp] GetTryServer:<br>
+(ltime(13170910719)-otime(13170910719))/30=(0)<br>
+[11:18:39:231] [B0000123123-R0001-E001] [test-sample00.jp] GetTryServer:()<br>
+<small>※５）この部分はエラーメールの生成と送信元への送信を表わします。</small><br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-35.html">senderlogに&quot;GetTryServer:(xxxx)/120=(0)&quot;が記録される意味について</a><br>
+<br>
+<b>【SMTP送信ローカルログ－outlocallogの例】</b><br>
+B0000123123＠test-sample00.jp sent on [16/May/2018:11:18:39] <br>
+to  192.168.0.xx from - to user＠test-sample00.jp <font color="#ff0000">※6</font> <br>
+B0000123123＠test-sample00.jp sent on [16/May/2018:11:18:39] <br>
+to  192.168.0.xx from - to user＠test-sample00.jp <font color="#ff0000">※6</font> <br>
+<small>※６）エラーメールの送信元への送信を表わします。&quot;<b>from - to [送信元アドレス]</b>&quot;というように、fromの後が空白なのは、E-Postが自動で生成したメールのためです。</small><br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-22.html">SMTP送信ローカルログ（outlocallog）などのログで fromアドレスが空白になっているケースがあるのはなぜ？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

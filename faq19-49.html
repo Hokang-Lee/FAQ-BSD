@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-49</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4サーバ接続時にメールの読み込みが遅くなってきた、ディスクI/Oが非常に高い状態はどうすればいいか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+あらためて確認すべき項目を下記にご紹介します。<br>
+<br>
+<B>1. IMAP4プロトコルで管理されているメールボックスフォルダである、INBOX直下の拡張子.MSGのファイル数はどのぐらいあるか確認する</B><br>
+ファイル数が非常に多いと、パフォーマンスが低下、レスポンスが悪化します。ファイル容量も関係してくる場面ではありますが、ここでは大きく&quot;数&quot;が効いてきます。IMAPにおけるコマンドにより、フォルダ内の全件の状態確認、索引などでもI/O（DISK）は増えます。また、IMAPの同時接続数（同時アクティブセッション数）が増えるほど、同時に実行されるコマンドが重なりやすくなるため、I/O（DISK）の「待ち」が発生しやすくなります。<br>
+具体的なファイル数の目安を挙げます。なお、フォルダに分けて整理してある状態で以下の目安です。<br>
+・理想量：　500通以下<br>
+・注意域：1,000通以下<br>
+・危険域：5,000通以下<br>
+もしINBOX直下のファイル数が多い場合、直下でない別フォルダに移動し、一度様子を見ることが推奨されます。<br>
+<br>
+<B>2. IMAP4ルートフォルダに膨大なファイルがないか確認</B><br>
+IMAP4専用アカウントにもかかわらず、［ユーザー管理］の各アカウント別設定で［POP3無効］チェックボックスがオフのままになっている場合があります。<br>
+一つ上の階層である「POP3プロトコルで管理される通常のメールボックスフォルダ」＝「IMAP4と併用するルートのフォルダ」に膨大な数のメールデータ（Bで始まるファイルで拡張子.MSG）が残存してしまっている場合もあります。そのような事態になっていないかご確認ください。<br>
+［POP3無効］オフで使うケースは、POP3/IMAP4併用のアカウントを想定しています。<br>
+<br>
+<B>3. ウイルス対策ソフトによるリアルタイム保護が効いていないか確認</B><br>
+サードパーティ製アンチウイルスソフトなどがリアルタイムや定期スキャンでフォルダアクセスをしている場合は、きわめて遅くなることがあります。<br>
+メールボックスフォルダやメール作業フォルダに対してはリアルタイムや定期スキャンは、導入時から除外設定をしていただくようお願いはしておりますが、万が一、設定が元に戻ってクリアされてしまっている場合もあります。この点についても念のためご確認ください。<br>
+<br>
+<B>（関連FAQ）</B><br>
+●<a href="./faq10-11.html">方式の違いによるメールボックスフォルダの作成位置について</a><br>
+●<a href="./faq17-97.html">IMAP4使用中にメールボックスのルートに"Bxxxxxxxxxx.MSG"ファイルが大量にたまっている</a><br>
+●<a href="./faq03-08.html">メールサーバマシンにアンチウイルスソフトを同居させるときの注意点</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

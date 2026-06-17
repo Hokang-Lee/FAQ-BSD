@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-39</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>pop3log に -ERR General failure on server が記録される原因は</b></FONT>
+<HR>
+<br>
+<a href="./faq05-11.html">POP3ログ（pop3log）</a>内にサーバからメールデータを削除しようとしているタイミングで次のようなエラー内容が記録されていることがあります。<br>
+<blockquote>
+from xx.xx.xx.xx RETR 99 [29/Aug/2017:15:29:05] -ERR General failure on server<br>
+</blockquote>
+pop3ログに記録されている &quot; -ERR General failure on server &quot; のエラーの意味は「ユーザーログイン後のメールボックス操作メモリ確保がサーバー側で失敗した」とされています。このエラーは、対象メールデータがサーバー上で何らかの理由でアクセスできない場合に発生するケースがあります。たとえば、メールデータ自体が壊れていたり、ロックされていたり、数やサイズ情報が不整合になっているときなどです。<br>
+このような事態が起きたときは、念のためサーバ側で対象のメールデータファイルを移動できるかどうか、またはリネームできるかどうかを確認してみてください。<br>
+万が一操作ができない状態であれば、OS内でファイルをつかんだままの状態の可能性もあります。そのようなときは、OSの再起動を行うことで回復する場合があります。<br>
+なお、ログにこの記録が載っている場合でも、最終的に対象のメールデータがきちんと削除されていれば、特に問題になることはありません。E-PostのPOP3サービスでは、仮に一度エラーが発生したタイミングでメールデータの削除が失敗した場合でも、削除のリトライは行っています。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

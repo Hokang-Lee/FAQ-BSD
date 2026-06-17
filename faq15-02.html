@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-02</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>BSD版でのメールボックスフォルダ配下の各ディレクトリのアクセス権やオーナー設定について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メールボックスフォルダ（既定値 /var/spool/epms/inbox）配下の各ディレクトリのアクセス権やオーナー設定について説明します。<br>
+正常なメールボックスフォルダ配下の各ディレクトリのアクセス権やオーナー設定、及び &quot;ims.ctl&quot; &quot;size.ctl&quot; &quot;apop.dat&quot; ファイルなど、メールボックスフォルダ内に置かれる制御系設定ファイルのアクセス権とオーナー設定は以下の通りです。<br>
+（例で示したメールボックスフォルダ位置は「接続ドメイン/IPで区別する」方式でPOP3利用の場合）<br>
+<br>
+<b>ドメインディレクトリ（例 /var/spool/epms/inbox/[ドメイン名]）</b><br>
+--------------------------------------------------------------<br>
+ドメインディレクトリのアクセス権 chmod 0755 [ドメイン名]<br>
+ドメインディレクトリのオーナー   chown www:wheel [ドメイン名]<br>
+# ls -l<br>
+# drwxr-xr-x  7 www  wheel  7 Jun 18 17:56 [ドメイン名]<br>
+--------------------------------------------------------------<br>
+<b>ユーザーディレクトリ（例 /var/spool/epms/inbox/[ドメイン名]/[ユーザー名]）</b><br>
+--------------------------------------------------------------<br>
+ユーザーディレクトリのアクセス権 chmod 0755 [ユーザー名]<br>
+ユーザーディレクトリのオーナー   chown www:wheel [ユーザー名]<br>
+# ls -l<br>
+# drwxr-xr-x  8 www  wheel  15 Jun 24 09:11 [ユーザー名]<br>
+--------------------------------------------------------------<br>
+<b>制御系設定ファイル（例 /var/spool/epms/inbox/[設定ファイル]）</b><br>
+--------------------------------------------------------------<br>
+制御系設定ファイルのアクセス権 chmod 0777 [設定ファイル名]<br>
+制御系設定ファイルのオーナー   chown www:wheel [設定ファイル名]<br>
+# ls -l<br>
+# -rwxrwxrwx  1 www   wheel    23 Jun 18 17:56 apop.dat<br>
+# -rwxrwxrwx  1 www   wheel    77 Jun 24 09:10 ims.ctl<br>
+# -rwxrwxrwx  1 www   wheel     1 Jun 18 17:56 size.ctl<br>
+--------------------------------------------------------------<br>
+※ブラウザから操作するE-POSTコントロールセンターのメールサーバ管理（Web管理CGI）が稼働するには、所有者 &quot;root&quot; でなく、apache/参加グループ：<b>&quot;wheel&quot;</b> に属する所有者 <b>&quot;www&quot;</b> というアカウントで読み書きが行われる権限が必要なことに注意してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-11.html">方式の違いによるメールボックスフォルダの作成位置について </a><br>
+●<a href="./faq15-30.html">inboxフォルダ（メールボックスフォルダ）配下に格納されるデータファイルについて</a><br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

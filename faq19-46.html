@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-46</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlogに記録されたGetTryServer:(ltime(xxx...)-otime(xxx...))/240=(0)の見方を知りたい <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+配送時の詳細ログsenderlogの記録で送信先サーバに接続時の時刻の見方を説明します。<br>
+下記は E-Postシリーズのsenderlog の基本的パターンを事例化したものです。<br>
+<small>
+<hr align="center" width="98%" size="1" noshade>
+　メッセージID　  送受信内容・内部処理ステータス
+<hr align="center" width="98%" size="1" noshade>
+　[B0000099999] [yyy.yyy.jp] GetTryServer:()<br>
+　[B0000099999] [yyy.yyy.jp] GetTryServer:(ltime(1753344040)-otime(1753344040))/240=(0)<br>
+　[B0000099999] ConnectHost(xxx.xxx.jp)<br>
+　　　　　　　　　：　　　　　　<br>
+</small>
+ここで、GetTryServer:(ltime(1753344040)-otime(1753344040))/240=(0)に関して、"1753344040" は[unix time]ですので時刻化可能です。<br>
+240=(0)の0は"[リトライ時刻]ltime(1753344040)-[初回時刻]otime(1753344040)"=時間差(0)という意味合いになります。<br>
+時刻化する場合、以下のように、FreeBSDに用意されている "date -r" コマンドで調べることができます。標準コンソールやSSHでターミナルにログインし下記コマンド書式で実行します。コマンドの結果、以下のようになります。<br>
+# date -r 1753344040<br>
+2025年 7月24日 木曜日 17時00分40秒 JST<br>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq05-10.html">配送時の詳細ログ(senderlog)について</a><br>
+●<a href="./faq05-35.html">senderlogに"GetTryServer:(xxxx)/120=(0)"が記録される意味について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

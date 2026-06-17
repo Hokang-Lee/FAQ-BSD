@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-60</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>内部ドメインが残ったままの状態で外部の同名ドメインから届くメールが拒否される可能性はあるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+マルチドメイン運用において、例えば次のような状況を想定します。<br>
+<blockquote>
+・Aドメイン（AAA.jp）：すでに外部サーバへDNS切り替え済（外部で運用中）<br>
+・Bドメイン（BBB.jp）と旧Aドメイン（AAA.jp）：E-Post側で運用中（内部ドメイン）<br>
+</blockquote>
+このとき、Bドメインを運用している同一サーバ上に“旧Aドメイン（外部と同名ドメイン）の内部ドメイン定義が残ったまま”になっている場合において、外部から送られてくる「送信元Aドメインのメール」が、Bドメイン宛の受信でスパム扱い等により拒否されることはあるか、というご質問をいただくことがあります。<br>
+<br>
+<b>デフォルト状態であれば、Aドメインの内部ドメイン定義がサーバ上に残っていても、それだけを理由に外部サーバから届く同名ドメインのメールが自動的に拒否されることは通常ありません。</b><br>
+<b>ただし、受信制限やフィルタ等の設定を行っており、結果として条件に合致した場合は、同名ドメインかどうかに限らず、受信拒否・隔離などの動作になる可能性があります。</b><br>
+該当しうる代表例は以下です。<br>
+<blockquote>・メールサイズ受信制限<br>
+・［RBL（ORDB）］：DNSBL方式指定による受信制限<br>
+・メールフィルタ設定（【mail.dat】に拒否／隔離を記述、URLBL方式の指定した場合を含む）<br>
+・getspfツール等を用いたSPFによる受信制限<br>
+</blockquote>
+外部サーバから届くメールであっても、送信元ドメインが自ドメイン（例：Aドメイン）になっている場合、運用設定によってはSMTP認証を前提とした判定や中継制限の影響で拒否されるように見えるケースがあります。<br>
+この場合でも、仮にSMTP認証等の条件により拒否される状況があり得る場合は、［中継の制限］「中継の制限設定」から［マシンごとの中継］ボタンで表示される【effect.dat】」に送信元（外部サーバ）IPアドレスの許可設定を入れておくことで、不要な拒否を回避できることがあります。<br>
+<blockquote>【effect.dat】の記述例<br>
+-------------------------------------------------------------------------------------------------------------------<br>
+192.168.0.xxx true　←（外部サーバAドメイン側送信元IPアドレス＋半角スペース＋true）<br>
+　または<br>
+192.168.0.xxx　←（外部サーバAドメイン側送信元IPアドレス　※true省略でも同義です）<br>
+-------------------------------------------------------------------------------------------------------------------<br>
+</blockquote>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-54.html">外部ドメインと同じ名前の内部ドメインを作成した場合の基本的な動作内容について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-33</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>エンベロープFROMを判定条件に使う場合の方法[B] <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Postの設定で Received:ヘッダーの書式ファイル【header.dat】にある項目を追加し、それとメールフィルタ設定【mail.dat】を組み合わせする方法です。以下に手順を示します。<br>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を選択すると表示される「Received:ヘッダの編集」ボタンをクリックすると、書式ファイル【header.dat】が開きます。このReceived:ヘッダの書式ファイル【header.dat】にヘッダに追加指定することができる指定項目があり、コメント行内に利用できる変数として &quot;&SENDER&quot; があるのを確認してください。&quot;&SENDER&quot;= 送信元アドレス (MAIL FROM:)の意味ですので、これを追加します。<br>
+<br>
+例えば、以下のように【header.dat】に加えます。<br>
+その後、メール受領が発生すると、ヘッダの記録には &quot;MAIL FROM&quot; の記録が任意ヘッダ（X-Sender）として記載されるようになります。<br>
+------------------------------------------<br>
+X-Sender: &SENDER<br>
+Received: from &HELO (unverified [&ORIGIN-IP]) by &MTA-NAME(&SOFT-NAME &SOFT-VER) with ESMTP id &lt;&MSG-ID@&MTA-NAME&gt;&PER{for &lt;&RECIPIENT&gt;}; &DATETIME<br>
+------------------------------------------<br>
+あとは、メールフィルタ【mail.dat】の設定にて &quot;Unique-Header:&lt;unique header&gt;:&lt;token&gt;&quot; の指定をうまく利用します。<br>
+--------------------------------------------------------<br>
+Unique-Header:X-Sender:[MAIL FROM の文字列]<br>
+--------------------------------------------------------<br>
+とする条件を加えた設定をすればよいことになります。<br>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq01-81.html">メールフィルタ【mail.dat】の設定事例</a><br>
+※ケース4やケース6に任意ヘッダを指定条件にする方法、Unique-Header:を記述する事例があります。<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

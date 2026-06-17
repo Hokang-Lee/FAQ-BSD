@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-33</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlogにデータ送信途中で&quot;socket error code=54&quot;や&quot;=53&quot;のようにsocketのエラーコードが記録される場合</b></FONT>
+<HR>
+<br>
+senderlogにデータ送信途中で<b>&quot;SendData error=54&quot;</b>や<b>&quot;socket error code=54&quot;</b>あるいは、<b>&quot;socket error code=53&quot;</b>のようにsocketのエラーコードが記録されている場合、相手側サーバによる切断や回線の切断のケースが考えられます。あるいはファイヤウォールやアプライアンスなどを含む通信経路上のトラブルの場合にも記録されることがあります。<br>
+下記の例のように、<b>&quot;socket error&quot;</b> が発生しているときは、epstddサービスプログラム自体の問題というより、SMTPプロトコル外のSocket通信環境、基本的には通信系・ハードウェア関係など外部要因に起因するものである可能性がきわめて高くなります。相手側サーバによる切断のケースではどうしようもありませんが、まずはメールサーバに近い側の通信環境を見直すことをお薦めいたします。<br><small>
+（例ａ）<br>
+<hr align="center" width="98%" size="1" noshade>
+[B0000123123] SendMailMess:354 Start mail input; end with [CRLF].[CRLF]<br>
+[B0000123123] SendData error=54<br>
+[B0000123123] 　　　　：<br>
+[B0000123123] 　　　　：<br>
+[B0000123123] SendData error=54<br>
+<hr align="center" width="98%" size="1" noshade>
+（例ｂ）<br>
+<hr align="center" width="98%" size="1" noshade>
+[16:01:50:770] [B0000123123] SendData (socket error code=54)<br>
+<hr align="center" width="98%" size="1" noshade>
+code=54は、socketのエラーコード(WSAECONNRESET)です。socketのエラーコードは、下記記事を参照してください。<br>
+（例ｃ）<br>
+<hr align="center" width="98%" size="1" noshade>
+[B0000334911] SendMailMess:[02:05:14:193] 354 3.0.0 continue. finished with "\r\n.\r\n"<br>
+[B0000334911] SendData (socket error code=54)<br>
+[B0000334911] SendData (socket error code=53)<br>
+　　　:　　　<br>
+[B0000334911] SendData (socket error code=53)<br>
+<hr align="center" width="98%" size="1" noshade>
+code=53は、socketのエラーコード(ECONNABORTED)です。socket error code=53や、socket error code=54については、回線切断や相手側サーバによる切断などが発生したときによくみられるsocketのエラーです。<br></small>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="https://www.freebsd.org/cgi/man.cgi?query=errno&sektion=2">FreeBSD エラーコード表</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

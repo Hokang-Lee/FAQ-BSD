@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-77</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>配送リトライ後にdomainフォルダの下にbaddomainフォルダができている</b></FONT>
+<HR>
+<br>
+baddomainフォルダが生成される状況としては、次のようなケースが考えられます。<br>
+<ul>
+<li>送信先アドレスとして、ドメインが記述されていないアドレスを送信先として送信しているような場合。</li>
+<li>何らかの原因によりエンベロープファイル（拡張子.RCPのファイル）内にドメイン記述が欠落している場合。</li>
+<li>何らかの原因によりエンベロープファイル（拡張子.RCPのファイル）内にドメインに（ \ / : ; , * ? &quot; &lt; &gt; | ）などのフォルダ名として使用できない不正な文字が含まれて記述されている場合。</li>
+</ul>
+エンベロープファイル（拡張子.RCPのファイル）をメモ帳で開いてみて、送信先に指定されているアドレスが、異常な文字列のドメインなのか、あるいはまったくドメインが記述されていないのか、などを判断することが必要です。<br>
+<br>
+また、予防策として、ドメインに問題のあるメールを送っているのが、外部からなのか、それとも自分のメールサーバシステム内からなのかを調べて行く必要があります。<br>
+<br>
+現行バージョンでは、baddomain フォルダ内のメールがリトライし続けないように、baddomain フォルダの対策処理が加えられています。もし baddomainフォルダができていて、その中にたまったデータは、削除してかまいません。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

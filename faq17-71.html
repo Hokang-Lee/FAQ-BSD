@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-71</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>エイリアス1つに実アドレス複数割り当ては不可、エイリアス複数に実アドレス1の割り当ては可 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+エイリアス1つにつき、実アドレス複数を割り当てる設定は不可です。<br>
+（できない例）<br>
+(1) エイリアスA　⇒実アドレスA<br>
+(2) エイリアスA　⇒実アドレスB<br>
+この例の(1)(2)はどちらか一組しか登録できません。エイリアスAは1つしか登録できず重複登録できません。<br>
+ (1)(2) で実アドレスA,実アドレスBへの同報送信を意図しているのであれば、エイリアスAを設定する代わりに、メーリングリスト機能を利用して設定する方法があります。<br>
+また、アカウント単位で設定可能な自動転送設定、すなわち別の実アドレスを作ってそこに自動転送設定を行うことにより、同様の結果にする動作は可能です。<br>
+<br>
+これに対し、エイリアス複数につき、実アドレス1の割り当ては設定可能です。<br>
+（可能な例）<br>
+(3) エイリアスC　⇒実アドレスF<br>
+(4) エイリアスD　⇒実アドレスF<br>
+ この (3)(4) の設定は可能です。ただし、下記のケースではユーザーが想定した動きと異なる可能性もありますので十分留意してください。<br>
+・別のアカウントEからエイリアスCとエイリアスDへ同報送信したとき<br>
+→SMTP受領時点で1つにまとめられるため、紐付けされたアドレスFには、結局1つのメールのみが届けられる。<br>
+・別のアカウントEからエイリアスCへ送信、さらに別のアカウントGからエイリアスDへ送信したとき<br>
+→SMTP受領時点ではまとめられないため、紐付けされたアドレスFには、（たとえ内容が同じメールでも）それぞれ別々にメールが届けられる。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

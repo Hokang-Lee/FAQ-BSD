@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-56</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>特定の送信先宛で送信失敗することがあり送信ドメイン認証を導入していないためと指摘された <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+特定の送信先宛で送信失敗することがあり、原因として「送信ドメイン認証」を導入していないためではないかと指摘されたという問い合わせがありました。<br>
+<br>
+「送信ドメイン認証」は送り手側（送信元）での話しと、受け取り側（受信側）での話しのそれぞれの意義や定着度合いが異なります。次にそれぞれ説明します。<br>
+<br>
+まず、送り手側（送信元）で「送信ドメイン認証」を設定するには、DNSサーバにSPFレコードやDMARCレコードを記述しておくことになりますが、これはどのような相手が送信ドメイン認証による受信許可や受信拒否を実施しているかわからない現状であるため、大部分の送信元メールサーバが送信を確実にするためにすでに実施しています。<br>
+E-Postシリーズのユーザー様に対しては、送信をより確実にするためにDNSサーバに該当レコードを記述するよう推奨しています。これはレコード記述だけですので、複雑な設定を行うことによる込み入った手間はかかりません。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-85.html">スパム扱いされないで確実に配送するためにDNSのSPFレコードやDMARCレコード記述を推奨</a><br>
+<br>
+一方、受け取り側（受信側）で「送信ドメイン認証」を実施するということは、送信元のDNSでSPFレコードやDMARCレコードの記述が確認できないもの、きちんと記述されていないものについて、メール受信を拒否するということになります。
+そのためのアドオンツールをE-Postシリーズ用にすでに「サポート2」サイトにおいて用意しております。<br>
+E-Postシリーズ用送信ドメイン認証（DMARC）アドオンツール epstdmarc がそれに該当いたします。epstdmarc を導入すれば、メール受信時にはこのプログラムのみで SPF/DKIM/DMARC の3つすべての判定結果のヘッダへの記載が可能になり、レコードの記述が確認できないメールを拒絶することができます。<br>
+<br>
+・送信ドメイン認証（DMARC/DKIM/SPF）アドオンツール epstdmarc については、最新差分アップデート収録CDにある次のドキュメントを参照してください。</b><br>
+・\tool\setup-dmarc.html …「E-POST VシリーズでDMARCを有効にする方法」 <br><br>
+繰り返しになりますが、内部から外部へ送信する際に、DNSサーバのSPFレコードやDMARCレコード記述をしていないケースでは、送信先によっては「送信ドメイン認証」を厳格に実施しているところがあるため、送信先相手のサーバで拒絶されたりするということはよく起こっています。gmailやyahooメール宛に送信するときは、この点注意が必要であることが判明しております。<br>
+ですので、E-Postシリーズのユーザー様には、前者のFAQ記事のように、まずは送信をより確実にするために、自身のDNSのSPFレコードやDMARCレコード記述をしっかりしていただくことをお薦めしています。<br>
+一方、外部から内部への受信時に「送信ドメイン認証」を導入するかどうかは、メールサーバの世界での動向や時流をご覧いただきながら、頃合いをみて決定していけばよいのではないかと考えます。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

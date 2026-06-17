@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-69</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>アカウント名のみでログイン接続できるのは基本的に「ドメイン1つのみ」かつ「共通ボックス方式」のとき <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+ドメインなしのアカウント名のみでログイン接続できるのは、基本的に「ドメイン1つのみ」かつ「共通ボックス方式」の場合です。<br>
+逆に言うと「ドメイン1つのみ」かつ「共通ボックス方式」のときに、ドメインなしのアカウント名のみでログイン接続できるようになります。<br>
+<br>
+「ドメイン1つのみ」かつ「共通ボックス方式」でドメインを運用する場合、それまで使ってきた設定状況によっては、以下の設定ファイルにある設定情報「値のデータ」内に記録されている接続IPアドレスがクリアされることがあり、デフォルトドメインがわからない状態になって、ドメインなしのアカウント名のみでログイン接続できなくなります。この場合は、以下の設定ファイル [domain name].2 内の値にメールサーバの接続IPアドレスを手動で登録してください。接続IPアドレスを登録しておくと、「ドメイン1つのみ」かつ「共通ボックス方式」のときに、「ドメインなし」の「アカウント名」のみでログイン接続できるようになります。<br>
+<blockquote><small>
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→domain<br>
+　　　　→smtpip<br>
+　　　　　→[domain name].2　(※文字列)<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→domain<br>
+　　　　→pop3ip<br>
+　　　　　→[domain name].2　(※文字列)<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→domain<br>
+　　　　→imap4ip<br>
+　　　　　→[domain name].2　(※文字列)</small></blockquote>
+設定ファイル変更前にはE-Post関係の全サービスを停止しておき、変更後に再開してください。なお、テスト時や過去の構築時にいろいろなドメイン名を作成しては消したことがあるときは、設定ファイル内には過去の使っていないドメイン名も残っているケースがあります。それらは削除してかまいません。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-62.html">メールクライアントから接続するユーザーIDに＠以降が必要なケース</a><br>
+●<a href="./faq17-25.html">メールボックスのドメインの管理方法を共通ボックス方式と接続ドメイン/IPで区別する方式を共存できますか？</a><br>
+<br>
+なお、運用するドメインを「接続ドメイン/IPで区別する」方式にしている場合でも、ドメインなしのアカウント名のみでログイン接続する方法があります。次の方法で「ドメインなし」の「アカウント名」のみでログイン接続できます。<br>
+あらかじめWindows側の設定でサーバにさらに追加で別のIPアドレスを割り当てておき、運用するドメインを「接続ドメイン/IPで区別する」方式運用にして、ドメインごとにそれぞれ異なるIPアドレスを入力します。これによって、それぞれのIPアドレスで接続した後、「ドメインなし」の「アカウント名」のみでログイン接続できます。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-22.html">別々のIPで複数ドメインを割り当てる場合（グローバルIPで直接公開）</a><br>
+●<a href="./faq01-21.html">別々のIPで複数ドメインを割り当てる場合（ローカルIPをルータの
+静的マスカレード機能で割当て公開）</a><br>
+<br>
+前者と後者、どちらの方法で設定するかですが、運用するドメインの管理方法を変えられるのか、あるいはサーバ自身に追加IPアドレスを割り当てられるかという条件も出てきますので、しっかりご判断ください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

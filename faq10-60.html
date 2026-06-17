@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-60</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>中継の制限【effect.dat】でSMTP認証と関連する &quot;norelay,2&quot; オプション</b></FONT>
+<HR>
+<br>
+中継の制限【effect.dat】で、以下のような書式に従って、ルールを&quot;norelay,2&quot;で設定すると、外部ネットワークから内部ドメインアドレスを送信元とした場合に、SMTP認証が通ればリレー許可されます。また受領のみSMTP認証が不要になります。&quot;norelay,2&quot;は、受領のみSMTP認証を無視するオプションです。<br>
+反対に、SMTP認証をしていても、強制的にリレー禁止にしたい場合には、&quot;norelay,0&quot;を設定します。<br>
+<br>
+<b>[effect.datの記述例]</b><br>
+<hr align="left" width="80%">
+xxx.xxx.xxx.xxx default　←&quot;default&quot;指定により、SMTP認証が<br>
+　　　　　　　　　　　　　　必要なネットワークを指定<br>
+*.*.*.* norelay,2 　　　　←上記以外のネットワーク（外部）で<br>
+　　　　　　　　　　　　　　SMTP認証されていればリレー許可、<br>
+　　　　　　　　　　　　　　されていないものはリレー禁止<br>
+　　　　　　　　　　　　　　受領のみSMTP認証不要<br>
+<hr align="left" width="80%">
+<small><br>
+※norelayのオプション [0,1,2] について<br>
+　2　…SMTP認証すればリレー許可、されていないものはリレー禁止<br>
+　1　…（空き）<br>
+　0　…SMTP認証しても強制的にリレー禁止<br>
+　書式例）192.168.0.100 norelay,0<br></small>
+<br>
+上記の設定では、１行目でdefault設定したネットワークはSMTP認証が必要となる一方、２行目の&quot;norelay,2&quot; の設定によって、それ以外の（外部）ネットワークから、内部ドメインアドレスを送信元にしたものについては、SMTP認証が通ればリレー許可されます。また受領のみSMTP認証が不要になります。<br>
+２行目を&quot;norelay,0&quot;の設定にした場合は、SMTP認証をしていても、強制的にリレー禁止（×）扱いとなります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+</body>
+</html>

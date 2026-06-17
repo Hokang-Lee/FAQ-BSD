@@ -1,0 +1,98 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-88</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP認証でメールが送信されたかログで確認する方法 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+クライアントからのSMTP認証付きでメールが送信されたかログで確認するには、マシン接続ログ（acceptlog）を見ると、SMTP認証成功・失敗が一目で確認できます。<br>
+-----------------------------------------------------------------------<br>
+<small>[acceptlogに記録された認証失敗例]<br>
+[09/Sep/2024:XX:XX:XX], (xxxx.xx.jp), xxx.xxx.xxx.xxx[xxx.xxx.xxx.xxx], AUTH-LOGIN:xxxx@xxx.xxx.jp [failed],<B0000000000>,abort<br>
+[09/Sep/2024:XX:XX:XX], (xxxx.xx.jp), xxx.xxx.xxx.xxx[xxx.xxx.xxx.xxx], AUTH-PLAIN:xxxx@xxx.xxx.jp [failed],<B0000000000>,abort<br>
+[09/Sep/2024:XX:XX:XX], (xxxx.xx.jp), xxx.xxx.xxx.xxx[xxx.xxx.xxx.xxx], AUTH-CRAM-MD5:xxxx@xxx.xxx.jp [failed],<B0000000000>,abort<br>
+<br>
+[acceptlogに記録された認証成功例]<br>
+[09/Sep/2024:XX:XX:XX], (xxxx.xx.jp), xxx.xxx.xxx.xxx[xxx.xxx.xxx.xxx], AUTH-LOGIN:xxxx@xxx.xxx.jp [success],<BXXXXXXXXXX>,ok<br>
+[09/Sep/2024:XX:XX:XX], (xxxx.xx.jp), xxx.xxx.xxx.xxx[xxx.xxx.xxx.xxx], AUTH-PLAIN:xxxx@xxx.xxx.jp [success],<BXXXXXXXXXX>,ok<br>
+[09/Sep/2024:XX:XX:XX], (xxxx.xx.jp), xxx.xxx.xxx.xxx[xxx.xxx.xxx.xxx], AUTH-CRAM-MD5:xxxx@xxx.xxx.jp [success],<BXXXXXXXXXX>,ok<br>
+<br>
+[acceptlogに記録された認証成功サンプル]<br>
+[09/Sep/2024:15:54:46], (test-sample00.jp), 192.168.0.41[192.168.0.41], AUTH-CRAM-MD5:user3@test-sample00.jp [success],<B0000000302>,ok<br></small>
+-----------------------------------------------------------------------<br>
+<br>
+クライアントからのSMTP認証付き送信は、<a href="./faq05-05.html"> receivelog（SMTP受信詳細ログ）</a>で epstrd サービスが受領したかどうかを詳細に確認できます。<br>
+receivelog（SMTP受信詳細ログ）でSMTP認証付き送信が受領されたかどうかを確認できるサンプルのログを下記に示しました。base64エンコードされている部分は、ツール類を使ってbase64デコードしてやると、パスワード部分以外は目視できるようになります。（※部分参照）<br>
+"235 2.0.0 Authentication successful." がSMTP認証成功の応答メッセージです。<br>
+-----------------------------------------------------------------------<br>
+<small>[receivelogに記録されたSMTP認証付き送信サンプル]<br>
+[09/Sep/2024:15:54:46], 0053efa0, 220 test-sample00.jp E-POST ESMTP Receiver (4.AJ) x64 Bld6CACBCADFA Mon, 09 Sep 2024 15:54:46 +0900<br>
+[09/Sep/2024:15:54:46], 0053efa0, EHLO [192.168.0.41]<br>
+[09/Sep/2024:15:54:46], 0053efa0, 250-test-sample00.jp Hello [192.168.0.41], pleased to meet you<br>
+250-STARTTLS<br>
+250 AUTH PLAIN LOGIN CRAM-MD5<br>
+[09/Sep/2024:15:54:46], 0053efa0, AUTH CRAM-MD5<br>
+[09/Sep/2024:15:54:46], 0053efa0, 334 PDAwMDA0MS42NzM0NTI0ODBAdGVzdC1zYW1wbGUwMC5qcD4=<br>
+　　　　　　　　　　　　　　　<font color="glay">※↑[000041.673452480@test-sample00.jp]</font><br>
+[09/Sep/2024:15:54:46], 0053efa0, dXNlcjNAdGVzdC1zYW1wbGUwMC5qcCBjNWFkNDYwNDA1OWFkMTVmN2RjYWQyNDM5YWVmZjMzOA==<br>
+　　　　　　　　　　　　　　　<font color="glay">※↑user3@test-sample00.jp　c5ad4604059ad15f7dcad2439aeff338<br>
+　　　　　　　　　　　　　　　　（ユーザー名）　　　　　（パスワード部分はデコード不可）</font><br>
+[09/Sep/2024:15:54:46], 0053efa0, 235 2.0.0 Authentication successful. ［SMTP認証が通った応答メッセージ］<br>
+[09/Sep/2024:15:54:46], 0053efa0, RSET<br>
+[09/Sep/2024:15:54:46], 0053efa0, 250 2.0.0 Reset state<br>
+[09/Sep/2024:15:54:46], 0053efa0, MAIL FROM:&lt;user3@test-sample00.jp&gt;<br>
+[09/Sep/2024:15:54:46], 0053efa0, 250 2.0.0 &lt;user3@test-sample00.jp&gt;... Sender ok.<br>
+[09/Sep/2024:15:54:46], 0053efa0, RCPT TO:&lt;tensosaki@eposttest6.jp&gt;<br>
+[09/Sep/2024:15:54:46], 0053efa0, 250 2.0.0 &lt;tensosaki@eposttest6.jp&gt;... Recipient ok.<br>
+[09/Sep/2024:15:54:46], 0053efa0, DATA [09/Sep/2024:15:54:46], 0053efa0, 354 Start mail input;id<br>
+<B0000000302> end with &lt;CRLF&gt;.&lt;CRLF&gt;<br>
+[09/Sep/2024:15:54:46], 0053efa0, MailToApproval() Start: pContext-&gt;mFnData=C:\mail\temp\B0000000302.MSG, pContext-&gt;mUIDFROM=user3@test-sample00.jp<br>
+[09/Sep/2024:15:54:46], 0053efa0, pContext-&gt;bMList=0 / bReq=0<br>
+[09/Sep/2024:15:54:46], 0053efa0, DeleteFile(C:\mail\temp\B0000000302.MSG) start.<br>
+[09/Sep/2024:15:54:46], 0053efa0, DeleteFile(C:\mail\temp\B0000000302.MSG) success.<br>
+[09/Sep/2024:15:54:46], 0053efa0, MoveFileEx(C:\mail\temp\B0000000302.MSG, C:\mail\incoming\B0000000302.MSG) is successed.<br>
+[09/Sep/2024:15:54:46], 0053efa0, MoveFileEx(C:\mail\temp\B0000000302.RCP, C:\mail\incoming\B0000000302.RCP) is successed.<br>
+[09/Sep/2024:15:54:46], 0053efa0, 250 2.0.0 Message received ok.<br>
+[09/Sep/2024:15:54:46], 0053efa0, QUIT<br>
+[09/Sep/2024:15:54:46], 0053efa0, 221 2.0.0 test-sample00.jp closing connection.[09/Sep/2024:15:54:46], 0053efa0, CloseClient Started.:SOCKET.C<br>
+[09/Sep/2024:15:54:46], 0053efa0, closesocket():SOCKET.C<br></small>
+-----------------------------------------------------------------------<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-03.html">接続マシンログ（acceptlog）について</a><br>
+●<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）について</a><br>
+●<a href="./faq10-35.html">SMTP AUTH有効時のログ記録からログインID（Username）などを知るには</a><br>
+●<a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

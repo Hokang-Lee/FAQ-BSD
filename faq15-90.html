@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-90</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールボックスに放置されている大量のメールデータを削除するときの注意点</b></FONT>
+<HR>
+<br>
+万が一、特定ユーザーのメールボックスに残されている大量のメールデータ、たとえばざっと1000を超えるようなデータファイルが放置されていることがわかった場合、メールサーバを安定して動作させるために、メールデータである.MSGファイルを削除していただくことが必要になることがあります。<br>
+このとき、削除してよいメールデータは拡張子.MSGのファイルです。.MSGファイル以外の.dat、.ctlなどのファイルは設定や制御系のファイルですのでそれらは残しておくようにしてください。<br>
+ただし、サーバ側でメールデータを削除するときは、該当ユーザーがアクセスしていないときに行うべきであり、万が一にもユーザーがPOP3受信中の最中に、そのような操作をすることは、少ないとはいえファイルの取り合いを起こす可能性もありますから、予期せぬ結果を招くことも心配されます。念のため、メールサーバ側のPOP3サービス（EPSTPOP3D）を停止した上で行った方がよいでしょう。<br>
+<br>
+ちなみに、メーラー側の「x日残す」設定は、「POP3受信時にx日以前のものについて削除命令を出す」という意味ですから、その設定が全ユーザーに徹底されるのであれば、サーバ側のメールデータをわざわざ削除するような特別対応は不要で、基本的な運用はそれだけでよいと考えます。メーラー側から出されるDELE（削除）命令にしたがって、メールサーバ側は該当するメールデータを削除していきます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-73.html">メールボックスにメールデータを残す運用をしているときの注意点</a><br>
+●<a href="./faq15-68.html">POP3メールボックスでメールデータ残存数が多いとパフォーマンス低下による logon overlap エラーが起きるおそれ</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

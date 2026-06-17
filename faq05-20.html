@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-20</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlog と faillog に記載された配送失敗の理由が異なる</b></FONT>
+<HR>
+<br>
+存在しないユーザーへ送信した場合は、通常、&quot;user unknown&quot;として扱われることになります。このとき、<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>には、送信リトライの度に&quot;550 user unknown&quot;として、途中の記録がされていることが確認できます。<br>
+<br>
+一方、<a href="./faq05-09.html">配送失敗ログ（faillog）</a>の記録には、送信リトライを繰り返した最終結果が記録されることになりますが、失敗理由として&quot;550 user unknown&quot;が記録されず、&quot;Unable to deliver destination domain&quot;として記録されることがあります。つまり、「ユーザーが存在しない」からではなく、「ドメインの名前が解決できなかった」という別の理由が記載される結果になるのです。<br>
+<br>
+これは、送信リトライのステップが、MXレコードの参照→Aレコードの参照の順番で行われていることに起因します。faillog の記録が、送信リトライを繰り返し最終結果の記録をするときに、Aレコードの参照段階で失敗すると、こうした記録が残される結果となります。<br>
+<br>
+さらにhostsファイルを記述しているものは、Aレコード参照するときに真っ先にhostsファイルを参照しに行きます。hostsファイルを記述していないときは、Windowsのネットワーク接続「DNSサーバー」設定項目に設定しているDNSに問い合わせて、名前解決を試みます。このとき次の2つを試します。<br>
+(1) ドメイン名からのMXレコード参照によるAレコード参照<br>
+(2) ドメイン名をそのままAレコードとした参照<br>
+この2つの結果による接続は、同一サーバを指す場合もありますが、異なる場合もあるので、その時の接続応答によって違ってきます。<br>
+さらに、hostsファイルだけでやりくりしていた場合とhostsファイル＋【gataway.dat】に明記した場合とでは、faillogの記録内容に違いが出てきます。<br>
+<br>
+このように、senderlog の送信リトライ中の途中理由と、faillog での配送失敗の最終理由が異なって記録されてしまうケースは、送信リトライの仕組みとも関係するため、避けることができない仕様です。配送失敗の理由を知るときは、<a href="./faq05-09.html">配送失敗ログ（faillog）</a>の記録のみならず、<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>の途中の記録も参照するようにしてください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-29.html">送信できなかったエラーメールの内容とfaillogの内容が異なる場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

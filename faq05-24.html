@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-24</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>接続マシンログ（acceptlog）で abort されている理由を知るには </b></FONT>
+<HR>
+<br>
+<a href="./faq05-03.html">接続マシンログ（acceptlog）</a>において拒絶されているものは、結果が abort 表示されますが、abort になるケースを大別すると、下記のような場合が考えられます。<br>
+<ol type=a>
+<li>［ORDBによる制限］&quot;ordb.dat&quot;で指定されたORDBサイトでブラックとして判断されているケース<br>
+→この場合は、拒絶理由として接続マシンログ（acceptlog）に &quot;It was in the ORDB IP.&quot; が記載されます。<br>
+また他の拒絶時のときとは異なり、このケースではSMTP受信詳細ログ（receivelog）には記録されません。<br>
+<br>
+<li>［マシン毎の中継］&quot;effect.dat&quot;で false 指定やリレー禁止などの設定により拒絶する設定がされている場合<br>
+→<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>に拒絶理由が記録されます。<br>
+<br>
+<li>不明なユーザー、user unknown などにより拒絶された場合<br>
+→SMTP受信詳細ログ（receivelog）に拒絶理由が記録されます。<br>
+<br>
+<li>［メールフィルタ］－［メールフィルタ編集］&quot;mail.dat&quot;で拒絶する設定がされている場合<br>
+→SMTP受信詳細ログ（receivelog）に拒絶理由が記録されます。<br>
+<br>
+<li>&quot;mail from:&quot; 送信後以降、セッション途中で次の理由で切断された場合<br>
+●無通信タイムアウトによるもの<br>
+●相手側が勝手に切断したものによるもの（切断した理由は相手側の理由・事情による）<br>
+<br>
+→SMTP受信詳細ログ（receivelog）には、拒絶理由ではなく、&quot;SOCKET_ERROR OTHER CODE=0&quot; の理由などで接続セッションが切断された事実のみが記録されます。<br>
+</ol>
+このように、理由のほとんどは、ａの場合を除いて <a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>に記録されます。SMTP受信詳細ログ（receivelog）を取得して調べてみるのがいちばん近道です。<br>
+<br>
+なお、接続マシンログ（acceptlog）の行末に記録されている abort について、その行頭に記録される時刻は、接続された時刻または &quot;mail from:&quot; を最初に受信した時刻となり、厳密に言うと abort された時点の時刻ではありません。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

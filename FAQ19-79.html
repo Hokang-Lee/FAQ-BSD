@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-79</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>outlocallogやsenderlogでメッセージIDの連番が飛んでいるがなぜか？また上限に達した場合はどうなるか？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メッセージIDの連番が飛んで見える場合があるのは正常な動作であり、問題ありません。<br>
+以下にメッセージIDの採番ルールを示します。<br>
+<br>
+<b>【メッセージIDが採番されるケース】</b><br>
+<blockquote>
+a. エンベロープ送信元（MAIL FROM）がOK判定の場合 ... 採番されます<br>
+</blockquote>
+<b>【メッセージIDが採番されないケース】</b><br>
+<blockquote>
+b. エンベロープ送信元（MAIL FROM）がNG判定の場合 ... 採番されません<br>
+c. グリーティングやSMTP認証の段階で失敗した場合 ... 採番されません<br>
+</blockquote>
+上記 a. の後の処理でも採番済みのメッセージIDが使われます。<br>
+<blockquote>
+d. エンベロープの送信先（RCPT TO）でNG判定の場合<br>
+e. DATA命令以降の本文途中でNGになった場合<br>
+</blockquote>
+新しい接続があると次のメッセージIDに進むため、b. や c. のように採番されない拒絶が発生した分だけ連番が飛びます。<br>
+<br>
+<b>【連番が飛んでいる場合の調査手順】</b><br>
+outlocallogで番号が飛んでいる場合、以下のログを調べることで所在を確認できます。<br>
+<blockquote>
+1. SMTP受領段階で拒絶（abort）された場合<br>
+　→ inlog（SMTP受信ログ）を確認し、拒絶の詳細は receivelog（SMTP受信詳細ログ）を参照<br>
+2. SMTP受領はOKだが外部アカウント宛に配送された、または配送失敗した場合<br>
+　→ outlog（SMTP送信ログ）または faillog（配送失敗ログ）を参照<br>
+</blockquote>
+いずれかのログに該当するメッセージIDが見つかれば問題ありません。<br>
+なお、acceptlogに採番済みのメッセージIDが記録されているのにreceivelogに見当たらないケースもあります（下記FAQ参照）。<br>
+<br>
+<b>【メッセージIDが上限に達した場合】</b><br>
+メッセージIDの数字は10桁（B0000000001～B9999999999）あります。上限に達した後は再びB0000000001からカウントアップされます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="https://www.e-postinc.jp/faq/faq17-20.html" target="_blank">acceptlogにメッセージIDが出ているのにreceivelogに見つからないケースがある理由</a><br>
+●<a href="https://www.e-postinc.jp/faq/faq05-18.html" target="_blank">ログに記録されるメッセージIDの後の枝番種類について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

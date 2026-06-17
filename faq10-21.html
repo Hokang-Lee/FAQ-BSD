@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-21</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Web管理ツールでの設定変更とサービス再開との関連について</b></FONT>
+<HR>
+<br>
+Web管理ツールで設定を変更した場合、どのサービスを再開すればよいかの目安を説明します。設定変更個所とサービス再開（サービスプログラム再起動）との関連については、おおむね次の通りです。<br>
+なお、サービスの開始・停止については、Web管理ツールの「サービス制御」で行う場合と、SSHなどでコンソールにログインしてコマンドで行う方法と、どちらの方法を使っても結果は同じです。<br>
+<br>
+●「基本設定」<br>
+　　SMTPゲートウェイ関係　→ epstrd、epstdd<br>
+　　メール作業フォルダ　→ 全サービス<br>
+　　メールボックスフォルダ　→ 全サービス<br>
+　　DNSサーバ　→ epstrd、epstdd<br>
+●「LDAP設定」　→ 全サービス<br>
+●「サービス制御」<br>
+　　SMTP認証方法およびセキュリティレベル　→ epstrd<br>
+　　Received:ヘッダ　→ epstrd<br>
+　　各サービスの詳細　→ 各サービス<br>
+●「中継の制限」関連　→ epstrd<br>
+●「ログ設定」<br>
+　　SMTP受信ログ、接続マシンログ、SMTP受信詳細ログ　→ epstrd<br>
+　　SMTP送信ログ、SMTP送信ローカルログ、配送時の詳細ログ、配送失敗ログ　→ epstdd<br>
+　　POP3ログ、POP3詳細ログ　→ epstpop3d<br>
+　　IMAP4ログ、IMAP4詳細ログ　→ epstimap4d<br>
+　　受信メールの複写、ジャーナル　→ epstrd<br>
+●「メールフィルタ」関連　→ epstrd<br>
+●「SSL設定」<br>
+　　SMTP関連　→ epstrd、epstdd<br>
+　　POP3関連　→ epstpop3d<br>
+　　IMAP4関連　→ epstimap4d<br>
+●「ドメイン管理」<br>
+　　アカウントフォルダー　→ 全サービス<br>
+　　管理者アカウント　→ epstrd、epstdd<br>
+　　運用ドメイン設定　→ 全サービス<br>
+●「エイリアス」関連　→ epstrd、epstdd<br>
+●「メーリングリスト」関連　→ epstrd、epstdd<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

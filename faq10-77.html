@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-77</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP認証パスワードをapop認証パスワードと別々に設定する方法</b></FONT>
+<HR>
+<br>
+SMTP認証を有効になるよう設定している場合、E-Postでは認証レベルを「認証ファイル」を使って有効に設定していますが、各ユーザーのメールボックスフォルダに格納されている &quot;apop.dat&quot; は、SMTP認証パスワードとapop認証パスワードを兼用する「認証ファイル」ですが、設定ファイルを記述することにより、SMTP認証パスワードとapop認証パスワードを別々にすることができます。<br>
+<br><small>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5RS<br>
+　　　　　→PasswordFile.2　　 (文字列　Default：&quot;apop.dat&quot; ）<br>
+<br>
+※ &quot;PasswordFile&quot; を文字列値で作り、この値を &quot;smtpauth.dat&quot; のように記述してファイルを保存します。設定した後は、epstrdサービスを再起動します。</small><br>
+<br>
+この後、該当するユーザーアカウントのメールボックスフォルダ（デフォルトで /var/spool/epms/inbox/%USERNAME%）を開き、&quot;apop.dat&quot; とは別に、&quot;smtpauth.dat&quot; をテキストファイルで作成します。その &quot;smtpauth.dat&quot; ファイル内に平文で &quot;apop.dat&quot; の内容とは異なる別のパスワードをエディタから手動で設定します。それに合わせてメールクライアント側のSMTP認証パスワード設定も変更してください。あくまで &quot;smtpauth.dat&quot; 内に記述するパスワードは、エディタから手動で変更する必要があります。<br>
+<br>
+なお、SMTP認証を有効に設定しているとき、E-POST コントロールセンター（メールサーバ管理）のユーザー管理からパスワードを変更した場合は、&quot;apop.dat&quot; と &quot;smtpauth.dat&quot; の内容は、両方とも同じ内容に変更されてしまう結果になります。<br>
+また、Active Directory（LDAP）連携を導入している場合は、すべてが同じパスワード項目として扱われます。認証レベルとして「認証ファイル」を使っていても、POP3認証パスワード・IMAP4認証パスワード・SMTP認証パスワード・apop認証パスワードは区別されず、ドメインコントローラによって同じパスワード項目として扱われますので注意してください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-09</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>公開ダウンロードに用意してあるSSL-Key-SHA2を証明書として本番利用することはできるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+「SSL-Key-SHA2」を利用して作成する証明書は、いわゆる自己認証局（プライベート認証局）の証明書ということになります。<br>
+作成した自己署名での秘密かぎと公開鍵証明書ファイルを「SSL設定」タブ画面内に設定することで、SMTP受領時でのSTARTTLS通信、SMTP受領時でのSSL/TLS通信（SMTP over SSL/TLS）に対応できます。ただしそれはいずれも自己認証局の証明書ということになります。<br>
+<br>
+ですので、自己署名での証明書と公開鍵を設定することはできますが、これはいわゆる自己認証局であり、あくまで動作テスト用とご理解ください。 <br>
+正式にサービス運用する場合は、httpsのサーバを設定する場合と同様、正式な第三者の認証局（パブリック認証局）での証明書を依頼し、そうした認証局の証明書を使用する必要性があります。<br>
+<br>
+※内部でのやり取りに終始するサーバであれば、自己認証局の証明書でもよいという場合もあるかと思います。そうしたケースは除きます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-42.html">STARTTLSを実施するときのサーバ証明書について</a><br>
+●<a href="./faq15-07.html">グローバルサイン認証局の証明書を利用したSSL/TLS設定事例</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

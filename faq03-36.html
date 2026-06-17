@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ03-36</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>E-Post稼働後にIPアドレスとホスト名を変更する際の影響と注意点について <font color="#ff0000">new!</font></b></FONT><br>
+<HR>
+<br>
+E-Postをインストール、サービスを一通り稼働させた後に、IPアドレスとホスト名を変更する場合、設定の内容次第によって影響があります。特に評価版を動かしていた後に、これらを変更して本番機に切り替えするときなど注意してください。概要およびそれぞれの注意点は、以下の通りです。<br>
+<ol type="a"><b><li> ホスト名の変更について</b></li>
+<br>
+ホスト名の変更が影響を与える点についてです。<br>
+ログが作成されるときには、「メール作業用フォルダ」下の各ログ種類のフォルダ内にホスト名のフォルダが作成され、その下に日付単位のログが記録されます。ホスト名が変わると別フォルダが自動生成されます。つまり、ログが生成されるフォルダ名が変わることになります。<br>
+各ログのフォルダ下に作成されるホスト名のフォルダが、新しいホスト名でかまわないときは、以前のホスト名のフォルダを削除してかまいません。<br>
+また、/etc/hostsファイルにメールドメインなどを特に記述していない場合、記録されるログ内にホスト名が使用されていることがあります。たいした問題ではありませんが、仮に新旧のログ比較をする必要性がある場合、その差が出る可能性はあります。<br>
+<br>
+<b><li> IP アドレスの変更について</b></li>
+<br>
+メールサーバ管理の設定でIP アドレスを記述したり、E-Postで設定を必須にしているhostsファイルに記述している場合、IP アドレスが変わったときに、サービスが応答できなくなったりするなど支障が出ることがあります。以下にあげた設定項目を確認した上で変更作業をするようにしてください。<br>
+なおE-Postのツール関係でIPアドレスを変更する際は、あらかじめE-Postの全サービスを停止した上で行う必要がありますので、十分ご注意ください。<br>
+<br>
+<b>・メールサーバ管理→［システム管理メニュー］→「SMTP受信詳細」→一覧のアドレスに応答する設定をしているときの特定のIPアドレス<br>
+・メールサーバ管理→［システム管理メニュー］→「POP3詳細」→一覧のアドレスに応答する設定をしているときの特定のIPアドレス<br>
+・メールサーバ管理→［システム管理メニュー］→「IMAP4詳細」→一覧のアドレスに応答する設定をしているときの特定のIPアドレス</b><br>
+変更する場合はサービス停止した上で正しく変更すれば動作上の支障はありません。<br>
+IPアドレスを「全てのアドレスに応答する」を選択しているときや「一覧のアドレスに応答する」「*.*.*.*」の書式でワイルドカード指定しているときには関係ありません。<br>
+<br>
+<b>・メールサーバ管理→［システム管理メニュー］→「ドメイン管理」→「ドメインの新規作成・設定変更」→登録済み既存ドメインの［詳細設定を開く］→「接続IP/ドメインで区別する」方式の設定にしているときのIPアドレス</b><br>
+変更する場合はサービス停止した上で正しく変更すれば動作上の支障はありません。<br>
+「共通ボックス（区別しない）」方式を選択しているときは関係ありません。<br>
+<br>
+<b>その他IPアドレスを設定している設定個所の例<br>
+・メールサーバ管理→［システム管理メニュー］→「メールフィルタ」→「チェック不要なIP」<br>
+・メールサーバ管理→［システム管理メニュー］→「アンチウイルス」→「チェック不要なIP」<br>
+・メールサーバ管理→［システム管理メニュー］→「中継の制限」→「マシンごとの制限」,「RBL(ORDB)検査しないIP」など<br></b>
+これらも正しく変更すれば動作上の支障はありません。設定ファイル（拡張子.dat）の変更は仕組み上、サービス停止は必須ではありませんが、停止した上での作業の方がより好ましいでしょう。<br>
+<br>
+<b>・/etc/hosts ファイル</b><br>
+インストールマシンの/etc/hostsファイルに記述されている運用メールドメインに対してIPアドレスを記述している場合、変更が必要です。きちんと変更すれば動作上の支障はありません。/etc/hostsファイルの変更は仕組み上、E-Postサービス停止は必須ではありませんが、停止した上での作業の方がより好ましいでしょう。<br>
+ちなみにE-Post V シリーズでは、/etc/hostsファイルにE-Post V シリーズに登録するメールドメインを記述することについて、以下の理由から必須のお願いにしています。<br>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq10-53.html">/etc/hostsファイル記述の必要性と有用性について</a><br>
+●<a href="./faq01-04.html">クライアントからのメール送信が遅いケースと/etc/hostsファイルの必要性</a><br>
+●<a href="./faq15-04.html">POP3/IMAP4利用時にも/etc/hostsファイル記述を必須とする理由について</a><br>
+</ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

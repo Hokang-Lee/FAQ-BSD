@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-74</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>【gateway.dat】での配送に失敗したとき、EPSTDSが第2の接続先（MXレコードなど）を探す挙動を止めたい <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+EPSTDSの配送先を決める優先順位は以下の通りです。<br>
+<blockquote>
+【gateway.dat】 &gt; MXキャッシュ &gt; DNS MXレコード &gt; DNS Aレコード &gt; hostsファイル<br>
+</blockquote>
+【gateway.dat】での配送に失敗した際に第2の接続先を探す挙動を直接止める設定はありません。<br>
+ただし、以下の2つの方法で対応できます。<br>
+<br>
+<b>【方法1】E-PostのDNSサーバ設定を空白にする</b><br>
+E-Post Mail Controlの「サーバー設定」タブにある「DNSサーバー」項目欄を空白にすることで、DNS MXレコードを参照する挙動を抑えることができます。<br>
+<blockquote>
+・E-Post Mail Controlの「DNSサーバー」項目欄 ... DNS MXレコードの参照に使用<br>
+・Windows側の「DNSサーバー」設定欄 ... DNS Aレコードの参照に使用（優先順位は低い）<br>
+</blockquote>
+設定を変更した場合は、[適用]ボタンをクリック後、E-Post関連サービスの再起動が必要です。<br>
+なお、Windows側の「DNSサーバー」設定欄については、Aレコード解決の最終手段として参照されますが、実際にはこの方法ではメール送信できないケースがほとんどのため、そのままでも支障はないと思われます。<br>
+<br>
+<b>【方法2】送信先制限【sender.dat】で特定ドメイン宛を受領段階で拒絶する</b><br>
+配送段階（EPSTDS）ではなく、受領段階（EPSTRS）で特定ドメイン宛の送信を止める方法です。<br>
+プログラムインストールフォルダ（C:\Program Files\EPOST\MS\）に【sender.dat】を配置することで全体共通設定として反映されます。<br>
+<pre>
+--------（【sender.dat】例）--------
+*@cybermail.jp,-1
+*,0
+------------------------------------
+</pre>
+（注）送信を禁止する宛先ドメインは、実際のエンベロープTOで指定されるドメインをログで確認して記述してください。MXレコードのドメインではありません。<br>
+<br>
+この設定により、該当ドメイン宛に送信しようとすると受領時に以下のエラーが返されます。<br>
+<blockquote>
+550 5.1.1 Please mail to a valid e-mail address. approval filter.<br>
+</blockquote>
+なお、同報メールの宛先に該当ドメインが含まれる場合、同報全体が拒絶されます。その場合はメールクライアント側で宛先を分けて送信する必要があります。<br>
+【sender.dat】の設定はサービス再起動不要で、ファイルを保存した次のメール送信から反映されます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="https://www.e-postinc.jp/faq/faq17-55.html" target="_blank">EPSTDS（SMTP配送サービス）が配送先を決める優先順位</a><br>
+●<a href="https://www.e-postinc.jp/faq/faq10-23.html" target="_blank">メールサーバがDNSを参照するときの動きについて</a><br>
+●<a href="https://www.e-postinc.jp/faq/faq01-64.html" target="_blank">配送処理とDNS参照について</a><br>
+●<a href="https://www.e-postinc.jp/faq/faq10-45.html" target="_blank">「送信先制限」で送り先アドレスを送信禁止させたい</a><br>
+●<a href="https://www.e-postinc.jp/faq/faq10-88.html" target="_blank">「送信先制限」で1ドメインを送信禁止したとき、同報で他ドメイン宛もいっしょに拒絶される</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

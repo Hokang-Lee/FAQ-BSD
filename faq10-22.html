@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-22</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>中継の制限【effect.dat】で設定する default と true の違い、only の意味は？ </b></FONT>
+<HR>
+<br>
+中継の制限【effect.dat】で設定する<b> default </b>と<b> true </b>の違いは、一見すると区別がつきにくいように思われますが、default と true とは実は意味が大きく異なります。<br>
+<br>
+<b>default は「デフォルトの設定に依存する」という意味</b>になります。たとえば、デフォルトでは、外部から外部への中継は拒絶する動きになります。また、存在しないユーザーアカウントを使った送信要求は当然のことながら不可です。この default 指定を行うと、指定されたIPアドレスから接続したときに、そのデフォルト設定状態を明示して指定することになります。言い換えると<b>安全なデフォルト設定を念押しして明示的に設定している</b>といえます。<br>
+<blockquote>【effect.dat】の記述例<br>
+192.168.0.0/24 default<br>
+　または<br>
+*.*.*.* default<br>
+</blockquote>
+<b>true は「無条件許可」を意味</b>します。true 指定を省略してIPアドレスだけの指定も true と同義です。<br>
+この「無条件許可」の実際の意味は、非常に強力です。存在しないユーザーアカウントを使った送信要求を行っても、User Unknownで接続を拒絶することはなくなります。さらに<b>SMTP認証を有効にしているときでも存在しないアカウントからSMTP認証なしで送信が可能になってしまいます</b>。何も考えずに設定すると、いわゆる“なりすまし”や“不正中継”でさえも許可してしまい、危険性を高める結果となります。<br>
+<br>
+これに対して、true 指定が逆に必要になるケースでの例を以下に記します。<br>
+一つめは<b>SMTP認証を有効に設定しているとき内部アカウントどうしの自動転送を設定するケース</b>です。このときは<b>メールサーバ自体のIPアドレスを true 指定</b>します。ちなみに true 指定を省略した場合も true を指定したものと同義に扱われます。<br>
+<blockquote>【effect.dat】の記述例<br>
+192.168.0.xxx true　←メールサーバ自体のIPアドレス<br>
+　または<br>
+192.168.0.xxx　←メールサーバ自体のIPアドレス<br>
+</blockquote>
+二つめ<b>はSMTPゲートウェイの設定で内側にあるメールサーバからの接続を無条件に許可を与えるケース</b>です。SMTPゲートウェイの設定で、内側のメールサーバに存在する実アカウント分だけ関連づけたエイリアスを登録する運用を行っているときです。設定例は「エイリアス: abc＠domain.jp → : 実アドレスabc＠domain.jp」。内側のメールサーバで自動転送を行っていて外部ドメイン宛への転送がされたときに、内側のメールサーバから SMTPゲートウェイを経由するアウトバウンド方向の通信について転送分が拒絶されてしまいます。これを防止するため、SMTPゲートウェイ側の【effect.dat】に内側のメールサーバのIPアドレスを下記のように true 指定します。<br>
+<blockquote>SMTPゲートウェイ側の【effect.dat】の記述例<br>
+192.168.0.xxx true　←内側のメールサーバのIPアドレス<br>
+　または<br>
+192.168.0.xxx　←内側のメールサーバのIPアドレス<br>
+</blockquote>
+一方、<b>メールサーバで設定した内部ドメイン名を&quot;true&quot;設定してしまうと、無条件許可を与えてしまいます。内部ドメイン名を語って送信要求されるものは、アカウントが存在しなくても送信でき、さらにSMTP認証パスワードが違っていても送信できることになり、なりすまし送信をそのまま許可してしまう事態になってしまうため、このような設定を絶対にしないよう注意</b>してください。<br>
+<blockquote><font color="#ff0000">（絶対にしてはならない【effect.dat】の例）</font><br>
+domain.jp　true<br>
+　または<br>
+domain.jp<br>
+<small>↑……　内部ドメイン名を"true"指定すると、ドメイン名を語りさえすれば<br>
+どこからでも無条件送信できてしまうので要注意</small><br>
+</blockquote>
+なお、<b>only </b>については、【effect.dat】の最後の行で有効で、しかも記述できるのは１行のみという制約があります。特定のIPアドレスからの中継だけを可能にしたいときには「x.x.x.x only」と記述できますが、この指定は１行しか書けず、しかも記述の最後にする必要があります。<b>only より下の記述がされていても、それらの記述はすべて無効になる</b>ので注意してください。<br>
+<blockquote><font color="#ff0000">（2行目が働かない【effect.dat】の例）</font><br>
+192.168.0.100 only<br>
+*.*.*.* norelay<br>
+<small>↑……　１行目で"only"を記述しているため２行目の行は無効になる</small><br>
+</blockquote>
+リレーに関するデフォルト設定は、オンラインヘルプにもくわしく書かれているほか、下記のFAQもご参照ください。<br>
+なお、中継の制限【effect.dat】に設定するIPアドレスと &quot;true&quot;、&quot;default&quot;、&quot;false&quot; などとの間の区切り文字は半角スペースです。[tab]コードでの区切りは無効ですのでご注意ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-61.html">中継の制限【effect.dat】での only 指定は特殊な働き方をすることに注意</a><br>
+●<a href="./faq15-16.html">中継の制限【effect.dat】で最下行に「norelay」の記述行を加えたときの動きについて</a><br>
+●<a href="./faq10-60.html">中継の制限【effect.dat】でSMTP認証と関連する "norelay,2" オプション</a><br>
+●<a href="./faq01-79.html">送信しようとすると、' 550 Sorry ・・・, I don't allow unauthorized relaying . ' が表示されて送信できない</a><br>
+●<a href="./faq01-41.html">SMTP認証有効時に内部アカウントから内部アカウントへ自動転送されない</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

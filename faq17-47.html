@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-47</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールクライアント → E-Post → SMTPゲートウェイ → 外部MTAの構成のとき暗号化通信の設定有無について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メールクライアント → E-Postシリーズ製品 → 他社製SMTPゲートウェイ → 外部MTAの構成のとき、他社製SMTPゲートウェイ → 外部MTA間において暗号化通信を実施したいとき、暗号化通信の設定有無について質問を受けたことがあります。<br>
+他社製SMTPゲートウェイ → 外部MTA間での暗号化通信だけが行われるであれば、内側に置いてある E-Postシリーズ製品側でのSSL/TLS設定など暗号化設定は不要です。<br>
+そうではなく仮に、E-Postシリーズ製品 → 他社製SMTPゲートウェイへの送信の場合に暗号化通信が必要であれば、SMTPゲートウェイ側にSSL/TLSの公開鍵が用意されていればOKです。<br>
+一方、メールクライアント → E-Postシリーズ製品への送信（SMTP送信依頼）で暗号化通信が必要なのであれば、E-Post側にSSL/TLSの公開鍵が用意されていてSSL/TLS設定の暗号化設定されていれば、OKとなります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-40.html">SMTP/POP3/IMAP4 over SSL/TLS設定方法</a><br>
+●<a href="./faq10-58.html">SSL/TLS設定で中間CA証明書を設定するには</a><br>
+●<a href="./faq15-07.html">グローバルサイン認証局の証明書を利用したSSL/TLS設定事例</a><br>
+●<a href="./faq15-06.html">SSL/TLS設定で認証局が発行するSHA2（sha256）の証明書に対応しているか </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-63</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>POP3を使わずIMAP4だけ使用する場合でもPOP3未設定状態は避けてください</b></FONT>
+<HR>
+<br>
+POP3を使わずIMAP4だけ使用する場合でも、POP3サービスに対してサーバIPアドレスを設定しないままにしておくなど、いわゆる「未設定」状態は避けてください。<br>
+POP3とIMAP4のライセンスキーは、設定ファイル内のPOP3側のサービスプログラムを管理している所に情報が登録されています。<br>
+そのため、サービスプログラムはPOP3/IMAP4の両方を組み込み、登録するようにしてください。<br>
+POP3/IMAP4の両方のサービスプログラムを組み込み、登録してあることは必要である一方、サービスプログラムを開始することは特に必須ではありません。<br>
+もしPOP3を使わない環境であるなら、POP3サービスを開始しないで停止したままでも大丈夫です。その場合は、SSHなどを使ってコンソールからログインし、/etc/rc.conf を開き epstpop3d_enable=&quot;YES&quot; を epstpop3d_enable=&quot;NO&quot; に書き換えることでスタートしないようにしておくことをお薦めします。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

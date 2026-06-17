@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-32</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>ヘッダーFromの情報を条件判定して自動転送を設定する方法 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+各アカウント単位で指定できる自動転送機能においては、［送信元編集］で設定する転送元アドレスはあくまでエンベロープFROMの情報を判断します。そのため、エンベロープFROMとヘッダーFromが異なるメールではヘッダーFromの情報は見られないことになります。<br>
+ヘッダーFromの情報を条件判定して自動転送を設定する方法がまったくないわけではありません。自動転送機能ではありませんが、メールフィルタ機能のメールフィルタ設定の指定行で「From:○○」という形の条件指定をした場合は、こちらはヘッダーFromの情報を元に条件判定がされます。<br>
+<br>
+個別メールフィルタ機能の <b>【Level:5xx】【Level:6xx】【Level:7xx】</b> を指定した場合の「&quot;Forward:&quot;で指定したアドレスへ転送する」機能を使えば、転送先アカウントは、内部ドメインでも、外部ドメインでも指定したアドレスへのForwardによる転送が可能です。下記に Level:500 を指定した事例を示しました。くわしくはメールフィルタ機能を扱った下記記事などを参考にしてください。<br>
+<ol>
+<b>［手順］</b><br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［メールフィルタ］を選択。続いて「メールフィルタ（機能）を使用する」チェックボックスをオンになっていることを確認。オフの場合はチェックボックスをオンにする。<br>
+※オフからオンにした場合は、epstrd サービス再起動必要。</li>
+<br>
+<li>アカウント単位で設定が可能な個人の「メールフィルタ設定」<br>
+［mail.datの事例］<br>
+'-------------------------------<br>
+ Virus:Tenso<br>
+ From:xxxx@abc.jp<br>
+ Level:500<br>
+ Forward:yyyy@domain.jp<br>
+ VirusEnd:<br>
+'-------------------------------<br>
+</li></ol>
+この設定を使う際はアカウント単位で指定する自動転送機能とは併用できません。転送元アカウントでは自動転送機能は使用せずオフにしてください。<br>
+また、メールフィルタ機能によるForward指定のため、<b><font color="#ff0000">転送元のアカウントには、メールが残らない仕様</font></b>です。これはメールフィルタ機能が迷惑系メールなどの特定メールを「隔離」させることが本来の目的であり、動きとしては元の送信先には残さず「移動」させる動きとなるためです。本来の使用目的とは少々異なることを承知してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-81.html">メールフィルタ【mail.dat】の設定事例</a><br>
+●<a href="./faq04-27.html">個別メールフィルタ設定がうまく働かないときのチェックポイント</a><br>
+●<a href="./faq04-23.html">メールフィルタ【mail.dat】で From:指定により受信の許可・拒絶設定しているものの受信すべきメールが拒絶されてしまう</a><br>
+●<a href="./faq04-07.html">メールフィルタ設定でワイルドカードは使えないか</a><br>
+●<a href="./faq10-62.html">自動転送時に任意の文字を件名に付加する方法</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-21</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>receivelog内に DATAコマンド応答後に &quot;closesocket():SOCKET.C&quot; というセッションクローズが記録されているケースが見つかる <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+<a href="./faq05-03.html">接続マシンログ（acceptlog）</a>で &quot;abort&quot; されている理由を調べるために、<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>の記録を見ているとき、receivelog内に DATAコマンドと &quot;354 Start mail input;id &lt;Bxxxxxxxxxx&gt; end with &lt;CRLF&gt;.&lt;CRLF&gt;&quot; 応答直後か数秒後に &quot;closesocket():SOCKET.C&quot; というセッションクローズが記録されているケースが見つかることがあります。<br>
+<br>
+こうした記録が見られるとき、ほぼまず E-Post側で切断したものではありません。SMTPセッションの接続中にDATAコマンドの後で、接続相手から一方的に切断された場合、receivelog に特別なエラーも出さずにセッションクローズのみが記録されることになります。このとき acceptlog 側には結果的に &quot;abort&quot; が記録されます。たとえばtelnetコマンドでSMTP接続してみても、同じことを再現させることが可能です。サーバからDATAコマンドの応答の後、quitなどでセッションを強制切断してみると、同様の結果が得られます。<br>
+<br>
+DATAコマンド応答直後か数秒後に &quot;closesocket():SOCKET.C&quot; というセッションクローズが記録されているケースを見つけた場合、接続元の通信記録を調べ、その挙動に問題がないかどうかを調べた方がよいでしょう。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-24.html">接続マシンログ（acceptlog）で abort されている理由を知るには </a><br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

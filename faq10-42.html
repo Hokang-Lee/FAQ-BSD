@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-42</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>自動転送設定数が多いと、処理が遅くなり負荷が過大にかかってしまう</b></FONT>
+<HR>
+<br>
+内部ドメイン宛へ自動転送設定した総数が100以上のレベルでかなり多いと、処理が遅くなり負荷が過大にかかってしまう原因となります。内部ドメイン宛への自動転送を設定するときは、転送する数の総数が多くならないように注意してください。<br>
+<br>
+ヘルプやマニュアルに、自動転送の設定数の上限は明記していません。またソフトウェア的にも制限は設けていません。自動転送設定数に制限はないように受け取られがちですが、自動転送処理は、次のような仕組みのため、メールサーバの他の処理内容と比べて、仕様上から、負荷が高くなる傾向があり、かなりCPUの占有率を上げてしまいます。<br>
+<br>
+通常の内部ドメインから内部ドメインへの送信（いわゆるローカル送信）については、epstddは、SMTPプロトコルベースで通信を行わず、内部のファイルコピーで処理しています。そのため、処理が高速に行われます。<br>
+<br>
+ところが、自動転送が内部から内部へ働くときは、epstddから、epstrdが再度受信するように、SMTPプロトコルベースで通信が基本的に行われます。メールキューである、epstddが作業場所に使うincomingディレクトリ、及びepstrdが一時作業場所に使うtempディレクトリに自動転送が終わるまでの間、ファイルがとどまることになります。<br>
+<br>
+このとき、実際に作成される作業ファイルの数は、１つのメールの転送でも３～５個とかなりのファイルが一時的に作られることになります。メールの通数が多い場合や、添付ファイルによりメールサイズが大きいときには、その分だけ倍数的にファイル数が増大することになり、かなりの負荷がかかります。<br>
+<br>
+負荷を必要以上に高めないためには、自動転送の設定数として、できれば10前後をめどに考えてください。“転送しなければいけない数”の実数が多いときには、自動転送の代わりに、メーリングリスト機能を活用してください。同一ドメイン内に送信するときなど、処理をまとめて行うなど、メーリングリスト機能の方が、負荷が高まらない工夫や仕様になっています。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

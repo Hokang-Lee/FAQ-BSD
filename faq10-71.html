@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-71</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールクライアントからの送信時にサイズ制限をかけるには</b></FONT>
+<HR>
+<br>
+メールクライアントからの送信時にサイズ制限をかけるには、SMTPの「メール受信時のサイズ」を設定すれば、クライアントからメール送信を行うときにもこの設定値に基づいて受領制限が行われます。「メール受信時のサイズ」を設定するには、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］を開いて［中継の制限］項目、もしくは［中継の制限］を開いて表示される「中継の制限設定」にある「メール受信時のサイズ」をbyte単位で指定します。<br>
+<br>
+クライアントからメール送信を行うとき、メールサーバ側はSMTP受信部（epstrd）が受領動作を行います。<br>
+「メール受信時のサイズ」制限設定は、SMTP受信部の“受領時”のサイズ制限であることから、外部MTAから見れば“受信サイズ制限”であり、内部ドメインのクライアントにとっては、“送信サイズ制限”ということになります。<br>
+つまりこの設定は、内部から送信されるアウトバウンド方向もしくは内部どうしのメール、および外部から受信されるインバウンド方向のメール両方に同じように適用されます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-24.html">メール送信時のメールサイズ制限を設定しているが設定サイズより小さいサイズで制限されてしまう</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

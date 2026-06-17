@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-23</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>同一マシン上でプロキシ型アンチウイルスソフトを経由して接続する場合</b></FONT>
+<HR>
+<br>
+SMTP／POP3／IMAP4に対して、メールサーバと同一マシン上でプロキシ型アンチウイルスソフトを稼働させている場合、プロキシ型アンチウイルスソフトは、各サービス（SMTP/POP3/IMAP4）に対し一般的に<B>ローカルループバックアドレス（127.0.0.1）</B>で接続しようとします。<br>
+なお、アカウント管理方法は、<B>Softアカウント（独自アカウント方式）</B>にしておく必要があります。<br>
+<BR>
+このような状況下で複数ドメインを管理している場合、ドメインの詳細設定では次の設定を行ってください。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］で各サービスを停止しておく。<br>
+続いて［ドメイン管理］を選び、［ドメインの新規作成・設定変更］をクリック、「既設ドメインの設定変更」で表示されたドメイン一覧から選択して、［詳細設定を開く］ボタンをクリックする。<br>
+<br>
+IPアドレス（SMTP）： 127.0.0.1<br>
+IPアドレス（POP3）： 127.0.0.1<br>
+IPアドレス（IMAP4）： 127.0.0.1<br>
+<br>
+［サービス制御］でその後各サービスを開始する。<br>
+<br>
+一方で、クライアント側の設定は、POP3／IMAP4への接続ユーザアカウントについて、[アカウント]のみでなく、[アカウント]＠[domain] または [アカウント]％[domain] としてください。（＠や％は半角）<br>
+すなわち、ユーザーアカウントが&quot;taro&quot;の場合、以下のようにします。<br>
+<blockquote>
+domainA.co.jpへの接続<br>
+ID=taro＠domainA.co.jp　または　ID=taro％domainA.co.jp<br>
+PASS=従来通り<br>
+<br>
+domainB.co.jpへの接続<br>
+ID=taro＠domainB.co.jp　または　ID=taro％domainB.co.jp<br>
+PASS=従来通り<br>
+</blockquote>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-69</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>STARTTLS命令を無効に設定するには</b></FONT>
+<HR>
+<br>
+E-Post Mail Serverシリーズ／E-Post SMTP Serverシリーズで、STARTTLS命令を無効にし、明示的に利用しない設定方法は次のように行います。<br>
+<br>
+以下の通り、設定ファイルを操作して数値10進で作成、値を手動で登録します。変更後はepstrdおよびepstddサービスの再起動が必要です。<br>
+<br>
+&quot;UsedSTARTTLS&quot;は、デフォルトで作成されていませんのでファイルを作成し、ファイル内の値を&quot;0&quot;に設定して保存してください。変更したら、epstrdおよびepstddを再起動してください。その後、STARTTLS命令を使用しなくなります。<br>
+<br>
+<b>[epstrd] (E-POST SMTP Receiver)</b><br>
+メール作業フォルダ　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5RS<br>
+　　　　→UsedSTARTTLS<br>
+　　　　　 (DWORD) (設定値:0)<br>
+<br>
+<b>[epstdd] (E-POST SMTP Delivry Agent)</b><br>
+メール作業フォルダ　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5DS<br>
+　　　　→UsedSTARTTLS<br>
+　　　　　 (DWORD) (設定値:0)<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

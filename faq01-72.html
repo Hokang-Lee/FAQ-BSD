@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-72</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>ウイルスパターンファイル更新の記録を取るには</b></FONT>
+<HR>
+<BR>
+アンチウイルス機能のある Enterprise版でのウイルスパターンファイル更新の記録を開始するには、次のように行います。<br>
+<br>
+<b>［パターンファイル更新の記録を取り、ログを確認する］</b><br>
+<ol>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［アンチウイルス］を選択すると表示される「アンチウイルスＤＢ更新」の［更新ログを残す］チェックボックスをオンにする。<br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面から fsupdd サービスを停止→開始で再起動する。<br>
+<li>メール作業用フォルダ（/var/spool/epms）内の &quot;fsupdlog&quot; フォルダに日付ごとのファイルが作成され、パターンファイル更新記録が取られているのを確認する（※）。<br>
+</ol>
+<b>［パターンファイル更新ログ事例］</b><br>
+（ファストスキャン版アンチウイルスエンジン）<br>
+<HR align="left" size="1" noshade width="85%">
+<blockquote><small>
+[15:50:54] <br>
+ktzautoupd (0.517) Copyright 2017 K-TEC Inc. All rights reserved.<br>
+<br>
+[15:50:54] mPath = [/usr/local/Fastscan/bin]<br>
+[15:50:54] IP version = [IPv4]<br>
+[15:50:54] mProxy = []<br>
+[15:50:54] mProxy-Auth = []<br>
+[15:50:54] Repart = [yes:10800 hour]<br>
+[15:50:54] Logdir = [/var/spool/epms/fsupdlog/]<br>
+[15:50:54] Start download nam index....<br>
+[15:50:54] [DOWNLOAD_ADK_DB_SITE] GetRemoteData() http://fastscan.xx.xxxxxx.jp/database/update-av61/nam
+.html<br>
+[15:50:54] [HttpRequestHeader] send(0004):105 bytes<br>
+[15:50:59] [DOWNLOAD_ADK_DB_SITE] GetRemoteData() success.(0)<br>
+[15:50:59] QueryDataBase()<br>
+[15:50:59]  [Client DB]<br>
+[15:50:59]   MD5:5ce5c994350e368a1862520cfd792bbc<br>
+[15:50:59]   Size:ef0b<br>
+[15:50:59]   Date:2013-12-14 04:53:00<br>
+[15:50:59]  [Master DB]<br>
+[15:50:59]   MD5:5ce5c994350e368a1862520cfd792bbc<br>
+[15:50:59]   Size:ef0b<br>
+[15:50:59]   Date:2013-12-14 04:53:00<br>
+[15:50:59] result = mach<br>
+[15:50:59] Skip download nam database....<br>
+[15:50:59] Start download wte index....<br>
+[15:50:59] [DOWNLOAD_ADK_DB_SITE] GetRemoteData() http://fastscan.xx.xxxxxx.jp/database/update-av61/wte
+.html<br>
+</small></blockquote>
+<HR align="left" size="1" noshade width="85%"><br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-10.html">メールサーバーで使用しているフォルダ（ディレクトリ）について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-72</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Denbun(IMAP)/Desknets(IMAP) 使用時の不具合諸対策 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Post Mail Server V シリーズとWebメールシステムである Denbun(IMAP)/Desknets(IMAP) との組み合わせ使用時に報告された各種の不具合に対し、E-Post Mail Server V に含まれる epstimap4d サービスプログラムへ諸々の対策を取っています。以下は20231223差分で、特に Denbun(IMAP)/Desknets(IMAP) に対して対策が取られたものを列挙してみました。すべて反映するには、20231223差分を適用してください。<br>
+<br>
+<b>v5.09 2023.09.14</b><br>
+　2.FETCH ENVELOPE命令で送信先ヘッダに複数のアドレスが記載されている場合正しく応答できない不具合の修正。(Denbun対策)<br>
+　3.SEARCH命令でOR指定が含まれると正しく検索結果が出力されない不具合の修正。(Denbun対策)<br>
+　4.FETCH ENVELOPE命令の応答でSenderまたはReplytoへの回答がNILだと開封確認ダイアログが表示されない不具合の修正。(Denbun対策)<br>
+　7.FETCH ENVELOPE命令でTO,CC,BCCヘッダのアドレス数の応答上限を増加させた(最大1000アドレス)。<br>
+　9.検索文字列をダブルクォーテーションで囲うと検索できない不具合の修正。<br>
+　10.FETCH命令のHEADER.FIELDSの文字列の並びに&quot;ALL/FULL/FAST&quot;が含まれると、&quot;FETCH ALL/FULL/FAST&quot;として誤って処理してしまう不具合の修正。<br>
+　11.FETCH BODYSTRUCTURE命令の応答で&quot;Content-Disposition:&quot;の構造にfilename以降に別の情報が含まれていると、正しいファイル名情報を出力できない不具合の修正。<br>
+　15.FETCH ENVELOPEで256byteを越える各ヘッダ情報読込みがあると、データメモリのオーバーロードが発生してしまう不具合の修正。<br>
+　16.&quot;Content-Transfer-Encoding:&quot;ヘッダが&quot;Content-Disposition:&quot;の次にあるとメール本文のエンコーディング情報を正しく返せない不具合の修正。<br>
+　17.&quot;Reply-to:&quot;,&quot;Sender:&quot;ヘッダの情報取得でメモリ確保に失敗する場合がある不具合の修正。<br>
+<b>v5.10 2023.10.04</b><br>
+　1.Content-Type:ヘッダの&quot;name&quot;フィールドの名称が、256byteを越えるMIME-Qエンコードで指定されていると正しいファイルが取得できない不具合の修正。<br>
+　2.FETCH命令で添付受信時にCPU負荷が上がり過ぎる場合、負荷低減用調整値をレジストリで設定可能にした。<br>
+<b>v5.11 2023.12.11</b><br>
+　1.Content-Type:ヘッダに続く文字列が改行のみしかない場合、添付ファイルと認識できない不具合の修正。<br>
+　2.Content-Type:ヘッダにnameタグがないと添付ファイルのエンコードに失敗する不具合の修正。（上記１の変更による影響対策)<br>
+　3.メールのMIME構造が多重化している場合、BODY/BODYSTRUCTREでスタックオーバーフローエラーでハングするため、バイナリ生成時のシステムスタックサイズを1MBから2MBに増加させた。<br>
+　5.FROMヘッダの情報が200Byteを越えた情報が含まれた場合にバッファオバーフローしないように残りのデータを切り捨てたため、データ長いとEnvelopeの応答でデータが途中までのデータで応答する不具合の修正。(2048byteまで拡張した)<br>
+　6.Content-Type:ヘッダに&quot;message/rfc822&quot;が指定されその内容がマルチ―パートの構造の場合に解析が失敗する不具合の修正。<br>
+　7.MIMEパートに対する、&quot;HEADER.FIELDS&quot;命令が失敗する不具合の修正。<br>
+　8.Conten-Type: message/rfc822"の子パートの取得に失敗する不具合の修正。<br>
+　9.FETCH命令の&quot;HEADER.FIELDS&quot;指定で範囲指定&quot;<a,b>&quot;を可能にした。<br>
+　10.検索文字列が空欄(&quot;&quot;)だと検索できない不具合の修正。 例）xxx SEARCH OR FROM &quot;&quot; TO &quot;&quot;<br>
+　11.FETCH命令で取得したデータが空白の場合、0バイトデータとして応答する。<br>
+　12.FETCH命令中に通信切断された場合に大きなサイズのデータ送信の中断を行えるようにした。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

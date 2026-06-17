@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-32</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Received:ヘッダの&quot;for △△△&quot;部分に受信者以外のアドレスが表示される</b></FONT>
+<HR>
+<br>
+Received:ヘッダの&quot;for △△△&quot;部分に受信者以外のアドレスが表示されるケースがあります。これは、同報によるSMTP受信が行われたときに、複数ある「エンベロープの送信先」の“最後”を表示する仕様となっているためです。<br>
+<br>
+Received:ヘッダの編集を行うのは次の通りです。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開き、画面下部にある［'Received:'ヘッダ］ボタンをクリック。<br>
+なお、Received:ヘッダは、以下の書式に基づいて表示されます。&quot;for △△△&quot;部分は、&quot;for &lt;&RECIPIENT&gt;&quot; の書式が元になっていますから、レシピエントすなわち、複数ある「エンベロープの送信先」の“最後”の送信先情報がここに表示されることになります。<br>
+<ul>
+[書式]<br>
+----------------------------------------------------------------<br>
+Received: from &HELO (unverified [&ORIGIN-IP]) by &MTA-NAME<br>
+ (&SOFT-NAME) with ESMTP id &lt;&MSG-ID@&MTA-NAME&gt;<br>
+ <b>&PER{for &lt;&RECIPIENT&gt;}</b>; &DATETIME<br>
+----------------------------------------------------------------<br>
+</ul>
+もし、受信者以外のアドレスが表示されることによって、誤解が生じたりすることを避けたいときは、以下の例の通り、Received:ヘッダの書式からこの&quot;&PER{for &lt;&RECIPIENT&gt;}&quot;の部分を削除すれば、表示されなくなります。<br>
+<ul>
+[修正後の書式]<br>
+----------------------------------------------------------------<br>
+Received: from &HELO (unverified [&ORIGIN-IP]) by &MTA-NAME<br>
+ (&SOFT-NAME) with ESMTP id &lt;&MSG-ID@&MTA-NAME&gt;;<br>
+ &DATETIME<br>
+----------------------------------------------------------------<br>
+</ul>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

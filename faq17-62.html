@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-62</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlogに接続先からE-Postでない500番台のエラー応答が記録されていた <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+配送がうまくいかなかったメールの原因を調べるために、SMTP配送詳細ログ（senderlog）を調べたところ、「535 authentication failed (#5.7.1)」というE-Postでない500番台のエラー応答が記録されていたという問い合わせが寄せられました。<br>
+<br>
+senderlogに記録されていると報告されたこの「535 authentication failed (#5.7.1)」のエラー応答は、応答コード書式自体がE-Postのものとはまったく異なり、E-Postから発行されたものではありません。経路上にある装置かソフトウェアかに含まれる、別のSMTPという可能性が高いです。<br>
+エラー応答コード500番台は&quot;永続的拒絶&quot;の意味を表すことがRFCによって規定されていますが、細かい部分、エラー応答メッセージやエラーコードの表現は各社製品によって、少しずつ異なります。E-Postのepstrdサービスが応答するエラー応答一覧は、下の記事の通りです。もしもE-Postのepstrdサービス（SMTP受信サービス）がSMTP認証関連で応答するエラー応答だとすれば、&quot;535 5.7.0 Authentication failed.&quot;が正しい書式です。<br>
+また、SMTP認証関連では、SMTP AUTHあり／なしで接続したときの動作とそのときの応答メッセージとコードについては、もう一つの記事で詳しく解説しております。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-01.html">epstrd（SMTPレシーバー）応答コード</a><br>
+●<a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a><br>
+<br>
+E-PostのepstrdサービスがSMTP AUTHに関して&quot;535 5.7.0 Authentication failed.&quot; を返しているか、返していないかを確認するには、SMTP詳細受信ログ（receivelog）でチェックします。receivelogを取得するには手動でフォルダ作成する作業が必要です。次の記事を参照してください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）について</a><br>
+<br>
+そもそもの考え方として、SMTP配送詳細ログ（senderlog）は、自律的なサービスであるE-Postのepstddサービス（SMTP配送サービス）自体の処理内容や挙動が逐一記録されるとともに、送信先相手と接続し、応答内容に応じて配送処理を行う記録がされます。つまり、senderlog中に記録される400番台の一時的拒絶応答や500番台の永続的拒絶応答のほとんどが送信先（接続先）からのエラー応答と考えてよいです。<br>
+ですから、senderlogに記録されているという「535 authentication failed (#5.7.1)」という500番台のエラー応答は、経路上にある接続相手からのものと考えるべきです。それには接続相手がE-Postであるケースも含みます。ただし、接続先が途中で一方的に切断したり、回線状態により切断されたりした場合は、相手からのエラー応答コードが何もありませんので、下記記事のようにepstddサービス自体が400番台のエラー応答として自動生成・記録することもあります。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-32.html">senderlogに&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;が記録される場合の対処策</a><br>
+●<a href="./faq05-26.html">senderlog に&quot;421 Service Temporarily Unavailable"と"451 Requested action aborted: error in processing. (code=0/0)&quot;が記録される理由について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

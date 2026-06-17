@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-35</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP AUTH有効時のログ記録からログインID（Username）などを知るには</b></FONT>
+<HR>
+<br>
+SMTP AUTHを有効にしているとき、<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>には、SMTP AUTH の Username などが記録されていますが、それらは基本的に Base64 で符号化されているため、そのままでは読めません。ただし、Base64 をデコードするツールを使えば、復号化できますので、Username などの情報が判別可能になります。<br>
+なお、Password の中身については、SMTP AUTH の認証方法がPLAINやLOGINであれば、Username と同じように復号化して読めるようになりますが、認証方法が CRAM-MD5 のときは、Password の中身までは復号化できません。<br>
+ちなみに、認証方法がどのように決定されるかは、メールサーバとメールクライアント（メーラー）との通信の中できまります。メールサーバ側で認証方法を「PLAIN LOGIN CRAM-MD5」といちばん強くしていたとしても、メーラー側の実装機能によって、PLAIN や LOGIN レベルでしかできないものがあります。そのときは Password の中身まで復号化して確認できます。<br>
+<small><br>
+例）認証方法が CRAM-MD5 のときのケース<br>
+dXNlcjFAdGVzdC1zYW1wbGUwMC5qcCA1NmJmOTAyYjJkZmQ0OTEwMjI2YjU1NzU4ZDQ1ODczMg==<br>
+　　　　　　　　　　　｜（※Base64 からdecodeすると）<br>
+　　　　　　　　　　　↓<br>
+user1＠test-sample00.jp 56bf902b2dfd4910226b55758d458732<br>
+　　　　　↑　　　　　　　　　　　　　↑<br>
+　メールアドレス部分　パスワード部分（暗号化されており復号はできない）<br>
+</small><br>
+Base64 をデコードするツールやサイトには、各種いろいろなものがあるようです。検索キーワード「Base64 decode」などで検索してみてください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

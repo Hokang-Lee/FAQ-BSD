@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-08</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>システム関係の通知メールをSMTP認証なし、暗号化通信なし、FROMで指定されるアカウント該当なし、でも送信ツールから送信するようにしたい <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+FROMに登録されていないアカウントを指定されていても送信できるようにするためには、［マシンごとの中継］【effect.dat】にて、該当する送信元のIPアドレスを指定し、無条件許可を与える"true"指定を設定することで可能になります。<br>
+<br>
+-----【effect.dat】----<br>
+[送信元IP] true<br>
+------------------------<br>
+<small>※IPアドレスと"true"の間には半角スペースを入れてください。<br>
+※[送信元IP]の代わりに[エンベロープ送信元(FQDN)]でもかまいません。<br>
+ただ名前解決が不定のときはIPアドレス指定の方がやりやすいと思われます。<br>
+IPアドレスは"192.168.*.*"のようなワイルドカード指定も可能ですが、"無条件許可"はとても大きな許可ですので、該当IPの指定は絞られた方がセキュリティ的にもより安心かもしれません。</small><br>
+<br>
+〔指定例〕<br>
+------------------------<br>
+192.168.10.100 true<br>
+------------------------<br>
+<small>※【effect.dat】を変更した場合、SMTPなどの関連サービス再起動は必要ありません。</small>
+<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-22.html">中継の制限【effect.dat】で設定する default と true の違い、only の意味は？</a><br>
+●<a href="./faq04-01.html">中継の制限－マシンごとの中継【effect.dat】設定</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

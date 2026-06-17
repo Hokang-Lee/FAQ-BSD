@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ13-27</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000">スパムメールに対して効果的な対策や機能は何かありますか？ </FONT>
+<HR>
+<br>
+スパムメールの問題はどこも頭を悩ますことが多いものですが、スパムメールの防止機能として、現状で大きな効果を発揮すると思われるものが、RBL（DNSBL）参照機能およびSURBL参照機能です。<br>
+「中継の制限」に実装されているRBL（DNSBL）参照機能を利用すると、ブラックリストデータベースを蓄積しているRBLサイトに問い合わせることで、接続自体を拒絶することができます。<br>
+また、「メールフィルタ」に実装されているSURBL参照機能を利用すると、ブラックリストにマッチするスパムメールに対し拒絶したり、また特定アドレスへ隔離したり、あるいは[SPAM]などの警告メッセージを付与して通過させたりといった設定が可能です。<br>
+<br>
+E-Post Mail Server V シリーズ・E-Post SMTP Server V シリーズ製品には、RBL（DNSBL）参照機能・SURBL参照機能が、下記の２カ所に実装されています。<br>
+<br>
+　●RBL（DNSBL）参照機能：「中継の制限」-「ORDBによる制限」<br>
+　　・・・接続元のIP/ドメイン名による問い合わせ。<br>
+　●SURBL参照機能：「メールフィルタ」-「メールフィルタ編集」<br>
+　　・・・本文をスキャンして、URLを抽出し、問い合わせ。<br>
+<br>
+現在、弊社として推奨させていただいているサイトは特にありませんが、参考までにあげるなら、国内向けのRBLサイトとして、http://www.rbl.jp など、SURBLサイトとして http://www.surbl.org/ などがあります。<br>
+<br>
+ただし、ここであげた機能を使っても、スパムメール防御策として完全を期することはなかなかできません。より強力にスパムメール・迷惑メールを防御するには、Enterprise版に実装されているSecure Handler機能を利用してください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

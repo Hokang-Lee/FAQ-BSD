@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-27</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>receivelog や pop3log / receiveimap4 にSOCKET_ERRORのコード 53や54のエラーが記録されている場合</b></FONT>
+<HR>
+<br>
+<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>を取得しているとき、場合によっては、以下のエラーが記録されているケースがあります。<br>
+<blockquote><b>
+get_reply() SOCKET_ERROR OTHER CODE=53<br>
+get_reply() SOCKET_ERROR OTHER CODE=54<br></b>
+</blockquote>
+SOCKET_ERRORのコード、53や54がログに記録されている状況下では、プロトコルレベルでなく物理層に近いレベルでネットワーク環境や、通信系のハードウェアに問題があったと見なすことができます。専用アプライアンス機器による一方的切断などもこれらに含まれます。ちなみにエラー53は「ネットワーク接続が破棄された」、エラー54は「ネットワーク接続が相手によって破棄された」ということになります。<br>
+<br>
+また、<a href="./faq05-11.html">POP3ログ（pop3log）</a>に類似のSOCKET_ERRORのエラーコード、たとえば get_reply() SOCKET_ERROR OTHER CODE が記録されているケースでは、メールクライアント側やその経路途中にあるアプライアンス機器などにより意図的に切断されたケースなどが推測できます。<br>
+IMAP4を使用しているときには、<a href="./faq05-14.html">IMAP4詳細ログ（receiveimap4）</a>に send() SOCKET_ERROR OTHER CODE=53/54 が記録されていてIMAP4受信がうまくできない現象も報告されています。この場合もやはり、ネットワーク機器や接続環境が原因となってネットワーク接続が切断されたと考えられます。ネットワーク機器に不具合がないか、接続環境が良好か、見直してください。<br>
+<br>
+下のFAQ記事では、socket errorのエラーコードが発生している例についてふれられております。SOCKET_ERROR 53や54のエラーコードに関する説明がされており、ほとんど同様の内容です。その次の記事は、socket エラーコード表をまとめたものです。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-33.html">senderlogにデータ送信途中で&quot;socket error code=54&quot;や&quot;=53&quot;のようにWINSOCKのエラーコードが記録される場合</a><br>
+●<a href="./faq10-04.html">socket エラーコード表</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

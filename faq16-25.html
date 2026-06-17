@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ16-25</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>上長承認（BossCheck）機能の承認依頼メール mailto リンクの生成時の文字コードを変更するには</b></FONT>
+<HR>
+<br>
+E-Post 上長承認(BossCheck)機能で自動生成される承認依頼メールでは、mailto リンクの生成時の文字コードは、デフォルトでShift-JISで固定されています。これは、Windows 環境で最も多く利用される OutlookExpress 系の Windows Mail や、Office Outlook などでは、承認・却下メール送信時に本文中に表示される Subject部分などの日本語文字が Shift-JIS の文字コードでなければ正しく表示されないためです。<br>
+<br>
+しかし一方で、メーラーから mailto リンク部分がクリックして承認・却下ができるにもかかわらず、mailto リンク部分の文字コードを UTF-8 とみなしている ThunderBird などのメーラーや、一部Web メールソフトが存在し、そうした使用環境では、承認・却下メール送信時に本文中に表示される Subject 部分などの日本語文字が文字化け表示されていました。<br>
+<br>
+<table border="1" cellspacing="0" cellpadding="2" width="480">
+ <tr>
+  <td><small>
+  　[メール作業フォルダ]/reg/epost/ims/MailApprovalCodepage.1<br>
+  　(数値 Default 932) mailto リンク生成時の文字コードテーブルを変更<br>
+  　<br>
+  　　[Codepage]<br>
+  　　Shift-JIS → 932 (デフォルト）<br>
+  　　UTF-8 → 65001<br>
+  　　JP_EUC → 20932<br>
+  　　JP_JIS → 50220 or 50222<br></small>
+  </td>
+ </tr>
+</table>
+<br>
+&quot;[メール作業フォルダ]/reg/epost/ims/&quot; フォルダ内の位置に &quot;MailApprovalCodepage.1&quot; の設定ファイルを作成、ファイルに数値を記述して保存します。<br>
+たとえば mailto リンクを UTF-8 でエンコードしたいときには 65001 を記述します。その際、数字の末尾に改行を加えないようにしてください。<br>
+<br>
+（※注意）<br>
+ファイルが存在しないときのデフォルト値は、'932'として動作します。<br>
+なお、設定後は必ずepstrdサービスの再起動が必要になります。<br>
+変更後は、承認依頼メールの一部にではなく、全ての承認依頼メールに反映されます。従って、メーラーが混在している環境では、ご使用判断に十分留意なさってください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

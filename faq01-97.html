@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-97</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>受信拒否時の送信リトライ回数をなぜ &quot;0&quot; にしてはいけない？</b></FONT>
+<HR>
+<br>
+
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP送信詳細］を開いて表示される「SMTP送信詳細設定」画面で、「リトライ回数（受信拒否）」項目により500番台での受信拒否時の送信リトライ回数を設定することができます。<br>
+しかし500番台での受信拒否時の送信リトライ回数を設定する「リトライ回数（受信拒否）」では &quot;0&quot; の値に絶対にしないでください。「リトライ回数（受信拒否）」回数は、最低でも &quot;1&quot; 以上を設定する必要があります。万が一、&quot;0&quot; の設定がされていると、事実上、無限リトライ回（2<sup>32</sup>回）になってしまいます。<br>
+万が一、大量にメールを送信している環境で、リトライ回数が事実上無限に行われて使い続けた場合、リトライデータがたまり続けてしまい、放置すると深刻な状況を招くことが考えられます。<br>
+Windowsのファイルシステムは、大量のファイルが1つのフォルダ下におかれると深刻なパフォーマンス低下を引き起こすことがわかっています。最悪の結果、メールサーバの処理がほとんど止まってしまう現象になってしまうことが考えられます<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-50.html">内部アカウントどうしの送信しかない環境のためリトライ回数・リトライ期間を最小限にしたい</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

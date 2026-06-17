@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-92</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>グリーティングの際、サーバが応答する &quot;Bld:xxxxxxxxx&quot; について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+各サービス（SMTP/POP3/IMAP4）に接続セッションが発生すると、デフォルトでは、グリーティングの応答メッセージとして、製品名およびバージョンなどの表示が返されます。<br>
+---（例）receivelogより抜粋-----------------------------------<br>
+[05/Nov/2024:13:43:55], 004bae20, 220 test-sample.jp E-POST ESMTP Receiver v5 (5.0x) <font color="#FF3399">Bld:xxxxxxxxx</font><br>
+-----------------------------------------------------------------<br>
+右端に表示される &quot;Bld:xxxxxxxxx&quot; 部分ですが、E-Postシリーズ製品のライセンス認証済みのサーバの応答に付加されるものです。<br>
+同一サーバマシンへ接続する応答については固定・同一で変化はしません。これは、接続するクライアントが変わったり、接続する他のサーバ（MTA）が変わって接続した場合に、Bld: で表示される値が変わらないという意味です。<br>
+一方でこのコードは、ライセンス認証を完了したライセンスキーの内容により変わりますので、異なるマシンでの応答内容は、メールサーバマシンごとにユニークなコードとなります。<br>
+もしこれらのコードを非表示にしたい場合、以下のリンクを参照してください。設定ファイルに変更を加えることで上記例の「220 test-sample.jp」以降が表示されなくなります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-44.html">接続時の応答メッセージから製品名やバージョンを非表示にしたい場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

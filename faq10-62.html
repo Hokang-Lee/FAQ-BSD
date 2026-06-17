@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-62</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>自動転送時に任意の文字を件名に付加する方法</b></FONT>
+<HR>
+<br>
+自動転送時に任意の文字を件名に付加するには、メールフィルタ機能を組み合わせるなど、いくつかの方法が考えられます。条件や要求内容によって少しずつ変わってきますので、それぞれの特徴とメリット、注意点を比較しながら、以下のＡ～Ｃの参考例を参照して、どの方法がベターであるかを考慮した上で、実施してください。<br>
+<br>
+（以下の参考例で想定したアカウント）<br>
+・自動転送元アカウント　…　info＠test-sample.jp<br>
+・自動転送先アカウント　…　abcd＠test-sample.jp<br>
+・Forward先アカウント　…　efgh＠test-sample.jp<br>
+<br>
+<b>Ａ．</b>内部ドメインにある<b>転送先のアカウント</b>について、個人のメールフィルタ設定を行い、<b>ヘッダTo:の条件として転送元のアカウントを指定</b>し、<b>【Level:3xx】の指定</b>によって、件名に任意の文字を追加する方法<br>
+<ol>
+<li type="1">E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーである転送元アカウント info＠test-sample.jp を選択して［転送指定］を選択し、[操作する]ボタンをクリック。<br>
+<li type="1">表示された「メール転送先の設定」において、転送先アドレスを abcd＠test-sample.jp に設定。<br>
+<li type="1">［設定する］ボタンをクリックして閉じる。<br>
+<li type="1">E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーである転送先アカウント abcd＠test-sample.jp を選択して［フィルタ設定］を選択し、［操作する］ボタンをクリック。<br>
+<li type="1">表示されたユーザー別フィルタの設定画面から「メールフィルタ」を選択した状態で［実行する］ボタンをクリック。<br>
+<li type="1">表示された【mail.dat】で以下の行を記述し追加する。<br>
+<hr align="left" width="80%" size="1" noshade>
+Virus:addsubjectA<br>
+To:info＠test-sample.jp<br>
+Level:300<br>
+Tag:[tenso]<br>
+VirusEnd:<br>
+<hr align="left" width="80%" size="1" noshade>
+<li type="1">【mail.dat】を[設定]ボタンを押して保存します。<br>
+</ol>
+<b>■特徴・メリット</b><br>
+・転送先で受信するメールにだけ、件名に文字が追加される。（例：[tenso]）<br>
+・それ以外の転送されていないメールには件名に文字は追加されない。<br>
+・転送元のアカウントが受信するメールには、件名には文字は追加されず、元のまま。<br>
+<b>■注意点</b><br>
+・個人のフィルタ設定を利用するため、転送先のアカウントが内部ドメインにある場合に限られる。<br>
+・転送先アカウントが外部ドメインにある場合はこの方法は使えない。<br>
+<br>
+<b>Ｂ．</b>内部ドメインにある<b>転送先のアカウント</b>について、個人のメールフィルタ設定を行い、<b>ヘッダFrom:の条件として任意のアカウント（ワイルドカード）を指定</b>し、<b>【Level:3xx】の指定</b>によって、件名に任意の文字を追加する方法<br>
+<ol>
+<li type="1">E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーである転送元アカウント info＠test-sample.jp を選択して［転送指定］を選択し、[操作する]ボタンをクリック。<br>
+<li type="1">表示された「メール転送先の設定」において、転送先アドレスを abcd＠test-sample.jp に設定。<br>
+<li type="1">［設定する］ボタンをクリックして閉じる。<br>
+<li type="1">E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーである転送先アカウント abcd＠test-sample.jp を選択して［フィルタ設定］を選択し、［操作する］ボタンをクリック。<br>
+<li type="1">表示されたユーザー別フィルタの設定画面から「メールフィルタ」を選択した状態で［実行する］ボタンをクリック。<br>
+<li type="1">表示された【mail.dat】で以下の行を記述し追加する。<br>
+<hr align="left" width="80%" size="1" noshade>
+Virus:addsubjectB<br>
+From:@<br>
+Level:300<br>
+Tag:[tenso]<br>
+VirusEnd:<br>
+<hr align="left" width="80%" size="1" noshade>
+<small>※From:で指定する&quot;@&quot;は、メールフィルタ設定で利用可能なワイルドカード。メールフィルタ設定では、&quot;*&quot;は使用不可。</small><br>
+<li type="1">【mail.dat】を保存して閉じる。<br>
+</ol>
+<b>■特徴・メリット</b><br>
+・転送先で受信するメールおよびそれ以外のメールすべて、件名に文字が追加される。（例：[tenso]）<br>
+・転送元のアカウントが受信するメールには、件名には文字は追加されず、元のまま。<br>
+<b>■注意点</b><br>
+・個人のフィルタ設定を利用するため、転送先のアカウントが内部ドメインにある場合に限られる。<br>
+・転送先アカウントが外部ドメインにある場合はこの方法は使えない。<br>
+・転送先で受信するメールおよびそれ以外の<b>転送されていないメールにまで、すべてのメールの件名に文字が追加</b>される。<br>
+<br>
+<b>Ｃ．転送元アカウント</b>について、個人のメールフィルタ設定を行い、<b>【Level:6xx】の指定</b>によって、<b>Forward先のアカウントを設定</b>する。<br>
+<ol>
+<li type="1">E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーである転送元アカウント info＠test-sample.jp を選択して［転送指定］を選択し、[操作する]ボタンをクリック。<br>
+<li type="1">表示された「メール転送先の設定」において、<b>自動転送が設定されているときは、転送設定を解除するため、「転送先アドレス」欄を全て空欄に</b>する。<br>
+<li type="1">［設定する］ボタンをクリックして閉じる。<br>
+<li type="1">E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーである転送先アカウント info＠test-sample.jp を選択して［フィルタ設定］を選択し、［操作する］ボタンをクリック。<br>
+<li type="1">表示されたユーザー別フィルタの設定画面から「メールフィルタ」を選択した状態で［実行する］ボタンをクリック。<br>
+<li type="1">表示された【mail.dat】で以下の行を記述し追加する。<br>
+<hr align="left" width="80%" size="1" noshade>
+Virus:addsubjectC<br>
+From:@<br>
+Level:600<br>
+Tag:[tenso]<br>
+Forward:efgh＠test-sample.jp<br>
+VirusEnd:<br>
+<hr align="left" width="80%" size="1" noshade>
+<small>※From:で指定する&quot;@&quot;は、メールフィルタ設定で利用可能なワイルドカード。メールフィルタ設定では、&quot;*&quot;は使用不可。</small><br>
+<li type="1">【mail.dat】を保存して閉じる。<br>
+</ol>
+<b>■特徴・メリット</b><br>
+・Forwardによる転送先で受信するメールにだけ、件名に文字が追加される。（例：[tenso]）<br>
+・Forwardによる転送先のアカウントが内部ドメインでも、外部ドメインでも有効。<br>
+・転送元アカウントでは<b>自動転送機能は使用せずオフにする</b>。<br>
+<b>■注意点</b><br>
+・メールフィルタ機能によるForward指定のため、<font color="red"><b>転送元のアカウントには、メールが残らない仕様</b></font>である。<br>
+（※Forward指定は、スパムメールの隔離・保管を本来の目的としているため）<br>
+・転送元アカウントで自動転送機能を有効にしたままにしないよう注意。併用禁止。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

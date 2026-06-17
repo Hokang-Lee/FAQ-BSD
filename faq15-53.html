@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-53</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>アカウントのホームディレクトリ項目が他項目と関連づけられたり動作上影響があるケースはありますか？</b></FONT>
+<HR>
+<br>
+E-POST コントロールセンター（メールサーバ管理）の［ユーザー管理］の各ユーザーに表示される「ホーム（home）」項目で、他の設定項目との間で関連づけられたり、動作上影響があるケースがあるのは次のケースの場合です。<br>
+<br>
+<b>１．メールボックスフォルダ指定に 「%HOME%」が指定されているとき</b><br>
+→「ホーム（home）」項目により、メールボックスフォルダに「%HOME%」を使ったディレクトリ構造（フォルダ構造）が指定されます。<br>
+<br>
+<b>２．アカウント情報のActive Directory（LDAP）連携が設定されているとき</b><br>
+→E-POST コントロールセンター（メールサーバ管理）の［ユーザー管理］で表示される「ホームデイレクトリ」項目と、ドメインコントローラ側「Active Directoryユーザーとコンピュータ 」の「ホームフォルダ（ローカルパス）」とが連動項目になっています。<br>
+<br>
+従って、メールボックスフォルダ指定に「%USERNAME%」が使われている通常のデフォルトの場合で、アカウント管理が Soft Account（E-Post方式）による管理方法を選択しているときは、「ホーム（home）」項目はまったく使われませんし、項目のデータを変更しても影響はありません。ですからそのような環境であることがはっきりしている場合は、「ホーム（home）」項目を備考欄の代わりの“メモ書き”用途に利用しても特に支障はありません。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

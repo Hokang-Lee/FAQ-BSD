@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-95</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールボックスの保管サイズ制限の対象外となるメール</b></FONT>
+<HR>
+<br>
+メールボックス保管サイズ制限は次の２箇所で設定が可能です。<br>
+<ol type="A">
+<li>全体共通設定：E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］を開いて［中継の制限］項目、もしくは［中継の制限］を開いて表示される「中継の制限設定」にある「メールボックスの保管サイズ」<br>
+<li>個別設定：E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーを選択して［設定変更］を選び［操作する］ボタンクリックで表示される「アカウントの設定変更」画面の「メールボックスサイズ」
+</ol>
+メールボックスサイズ制限は、原則として epstrd（SMTP受信部）が受信し、到達したメールに適用される機能です。これは別の言い方をすれば、セッションが張られてSMTPプロトコルベースで受信した次のメールがメールボックスサイズ制限の適用対象です。<br>
+<ul>
+<li>外部のMTAからSMTPプロトコルベースで受信<br>
+<li>E-Post Mail Server内に作った別ドメインからSMTPプロトコルベースで受信<br>
+<li>内部ドメインの別アカウントからSMTPプロトコルベースで受信<br>
+</ul>
+これに対して、以下の種類のメールは、E-Post Mail Serverシリーズがシステム内部で自動生成するメールであったり、内部処理で完結する種類のメールであったりするため、メールボックスサイズ制限の対象外となります。<br>
+<br>
+<b>(a). delivery failure などの送信不能メールの配送</b><br>
+送信エラーなどがあった場合、E-Post Mail Serverは、システム内部で postmaster の名前を使って自動生成し、各アカウントのメールボックスへ&quot;delivery failure&quot; などの“エラーメール”を送り込みます。こうしたエラーメールはサイズ制限の対象外です。<br>
+<br>
+<b>(b). メーリングリストで内部アカウントへの配送</b><br>
+作成したメーリングリストに内部アカウントが登録されている場合も、E-Post Mail Serverが内部処理を行って完結する種類のメールとなるため、サイズ制限の対象外です。<br>
+<br>
+<b>(c). メール転送機能のうち、ローカル内部でのフォワード</b><br>
+自動転送機能を使って、内部アカウントへ転送する場合も、E-Post Mail Server内部で処理されるため、メールボックスサイズ制限の対象外となります。<br>
+<br>
+<b>(d). IMAP4使用時に追加される［送信済み］等のデータ</b><br>
+IMAP4使用時にメールクライアントが［送信済み］や［下書き］フォルダをリモート上（IMAP4サーバ）に置くように設定されている場合、IMAP4プロトコルのAPPENDコマンドによって、［送信済み］等のメールデータがサーバのフォルダに保存されます。それに応じてファイルサイズの総容量、ディスク使用量は増加することになります。<br>
+IMAP4プロトコル使用時に［送信済み］等のメールデータが追加されていく場合、その動きはSMTPプロトコル経由でないため、E-PostのSMTPサービス（epstrdとepstdd）に組み込まれている機能では関知できません。メールボックス保管サイズ制限の対象外となります。<br>
+<br>
+上記のいずれかに当てはまるメールは、保管サイズ制限の対象外としてメールボックスに格納されます。結果的に、メールボックスフォルダのサイズは、実際に設定したメールボックスの保管サイズ制限を超えているケースがあることが十分考えられます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-47.html">IMAP4使用時のメールボックスフォルダにメールボックス保管サイズ制限を超えてメールデータが格納される理由について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

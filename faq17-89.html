@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-89</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP AUTH PLAIN/LOGIN/CRAM-MD5認証成功と失敗をBase64デコードして表示させる <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+SMTP AUTHを有効にしているとき、SMTP受信詳細ログ（receivelog）にはSMTP AUTHのUsernameなどが記録されていますが、それらは基本的にBase64で符号化されているため、そのままでは読めません。
+<br>
+ただし、Base64をデコードするツールを使えば復号化できますので、Usernameなどの情報が判別可能になります。
+<br>
+PLAIN, LOGIN, CRAM-MD5でそれぞれ認証のテストをして、どれかが認証失敗する場合はそれぞれデコードすることで詳しい原因を探ることができます。
+<br>
+<br>
+以下はPLAIN, LOGIN, CRAM-MD5をそれぞれ認証テストした場合のreceivelogの一部です。
+<br>
+-----------------------------------------------------------------------<br>
+<small>【AUTH PLAIN 認証成功】　→部分はBase64デコードして表示させた部分<br>
+[12/Sep/2024:09:38:11], 00573f80, AUTH PLAIN AHRlc3QxACFRQVp4c3cy<br>
+　　　　　　　　　　　　　　　　　　　　　　　　<font color="glay">→ \0test1\0!QAZxsw2</font><br>
+[12/Sep/2024:09:38:11], 00573f80, 235 2.0.0 Authentication successful.<br>
+
+<br>
+【AUTH CRAM-MD5 認証成功】　→部分はBase64デコードして表示させた部分<br>
+[12/Sep/2024:09:38:51], 00573f80, AUTH CRAM-MD5<br>
+[12/Sep/2024:09:38:51], 00573f80, 334 PDAwMDAwMS4wMDAwMDAwMUB0ZXN0LXNhbXBsZS5qcD4=<br>
+　　　　　　　　　　　　　　　　　　<font color="glay">→ <000001.00000001@test-sample.jp></font><br>
+[12/Sep/2024:09:38:51], 00573f80, dGVzdDEgODBjYmM4YTYxMzQ2YTMzZWU5ZTNmNjQ4MGJjOTkzZmQ=<br>
+ ["test1 80cbc8a61346a33ee9e3f6480bc993fd"]<br>
+　　　　　　　　　　　　　　　　　　<font color="glay">→ test1 80cbc8a61346a33ee9e3f6480bc993fd（※パスワード）</font><br>
+[12/Sep/2024:09:38:51], 00573f80, 235 2.0.0 Authentication successful.<br>
+
+<br>
+【AUTH LOGIN 認証失敗】　→部分はBase64デコードして表示させた部分<br>
+[12/Sep/2024:10:04:07], 00621ba0, AUTH login dGVzdFxhZG1pbmlzdHJhdG9y<br>
+　　　　　　　　　　　　　　　　　　　　　　　<font color="glay">→ test\administrator</font><br>
+[12/Sep/2024:10:04:07], 00621ba0, 334 LOGIN<br>
+[12/Sep/2024:10:04:07], 00621ba0, IVFBWnhzdzI=<br>
+　　　　　　　　　　　　　　　　　　<font color="glay">→ !QAZxsw2</font><br>
+[12/Sep/2024:10:04:07], 00621ba0, 535 5.7.0 Authentication failed.</small><br>
+-----------------------------------------------------------------------<br>
+<br>
+上記のようにそれぞれbase64デコードして見ると、認証成功時のユーザーは"test1"、認証失敗時は"test\administrator"になっています。これだと異なるユーザーアカウントだと認識されてしまいます。
+この場合は、AUTH LOGINを試している時のメールクライアント側の設定を見直すことで原因を探ることができます。<br>
+Base64 をデコードするツールやサイトには、各種いろいろなものがあるようです。検索キーワード「Base64 decode」などで検索してみてください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-35.html">SMTP AUTH有効時のログ記録からログインID（Username）などを知るには</a><br>
+●<a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

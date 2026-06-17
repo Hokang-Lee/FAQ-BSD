@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-30</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Active Directory（LDAP）連携時にマルチドメイン設定を行うとセキュリティグループが参照されるしくみについて</b></FONT>
+<HR>
+<br>
+ActiveDirectry（LDAP）連携時のメールサーバを移行するため、アカウント情報のエクスポート・インポート作業を行うとき、インポートされたデータ内にはドメイン名があるにもかかわらず、インポート後のアカウント情報を見ても、ドメイン名が空欄のままになっていることがあります。そのようなときは、「ActiveDirectryユーザーとコンピュータ」の Users の中にドメイン名のセキュリティグループができているはずですので、セキュリティグループのプロパティを開き、「メンバ」タブにユーザーを追加すると、ドメイン名が表示されるようになります。<br>
+これは、<b>ActiveDirectry（LDAP）連携時にマルチドメイン設定を行うと、ドメイン名項目としてActive Directory側のセキュリティグループが参照されるしくみになっている</b>ことが理由です。<br>
+<br>
+<b>（解説）</b><br>
+・AD連携時にも仮想的とはいえ、マルチドメイン対応が取れるようになっています。ただし、AD連携時には、アカウント（ユーザー名）が一意のものとして管理されますので、アカウントが重複しなければマルチドメインの設定が可能です。<br>
+<br>
+・単一ドメイン名での管理のときは、ドメイン名が空欄のままで特に問題はありませんが、AD連携時にマルチドメイン設定を行う場合、所属ドメイン名の区別をつけるため、メールサーバ側で管理されるドメイン名項目（dc=&quot;&quot;）は、ADで管理されているセキュリティグループ名を参照するようにしていますので、必ずセキュリティグループ内に加えてください。<br>
+<p align="center"><img src="img/faq10-30.gif" border="0"></p>
+・たとえば、下記設定のとき、ADで管理されているセキュリティグループ内それぞれにユーザーが所属されていることになります。<br>
+<br>
+<b>（メールサーバ側）<br>
+　　アカウント　ドメイン名（dc=&quot;&quot;）</b><br>
+　　　user1　　　　abc.jp<br>
+　　　user2　　　　abc.jp<br>
+　　　user3　　　　def.jp<br>
+　　　user4　　　　def.jp<br>
+　　　user5　　　　ghi.jp<br>
+　　　user6　　　　ghi.jp<br>
+<br>
+<b>（Active Directory側）<br>
+　セキュリティグループ　　　所属ユーザー</b><br>
+　　　abc.jp　　　　　　　　　user1,user2<br>
+　　　def.jp　　　　　　　　　 user3,user4<br>
+　　　ghi.jp　　　　　　　　　 user5,user6<br>
+<br>
+・つまり、AD連携時に、メールサーバ側で表示したときに、ドメイン名項目が空欄になっているものは、セキュリティグループに所属していないことになります。<br>
+・アカウントデータをエクスポートする際は、メールサーバ側で表示されている状態をそのまま出力します。つまり、ドメイン名項目が空欄になっているものは、そのまま空欄として出力します。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-15</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>E-Postから他サーバへ送信、そのサーバが自動転送して再びE-Postに送信する場合の要注意点 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Postから他メールサーバへ送信、そのメールサーバが自動転送処理をするとき、エンベロープFROMをもとのまま書き換えないで再びE-Postに転送すると、意図せずE-Post着信時に拒絶されるケースが起こり得ます。<br>
+<br>
+メールサーバ全般についてふれると、メールサーバ内で自動転送を行うとき、エンベロープFROMを書き換え設定できるもの、元のエンベロープFROMのままで書き換えできないもの、といずれかに分かれます。元のエンベロープFROMのまま書き換えないで再びE-Postに転送するということは、エンベロープFROMはE-Post側に登録されているドメイン名を冠したメールアドレスが使われているということになります。<br>
+<br>
+この場合、他メールサーバで転送させたメールをE-Post側に単に着信させたいだけであっても、実際にはE-Post側に登録されているドメインに含まれる元のアカウントを使ったSMTP送信要求の形になってしまうものと理解してください。E-Post側でSMTP認証を実施していれば、E-PostはSMTP AUTHを要求する形となり、着信させるはずが送信要求の形となり、最終的にエラー「503.5.0.0 Need EHLO before AUTH」で拒絶される結果となってしまいます。<br>
+<br>
+これに対する解決方法は、他メールサーバが自動転送をするときにエンベロープFROMを元のままにせず、書き換えるように設定することです。この場合は他メールサーバがそうした機能を有していることが前提になります。<br>
+<br>
+あるいは別の方法としては、E-Post側に送られてくる自動転送をするメールサーバからの送信要求を無条件許可させるよう中継の制限【effect.dat】にIPアドレスをtrue指定するという方法がその次に考えられます。ただしこの方法ですと、無条件許可を与えるメールサーバが不正中継や不正利用の踏み台になるおそれがなく、またbot等に感染してSPAMをばらまく危険性もまったくなく、絶対的に信頼できるものなのかどうかという大前提が必要になります。うかつな無条件許可は、不正中継や不正利用の踏み台になる可能性が常に背中合わせにあることを理解してください。<br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

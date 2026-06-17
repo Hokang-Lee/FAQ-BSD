@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-99</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4だけを使いたい目的で「POP3無効」を一律で指定する方法</b></FONT>
+<HR>
+<br>
+既にアカウントが作成済みのケースで、IMAP4だけを使いたい目的で、E-POST コントロールセンター（メールサーバ管理）の［ユーザー管理］から各アカウントの「POP3無効」チェックボックスを一つずつオンにしようとすると、手間がかかってしまいます。<br>
+各アカウントに用意されている「POP3無効」チェックボックスを一つずつオンにする代わりに、「POP3無効」を一律で指定するには、次の２つの方法があります。<br>
+<br>
+<ol><b><li> &quot;$offpop3&quot; ファイルを一律コピーする方法</li></b>
+1つのアカウントの「POP3無効」オンに設定したとき、フォルダ内に0バイトの <b>&quot;$offpop3&quot; </b>ファイルが生成されます。その &quot;$offpop3&quot; ファイルを全アカウントのメールボックスフォルダに向けて一律コピーします。ファイルコピーはSSHなどを使ってコンソールにログインして行ってください。メールボックスフォルダは、 /var/spool/epms/inbox/[ドメイン名]/[ユーザー名] または  /var/spool/epms/inbox/[ユーザー名] です。
+ちなみに &quot;$offpop3&quot; ファイルがある該当アカウントについては、すべて「POP3無効」オンの設定状態として反映されます。<br>
+なお、新規にアカウントをインポートする場合、「POP3有効無効」のフィールドが用意されています。フィールドの値を無効 = &quot;0&quot; にセットしてインポートしてください。<br>
+<br>
+<b><li>POP3一括禁止フラグを設定する方法</li></b>
+IMAP4だけを使う目的で、POP3をすべて使用できない設定にしたいときは、POP3一括禁止フラグを設定する方法もあります。下記のように〈メール作業フォルダ〉\reg\フォルダ下の指定フォルダに下記の名前のファイルを作成し、ファイルに設定値 &quot;1&quot; を入力して保存してください。行末に改行は入れません。設定ファイルを作った後、E-Post関連サービスをすべて再起動させてください。<br>
+<br>
+<b>POP3禁止を全アカウントに反映する設定</b><br>
+[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→POP3IsNotUsed.1<br>
+　　　　 (数値  Default 0)　0=禁止しない 1:禁止する<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

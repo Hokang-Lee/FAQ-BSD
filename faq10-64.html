@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-64</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>IMAPデータファイルの基本的な構造について</b></FONT>
+<HR>
+<br>
+IMAPデータファイルの基本的な構造については、次のようになっています。<br>
+<br>
+１．IMAP用メールボックスに格納されたメールデータファイルのファイル名のうち、前半部が必ず連番になっていること。<br>
+一方で後半部の数字「0か1」は、未読既読などのフラグの役割が当てられている。<br>
+<ul>
+例）0000000001-000000.MSG<br>
+　　+-----------+ +-----+<br>
+　　連番部分　　　フラグ部分<br>
+</ul>
+２．IMAP用メールボックスにある&quot;uid&quot;ファイル内に記録されている数値が、上記１の&quot;連番の最終値&quot;＋&quot;1&quot;になっている必要がある。&quot;uid&quot;ファイル内に記録されている数値に基づいて、連番部分の採番が行われる。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

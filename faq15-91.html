@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-91</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>MXキャッシュデータはどう更新されどういうときに削除されるのか</b></FONT>
+<HR>
+<br>
+MXキャッシュデータは、「MXキャッシュの更新間隔」で設定されているいわゆる期限が切れている状態では削除されることはありません。ファイルのタイムスタンプ（更新日付）を参照して、有効期間内ならキャッシュ情報を参照します。期限が切れた有効期間外なら、DNS問い合わせを改めて行い、接続成功した情報を同じファイル名で上書き更新します。<br>
+E-Postのこれまでの仕様でMXキャッシュデータが削除されるのは接続（コネクト）に失敗したときのみで、接続が失敗した場合のみキャッシュ情報のリセット対象とみなしてMXキャッシュファイルを削除していました。しかしながら最新版では、MXキャッシュデータの削除タイミングを一時的拒絶や永続的拒絶の場合にも広げ、適用するように仕様が変更されました。MXキャッシュ有効時に接続が成功してもDNSのMXレコードにある全ての送信先に拒絶された場合は、MXキャッシュファイルを削除します。<br>
+<br>
+E-Postとしてのこの現行動作仕様についてまとめると次の通りです。<br>
+ａ．MXキャッシュ情報は、ただ期限が切れて超過しているだけでは削除されない。<br>
+ｂ．再度の接続の際、接続（コネクト）失敗した場合には、MXキャッシュ情報のリセット対象とみなし、MXキャッシュファイルを削除する。<br>
+ｃ．接続後のネゴシェーションの結果が一時拒絶や拒絶を受けた場合にも、MXキャッシュ情報はリセットされる。（最新版 epstdd v5.00以降）<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-92.html">MXレコードに書かれた複数のMTAのうち優先度の低いサーバに繰り返し接続しエラーを返される</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

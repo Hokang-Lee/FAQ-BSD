@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-51</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>自動転送時の「不転送レポート先」設定は「エンベロープFROMの書き換え」と等価であることに留意</b></FONT>
+<HR>
+<br>
+自動転送設定には、「不転送レポート先」の設定項目があります。自動転送に失敗したときに配送エラーがこの設定に基づいて戻されることになりますが、この自動転送時の「不転送レポート先」の設定は「エンベロープFROMの書き換え」と等価になっていることに留意してください。<br>
+自動転送時の「不転送レポート先」設定では、自動転送メールについてエンベロープFROM をメールサーバが書き換えるように動作します。「不転送レポート先」設定によって、どのようにエンベロープFROMが書き換えられるかは以下の通りです。<br>
+<blockquote>管理者　　　　　　→エンベロープFROM を管理者アカウントに書き換え<br>
+    送信者　　　　　　→エンベロープFROM は書き換えずそのまま<br>
+    返信しない　　　　→エンベロープFROM を空欄〈〉に書き換え<br>
+    返信先指定（任意）→エンベロープFROM を任意アカウントに書き換え</blockquote>
+ただし、書き換えるのは、エンベロープFROM であり、メールヘッダのFrom:は書き換えません。自動転送メールを受け取った側から、メールヘッダのFrom:を見ても特に変更されていないので区別はつきません。<br>
+ここで問題となるのは、社内メールサーバの自動転送設定において、内部ドメインのアドレス宛に来たメールを、外部へ自動転送させるときに、「不転送レポート先」をどういう設定にしているかによって問題が起きることがあります。たとえば、状況と環境要件によっては以下のような事象が発生する可能性が考えられます。<br>
+<ul><li>「不転送レポート先」として管理者アドレスを設定しているときに多重転送できないケースが発生する。<br>
+<li>「不転送レポート先」として「返信しない」設定をしているとき、エンベロープFROMが空欄〈〉になることで、転送先のMTAやアプライアンスに拒絶されてしまうケースが発生する。<br>
+<li>「不転送レポート先」として外部のメールアドレスが設定されているとき、エンベロープFROMとして使われるため、転送先のMTAではそれをもとに判断して拒絶されてしまうケースが発生する。<br></ul>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-61.html">自動転送時の「不転送レポート先」を管理者に設定したときの仕様について</a><br>
+●<a href="./faq01-37.html">管理者アカウントからメールが自動転送できない</a><br>
+●<a href="./faq01-25.html">自動転送先で再転送できない（多重転送ができない）場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

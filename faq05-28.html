@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-28</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>pop3log に -ERR unknown or invalid command in this state [CAPA] が記録される理由 </b></FONT>
+<HR>
+<br>
+<a href="./faq05-11.html">POP3ログ（pop3log）</a>に以下のようなエラー内容が記録されることがあります。<br>
+<blockquote>
+from xx.xx.xx.xx CAPA [11/Aug/2017:21:16:43] -ERR unknown or invalid command in this state [CAPA]<br>
+</blockquote>
+このエラー内容のキーとなっているのがCAPA命令です。CAPA命令は、RFCの拡張仕様の一つであるものの、必須命令でも推奨仕様でもありません。E-Postシリーズはこの命令に対応しておらず、POP3サービス（epstpop3d）は、応答としてエラーを返す仕様です。<br>
+<br>
+もし、上記のエラーの後すぐ get_reply() SOCKET_ERROR OTHER などが pop3log に記録されているケースでは、命令がエラーになったためにメールクライアント側が意図的に切断したことが類推できます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-43.html">POP3使用時にCAPA命令へエラーを返さず、どうしてもOKを返したいときは</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

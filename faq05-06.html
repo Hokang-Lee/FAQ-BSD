@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-06</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>メール・ウイルスフィルタログ（viruslog）について</b></FONT>
+<HR>
+<br>
+メール・ウイルスフィルタログ（viruslog）は、単純なログというより、フィルタ設定機能による迷惑メールの隔離・保管的な性格を帯びたものです。<br>
+具体的には、メールフィルタ設定（&quot;mail.dat&quot;ファイルおよび&quot;virus.dat&quot;ファイル）にて受領拒否する設定をしているときに、メールメッセージと送受信エンベロープのデータを保管指定（[Level:x1x]で&quot;メールのバックアップする&quot;指定）している場合に限り、メールデータそのもの（.MSG）とエンベロープデータ（.RCP）が保管されるようになるものです。さらに[Warning:]指定がなされていれば、受領拒否の理由を追加できます。<br>
+<br>
+データの保管＝記録を採る場合は次のようにしてください。<br>
+<ol><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［メールフィルタ］を開き［メールフィルタ機能を使用する］チェックボックスの状態を確認します。
+<li>チェックボックスがオンの設定のままのときはそのままで、［メールフィルタ機能を使用する］チェックボックスがオフのときはオンに変更してから［設定する］ボタンクリックします。
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面からSMTP配送サービス（epstdd）を［停止］→［開始］で再起動します。</ol>
+なお、[メール作業フォルダ]下の[viruslog]フォルダにデータが保管されるようになるには、フィルタ設定で[Level:x1x]で&quot;メールのバックアップする&quot;指定がされている必要があります。以上のようなファイルが１対の形で保管されます。<br>
+<br>
+メールメッセージデータ　：B001234567.MSG<br>
+送受信エンベロープデータ：B001234567.RCP<br>
+<br>
+受領拒否された理由については、フィルタ設定でさらに[Warning:]指定がなされていれば、.RCPファイル内の後尾に&quot;Warning:&quot;記述が追加されるようになります。<br>
+（例）<br>
+　---------------- warning ---------------------<br>
+　&quot;Subject タダ Keyword&quot;<br>
+　----------------------------------------------<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

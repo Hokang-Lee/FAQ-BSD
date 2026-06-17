@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-10</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>個人アカウント単位で【effect.dat】を有効にするには</b></FONT>
+<HR>
+<BR>
+E-Post Mail Serverシリーズ での個人メールフィルタ設定では、アカウント単位で設定が可能な個人の「メールフィルタ設定」を行っているとき、個人のメールフィルタ設定により受信制限をかけているユーザーと、かけていないユーザー両方に同報されたメールを受ける場合、同報されたどちらのメールも同じ受信制限がかかるという課題がありました。<br>
+個人アカウント単位での【effect.dat】機能を使うと、個人アカウント単位で受信するメールドメインが決まっている場合、受信許可するよう記述されたドメイン名からの受信だけが許可され、その他外部からのすべてのドメインからやってくるメールを拒絶することができるようになります。エンベロープFROMレベルでチェックされるので強力です。<br>
+<br>
+基本的な書き方は、「マシン毎の中継」【effect.dat】の書式に準じます。この設定ファイルの中で、許可をするドメインを先に記述し、最後に拒絶をするその他のドメインをワイルドカード指定する方法で、同報されたときでも、他のアカウントと一緒に扱われることなく、受信許可と拒絶を明確に分けることができるようになります。設定ファイルのサンプル事例は下記を参照してください。<br>
+<br>
+<b>１．設定方法と設定値の事例</b><br>
+<br>
+effect.datは、各ユーザー管理のページで［送信先制限（sender.dat）］の入力項目を [送信先制限（effect.dat）] と入力して変更でき、個人用の【effect.dat】の編集を行うことができます。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」からエクスポートする対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーを選択して[送信先制限（sender.dat）]の入力項を [送信先制限（effect.dat）] と入力、［操作する］ボタンをクリックしてください。【effect.dat】の画面が表示されます。<br>
+<br>
+もしくはコンソールに直接ログインし、該当アカウントのメールボックスフォルダ内に、下記の内容に従いテキスト形式で【effect.dat】を作成する方法でもかまいません。<br>
+ちなみにメールボックスフォルダの既定値は　/var/spool/epms/inbox/[ドメイン名]/[ユーザー名]　または　/var/spool/epms/inbox/[ユーザー名]　です。なお、該当アカウントのメールボックスフォルダに個別メールフィルタ設定ファイルである【mail.dat】がある場合は、ファイルを削除してしまうか、【mail.dat】内の記述部分をコメントアウトするか、どちらかの作業を行ってください。<br>
+<br>
+<b>[アカウント単位の中継の制限【effect.dat】設定例]－aドメインからだけ受信するパターン</b><br>
+'-----------------------------------<br>
+*＠a-domain.jp　← 受付けたいエンベロープの送信元ドメイン<br>
+* false　　　　← その他はすべて拒否<br>
+'-----------------------------------<br>
+※受け付けたいドメインを記述する１行目の部分については、次のように書いても等価であり有効です。<br>
+'-----------------------------------<br>
+*＠a-domain.jp true　← 受付けたいエンベロープの送信元ドメイン<br>
+'-----------------------------------<br>
+※ワイルドカード指定は１行内に２箇所を指定するような下記のような設定でも有効です。<br>
+'-----------------------------------<br>
+*＠a-domain*.jp true　← 受付けたいエンベロープの送信元ドメイン<br>
+'-----------------------------------<br>
+<br>
+なお、受け付けたいドメインが複数ある場合は、行を続けて記述し、最後に拒絶するパターンを記述するようにしてください。<br>
+<br>
+<b>[アカウント単位の中継の制限【effect.dat】設定例]－aドメインとbドメインからだけ受信するパターン</b><br>
+'-----------------------------------<br>
+*＠a-domain.jp　← 受付けたいエンベロープの送信元ドメイン1行目<br>
+*＠b-domain.jp　← 受付けたいエンベロープの送信元ドメイン2行目<br>
+* false　　　　← その他はすべて拒否<br>
+'-----------------------------------<br>
+<font color="#ff0000">上記の設定例にもあるように、個人アカウント単位での【effect.dat】の設定で使用できる設定値は、true（省略時も等価）,false ,default の３種類のみになります。個人アカウント単位での【effect.dat】の設定では、only ,norelay は使えませんのでご注意ください。</font><br>
+<br>
+ちなみに拒絶時には、個人アカウント単位での【effect.dat】による受信拒否のエラー応答として &quot;550 5.1.7 Please, mail from a valid IP or Domain address.&quot; が送信元MTAに返されます。<br>
+<br>
+<b>２．運用上の注意・補足事項</b><br>
+<br>
+設定内容が同じものは、個々のアカウントのメールボックスフォルダ内にある【effect.dat】のファイルを他のアカウントのメールボックスフォルダにコピーをしてください。ファイルをコピーする方法で有効になるのは、【mail.dat】や【ims.ctl】など、ファイルコピーすると有効でしたが、【effect.dat】でも動作上同等です。【effect.dat】のファイルが置かれていないアカウントについては、通常通りであり特に何も受信の制限はされません。<br>
+<br>
+なお、基本的にプログラムインストールフォルダ内にあるメールサーバ全体の【effect.dat】と書式は同一ですが、<font color="#ff0000">上記の内容をそのままメールサーバ全体の設定である「中継の制限」－［マシン毎の中継］【effect.dat】の方には決して書かないように注意してください。この書き方は個々のアカウント単位であれば支障はありませんが、メールサーバ全体で任意のドメイン名を無条件許可する書き方をしてしまうと、セキュリティが格段に下がってしまいます。</font><br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

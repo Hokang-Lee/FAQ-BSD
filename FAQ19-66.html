@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-66</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>POP3logに「STAT」の後に「RETR」「DELE」が記録されているものがあるが、これをもって新着メールをチェックしているのか？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+POP3コマンドは、メールクライアントからPOP3プロトコルに準じて発せられる命令で、それに対してE-PostのPOP3ではpop3logに記録します。以下にpop3logのメールアクセスの例を挙げてみます。<br><br>
+info from 192.168.1.10 USER info [07/Nov/2025:15:38:42] <br>
+info@ from 192.168.1.10 PASS **** OK [07/Nov/2025:15:38:42] <br>
+info@ from 192.168.1.10 STAT [07/Nov/2025:15:38:42] <br>
+info@ from 192.168.1.10 RETR 1 [07/Nov/2025:15:38:42] <br>
+info@ from 192.168.1.10 DELE 1 [07/Nov/2025:15:38:42] <br>
+info@ from 192.168.1.10 QUIT [07/Nov/2025:15:38:42] <br><br>
+「STAT」命令の応答結果によって、POP3クライアント側が新着ありと判断したら、「RETR」命令でメールを取得、成功したらサーバから該当メールを削除する「DELE」命令を発出するという流れになります。<br>
+新着があるかどうかの判定は、POP3サーバ側では管理せずPOP3クライアント側が判断し認識しているだけです。「RETR」命令が出されていること自体では、新着メールが届いたのか既着メールかの判定にはなりません。<br>
+POP3プロトコルでは、新着・既着、未読・既読の管理や判定は、POP3サーバ側では行われず、POP3クライアント側で行われます。<br>
+POP3ログに「USER」、「PASS」、「STAT」、「RETR」、「DELE」、「QUIT」が一連の流れで出力されていればPOP3リクエストをE-POST側で受信している正常な動作を表しています。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./FAQ19-65.html">POP3logに同じ時間帯で「USER」→「PASS」→「STAT」→「NOOP」→「QUIT」と「USER」→「PASS」→「QUIT」の2種類のパターンが記録されているが、両者に違いはあるか？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

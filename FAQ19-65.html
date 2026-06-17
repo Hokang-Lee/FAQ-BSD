@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-65</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>POP3logに同じ時間帯で「USER」→「PASS」→「STAT」→「NOOP」→「QUIT」と「USER」→「PASS」→「QUIT」の2種類のパターンが記録されているが、両者に違いはあるか？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+POP3コマンドは、メールクライアントからPOP3プロトコルに準じて発せられる命令で、それに対してPOP3サーバ側が処理した内容がpop3logに記録されます。<br>
+E-Postでは以下のようにpop3logに記録されます。<br><br>
+info from 192.168.1.10 USER info [07/Nov/2025:15:38:42] <br>
+info@ from 192.168.1.10 PASS **** OK [07/Nov/2025:15:38:42] <br>
+info@ from 192.168.1.10 STAT [07/Nov/2025:15:38:42] <br>
+info@ from 192.168.1.10 NOOP [07/Nov/2025:15:38:42] <br>
+info@ from 192.168.1.10 QUIT [07/Nov/2025:15:38:42] <br><br>
+最後まで処理できたという意味では、2つのパターンに差異はありません。<br>
+パターンの違いは「STAT」と「NOOP」の有無です。これはそのときのメールクライアントから発せられたSTAT命令とNOOP命令をそのまま処理しただけです。<br><br>
+STAT命令は、メールボックスの状態チェック（新着チェック）を行うコマンドです。<br>
+NOOP命令は、セッションを張り続けて無通信タイムアウトしないために発せられるコマンドです。何もしないけれども、タイムアウトはせず活線し続けてほしい指示という意味です。<br>
+NOOPは通常のメーラー（Thunderbird / Outlook など）から利用者が手動で送ることは基本的にできません。NOOPはメーラー内部の接続維持処理として自動送信されるコマンドです。<br>
+これらをPOP3コマンド一覧　※外部サイト<br>
+<a href="https://atmarkit.itmedia.co.jp/fnetwork/rensai/netpro07/pop3-commands.html" target="_blank">https://atmarkit.itmedia.co.jp/fnetwork/rensai/netpro07/pop3-commands.html</a><br>
+などで意味を確認できます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./FAQ19-66.html">POP3logに「STAT」の後に「RETR」「DELE」が記録されているものがあるが、これをもって新着メールをチェックしているのか？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-39</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>暗号化通信を使って送受信する際、使用するポートをどのように設定しどのように運用すればよいか？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+暗号化通信を使って送受信する場合、使用するポートをどのように設定し、どのように運用したらよいと考えるべきか、質問を受けたことがあります。<br>
+下記に基本的考え方と指針を述べます。<br>
+<br>
+暗号化通信を前提とする場合、<br>
+<ol><li> 465番ポートを使うときは SMTP over SSL/TLS 用、<br>
+<li> 25番ポート or 587番ポートを使うときは （通常の暗号化のない）SMTPに加え、STARTTLSによるSMTP通信用、<br></ol>と考えてください。<br>
+両者の違いは下記の通りです。<br>
+<ol><li> 465番ポートを使う SMTP over SSL/TLS は、グリーティング時点、つまりコネクションの最初の時点から暗号化される。<br>
+※ SMTP over SSL/TLS を使ってサーバが受領するには、認証局が必要になります。<br>
+<li> STARTTLSは、グリーティング後に暗号化するかどうか、通信相手SMTPサーバ側とネゴシェーションしてから暗号化するか否かが決まる。<br>
+※配送時には不要ですが、受領時にはSSLキーを設定した認証局が必要になります。<br></ol>
+また、一般にMTAどうしのSTARTTLSによるSMTP通信を行う場合でも、単純な暗号化なしのSMTP通信を行う場合でも、ポート番号に関して言えば、どちらも25番ポートを使いますので、epstddサービスのポート番号指定で25番以外を設定することはめったにありません。<br>
+ちなみにここであげたすべてのポートを同時併用させる設定は可能です。<br>
+<br>
+また、E-Postシリーズの基本的考え方についての補足事項を下記に述べます。<br>
+<ul>
+<li>epstrdサービスは、待ち受けするSMTP受信サービスとして、アウトバウンド時およびインバウンド時双方のSMTP受領を担います。このときの受領ポート番号を複数設定するときは、epstrdの［詳細］でポート番号を追加することができ、単一のポート番号自体を変更したいときもそのように設定できます。<br>
+<li>epstddサービスは、自律的なSMTP配送サービスとして、アウトバウンド時およびインバウンド時双方のSMTP配送を担います。このときの配送ポート番号は変更可能で、振り分けごとにポート番号を変えたい場合はテーブル編集[gateway.dat]で設定可能です。<br>
+</ul>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-40.html">SMTP/POP3/IMAP4 over SSL/TLS設定方法 </a><br>
+●<a href="./faq15-59.html">STARTTLSを有効にするためのE-Postでの仕様と設定について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

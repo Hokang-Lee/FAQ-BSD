@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-64</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SSL/TLSやSTARTTLSのTLSバージョンやCipherの表記をReceived:ヘッダに記録するようにしたい <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+epstrd v5.13以降のバージョンでは、SSL/TLS通信やSTARTTLSの暗号化通信の際、接続時のTLSバージョンやCipherの表記をReceived:ヘッダに記録することができるようになりました。<br>
+以下の20230426差分以降の最新差分アップデートを適用後、Received:ヘッダに接続時のTLSバージョンとCipherの表記を追加できるようになります。ヘッダ編集時の変数名は(&SSLINFO または &TLSINFO)です。<br>
+20230426差分以降の最新差分アップデート適用した後で、Received:ヘッダを下記の事例のように編集します。必要に応じて適切な個所に上記の変数名(&SSLINFO または &TLSINFO)を加えてください。<br>
+<br>
+<b>　【Received:ヘッダ編集例】</b><br>
+　------------------------------------------------------------------------<br>
+　Received: from &HELO (unverified [&ORIGIN-IP]) by &MTA-NAME<br>
+　　(&SOFT-NAME &SOFT-VER) with ESMTP (<b>&TLSINFO</b>)<br>
+　　id &lt;&MSG-ID@&MTA-NAME&gt;<br>
+　　&PER{for &lt;&RECIPIENT&gt;}; &DATETIME<br>
+　------------------------------------------------------------------------<br>
+<br>
+　（最新差分プログラムの更新情報より該当部分）<br>
+　------------------------------------------------------------------------<br>
+　v5.13 2023.03.02<br>
+　1. Received:ヘッダに接続時のTLSバージョンとChipherの表記を追加できるようにした。<br>
+　　ヘッダ編集時の変数名は(&SSLINFO または、&TLSINFO)<br>
+　------------------------------------------------------------------------<br>
+<br>
+この機能を使うには、20230426差分以降の最新差分アップデートを適用してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-28.html">opensslコマンドでTLSバージョンを指定して疎通確認する方法について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

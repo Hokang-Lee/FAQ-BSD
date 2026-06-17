@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-67</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Active Directory（LDAP）連携時にまれに送信エラーになったり、POP受信エラーが発生するとき</b></FONT>
+<HR>
+<br>
+アカウントのActive Directory（LDAP）連携をしているとき、E-Post Mail ServerとAD（ドメインコントローラ）やLDAPサーバとの間で通信に時間がかかることが原因となり、ふだんは正常に送ることができる社内メールで、まれに送信エラーになったり、POP受信エラーになることが発生することがあります。<br>
+<br>
+そのような事象が発生する場合、メールサーバとAD（ドメインコントローラ）やLDAPサーバとの間の通信で少し時間がかかることにより、ユーザーのマッチングが完ぺきにできていないおそれがあります。AD（ドメインコントローラ）やLDAPサーバとの間で、通信タイムアウトの設定を見直してください。<br>
+<br>
+ADとの通信については、下記の設定ファイル項目によって、リトライ回数を上げて試すことができるようになっています。
+&quot;ADRetryTime&quot;のキーはデフォルトで作成されていませんので、数値10進でキーを新規作成し、値を10より上の任意の数、たとえば20や30などの数値を入れて試してください。変更後は、該当する各サービスの再起動が必要です。<br>
+<br>
+この&quot;ADRetryTime&quot;ファイルは、epstrd、epstdd、epstimap4d、epstimap4dそれぞれに作成、設定します。<br>
+<br>
+<br>
+<b>[epstrd] (E-POST SMTP Receiver)</b><br>
+メール作業フォルダ　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5RS<br>
+　　　　→ADRetryTime<br>
+　　　　(DWORD  Default 10) ADへのユーザ情報問合せリトライ回数<br>
+<br>
+<b>[epstdd] (E-POST SMTP Delivry Agent)</b><br>
+メール作業フォルダ　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5DS<br>
+　　　　→ADRetryTime<br>
+　　　　(DWORD  Default 10) ADへのユーザ情報問合せリトライ回数<br>
+<br>
+<b>[epstpop3d] (E-POST POP3 Server)</b><br>
+メール作業フォルダ　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5POP3S<br>
+　　　　→ADRetryTime<br>
+　　　　(DWORD  Default 10) ADへのユーザ情報問合せリトライ回数<br>
+<br>
+<b>[epstimap4d] (E-POST IMAP4rev1 Server)</b><br>
+メール作業フォルダ　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5IMAP4S<br>
+　　　　→ADRetryTime<br>
+　　　　(DWORD  Default 10) ADへのユーザ情報問合せリトライ回数<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-29.html">Active Directoryへの問い合わせリトライ間隔と時間を調整するには</a>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

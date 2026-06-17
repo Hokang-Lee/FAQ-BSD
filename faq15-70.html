@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-70</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>1フォルダ当たりのファイル数が膨大になるとファイルシステムのパフォーマンスが劇的に落ちるとは？</b></FONT>
+<HR>
+<br>
+弊社サポートとしては、1フォルダ当たりのファイル数が膨大になるとファイルシステムのパフォーマンスが劇的に落ちてしまう現象が発生し、あたかもサービスがまったく動作していないように見える事態に陥ることがあると再三にわたって注意喚起をしています。<br>
+E-Postシリーズでは、ある程度の使用期間を経ている場合、次のような運用を行うケースで1フォルダ当たりのファイル数が膨大にたまったまま運用してしまうおそれがあり、その防止に十分な注意を払う必要があります。万が一、こうした状況を放置したままでいると、メールサーバ全体に影響を与え、あたかもサービスがまったく動作していないように見える事態になるなど、動作に深刻な問題が発生する可能性があります。<br>
+<ul><li>POP3利用時にメールボックスにメールをたくさん残したまま運用するケース
+<li>IMAP4利用時にサブフォルダ分けをせず運用するケース
+<li>SMTPサービスが使用するdeadフォルダやmxcashフォルダ、viruslogフォルダなど特定フォルダにファイルがたまっていることに気づかずメンテナンスしていないケース
+<li>ジャーナル機能を利用し、メールアーカイブを取り続けているが、データを1フォルダに蓄積させ続ける一方で、メンテナンスしていないケース</ul>
+特にE-Postシリーズは、ファイルシステムをそのまま利用していますので、E-PostシリーズのメールサーバやSMTPサーバを運用する上ではこの問題に十分気をつける必要があります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-44.html">deadやmxcash、viruslogなど特定フォルダに膨大な数のファイルが蓄積されたときのパフォーマンス低下現象について</a><br>
+●<a href="./faq10-73.html">メールボックスにメールデータを残す運用をしているときの注意点</a><br>
+●<a href="./faq15-68.html">POP3メールボックスでメールデータ残存数が多いとパフォーマンス低下による logon overlap エラーが起きるおそれ</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

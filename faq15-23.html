@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-23</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メール送信経路上にアプライアンスが追加される場合のメールサーバの変更点</b></FONT>
+<HR>
+<br>
+E-Postからメール送信経路上にSMTPゲートウェイともなるアプライアンスが追加されるような場合、メールサーバのどこを変更したらよいかについてふれます。<br>
+E-Postからの送信メールをすべてメール送信経路上にあるアプライアンスに向ける場合、下記のように「SMTPゲートウェイ」項目にフォワード先IPアドレスを入力します。<br>
+<blockquote>
+・E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある「SMTPゲートウェイ」項目<br>
+</blockquote>
+すぐ下の「全受信メールをSMTPゲートウェイに転送」チェックボックスについては、オンにせず、必ずオフのままにしてください。オンにすると「E-Post自身にはメールボックスがないこと」を意味してしまうようになります。<br>
+設定変更した後は必ず「設定する」ボタンをクリック、その後で epstrd/epstdd サービスをそれぞれ再起動してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-61.html">SMTPゲートウェイとメールサーバの設定ポイント（E-Post Mail Server・E-Post SMTP Server）</a><br>
+<br>
+指定したSMTPゲートウェイ先に振り向けられて送信できたかどうかをログで確認するには、基本ログなら<a href="./faq05-07.html">SMTP送信ログ（outlog）</a>、詳細ログなら<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>の内容を確認するようにします。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

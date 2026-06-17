@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-43</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4のユーザーID/パスワードで避けた方がよい文字、特に記号の「{」について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Post IMAP4サービス使用時にIMAP4ユーザーID/IMAP4パスワードで運用上避けた方がよい文字については、以下の通りです。<br>
+<ol><b><li>E-Post IMAP4サービス（epstimap4d）でIMAP4のユーザーID/パスワードに運用上は避けたほうがよい、使用不可な文字について</b></li>
+現行のE-Post IMAP4サービス（epstimap4d）において、IMAP4ユーザーID/パスワードに使う文字として、運用上は念のため避けたほうがよい、使用不可な文字は下記の通りです。特に記号の「{」について現行では避けてください。<br>
+<br>
+<b>&quot; { \　(以上の3文字)</b><br>
+<br>
+※上記は2021年12月現在の状況です。2022年以降の次期最新差分アップデートでは、上記3文字のうち、特に記号の「{」について、IMAP4パスワード文字列に使用できるように予定しています。これについて下記の3.で詳しく説明いたします。<br>
+<br>
+<b><li>ActiveDirectory［LDAP］連携など、Windows Server側でパスワードに使用可能な文字について</b></li>
+一方、ユーザー管理をActiveDirectory［LDAP］連携しているときは、ユーザー名とパスワードは、Windows側で管理され、Windowsで許容される文字を使用することになります。
+Windows Server 2016 でユーザーパスワードに使用可能な文字は下記の通りです。参考したサイトは2016についてですが、2019の場合も同様かと考えます。<br>
+<b>（参考）</b><br>
+<a href="https://social.technet.microsoft.com/Forums/ja-JP/1764e14e-7e9b-4d9b-a5c2-936693bd792d/windows-server-2016">https://social.technet.microsoft.com/Forums/ja-JP/1764e14e-7e9b-4d9b-a5c2-936693bd792d/windows-server-2016</a><br>
+英大文字：[A-Z]（26 文字）<br>
+英小文字：[a-z]（26 文字）<br>
+数字：[0-9]（10 文字）<br>
+記号：(半角スペース) ! &quot; # $ % & ' ( ) *<br>
+       + , - . / : ; &lt; = &gt; ? @ [ ] ^ _ ` | { } ~（33 文字）<br>
+※Windows Server側ではユーザーパスワードに「&quot;」および「{」を使うことは実際に許容されております。この点について前記1.と違う点であることに留意してください。<br>
+<br>
+<b><li>現行のIMAP4サービスにおいてIMAP4パスワードに記号の「{」を含んだ場合に起きる事象の説明</b></li>
+現行のE-Post IMAP4サービス（epstimap4d）においてIMAP4パスワードに記号の「{」を含んだ場合、telnetコマンドで試すと「+ Ready for additional command text」を返して待ちの状態となり、Outlookから試すと応答なし状態となります。どうしてこのようになるのか理由と原因を説明いたします。<br>
+<br>
+まずRFCで規定されているIMAP4プロトコル上では、「{}」はトークンとして扱われます。「{数値}」の指定でサイズ指定をするルールがあり、たとえば「{11}」や「{7}」の指定で次に受け取るバイト数を指定するトークンとなります。<br>
+<br>
+RFCで規定されているIMAP4の書式では以下のルールが規定されています。<br>
+<b>（参考）</b><br>
+* rfc3501:INTERNET MESSAGE ACCESS PROTOCOL - VERSION 4rev1<br>
+<a href="https://tex2e.github.io/rfc-translater/html/rfc3501.html">https://tex2e.github.io/rfc-translater/html/rfc3501.html</a><br>
+* rfc9051:Internet Message Access Protocol (IMAP) - Version 4rev2<br>
+<a href="https://tex2e.github.io/rfc-translater/html/rfc9051.html">https://tex2e.github.io/rfc-translater/html/rfc9051.html</a><br>
+<br>
+APPEND命令でのデータを受け取る個所で現象が起きたり、LOGIN命令においても「{数値}」の指定が許されるケースが規定されています。<br>
+<br>
+例をあげて説明します。<br><small>
+-----------------------------------------------------------<br>
+"COMMAND" "STRING" "{number}" "CRLF"<br>
+-----------------------------------------------------------<br>
+LOGIN命令においても、以下のようなリクエストの指定が認められています。<br>
+（C:クライアント,S:サーバ―側からの応答）<br>
+-----------------------<br>
+C:LOGIN {11}<br>
+S:+ Ready for additional command text<br>
+C:"user id" {12}<br>
+S:+ Ready for additional command text<br>
+C:"password"<br>
+S: OK login completed<br>
+--------------------------<br>
+C:LOGIN "user id" {12}<br>
+S:+ Ready for additional command text<br>
+C:"password"<br>
+S: OK login completed<br>
+--------------------------<br>
+これらを考えた場合、極端なケースでは、以下のようなリクエストを出しても規定上はよいことになります。<br>
+--------------------------<br>
+C:LOGIN "user id" "pass{7}<br>
+S:+ Ready for additional command text<br>
+C:word"<br>
+S: OK login completed<br>
+--------------------------<br>
+IMAP4パスワードに「{」を含んでいる場合、2021年12月現在の現行バージョンでは、この極端なリクエスト事例と同じだとみなされ、処理された結果、「+ Ready for additional command text」の応答を返した後、続きのトークン待ちのため、ログイン処理が進まない現象となり、Outlookから試すと応答なし状態になります。<br></small>
+</ol>
+IMAP4プロトコル上では、IMAP4パスワードに「{」を含むこと自体を禁止していないものの、「{}」はトークンとして扱われることを考慮しておくのなら、E-Post Mail Server V シリーズのIMAP4サービスとしても、IMAP4パスワード文字列に記号の「{」が使われることも想定するべきと考え、2022年以降の次期最新差分アップデートで対応することにいたしました。<br>
+現行では、上記1.にあげた通り、IMAP4ユーザーID/パスワードに使う文字のうち、記号の「{」は運用上の禁則文字として扱ってください。また、今後、最新差分アップデートが公開されても、最新差分を適用せず、E-Postの従来バージョンをそのままご利用になる場合も同様で、禁則文字として扱ってください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

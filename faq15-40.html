@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-40</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Outlook2016をクライアントに使用しSSLを設定したSMTP/POP3通信でエラーになる</b></FONT>
+<HR>
+<br>
+Office Outlook2016をメールクライアントとして使用し、SSLを設定した上でのSMTP送信/POP3/IMAP4受信を行うと、以下のエラーが発生する場合があります。<br>
+<blockquote>「このサーバは、指定した種類の接続暗号化をサポートしていません。暗号化方式を変更してください。」</blockquote>
+この種のエラーが確認された場合、メールサーバ側の次の設定を確認してください。<br>
+<br>
+<b>１．SHA-2（SHA256）方式の鍵について</b><br>
+エラーが発生した理由として、鍵を作ったときの暗号方式がSHA-2（SHA256）で作成しておらず、古い方式だからエラーになった可能性があります。SSL設定とSHA-2（sha256）については、次のFAQ記事をご覧ください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-06.html">SSL設定で認証局が発行するSHA2（sha256）の証明書に対応しているか</a><br>
+<br>
+上記ページ内にもリンクがありますが、SHA-2（SHA256）で鍵を作るには、ダウンロード公開ページより以下の項目のものをダウンロードし、作成してください。<br>
+<a href="http://www.e-postinc.jp/download.html#tool" target="_blank">「ダウンロード」公開ページ</a>　■SSL Key 作成キット　<b>SSL-Key-SHA2a.zip</b>もしくは<b>SSL-Key-SHA2.zip</b><br>
+<br>
+作成方法については、従来から解説している手順に準じてください。<br>
+●<a href="http://www.e-postinc.jp/epmsent_construct_guide/kouchiku22.html" target="_blank">E-Post Mail Server構築ガイド｜22.SSL通信で送受信してみよう</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

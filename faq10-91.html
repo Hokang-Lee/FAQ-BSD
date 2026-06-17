@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-91</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>リトライを待たずに手動で強制的に実行させる方法 </b></FONT>
+<HR>
+<br>
+滞留しているメールを次のリトライを待たずに手動でリトライを実行するには、次のように行います。リトライの動作原理を十分熟知した上で、以下の操作を行うことにより、強制的にリトライを実行させることが可能です。<br>
+<ol type="1">
+<li>SMTP配送サービスである epstdd サービスプログラムをいったん停止<br>
+（※以下の操作をするとき、リトライデータ、メールキューデータのファイル取り合いや不整合を防ぐため）<br>
+<li>メール作業フォルダ（既定値 /var/spool/epms/）下の次の３つのフォルダを別ウィンドウで開いておき表示したままにしておく<br>
+<ol type="a">
+<li> domains  ... リトライ関係フォルダ<br>
+<li> holding  ... リトライ関係フォルダ<br>
+<li> incoming  ... メールキューフォルダ<br>
+</ol>
+<li>上記 (a.) domains フォルダ、(b.) holding フォルダ内より、拡張子.MSG／.RCPファイルの一対となっている同じ名前のファイルを見つけ、その一対のファイルを (c.) incoming フォルダに移動する<br>
+<ol type="a">
+<li> domains/[リトライするドメイン名が付いたフォルダ]内にある拡張子.RCPファイル<br>
+<li> holding フォルダ内にある拡張子.MSGファイル<br>
+　　　　　　↓　この２ファイルを一対のセットでファイル移動<br>
+<li> incoming フォルダへ<br>
+</ol>
+<li> epstdd サービスプログラムを再開<br>
+<li>配送がうまく完了したか、再度のリトライにはいったかをファイル状態で確認<br>
+配送がうまく完了した場合は、(c.) incoming フォルダからファイルがなくなり、(a.) domains/[リトライするドメイン名が付いたフォルダ]、および (b.) holding フォルダには、ファイルが戻らない状態となる。再度のリトライに入った状態になると、３を実行する前の状態に戻る。<br>
+このうち、どちらかの状態になっているかを判断する。<br>
+<li>しばらく経過してもリトライ用作業フォルダと Domain.mri ファイルが残る場合は、それらを手動で削除する。しばらくしても (a.) domains/[リトライするドメイン名が付いたフォルダ] が残っている場合は、そのフォルダとその下に一時保管されていた Domain.mri ともに手動で削除する。<br>
+</ol>
+実際にこのような運用をするかどうか、ユーザー様各自で判断して作業してください。なお、epstdd サービスは待ち受けをしない自律的に動作しているサービスのため、一時的に停止・再開しても、メールクライアントや相手側MTAには影響はありません。<br>
+　　　　　　　　　☆　　　　　　　　　　　☆<br>
+ちなみに、リトライが継続してしまう時間が長く、domains／holding フォルダに滞留している時間が非常に長い場合は、リトライ関係の設定を見直すことで、多少は改善することが見込まれます。「リトライ回数（受信拒否）」について、デフォルト9回と、かなり多めに設定されています。これは、500番台での拒絶を相手側から受けたときでも、9回分のリトライを続け、計算上は通算960分（約16時間）とかなりの長い時間リトライ関係のフォルダにデータがとどまることになります。この回数を短めに設定されることで、受信拒否をされたリトライが長い時間滞留することを防ぐことが可能です。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-67.html">リトライ処理が行われるときの情報とフォルダについて</a> <br>
+●<a href="./faq01-65.html">リトライ回数やリトライ期間の設定について</a> <br>
+●<a href="./faq01-66.html">「リトライ間隔のまま」チェックボックスの意味について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

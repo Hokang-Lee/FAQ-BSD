@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-21</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>作成済みメーリングリスト名を変更するには</b></FONT>
+<HR>
+<br>
+E-POSTコントロールセンターのメールサーバ管理のメーリングリスト設定画面から、メーリングリスト名の変更を行うことはできません。これは現行バージョンでの仕様です。<br>
+<br>
+あまりスマートな方法ではありませんが、メーリングリスト名を変更するための代用案として、以下の方法を提示いたします。<br><ol>
+<li>メーリングリストの使用を一斉に止めるか、事前にepstrd/epstddのサービスを停止させ、アクセスを止める。
+<li>メール作業フォルダ（メール用作業ディレクトリ）（既定値 /var/spool/epms/）を開く。
+<li>メール作業フォルダ（メール用作業ディレクトリ）下の reg/epost/ims/lists ディレクトリを開く。
+<li>変更元のメーリングリスト名のディレクトリを探し、ディレクトリ名を新しいメーリングリスト名に変更する。
+<li>&quot;[変更元のメーリングリスト名]＠[ドメイン名]MlId_RW.lck&quot;ファイルと&quot;[変更元のメーリングリスト名]＠[ドメイン名].lck&quot;ファイルを探し、それぞれのファイル名の＠より前の部分について新しいメーリングリト名となるように変更する。
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［メーリングリスト管理］を選択して「ドメインの選択」からエクスポートする対象ドメインを選択して［メーリングリスト管理へ］をクリック。同じ設定内容のままでメーリングリスト名が変更されているかどうかを確認する。
+<li>epstrd/epstddのサービスを再開する。
+</ol>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-46</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>最大14文字に制限されていたPOP3パスワード/IMAP4パスワードを14文字を超えて設定する方法 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+これまでPOP3パスワード/IMAP4パスワードの長さについて、Windows Server旧バージョンのアカウントと整合性を取るため、パスワード長さに最大14文字までの制限が設けられていましたが、2022年5月8日以降の最新差分アップデートを適用することにより、POP3パスワード/IMAP4パスワードを14文字超えて設定することができるようになりました。以下に設定の手順を示します。<br>
+<ol>
+<li>E-Post Mail Server V 本体に対して、20220508差分以降の最新差分アップデートを適用し、epstman v5.04 以上、epstpop3d v5.05 以上、epstimap4d が v5.04 以上になったことを確認します。なお最新差分適用後はサービス再起動が必要です。</li>
+<li>以下の設定ファイル&quot;PasswordLength.1&quot;をviエディタで手動作成し、ファイル内にパスワード最大値を数値で記述します。なお記述した数値の後の末尾は改行しません。<br>
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→PasswordLength.1<br>
+　　　（デフォルト値=14 最大値=64）</li>
+<li>上記設定値を変更後はWeb管理画面を開き直します。</li>
+<li>Web管理画面から設定できるPOP3受信/IMAP4受信で可能なパスワード長は、最大64文字（MAX 64byte）までの設定された値に変更されています。</li>
+</ol>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-18.html">アカウントの最大文字数と使えない文字およびパスワード長さについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

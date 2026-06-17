@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta name="robots" content="index,follow">
+<TITLE>FAQ13-37</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000">SMTP認証接続時の「認証接続ロックアウト機能」とは何ですか？</FONT>
+<HR>
+<br>
+メールサーバ・SMTPサーバの大部分は、既にSMTP認証での利用が普通の状態になってきていますが、それに比例して、外部から不正にID/パスワードが総当たりで試されることが多くなってきました。<br>
+SMTPサービスに実装されるSMTP認証時の「認証接続ロックアウト機能」は、外部から不正にSMTP認証でID/パスワードを何千通り何万通りも執拗に繰り返す“総当たり攻撃”に対して接続自体を拒絶、ロックアウトするものです。これにより、サーバの負荷が不用意に高まることを防ぎ、セキュリティを格段に高めます。<br>
+<br>
+設定方法・設定個所としては、接続ロックアウト機能を有効にするために、接続設定回数とロックアウト時間をレジストリで設定します。<br>
+<br>
+SMTP認証時の「認証接続ロックアウト機能」の働きは以下の通りです。<br>
+<ol><li>SMTP認証時にID／パスワードが異なる理由で認証失敗し、特定の同一IPアドレスからの接続回数が設定回数に達したとき、接続元IPアドレスと接続時間情報を記録します。</li>
+<li>さらに設定ロックアウト期間（時間）の間、SMTPサービスは該当IPアドレスからの接続を一切拒絶し、接続時に強制切断します。</li>
+<li>設定ロックアウト期間をすぎると、自動的に再度接続が可能となりますが、再び認証失敗を繰り返し設定された接続回数に達すると、再び同様の接続ロックアウト処理が繰り返されます。</li>
+<li>SMTPサービスに記録された情報を管理者が編集することにより、接続回数に関わりなく、SMTP認証時に特定の同一IPアドレスからの接続を永続的に拒絶・切断させることが可能です。また、逆にリセットすることも可能です。</li></ol>
+SMTP認証時の「認証接続ロックアウト機能」は、現行のバージョンからすべて利用できます。<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-87</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>アカウントデータとインポートの仕様について</b></FONT>
+<HR>
+<br>
+E-Postで管理されているアカウントデータは、ある意味、本格的なデータベースとして管理されているわけではありません。そのため、アカウントデータは、アカウント項目を一意のキーとして管理していますが、［ユーザー管理］から行うことができるアカウントインポート機能は、<b>重複データがあると</b>スキップされる形となり、<b>上書きされない</b>仕様です。<br>
+一般的なデータベースであれば、インポート時にキー項目のデータが重複しているときは、該当レコードが上書きされることが当然として見なされると思いますが、［ユーザー管理］でのアカウントインポートの仕様はそのようになっていませんので、ご注意ください。もし、アカウントデータをインポートによって、完全に書き直したいときは、アカウントデータファイルである.idxファイルを任意の場所へ移動するか、消去した状態で、インポートさせてください。ちなみに、.idxファイルは、アカウントフォルダ（デフォルト /var/spool/epms/db/ ）に &quot;[ドメイン名].idx&quot; の名前で保管されています。<br>
+ちなみにアカウントインポートを実行するには次の操作になります。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」からエクスポートする対象ドメインを選択して［ユーザー管理へ］をクリック。アカウントインポートするテキストファイルを［参照］ボタンで選択して［インポート］ボタンをクリックします。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-01</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>epstrd（SMTPレシーバー）応答コード <font color="#ff0000">updated!</font></b></FONT><br>
+<HR>
+<TABLE bordercolor="#000000" border="1" cellspacing="0" cellpadding="2">
+<TR bgcolor="#CCCCCC">
+ <TH>コード＆メッセージ</TH>
+ <TH>意味</TH>
+</TR>
+<TR>
+ <TD>220 '接続サーバーのFQDN' ....</TD>
+ <TD>セッション確立時のグリーティング</TD>
+</TR>
+<TR>
+ <TD>421 Exceeded an expiration date.</TD>
+ <TD>試用期間を経過した。</TD>
+</TR>
+<TR>
+ <TD>421 exceeds an accepting limit. ...</TD>
+ <TD>セッション制限数を超えた接続。</TD>
+</TR>
+<TR>
+ <TD>221 2.0.0 '接続サーバーのFQDN' closing connection.</TD>
+ <TD>QUIT命令への応答。</TD>
+</TR>
+<TR>
+ <TD>250 2.0.0 Message received ok.</TD>
+ <TD>DATA（メッセージ本文）を受領した。</TD>
+</TR>
+<TR>
+ <TD>250 2.0.0 ok.</TD>
+ <TD>NOOP命令への応答。</TD>
+</TR>
+<TR>
+ <TD>250 '接続サーバーのFQDN' Hello ['クライアントのIPアドレス'], pleased to meet you</TD>
+ <TD>HELO命令への応答。</TD>
+</TR>
+<TR>
+ <TD>250 xxxx Hello [xxxx], pleased to meet you</TD>
+ <TD>EHLO命令への応答。</TD>
+</TR>
+<TR>
+ <TD>250 SIZE '受領メールサイズ上限'</TD>
+ <TD>EHLO命令へのSIZE応答。</TD>
+</TR>
+<TR>
+ <TD>250 AUTH '利用可能な認証方式'</TD>
+ <TD>EHLO命令へのAUTH応答。</TD>
+</TR>
+<TR>
+ <TD> 250-STARTTLS</TD>
+ <TD> EHLO命令へのSTARTTLS応答。</TD>
+</TR>
+<TR>
+ <TD>334 '認証キー情報'</TD>
+ <TD>SMTP-AUTHの認証キー情報応答。</TD>
+</TR>
+<TR>
+ <TD>235 2.0.0 Authentication successful.</TD>
+ <TD>SMTP-AUTHの認証成功応答。</TD>
+</TR>
+<TR>
+ <TD> 220 2.0.0 Ready to start TLS</font></TD>
+ <TD> STARTTLS命令への応答。</font></TD>
+</TR>
+<TR>
+ <TD>250 2.0.0 &lt;送信元のエンベロープ&gt;... Sender ok.</TD>
+ <TD>MAIL FROM:命令への送信元のエンベロープ（送信元メールアドレス）受領応答。</TD>
+</TR>
+<TR>
+ <TD>250 2.0.0 &lt;送信先のエンベロープ&gt;... Recipient ok.</TD>
+ <TD>RCPT TO:命令への送信先のエンベロープ（送信先メールアドレス）受領応答。</TD>
+</TR>
+<TR>
+ <TD>250 2.0.0 Reset state</TD>
+ <TD>RSET命令への応答</TD>
+</TR>
+<TR>
+ <TD>250 2.0.0 'アカウント' '氏名' ... User ok</TD>
+ <TD>VRFY命令への応答</TD>
+</TR>
+<TR>
+ <TD>250 2.0.0 'アカウント' '氏名'</TD>
+ <TD>EXPN命令への応答</TD>
+</TR>
+<TR>
+ <TD>550 5.1.1 Please mail to a valid e-mail address.</TD>
+ <TD>RCPT TO:命令での送信先の受領拒否応答（外部→外部への中継禁止）。／「送信先の制限」【sender.dat】で送信を禁止している条件に合致したときの受領拒否応答 (epstrd v5.03まで)。</TD>
+</TR>
+<TR>
+ <TD>550 5.1.1 Please mail to a valid e-mail address. approval filter. '[fromaddress]' is entry in the blacklist.</TD>
+ <TD>このメールは Secure Handler でのブラックリスト（拒否アドレス）に記載されているため受領拒絶した。<b>［Secure Handler組み込み時］</b>／「送信先の制限」【sender.dat】で送信を禁止している条件に合致したときの受領拒否応答 (epstrd v5.04以降)。 <font color="#FF0000">new!</font></TD>
+</TR>
+<TR>
+ <TD>550 5.1.1 Address exceeds a maximum.</TD>
+ <TD>RCPT TO:命令での送信先の受領拒否応答（１メール当たりの同報数の上限を超えた）。</TD>
+</TR>
+<TR>
+ <TD>450 4.2.2 Sorry. e-mail address box is full.</TD>
+ <TD>RCPT TO:命令での送信先の受領拒否応答（ローカルユーザメールボックスが制限容量を超えている）。</TD>
+</TR>
+<TR>
+ <TD>354 2.0.0 Start mail input;id &lt;メッセージID&gt; end with &lt;CRLF&gt;.&lt;CRLF&gt;&quot;</TD>
+ <TD>DATA命令への受領許可応答。</TD>
+</TR>
+<TR>
+ <TD>450 4.7.1 Sorry. mail from a valid IP or Domain address.(SPF_GRAY)</TD>
+ <TD>MAIL FROM:命令への送信元エンベロープ（送信元メールアドレス）(送信ドメイン認証 SPF方式による)受領拒否応答。<b>［getspf組み込み時］</b></TD>
+</TR>
+<TR>
+ <TD>550 5.1.7 Please, mail from a valid e-mail address.</TD>
+ <TD>MAIL FROM:命令への送信元エンベロープ（送信元メールアドレスがローカルアカウントとして存在していない）受領拒否応答。<br>
+ <b>（関連FAQ）</b><a href="./faq05-38.html">receivelog に 550 5.1.7 Please, mail from a valid e-mail address. が記録されている場合</a></TD>
+</TR>
+<TR>
+ <TD>550 5.1.7 Please, mail from a valid IP or Domain address.</TD>
+ <TD>MAIL FROM:命令への送信元エンベロープ（送信元メールアドレスや送信元IPアドレスが中継の制限の設定を受けている）受領拒否応答。</TD>
+</TR>
+<TR>
+ <TD>550 5.7.0 Please, mail after SMTP-authentication.</TD>
+ <TD>MAIL FROM:命令への送信元エンベロープ（メーリングリストへのメール投稿には、SMTP-AUTHを必要する）受領拒否応答。</TD>
+</TR>
+<TR>
+ <TD>500 5.5.2 command unrecognized: &quot;命令&quot;</TD>
+ <TD>不明な命令に対する応答。</TD>
+</TR>
+<TR>
+ <TD>501 5.5.2 Argument required</TD>
+ <TD>命令に対する引数が足りない。</TD>
+</TR>
+<TR>
+ <TD>501 5.0.0 The client wanted to cancel authentication.</TD>
+ <TD>SMTP-AUTHがキャンセルされた。</TD>
+</TR>
+<TR>
+ <TD>502 5.3.3 Command isn't implemented.</TD>
+ <TD>VRFY/EXPN命令の応答が禁止されている場合の各命令に対する応答。</TD>
+</TR>
+<TR>
+ <TD>503 5.5.1 '接続サーバーのFQDN' Duplicate HELO</TD>
+ <TD>HELO命令が再度要求された。</TD>
+</TR>
+<TR>
+ <TD>503 5.5.1 '接続サーバーのFQDN' Duplicate EHLO</TD>
+ <TD>EHLO命令が再度要求された。</TD>
+</TR>
+<TR>
+ <TD>503 5.5.1 '接続サーバーのFQDN' Duplicate AUTH</TD>
+ <TD>AUTH命令が再度要求された。</TD>
+</TR>
+<TR>
+ <TD>503 5.5.1 Sender already specified</TD>
+ <TD>MAIL FROM命令が再度指定された。</TD>
+</TR>
+<TR>
+ <TD>503 <font color="#0000cc">5.5.1</font> Error: authentication not enabled.</TD>
+ <TD>全体設定でSMTP認証&quot;NO&quot;を設定時にクライアントからSMTP認証が行われた場合の応答＝SMTP認証（SMTP AUTH）は無効。<font color="#FF0000">new!</font><br>
+ <b>（関連FAQ）</b><a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a></TD>
+</TR>
+<TR>
+ <TD>503 5.0.0 Need EHLO before AUTH</TD>
+ <TD>SMTP認証の前にEHLO命令が必要。<br>
+ <b>（関連FAQ）</b><a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a></TD>
+</TR>
+<TR>
+ <TD>503 5.0.0 Need AUTH before MAIL</TD>
+ <TD>MAIL FROM命令の前にSMTP認証（SMTP AUTH）が必要。<br>
+ <b>（関連FAQ）</b><a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a></TD>
+</TR>
+<TR>
+ <TD>503 5.0.0 Need MAIL before RCPT</TD>
+ <TD>RCPT TO命令の前にMAIL FROM命令（送信元のエンベロープ）が必要。</TD>
+</TR>
+<TR>
+ <TD>503 5.0.0 Need RCPT</TD>
+ <TD>DATA命令の前にRCPT TO命令（送信先のエンベロープ）が必要。</TD>
+</TR>
+<TR>
+ <TD>504 5.7.4 Unrecognized authentication type.</TD>
+ <TD>存在しないSMTP-AUTHの方式を指定した。</TD>
+</TR>
+<TR>
+ <TD>535 5.7.0 Authentication failed.</TD>
+ <TD>SMTP認証（SMTP AUTH）の認証が失敗した。（ID/PWのいずれかが違う）<br>
+ <b>（関連FAQ）</b><a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a></TD>
+</TR>
+<TR>
+ <TD>550 5.1.1 xxxx ... User unknown.</TD>
+ <TD>指定したメールアドレスは、不明なローカルアドレス（存在しないアドレス）。</TD>
+</TR>
+<TR>
+ <TD>550 5.7.1 Sorry '送信先のエンベロープ（送信先メールアドレス）', I don't allow unauthorized relaying.</TD>
+ <TD>指定した送信元・送信先の組み合わせでは、メールの中継はできない。（中継拒否）<br>
+ <b>（関連FAQ）</b><a href="./faq01-79.html">送信しようとすると' 550 5.7.1 Sorry [account＠domain] , I don't allow unauthorized relaying . ' が表示されて送信できない</a></TD>
+</TR>
+<TR>
+ <TD>552 5.3.1 Requested mail action aborted: exceeded storage allocation.</TD>
+ <TD>このメールのサイズが指定している１メール当たりの上限サイズを超えている。</TD>
+</TR>
+<TR>
+ <TD>552 5.7.1 Requested mail action aborted: caught by the filter setting.</TD>
+ <TD>このメールはウイルスチェックやメールフィルタ条件で受領拒絶した。Standard版ではメールフィルタ設定で &quot;Level:1xx&quot; での拒否が典型。<br>
+ <b>（関連FAQ）</b><a href="./faq01-81.html">メールフィルタ【mail.dat】の設定事例</a></TD>
+</TR>
+<TR>
+ <TD>552 5.7.1 Requested mail action aborted: approval filter.</TD>
+ <TD>このメールは Secure Handler でのブラックリスト（拒否題名）に記載されているため受領拒絶した。<b>［Secure Handler組み込み時］</b></TD>
+</TR>
+<TR>
+ <TD>554 5.4.6 too many Received: headers.</TD>
+ <TD>このメールのReceived:ヘッダ（SMTPホップ数：デフォルト20）の記録が制限値を超えている。<br>
+ <b>（関連FAQ）</b><a href="./faq10-79.html">Received:ヘッダのループ数制限＝SMTPホップ数の制限を緩和するには</a></TD>
+</TR>
+</TABLE>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

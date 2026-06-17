@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-19</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>MXキャッシュデータの更新が設定されている既定の24時間より長くかかっているのはなぜ？</b></FONT>
+<HR>
+<br>
+MXキャッシュデータが更新される時間を見ていると、設定された既定の24時間より長くかかっている場合があります。その理由を説明します。<br>
+<br>
+E-Post独自のMXキャッシュ機能は、E-PostからDNSへの問い合わせでMXレコード参照が成功したものがキャッシュされる仕組みです。キャッシュされたデータは、[メール作業用フォルダ]/mxcash/ フォルダ下に該当ドメインの名の付いた拡張子.mxのデータファイルとして蓄積されます。（※デフォルトのメール作業用フォルダ /var/spool/epms/ ）<br>
+<br>
+一方で、DNSサーバ自体にもキャッシュの有効時間が設定されているはずですから、DNSサーバのキャッシュが新情報に更新されるまでにも時間がかかることになり、次のことが言えます。<br>
+<blockquote>
+DNSサーバのキャッシュ有効時間＋E-Post独自のMXキャッシュ有効時間<br>
+</blockquote>
+これらのことから、MXレコードが修正された場合は、新情報が得られるまで、ここであげた有効時間いっぱいまで更新時間がかかると思われます。ですから、MXキャッシュデータの更新時間が、設定されている既定の24時間より長くかかって更新されているケースでは、この間はE-PostからDNSへの問い合わせでMXレコードが成功したものがなかった、さらに加えてDNSサーバのキャッシュ有効期間が満ちていなかった、という推測ができます。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

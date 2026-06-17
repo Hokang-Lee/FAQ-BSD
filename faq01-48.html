@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-48</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>配送サービス（epstdd）が送信先のMTAを決定する手順</b></FONT>
+<HR>
+<BR>
+配送サービス（epstdd）が送信先MTAの決定手順の概要は、以下の通りです。<br>
+<br>
+＋＋ 1.ゲートウェイテーブル（gateway.dat）の参照（テーブルに対象ドメインがあれば優先して配送）<br>
+↑↓<br>
+｜＋ 2.ゲートウェイテーブル（gateway.dat）がない場合は、送信先MTAの検索を実施<br>
+｜　↓<br>
+｜　＋ 3.E-Post独自のMXキャッシュデータの参照（[メール作業フォルダ]/mxcash/）<br>
+｜　↓<br>
+｜　＋ 4.送信できない場合、もしくはMXキャッシュ有効時間を経過した場合<br>
+｜　　↓<br>
+｜　　＋ 5.DNS MXレコード参照、ドメインのMXレコード検索結果<br>
+｜　　｜ ※ 使用するMXレコード＝回答されたMXリスト［（リトライの回数/MXリスト数）の剰余］<br>
+｜　　＋ 6.DNS Aレコード参照、ドメインのAレコード検索結果<br>
+｜　　↓ ※ 5,6は、リトライの回数で交互<br>
+＋←－＋
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

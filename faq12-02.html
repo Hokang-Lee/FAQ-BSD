@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta name="robots" content="index,follow">
+<TITLE>FAQ12-02</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000">アップデートはどのように行うのでしょうか？ </FONT>
+<HR>
+<br>
+アップデート作業は次の手順で行います。<br>
+<ol>
+<li>アップデートプログラムは次年度更新時に提供しているCDに収録されていますのでそのCDを用意します。
+<li>CDに収録されている該当差分アップデートプログラムをアプライアンスのメールサーバマシンの/tmpディレクトリに次のいずれかの方法でアップします。
+<ul type="disc"><li>E-Postコントロールセンターの「システム管理」にある「アップロードファイル」を指定してアップする
+<li>TeraTermなどのSSHターミナルツールでファイルを指定してアップする</ul>
+<li>その後、ターミナルでサーバにログインし、/tmpディレクトリにコピーされたファイルを解凍、展開されたディレクトリに移動し、&quot;./update.sh&quot; を実行します。
+<li>実行すると差分アップデートプログラムが適用されます。自動的に各サービスプログラムがいったん止められ、モジュールが上書き更新された後、自動的に各サービスプログラムが開始されます。
+<li>適用後は、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ライセンス情報］をクリックして表示される画面でバージョン情報を確認します。
+</ol>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

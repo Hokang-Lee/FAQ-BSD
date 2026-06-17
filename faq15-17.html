@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-17</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>E-PostシリーズでHELO応答するFQDNについて</b></FONT>
+<HR>
+<br>
+E-Post Mail Server・E-Post SMTP ServerシリーズでSMTPプロトコルで接続した際に、HELO 応答する FQDN について、E-Post は何をどのように参照して表示しているかについて、説明します。<br>
+基本的に E-Postシリーズでは、運用する登録済みドメイン名を /etc/hosts ファイル内に記述していただくようお願いしています。特に内部アカウントどうしで送るときに、epstrd サービスが逆引きで利用する部分があることや、自動転送機能・メーリングリスト機能が使われる際には名前解決が必要とされることから、できるだけ /etc/hosts ファイルを明示的に記述していただくことをお願いしています。（下記FAQ記事参照）<br>
+メールサーバーマシンの /etc/hosts ファイルにグローバルで公開しているメールサーバーのFQDN（ホスト名＋ドメイン名）を自身のローカル IP アドレスと関連付けを行って記述しておくと、それに準じて、E-Post SMTPのSMTP受信サービスである epstrd サービスが HELO で応答する FQDN を表示するようになります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-42.html">HELOコマンドで送出するホスト名がFQDN（ホスト名＋ドメイン名）になっていない</a><br>
+●<a href="./faq10-31.html">Received:ヘッダに該当しない別のドメイン名が表示される</a><br>
+●<a href="./faq10-53.html">hostsファイル記述の必要性と有用性について</a><br>
+<br>
+なお、内部アカウントどうしで送るケースや自動転送・メーリングリスト機能の利用などがまずないという理由で、あえて /etc/hosts ファイルを記述しない設定もケースとしてはあり得るため、絶対不可というわけではありません。仮に、もしそのような状況の場合、epstrd サービスは、次のルールにもとづいて、HELO で応答する際の FQDN を内部で自動生成して応答します。<br>
+<blockquote>
+<hr width="95%" border="1" align="left" noshade>
+[OS上のコンピュータ名].[E-Postに登録されているドメインのDomain Listsに表示される先頭のドメイン名]<br>
+<hr width="95%" border="1" align="left" noshade>
+例）Epost01.test-sample.jp<br>
+<hr width="95%" border="1" align="left" noshade>
+</blockquote>
+また、E-Postに作成していないドメイン名を適当に /etc/hosts ファイルに書いたときも、この状況と同等の動きになります。<br>
+こうした自動生成された FQDN で支障がある場合は、特に作成済みドメインと IP アドレスを関連づけた /etc/hosts ファイルを明示的に記述してください。<br>
+ちなみに、E-Post 内部の仕組みにさらに少し踏み込んだ話しですが、E-Post SMTPの配送サービスである epstdd サービスでは、HELO につづく FQDN として、エンベロープ情報を記述した &quot;.RCP&quot; ファイル内に書かれる &quot;Message-ID:&quot; 行の＠マーク以降の FQDN を利用します。&quot;.RCP&quot; ファイルは、メールキューフォルダである incoming フォルダに &quot;.MSG&quot; ファイルとともに生成されて、epstdd サービスによる配送時・送信時に用いられています。<br>
+&quot;.RCP&quot; ファイルの中身を確認する場合は、epstdd サービスを一時的に停止しておくと、incoming フォルダに滞留されますので、そこで確認することが可能です。確認した後、epstdd サービスを再開すれば、自動的に配送が試みられます。ちなみに、&quot;.RCP&quot; ファイルの &quot;Message-ID:&quot; 行は、epstrd サービスによりメール受領時点で作成されますが、そのときの生成ルールは「接続元IPからの /etc/hosts ファイルを参照した上での逆引き結果」の内容が使われます。<br>
+/etc/hosts ファイルに書かれていないケースや、E-Post に登録されているドメイン名が見つからないケースなど、逆引きできなかった場合、epstrd は [コンピュータ名].[E-Postに登録されているドメインのDomain Listsに表示される先頭のドメイン名] という FQDN を自動的に生成します。この FQDN とメッセージ ID が合わさって &quot;.RCP&quot; ファイルの &quot;Message-ID:&quot; 行に記載されることになります。<br>
+<blockquote>
+<hr width="60%" border="1" align="left" noshade>
+例）Message-ID: &lt;B0000123123＠Epost01.test-sample.jp&gt;<br>
+<hr width="60%" border="1" align="left" noshade>
+</blockquote>
+以上、少し立ち入った内容ですが、理解の助けにしてください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

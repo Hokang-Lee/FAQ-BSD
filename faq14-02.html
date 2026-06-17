@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta name="robots" content="index,follow">
+<TITLE>FAQ14-02</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000">POP before SMTPに対応していますか？</FONT>
+<HR>
+<br>
+E-Post Mail Server V シリーズ製品では、株式会社イー・ポストのポリシーとして、POP before SMTPに対応しません。<br>
+<br>
+POP before SMTPについては、下記の点でセキュリティ上の問題が大きく、とても危険性の高い仕組みだと考えています。<br>
+<br>
+常時接続が当たり前になり、個人も会社も、1～2分間隔でPOP3によるメール受信を行っているケースが通常になっていると思われます。そのため、常にPOP認証を行っている状態になっており、その間はアカウントさえわかれば、外部から誰でも送信が可能になってしまいます。アカウントを詐称するだけでなく、実際のメールサーバからその人のアカウントで、スパムメールの大量配信がいとも簡単にできてしまう事実を認識していただきたいと思います。<br>
+<br>
+イー・ポストとしては、セキュリティ上もっとも問題があり、危険性の高いPOP before SMTPではなく、SMTP AUTH（SMTP認証）を有効な設定にしていただくよう推奨しています。<br>
+<br>
+また、POP認証についても、平文でパスワードを送ることから、パスワードが暗号化されたAPOP認証を使っていただくのがよりベターかと考えています。ただし、Outlook Expressなどのメジャーなメールクライアントソフトが未対応であるため、導入に際しては十分検討してください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

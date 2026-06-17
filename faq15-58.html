@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-58</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>配送サービス epstdd のスレッド数はどの程度まで上げても大丈夫か</b></FONT>
+<HR>
+<br>
+SMTP配送サービス epstdd のスレッド数について、どの程度まで上げて大丈夫かといったご質問を受けることがあります。<br>
+ハードウェア環境やネットワーク環境に左右されるとは思いますが、実際の運用経験から見ても、スレッド数を最大100ぐらいの設定にしても特に問題になることなく、普通に可能だと考えられます。<br>
+ちなみに epstdd のスレッド数の設定値は、epstdd 内で起動するスレッドの上限値であり、このスレッド数が常時展開されるわけではありません。incomingフォルダ内でのメールデータの溜まり具合により、生きて動作するスレッド数はこの上限の範囲内で変動します。<br>
+たとえば、スレッド数100の設定値にしているときに、100スレッドが一度に起動しても、メール1通しかない場合は、1スレッドが配送実施し、incoming フォルダが空であれば、残りの99スレッドは起動開始してもすぐ終了する動きをしますので、常時負荷が上がるわけではありません。<br>
+ただし、ネットワーク環境の中でE-Postからのフォワード先SMTPやゲートウェイ装置があるような場合、メールの受け手になるフォワード先の処理可能なスレッド数を事前に調べることが必要になります。フォワード先でいくつまで受信側のスレッドを立てても大丈夫なのかを確認した上で epstdd のスレッド数を決めるとよいでしょう。不明な場合は、現行の設定値から、10ずつ増やしていって、動作を見ていく方法も考えられます。<br>
+その際、CPU負荷やディスクアクセス負荷を確認するのは当然でしょうが、メールキューである incoming フォルダ内のファイル生成やファイル消去の具合など目視で確認してください。そのようすからメール送信の処理具合として判断していただくとよいでしょう。<br>
+<br>
+<b>（参照FAQ）</b><br>
+●<a href="./faq15-83.html">ゲートウェイ装置がある環境で epstdd のスレッド数を増やしたところ逆に遅延が発生するおそれがある場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

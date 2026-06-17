@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-83</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>コマンドでアカウント登録・削除などを操作したいときには </b></FONT>
+<HR>
+<br>
+E-POSTコントロールセンターのメールサーバ管理（Web管理CGI）のプログラムファイルである epstman をコンソールから引数付きで実行することにより、コマンドベースでアカウント登録・削除などを操作することが可能です。<br>
+<br>
+ここでは、よく使われそうな機能とコマンドの事例を紹介します。詳細な使い方に関しては、『E-Post Mail Server コンソール用管理ツール マニュアル』（PDF）をご参照ください。<br>
+<br>
+SSHなどを使ってroot権限でコンソールにログイン、epstman のプログラムファイルがある /usr/local/mta/bin/ ディレクトリへ移動します。<br>
+# cd /usr/local/mta/bin/<br>
+<br>
+<b>アカウントの登録</b><br>
+./epstman mode=AG server=[接続マシン名] group=[メールグループまたはドメイン名] domname=[ドメイン名] id=[ユーザ名] newpass=[パスワード] fullname=[名前] homedir=[ホームディレクトリ] boxsize=[メールボックスサイズ] auth=[SMTP認証の有無] usedpop3=[POP3利用の有無] usedimap4=[IMAP4利用の有無]<br>
+<br>
+※必須項目は mode=AG group=[メールグループまたはドメイン名] domname=[ドメイン名] id=[ユーザ名] newpass=[パスワード]<br>
+<br>
+<b>アカウントの削除</b><br>
+./epstman mode=DG server=[接続マシン名] group=[メールグループまたはドメイン名] domname=[ドメイン名] id=[ユーザ名] box=[メールボックス削除の有無:on/off]<br>
+<br>
+※必須項目は mode=DG group=[メールグループまたはドメイン名] domname=[ドメイン名] id=[ユーザ名]<br>
+<br>
+<b>アカウントの一覧</b><br>
+./epstman mode=QL server=[接続マシン名] group=[メールグループまたはドメイン名] domname=[ドメイン名]<br>
+<br>
+※必須項目は mode=QL group=[メールグループまたはドメイン名] domname=[ドメイン名]<br>
+<br>
+<b>アカウントパスワードの変更</b><br>
+./epstman mode=PG server=[接続マシン名] id=[ユーザ名] group=[メールグループまたはドメイン名] newpass=[変更後のパスワード] renewpass=[確認用newpassと同じ]<br>
+<br>
+※必須項目は mode=PG id=[ユーザ名] group=[メールグループまたはドメイン名] newpass=[変更後のパスワード] renewpass=[確認用newpassと同じ]<br>
+<br>
+<b>（実行例）</b><br>
+./epstman mode=AG group=domain.test domname=domain.test id=user1 newpass=xyz#1234<br>
+./epstman mode=DG group=domain.test domname=domain.test id=user1<br>
+./epstman mode=QL group=domain.test domname=domain.test<br>
+./epstman mode=PG group=domain.test id=user1 newpass=vwx1234# renewpass=vwx1234#<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-18.html">コマンドでエイリアス登録・削除などを操作したいときには</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

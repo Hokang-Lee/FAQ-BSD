@@ -1,0 +1,80 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-06</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>STARTTLSを含むSSL/TLS通信の成否記録はログで確認できますか？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+STARTTLSを含むSSL/TLS通信の成否をログで確認できるか、そのログはどれになるのかについて説明します。<br>
+まず、マシン接続ログ（acceptlog）、SMTP受信ログ（inlog）、POP3基本ログ（pop3log）、IMAP4基本ログ（imap4log）の基本ログ内には、SSL通信の成否やSSL証明書自体の検証記録は表示されません。STARTTLSを含むSSL/TLS通信の場合でも、通常の通信と同じ内容であり、見ただけでは区別がつきません。<br>
+<br>
+一方、以下の詳細ログには STARTTLS を含むSSL/TLS通信関係の内容が記録されます。<br>
+・SMTP受信詳細ログ（receivelog）<br>
+・POP3受信詳細ログ（receivepop3）<br>
+・IMAP4受信詳細ログ（receiveimap4）<br>
+詳細ログの取得方法については下記記事を参照して設定してください。この中でもSMTP受信詳細ログ（receivelog）は、SSL/TLS通信関係の内容を確認するだけにとどまらず、他の内容も記録される重要度が高いログですので、できれば継続して取得することを推奨します。<br>
+<br>
+STARTTLSの暗号化通信した場合は、各詳細ログの中に <b>&quot;SSL_CTX_new() = xxxxxxxx&quot;</b> という記録が共通なものとして確認できます。各詳細ログを確認してください。over SSL/TLSの場合は、詳細ログでも違いは確認できません。<br>
+<br>
+STARTTLS か over SSL/TLS かによって、下記のように各詳細ログの記録は a. b. それぞれのケースに分かれます。<br>
+<b>[SMTPの場合-receivelogより]</b><br>
+a. SMTPのSTARTTLSであれば、<b>SSL_CTX_new() =</b>が記録されます。<br>
+（例）SSL_CTX_new() = 14259424<br>
+さらに <b>&quot;220 2.0.0 Ready to start TLS&quot;</b> の応答記録がなされ、引き続きSMTPプロトコルの記録が行われます。<br>
+b. SMTP over SSL/TLSはセッション接続時点で暗号化されているので、正常なら通常のSMTPプロトコルの記録が行われます。<br>
+<br>
+<b>[POP3の場合-receivepop3より]</b><br>
+a. POP3のSTARTTLSであれば、<b>SSL_CTX_new() =</b>が記録されます。<br>
+（例）Start SSL_CTX_new().<br>
+　　　SSL_CTX_new() = 2070832<br>
+さらに <b>&quot;+OK Begin TLS negotiation&quot;</b> の応答記録がなされ、引き続きPOP3プロトコルの記録が行われます。<br>
+b. POP3 over SSL/TLSはセッション接続時点で暗号化されているので、正常なら通常のPOP3プロトコルの記録が行われます。<br>
+<br>
+<b>[IMAP4の場合-receiveimap4より]</b><br>
+a. IMAP4のSTARTTLSであれば、<b>SSL_CTX_new() =</b>が記録されます。<br>
+（例）SSL_CTX_new() = 2013608<br>
+さらに <b>&quot;xx OK Begin TLS negotiation now&quot;</b> の応答記録がなされ、引き続きIMAP4プロトコルの記録が行われます。<br>
+b. IMAP4 over SSL/TLSはセッション接続時点で暗号化されているので、正常なら通常のIMAP4プロトコルの記録が行われます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）について</a><br>
+●<a href="./faq05-12.html">POP3の詳細ログ（receivepop3）について</a><br>
+●<a href="./faq05-14.html">IMAP4の詳細ログ（receiveimap4）について</a><br>
+<br>
+STARTTLSを含むSSL/TLS通信の成否記録をログ以外で確認するには、EPSTRSサービスがSMTP受信するとき、 Received:ヘッダ内にTLSバージョンやCipherの表記を記載するオプションが追加されています。詳細ログを取得して追跡して調べなくても、メールヘッダを一目見て判断がつきますので、設定しておくことをお薦めします。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-64.html">SSL/TLSやSTARTTLSのTLSバージョンやCipher表記をReceived:ヘッダに記録するようにしたい</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

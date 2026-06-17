@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-05</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>登録する内部ドメイン名を直近のDNSに登録することを推奨</b></FONT>
+<HR>
+<br>
+E-Postシリーズでは、登録する内部ドメイン名を/etc/hostsファイルに記述していただくことを必須のお願いとしておりますが、もしその設定ができない場合、E-Postに登録する内部ドメイン名について、前方参照（正引き）および後方参照（逆引き）ともに直近のDNSに登録しておくことを推奨します。<br>
+仮に/etc/hostsファイルの記述がない場合でも、そもそも直近のDNSに自身の内部ドメイン名が前方参照（正引き）および後方参照（逆引き）設定がされていれば、内部ドメイン内での配送上の問題や、自動転送使用時やメーリングリスト使用時にも問題が起きることはなくなります。<br>
+なお、AD連携時や、MSFCクラスタ構成時には、ドメインコントローラ上でマイクロソフトDNSがいっしょに連動しているため、そのDNSに内部ドメイン名の前方参照（正引き）および後方参照（逆引き）をそれぞれ設定してください。<br>
+他社のメールサーバ製品では、逆引き設定がないケースのIPからの接続は、SPAM判定するものもあったりするため、できる限り、直近のDNSに自身の内部ドメインの逆引き設定を登録しておいた方が無難であると考えます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-53.html">/etc/hostsファイル記述の必要性と有用性について</a><br>
+●<a href="./faq01-04.html">クライアントからのメール送信が遅いケースと/etc/hostsファイルの必要性</a><br>
+●<a href="./faq10-54.html">内部アカウントを自動転送で設定したり、メーリングリストに設定したときに、送信処理に時間がかかってしまう</a><br>
+●<a href="./faq15-04.html">POP3/IMAP4利用時にも/etc/hostsファイル記述を必須とする理由について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

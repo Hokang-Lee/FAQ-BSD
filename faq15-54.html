@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-54</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>テーブル編集【gateway.dat】に負荷分散させる目的での複数送信先を指定する方法と注意点について</b></FONT>
+<HR>
+<br>
+テーブル編集【gateway.dat】で記述する内容は、指定ドメインや指定アドレスにつき、通常は送信先を１つずつ指定します。仮に同じ指定ドメインを複数行に書いたとしても、上の方の行で指定された内容が先に実行されます。<br>
+しかし、隠しオプション機能を使えば、テーブル編集【gateway.dat】には、負荷分散させる目的で設置されている複数の送信先を指定することができます。ただし、動作仕様から利用できる状況や条件に注意点があります。このオプション機能と設定方法はこれまで公開してきませんでしたが、下記に示す「利用可能と判断できる状況」であることを理解した上で、条件付きで利用いただけます。<br>
+gateway.dat への送信先複数設定は、下記事例のように、タブ区切りで区切ったセクションで３つまで複数指定することが可能です。下記の記述スタイルで gateway.dat に設定してください。gateway.dat には以下の記述方法で、送信先として[TAB]コードを入力した「タブ区切り」で設定、複数のフォワード先を３つまで同列に指定できます。<br>
+<small><blockquote><b>（[gateway.dat]設定例その１）</b><br>
+domainA.jp,mx1.domain.jp,25<font color="#FF69B4">[TAB]</font>mx2.domain.jp,25<font color="#FF69B4">[TAB]</font>mx3.domain.jp,25<br>
+domainB.jp,192.168.0.2,25<font color="#FF69B4">[TAB]</font>192.168.0.3,25<font color="#FF69B4">[TAB]</font>192.168.0.4,25<br>
+<b>（[gateway.dat]設定例その２）</b><br>
+*,mail1.relay.local,25<font color="#FF69B4">[TAB]</font>mail2.relay.local,25<font color="#FF69B4">[TAB]</font>mail3.relay.local,25</blockquote></small>※注意：１つ目のセクションだけに任意の指定ドメインやすべてのドメインを意味する「*」を指定し、２つ目のセクション以降には任意の指定ドメインやすべてのドメインを意味する「*」を指定しない形です。<br>
+<br>
+<b>●「利用可能と判断できる状況」とは</b><br>
+いずれの設定例でも、もし１台目がダメなら、リトライ時に２台目、３台目を試すというしくみではなく、リトライ時にも再び１台目に送信を試すか、２台目に向けて送信するかは、そのときのタイミング次第です。つまり負荷分散させる目的で設けられている複数サーバへの複数送信先を指定する用途としては可能ですが、送信先１台目がもしダメなら２台目という、インテリジェントかつフェイルオーバ的な用途には向いていないことを理解する必要があります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-85</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>スパム扱いされないで確実に配送するためにDNSのSPFレコードやDMARCレコード記述を推奨 <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+ドメインレベルのメール送信のなりすまし防止策として、送信ドメイン認証SPFやDKIM、DMARCなどが、徐々に普及されつつあります。典型的なところでは、gmailやYahoo!メールなど、DNSのSPFレコードやDMARCレコードの記述がないものはスパムとして判定し、一時的拒絶する動きをしていることが報告されています。<br>
+送信相手にスパム扱いされないで確実に配送をするためには、相手側が送信ドメイン認証によって受信制限をしているケースがあることを考慮し、メール配送に備えてあらかじめ最低限、DNSのSPFレコードやDMARCレコード記述をしておくことを推奨します。これはDNSの設定であり、E-Post側の設定ではありません。<br>
+<br>
+相手側MTAに「送信ドメイン認証SPF」ルールが適用されていると想像され、こちらからのメールが制限されてしまう場合、DNSにSPFレコードやDMARCレコードを記載すると改善することがあります。ちなみに gmailでは [421-4.7.0 This message does not have authentication information or fails to pass] というような一時的拒絶を返しているようです。DNSのSPFレコードやDMARCレコードを記述をしておくことで、相手先によっては受信が制限されず、優先して接続してくれる効果は多少なりとも期待できそうです。<br>
+<br>
+送信ドメイン認証について、一般サイトですが参考情報を引用します。<br>
+<b>（参考情報）</b><br>
+送信ドメイン認証（SPF / DKIM / DMARC）の仕組み<br>
+<a href="https://ent.iij.ad.jp/articles/172/" target="_blank">https://ent.iij.ad.jp/articles/172/</a><br>SPFレコードの書き方<br>
+<a href="https://baremail.jp/blog/2020/02/28/579/" target="_blank">https://baremail.jp/blog/2020/02/28/579/</a><br>
+DMARC レコードを DNS に追加する<br>
+<a href="https://www.naritai.jp/guidance_dmarc.html" target="_blank">https://www.naritai.jp/guidance_dmarc.html</a><br><br>
+なお、E-Postシリーズでは、SMTP受信時においてこれらの送信ドメイン認証によるチェックが可能なアドオンツールを用意しています。2020年2月より新しく、DMARC/DKIM/SPFのチェックが可能な送信ドメイン認証（DMARC）アドオンツールを次年度更新時のCDに収録しています。<br>
+設定手順は同梱のマニュアルなどをご参照いただき、ぜひすすんでご利用くださるようお薦めいたします。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-51.html">senderlogに &quot;553-SPF (Sender Policy Framework) domain authentication&quot; が記録され送信先から拒絶されている</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

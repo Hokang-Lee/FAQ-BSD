@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-34</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP対応Webメール[2]: roundcube でユーザーログインが失敗する場合 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+IMAP対応Webメールである roundcube での E-Post Mail Server V シリーズへのログインには、デフォルトで &quot;AUTHENTICATE CRAM-MD5&quot; が使われるようです。一つの方法としては roundcube側の config.inc.php を書き加えると &quot;AUTHENTICATE&quot; ログインの方式が変更できるようですが、もう一方の方法として E-Post側のレジストリを手動設定しなおすことで、roundcube 側から AUTHENTICATE なしの LOGIN 命令でログインできます。以下は、CAPABILITY 命令で応答する認証方法を通知するための設定ですが、手動で&quot;LOGIN&quot; のみ記述するか、&quot;&quot;(空白値) として記述を変更してください。<br>
+下記のディレクトリ位置に viエディタを使って ImapAuthType.2 ファイルを作成、セットする値として &quot;LOGIN&quot; のみを記述、その後 epstimap4d サービスを再起動します。<br>
+<small><br>
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5IMAP4S  (ディレクトリ)<br>
+　　　　　→ImapAuthType.2　　［CAPABILITY 命令で応答する認証方法の制限指定］<br>
+　　　　　　(文字列)　Default &quot;CRAM-MD5,LOGIN,PLAIN&quot;　→  <u>&quot;LOGIN&quot; のみを記述するか&quot;&quot;(空白値) として記述を変更</u><br></small>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

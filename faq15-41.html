@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-41</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>内部ドメイン宛アドレスに自動転送を行ったときに遅延する場合</b></FONT>
+<HR>
+<br>
+自動転送機能を使って、テキストファイルで指定する方法により、内部ドメイン宛アドレスを複数設定しているときに、配送時に遅延する場合があります。下記の項目をチェックして遅延の要因を取り除いてください。<br><br>
+<b>１．自動転送の設定数（総数）がそもそも多い？</b><br>
+自動転送の設定されたアドレスの数、およびその設定総数が多すぎませんか？<br>
+通常の内部ドメインどうしの送信時には、プロトコルを使わず、ファイルコピーの処理がシステムで行われますが、自動転送の設定時には、転送先が内部ドメインであってもプロトコルを使って、セッションが張られる仕組みです。<br>
+そのため、「自動転送」の設定総数が非常に多い状態で転送していると、E-Postの中では負荷が高くなりやすい傾向にあります。自動転送時にはメールキュー（incomingフォルダ）やtempフォルダ内に、転送処理中の作業ファイルが作成されるためで、数が多くなりすぎると、OSのファイルシステム自体のもつ課題もあり、高負荷になりやすいことがわかっています。<br>
+これを防止するためにも、自動転送の設定数が非常に多いときは、代替として負荷のかかりにくい仕組みをもつメーリングリスト機能を使用するなどの代替策を取ってください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-42.html">自動転送設定数が多いと、処理が遅くなり負荷が過大にかかってしまう</a><br><br>
+<b>２．内部ドメイン名をhostsファイルに記述していない？</b><br>
+使用している内部ドメイン名をメールサーバマシンのhostsファイル内に記述していますか？<br>
+E-Postシリーズでは、hostsファイル記述を必須としてお願いしています。なお、hostsファイルに内部ドメインを記述しても改善されないときは、「テーブル編集」（gateway.dat）に内部ドメイン名を記述する方法も提案しています。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-53.html">hostsファイル記述の必要性と有用性について</a><br>
+●<a href="./faq01-04.html">クライアントからのメール送信が遅いケースとhostsファイルの必要性</a><br>
+●<a href="./faq10-54.html">内部アカウントを自動転送で設定したり、メーリングリストに設定したときに、送信処理に時間がかかってしまう</a><br>
+<br>
+<b>３．自動転送を指定しているアドレス表記について</b><br>
+自動転送先をファイルで一括指定するときや、メーリングリストのメンバー指定するときなど、指定されたアドレスについて、＠より右側のドメイン名までも含めたフル表記にしているでしょうか？<br>
+内部ドメインへの自動転送を行う場合や、メーリングリストのメンバー指定を行うときに、＠より右側のドメイン名を省略した場合など、E-Postシリーズでは、配送処理の最終段階で内部ドメインの該当するアカウントのメールボックスに届けるという仕組みが入っています。これは非常手段として配送が試みられるわけですが、配送処理の最終段階で行われるため、非常に遅い原因となります。念のため、指定されているアドレスがフル表記になっているかご確認ください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-47.html">ドメイン名を付けないアカウント名のみのアドレスに送信したメールの扱いについて</a><br>
+<br>
+<b>４．自動転送の転送元・転送先のメールボックスフォルダに膨大なメールデータが残っていないか</b><br>
+自動転送の転送元か転送先のユーザーアカウントについて、該当メールボックスフォルダに膨大なメールデータが残ったままになっていないか確認してください。万が一、メールボックスフォルダに万単位のメールを残しているユーザーアカウントがある場合、OSのファイルシステム自体のもつ問題のため、転送が遅延する原因となります。メールデータを削除してください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-73.html">メールボックスにメールデータを残す運用をしているときの注意点</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

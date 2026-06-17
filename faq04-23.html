@@ -1,0 +1,121 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-23</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	pre {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:1.6em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールフィルタ【mail.dat】で From:指定により受信の許可・拒絶設定しているものの受信すべきメールが拒絶されてしまう</b></FONT>
+<HR>
+<br>
+メールフィルタ【mail.dat】で From:[ドメイン名] を指定することによって、受信の許可または拒絶設定を行っているが、意図した通りにいかず、受信すべきなのに拒絶されるものがある、という報告を受けたことがあります。<br>
+<ol>
+<b><li>意図せずメールフィルタ【mail.dat】で拒絶されていた理由について</li></b>
+メールフィルタ【mail.dat】を以下のように設定しているのにもかかわらず、受信許可しているはずの送信フォームを使った From: admin＠abcd.jp からのメールが拒絶・隔離されてしまっているという報告でした。<br>
+問題のメールフィルタ【mail.dat】を見たところ、次のような設定がされていました。ここでは架空のドメイン名にしています。<br>
+'---------------------------------<br>
+'送信元ドメインがlg.jpの場合受信許可する<br>
+Virus:FROM1<br>
+From:lg.jp<br>
+Level:000<br>
+VirusEnd:<br>
+'---------------------------------<br>
+'送信元ドメインがabcd.jpの場合受信許可する<br>
+Virus:FROM2<br>
+From:<b>abcd.jp</b><br>
+Level:000<br>
+VirusEnd:<br>
+'---------------------------------<br>
+'上記以外の送信元ドメインの場合メールを拒絶・隔離する<br>
+Virus:Reject<br>
+Level:110<br>
+Warning:<br>
+[!]WARNING[!]<br>
+許可送信元ドメイン以外のため隔離しました<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'---------------------------------<br>
+この設定内容では【mail.dat】内で From:[ドメイン名] を指定することによって、ホワイトリストとして受信許可させようという意図があると理解できました。<br>
+しかしながら、実はメールフィルタ【mail.dat】で From:[ドメイン名] や To:[ドメイン名] を指定した場合はヘッダレベルでの判定となります。あくまでメールのヘッダ部分にある From: だけを見て判別しています。<br>
+ところが、報告のあった拒絶隔離されたメールのヘッダFrom:を調べてみると、許可されているドメイン名の <b>abcd.jp</b> ではなく、別のドメインが付いたメールアドレスになっていました。そのため、設定通り【mail.dat】の最下行の部分「それ以外の送信元ドメインからのメールを拒絶」に条件がマッチし、結果として拒絶されていました。動作としては設定通りの動きでした。<br>
+<br>
+<b><li>エンベロープFROMとヘッダFromについて</li></b>
+よくあるメーラーから送る通常のメールならば「エンベロープFROM＝ヘッダFrom」の状態でメールが生成され送られてきますので、ある意味、このメールフィルタ設定でも有効に働きます。しかし、いつも「エンベロープFROM＝ヘッダFrom」の状況であるとは限りません。<br>
+送信フォームプログラムなどは、よくやる手法としてエンベロープFROMをシステム専用アカウントにし、ヘッダFromは送信フォームに記載されるメールアドレスなどを転用して、メールヘッダに記載して送信するようなことを行います。また、メーリングリストの投稿時にはヘッダFromはそのままだが、エンベロープFROMを書き換えるような動作を行う場合があります。<br>
+実はメールフィルタ【mail.dat】機能は、もともとSubject:や本文、あるいはメールヘッダにあるFrom:やTo:などの既知のヘッダ、特異な文字列などで表現される独自ヘッダなどを判定することによるフィルタ処理を行うことが主眼ですので、ヘッダFromの判定でうまく行かないときや不十分なときは別の手段や方法を考える必要があります。<br>
+<br>
+<b><li>考えられる別の対処策や代替の方法について</li></b>
+このケースでは拒絶隔離されたメールは送信フォームプログラムから送られたものであることがわかっていました。エンベロープFROMは、許可されている <b>abcd.jp</b> ドメインのシステム専用アカウント admin＠abcd.jp にしているものの、ヘッダFrom:は独自に書き換えられ、送信フォームに登録したメールアドレスなどがそのままコピーされて使われていました。さらに隔離されたメールを調べたところ、実際の送信元を表す &quot;Sender:&quot; というユニーク（独自）なヘッダが追加されていました。<br>
+これにより以下の<b> A</b>、<b>B </b>2通りの方法を考えてみました。<br>
+<br>
+<ol type="A">
+<b><li>メールフィルタ【mail.dat】の許可設定にユニークヘッダとしての &quot;Sender:&quot; 項目を付け加える</li></b>
+この方法は拒絶隔離されたメールのヘッダに &quot;Sender:&quot;というユニーク（独自）なヘッダが記録されているようでしたので、それを指定して許諾条件にしたものです。このようなユニーク（独自）なヘッダが何もない場合はこの手段は使えません。<br>
+【mail.dat】の許可設定部分（最下部より上）に次の１パターンを付け加えます。<br>
+'---------------------------<br>
+Virus:SENDER<br>
+Level:000<br>
+Unique-Header:Sender:admin＠abcd.jp<br>
+VirusEnd:<br>
+'---------------------------<br>
+（注意）実際のヘッダには、Sender:の後に半角スペースが入っていますが【mail.dat】ではスペースを入れないように設定します。＠マークはここでは全角にしていますが実際には半角です。<br>
+<br>
+<b><li>E-Postシリーズにある個別アカウント単位での【effect.dat】を設定し、エンベロープFROM レベルでの許可・拒絶設定する</li></b>
+こちらの方法は該当するアカウントについて、個別アカウント単位での【effect.dat】を設定する方法です。この個別アカウント単位での【effect.dat】機能を使うには以下のように操作してください。<br>
+個別アカウント単位での【effect.dat】は、各ユーザー管理のページで［送信先制限（sender.dat）］の入力項目を [送信先制限（effect.dat）] と入力して変更でき、個人用の【effect.dat】の編集を行うことができます。
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」からエクスポートする対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーを選択して[送信先制限（sender.dat）]の入力項を [送信先制限（effect.dat）] と入力、［操作する］ボタンをクリックしてください。【effect.dat】の画面が表示されます。<br>
+'-----------------------------------<br>
+*＠lg.jp　　← 許可したいエンベロープの送信元ドメイン<br>
+*＠abcd.jp　← 同<br>
+（途中略）<br>
+* false 　　← その他はすべて拒否<br>
+'-----------------------------------<br>
+（注意）＠マークはここでは全角にしていますが実際には半角です。<br>
+この個別アカウント単位での【effect.dat】機能は、エンベロープレベルで判定されます。つまりエンベロープFROMがチェックされるということになります。<br>
+なお、メールサーバ全体の設定である「中継の制限」－［マシン毎の中継］【effect.dat】はサーバ全体に適用される機能であり、IPアドレスベースでメールサーバ全体で拒絶したり中継のルールを設定することを主な役割にしており、個別【effect.dat】とは役割が大きく異なるものです。上にあげた個別アカウント用の【effect.dat】事例の内容を全体設定の【effect.dat】に書かないようにご注意ください。<br>
+</ol></ol>
+<b>（関連FAQ）</b><br>
+●<a href="./faq04-10.html">個人アカウント単位で【effect.dat】を有効にするには</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

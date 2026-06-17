@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-83</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Active Directory（LDAP）連携をしているせいか小さなメールでも送信完了まで約10秒かかってしまう <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+Active Directory（LDAP）連携をしているせいか、ごく小さなテストメールでも送信完了まで約10秒かかってしまうのだが、この原因は、ADのドメインコントローラとのレスポンス時間がかかり、デフォルト設定のリトライ10回目でADにユーザーが存在することが確認できるという状況なのだろうか？という質問を受けたことがあります。<br>
+まず「送信終了までに約10秒かかる」というのは、epstrd サービスから見れば「SMTP受領プロセスが received ok. の受信完了までに約10秒かかる」という意味と同義です。<br>
+ここでは「送信終了までに約10秒かかる」ことの類推原因として、ADのドメインコントローラとのレスポンス時間ばかりに注視していますが、実はADとのリトライを含むやり取りにかかる時間は、epstrd サービスが受信完了までにかかる時間の一部でしかありません。調べるには視野を少し広げた方がよいです。<br>
+<br>
+<b>1．/etc/hostsファイルを記述しているか確認</b><br>
+<br>
+処理完了までに時間がかかる可能性は、/etc/hostsファイルを記述しておらず接続マシンの逆引き設定がされていないとか、ORDBの設定をしていて対象ORDBからの応答がないといったことが原因になることがあります。<br>
+逆引き設定ですが、E-Post V シリーズのSMTP受信サービス（epstrd）は、プログラムのその仕組み上、受領時にDNSへの逆引き問合わせを行う部分があります。そのときにhostsファイルを明示的に記述していれば、その内容を epstrd が逆引きに利用し、応答がスムーズになります。E-Postシリーズでは最低限、/etc/hostsファイルの明示的な記述が必要になっています。（下記記事参照）<br>
+ですから、「送信終了までに約10秒かかる」＝「epstrd サービスでの受信完了に10秒かかる」ことは、ADとのレスポンス時間に原因があるのではなく、接続マシンの逆引き設定が問題になっているところに大多数の原因がある可能性があります。<br>
+E-Postシリーズでは、自身のマシンIPアドレスとメールサーバに登録済み自ドメイン名をhostsファイルに記述することを必須のお願いにしています。/etc/hostsファイルに自ドメインのIPアドレスを記載しているか確認してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-04.html">クライアントからのメール送信が遅いケースと/etc/hostsファイルの必要性</a><br>
+●<a href="./faq10-53.html">/etc/hostsファイル記述の必要性と有用性について</a><br>
+●<a href="./faq15-04.html">POP3/IMAP4利用時にも/etc/hostsファイル記述を必須とする理由について</a><br>
+<br>
+<b>2．AD問い合わせでリトライが発生している可能性をログから探る</b><br>
+<br>
+AD問い合わせでリトライが発生している可能性をログから探る場合、SMTP受信詳細ログ（recivelog）を調べます。<br>
+AD問合せでリトライが発生している場合は、&quot;NetGetAnyDCName&quot; という記述をキーとして、エラーコードが記録されているはずです。SMTP受信詳細ログ（recivelog）を確認してください。<br>
+※AD問い合わせのレスポンスは、どちらかというとADのドメインコントローラと問い合わせマシンとのネットワーク環境や、ADのドメインコントローラ自体のレスポンスが悪いことに由来することが多いです。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

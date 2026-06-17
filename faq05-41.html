@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-41</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlogにデータ送信途中で&quot;socket error code=54&quot;が複数回続けて記録される理由とリトライの挙動について</b></FONT>
+<HR>
+<br>
+senderlogにデータ送信途中で<b>&quot;SendData (socket error code=54)&quot;</b>のsocketエラーコードが複数回続けて記録されて、最終的にセッションが閉じエラーのリターンメールを生成して終わっている場合、推測される理由とそのときのリトライの挙動について説明します。<br>
+<blockquote><small>
+（例）<br>
+[19:36:50:193] [B0000999999] SendData (socket error code=54)<br>
+[19:36:50:193] [B0000999999] SendData (socket error code=54)<br>
+[19:36:50:193] [B0000999999] SendData (socket error code=54)<br>
+　　　　　：　　　　　<br>
+※54のsocketエラーコードを複数回続けて記録、最終的にエラーのリターンメールを生成し終了</small><br>
+</blockquote>
+senderlogにデータ送信途中で記録されている<b>&quot;SendData (socket error code=54)&quot;</b>は、単なるネットワーク接続廃棄を意味する<b>&quot;=53&quot;</b>とは異なり、相手側による切断、ネットワーク破棄を意味します。相手側による意図的な切断があったと解釈はできますが、くわしいことは先方のサーバや機器の事情を調べてみない限り詳細な理由はわかりません。発生が一時的なもので、その後は正常に送信できている場合でしたら特に心配することはないと考えられます。<br>
+上記の例のように複数回出力されたのは、E-Postのepstddサービスがシステム的に接続復旧のためのリトライを行っていることになります。E-Post側でシステム的な接続復旧のリトライを行ってもダメだったので、最後にはあきらめてエラーのリターンメールを生成した結果になっているのが上記の例です。<br>
+一方、E-POST コントロールセンター（メールサーバ管理）の［SMTP送信詳細］を開いて表示される「SMTP送信詳細設定」画面にある「配送のリトライ」については、「受信拒否」「回線異常」「サーバ無応答」のいずれの条件に当てはまらないときには、配送リトライが実行されず配送リトライの対象外となるケースが存在します。<br>
+具体的に言うと、相手側である送信先MTAのエラー応答コード400番台や500番台を受け取れないときは、「受信拒否」「回線異常」各々に設定されている配送リトライは実行されません。また最初の接続時点で相手サーバが応答してセッションが進行している状態でセッション途中で相手から強制切断された場合も「サーバ無応答」で設定されている配送リトライがやはり実行されないことになります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

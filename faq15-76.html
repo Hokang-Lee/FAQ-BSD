@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-76</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>経路上にある装置によりヘッダ途中に空白行が挿入されメール本文が文字化けする現象について</b></FONT>
+<HR>
+<br>
+メールを受信する過程で、経路上にあるSMTPゲートウェイやメールセキュリティ装置など、何らかの中継機器や装置により、ヘッダ途中に空白行[CR][LF]が挿入されることが原因となって、メール本文が文字化けする現象の報告を受けたことがあります。<br>
+メールサーバ上に残っているメールデータ（拡張子.MSG）の提供を受けてその理由が判明しました。現象が起きた実際のメールデータ（拡張子.MSG）ファイルをエディタで開いて確認したところ、メールデータのヘッダ部分、論理行の50行目、x-microsoft-antispam-message-info: があるヘッダと、論理行の52行目、spamdiagnosticoutput: があるヘッダの間、51行目に想定していない空白行（[CR][LF]コード）が挿入されている状況が確認されました。<br>
+<br>
+[B00123123.MSG]<br>
+-----------------------------------------------<br>
+[50]x-microsoft-antispam-message-info: ～<br>
+[51]　　　　　← ヘッダの途中で異常な空白行[CR][LF]が挿入<br>
+[52]spamdiagnosticoutput: ～<br>
+-----------------------------------------------<br>
+<br>
+[上記の説明]<br>
+-----------------------------------------------<br>
+header1:<br>
+header2:<br>
+　:<br>
+[CR][LF]　　　← ヘッダの途中で異常な空白行[CR][LF]が挿入<br>
+headerN1:<br>
+headerN2:<br>
+[CR][LF]　　　← 正常な空白行[CR][LF]<br>
+本文データ<br>
+　:<br>
+　:<br>
+-----------------------------------------------<br>
+<br>
+ヘッダの途中で空白行（[CR][LF]コード）が挿入されている上記の例では、このメールデータを読み出すメールクライアント（メーラー）は規約に従い、途中に空白行が挿入された位置でヘッダが終わったと認識され、ここからメール本文として判断される原因となります。このことが原因となって、本文が文字化けを起こしてしまう結果になっていました。<br>
+E-Post側にはこの現象を引き起こす原因はまずありません。途中の経路上にあるSMTPゲートウェイやメールセキュリティ装置など、ヘッダの途中にこの空白行（[CR][LF]コード）を異常に挿入させたものがあることをまず疑って、調査すべき事例と思われます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-89.html">メールヘッダの一部がそのまま本文に表示されてしまうことがある</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

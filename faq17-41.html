@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-41</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>サービス停止・開始を手動で制御する際、サービスの停止順や開始順は厳密に決まっているのか？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+定期メンテナンス時間帯に作業を行う際、service start, service stop コマンドでサービスの停止・開始を手動で制御するにあたり、サービスの停止順や開始順は厳密に決まっているか質問を受けたことがあります。<br>
+<br>
+結論から言うと、E-Postのサービスの停止順、開始順について、厳密な決まりはありませんが、むしろ [メール作業フォルダ]\tempや、 [メール作業フォルダ]\incomingなどのフォルダが空であることの目視確認をステップとして重視してください。<br>
+<br>
+下記例にあるように[メール作業フォルダ]\temp や [メール作業フォルダ]\incoming フォルダが空であることの目視確認を入れたことに関して言うと、仮にファイル生成途中でサービスを停止させた場合、サービスは未処理のものをもう一度やり直しますが、万が一にも大量受領中や大量配送中などクリティカルな状況下も考慮し、この確認作業は留意しておいた方が望ましいと言えます。バッチファイルやスクリプトで実施するときはフォルダ下のファイル数などをチェックしておく方法はいかがでしょう。<br>
+<br>
+<b>（サービス停止時）</b><br>
+(1)  [メール作業フォルダ]\temp が空であることを目視で確認。<br>
+(2) epstrdを停止。<br>
+(3) [メール作業フォルダ]\incoming が空であることを目視で確認。<br>
+※場合によっては [メール作業フォルダ]\holding,domains も追加しておいてもよいでしょう。<br>
+(4) epstddを停止。<br>
+<br>
+<b>（サービス開始時）</b><br>
+(1) epstddを開始。<br>
+(2) epstrdを開始。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

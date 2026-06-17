@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ02-10</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メーリングリストへの返信抑制と自動応答の方法について</b></FONT>
+<HR>
+<br>
+よくアンケートメールなどに見られるように、「本メールは自動配信です。このメールに返信いただいても届きません」などのように返信を抑止しているものがありますが、メーリングリストアドレスについて、メーリングリストの返信制御と自動応答の方法を組み合わせることで、そのように動作させることは可能です。<br>
+<br>
+以下に２つの方法をあげます。方法１は以下の A.B.C. の運用手順を取ります。方法２は D. の手順を取ってください。<br>
+<br>
+<b>《方法１》</b><br>
+Repry-to:ヘッダを付加しないメーリングリスト形態にして、投稿者の条件を管理人のみにし、さらに自動応答の設定を行う方法です。<br>
+<br>
+A．E-Post Mail Serverアカウントマネージャのメーリングリスト詳細設定<br>
+<blockquote>
+■メーリングリストの詳細設定<br>
+「Repry-to:ヘッダを付加する」＝オフ<br>
+「投稿者の条件」＝管理人のみ<br>
+「結果応答をしない。」＝オン<br>
+</blockquote>
+※さらに「"FROM"では利用しない」＝オフ にしておきます。このオプションは、メーリングリストアドレスを外部から勝手に利用されたり、不正中継させないための別のセキュリティ上の目的があります。<br>
+※上記で「結果応答をしない。」＝オフ にした場合は、メーリングリストアドレスに送信したり投稿したとき、【'xxx.jp' is not the moderator of the 'ml＠xxx.jp' list. Sorry, only the moderator may send mail to this list. Your message has been forwarded to the moderator.】というE-Post標準の固定メッセージ、『moderatorしか投稿できない』エラーメールが返されるようになります。<br>
+<br>
+B．投稿者のメールクライアント設定<br>
+<br>
+投稿者＝管理人は、メールクライアント送信プログラムの設定を変更し、投稿する「From:」を自動応答設定を行った任意のメールアドレスに変更します。（From:ヘッダの書き換え）<br>
+「To:」はメーリングリストアドレスにして投稿するようにします。<br>
+※つまり、投稿者＝管理人が使うメールクライアントソフトから投稿するとき、From:ヘッダの書き換えを行って投稿するよう設定しておくということです。From:ヘッダの書き換え方法は、各メールクライアントソフトまたは送信プログラムの設定方法を参照してください。<br>
+<br>
+C．E-Post Mail Serverアカウントマネージャの自動応答設定<br>
+<blockquote>
+■任意のアドレスで自動応答設定<br>
+上記「From:」で指定する任意アドレスのアカウントで「メール制御」の自動応答を設定し、返信内容にオリジナルメッセージを定義します。<br>
+自動応答のメッセージを日本語表記にする場合、Shift-JISで保存・記録せず、必ず、JISコード形式で保存します。<br>
+</blockquote>
+JISコードでメッセージを作る方法は、「サポート２」サイトにある変換ツールの"UnicodeConv.exe"を使うか、書籍の構築ガイド記事を参考にしてください。<br>
+■<a href=../epmsent_construct_guide/kouchiku20.html target="_blank">E-Post Mail Server構築ガイド－20.自動応答を設定してみよう</a><br>
+<br>
+また、次のFAQの内容に従って、返信メールの Content-Type: が iso-2022-jp になるように設定ファイルを設定します。<br>
+●<a href=./FAQ01-63.html>自動応答メールの文字コードが西ヨーロッパ言語になっていて、メーラで文字化けする</a><br>
+<br>
+なお、設定後は、各サービスの再起動が必要になります。<br>
+<br>
+この方法１では、ユーザーに配信されたメーリングリストの送信元は、From:のアドレスになっていますから、そこに返信しても、設定済み自動応答メッセージメールが返される結果になります。<br>
+<br>
+<b>《方法２》</b><br>
+Repry-to:ヘッダを付加することの多い、通常のメーリングリスト形態では、以下の D. の手順にて、投稿者の条件を管理人のみにしてしまう方法です。<br>
+投稿者以外からの投稿があると、システム側からは下記の内容の固定メッセージが返されます。メッセージ内容にこだわらないのであれば、この方法がいちばんシンプルで、他の設定も不要です。<br>
+<br>
+D．E-Post Mail Serverアカウントマネージャのメーリングリスト詳細設定<br>
+<blockquote>
+■メーリングリストの詳細設定<br>
+「Repry-to:ヘッダを付加する」＝オン<br>
+「投稿者の条件」＝管理人のみ<br>
+「結果応答をしない。」＝オフ<br>
+</blockquote>
+このとき、管理人以外の人が（返信で）投稿した場合、【'xxx.jp' is not the moderator of the 'ml@xxx.jp' list. Sorry, only the moderator may send mail to this list. Your message has been forwarded to the moderator.】というE-Post標準の固定メッセージ、『moderatorしか投稿できない』エラーメールが返される結果になります。<br>
+<br>
+以上の方法について、それぞれテスト運用してみて、望んでいる動きや結果に近いかを判断した上でご使用になることをお薦めします。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-02</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>外部へメールが配送がされない</b></FONT><br>
+<HR>
+<br>
+外部へメール配送されない場合は、以下の点を確認してください。<br>
+以下の手順にて、DNS回りや相手側の拒絶、通信経路に絡む問題を順次、調ベてください。<br>
+<OL><LI>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある「DNSサーバー」項目に利用可能なDNSサーバのIPアドレスを設定済みですか？<br>
+また、OSの設定ファイル「/etc/resolv.conf」で「nameserver xxx.xxx.xxx.xxx」として利用可能なDNSサーバのIPアドレスが設定されていますか？<br>
+<br>
+この２つの設定項目は、メールサーバが送信時に名前解決をするときに参照されますが、参照されるタイミングが異なります。<br>
+<ul type="square">
+<li>MXレコードの参照･･･>　E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］を選択して［開始する］、「DNSサーバー」の設定<br>
+<li>Aレコードの参照･･･>　hostsファイル、あるいは、OSの設定ファイル「/etc/resolv.conf」記述の「nameserver xxx.xxx.xxx.xxx」<br>
+</ul>
+E-Post Mail Server／E-Post SMTP Serverシリーズでは、リトライ毎に、MXレコード1→MXレコード2→Aレコードと順番に参照しますので、両方のDNSサーバー項目が正しく設定されていることを前提にしています。<br>
+<br>
+<LI>設定したDNSサーバは、外部ドメインのMXレコードを正しくキャッシュしていて、名前解決ができるようになっていますか？<br>
+メールサーバを設定したマシンから、nslookupコマンドで確認してください。<br>
+以下のように配送先のドメインの応答がされれば、使用しているDNSは正しく参照されています。名前解決ができなければ、DNSを参照できないか、設定に問題があります。<br>
+<br>
+（太字部分をユーザーが入力　abcd.ne.jpは架空のドメイン）<br>
+<table bgcolor="#777777" width="480">
+ <tr>
+  <td class="m"><font color="#ffffff">
+  <b><u>nslookup</u> [Enter]</b><br>
+  Default Server:  ns.xxx.co.jp<br>
+  Address:  xxx.xxx.xxx.xxx<br>
+  <b><u>set type=mx</u> [Enter]<br>
+  <u>abcd.ne.jp</u> [Enter]</b><br>
+  Server:  ns.xxx.co.jp<br>
+  Address:  xxx.xxx.xxx.xxx<br>
+  <br>
+  abcd.ne.jp    MX preference = 5, mail exchanger = mail.abcd.ne.jp<br>
+  　　　　:<br>
+  <b><u>exit</u> [Enter]</b><br>
+  <br></font>
+  </td>
+ </tr>
+</table>
+※または <b>nslookup type=mx abcd.ne.jp [Enter]</b> と一度に引数付きで入力することも可能です。<br>
+<br>
+<LI>上で確認することができたMXレコード宛に、telnetコマンドでSMTPポートへ接続できるか試してください。メールサーバを設定したマシンから、確認します。（※）<br>
+何の応答もないときは、相手側サーバーか到達するまでの経路上に問題があります。<br>
+<br>
+（太字部分をユーザーが入力　abcd.ne.jpは架空のドメイン）<br>
+<table bgcolor="#777777" width="480">
+ <tr>
+  <td class="m"><font color="#ffffff">
+  <b><u>telnet mail.abcd.ne.jp smtp</u> [Enter]</b><br>
+  220 OK<br>
+  <br>
+  <b><u>quit</u> [Enter]</b><br>
+  221 abcd.ne.jp Service closing transmission channel<br>
+  <br></font>
+  </td>
+ </tr>
+</table>
+※応答メッセージに長短があったり、メッセージの文言は、相手のメールサーバ種類や設定内容により、一律ではありません。ただし、RFCで規定された応答コードについては、どのようなサーバでも原則は同じです。<br>
+※OP25Bを実施している回線上のクライアントマシンからは、原理上、SMTPの25番ポートではつながりません。OP25Bが実施されていない回線上のメールサーバマシンから、接続できるかどうかを試すようにしてください。<br>
+<br>
+<LI>TELNETでSMTPポートへ通信でき、接続できるにもかかわらず、実際のメールで拒絶されてしまう場合は、相手SMTPサーバが、送信しようとするメールに対して何らかの拒否設定がされている可能性があります。<a href="./faq05-10.html">［配送時の詳細ログ］（senderlog）</a>や<a href="./faq05-09.html">［配送失敗ログ］（faillog）</a>を有効にして、ログを取得してください。ログを精査することによって、相手側から拒絶されている理由を探ります。ログを取得しないでも、相手先に問い合わせできたり、調べられるときは、そうした情報を確認します。<br>
+<br>
+[確認事項]<ul type="disc">
+<li>メールサイズ制限されていないか。
+<li>宛先が存在しないメールアドレスでないか。
+<li>こちらのサーバのIPかドメイン名が、SPAMフィルタサービスなどのブラックリストに載っていないか。
+<li>送信元アドレスが拒絶されていないか。
+<li>送信元ドメインが架空のドメインを使用していないか
+<li>その他、相手SMTPサーバーが何らかの拒絶理由を設定していないか。
+</ul>
+<br>
+<LI>［配送の詳細ログ］（senderlog）に理由のわからない&quot;code=0/0&quot;や&quot;error=54&quot;が記録されているときは、次の２つの例を参照してください。<br>
+<br>
+<b>（例１）通信手順中に「451 Requested action aborted: error in processing. (code=0/0)」が記録されている場合</b><br>
+<br>
+この記録があるとき、回線上で通信ができない、または回線が混雑のため、通信タイムアウトが発生している可能性があります。<br>
+&quot;code=0/0&quot;は、無通信タイムアウトや、セッションを相手が切ったために、メールサーバー内部処理において自動作成した応答コード＆メッセージです。<br>
+<br>
+[対処方法]<br>
+下記のレジストリ設定値を変えることで、無通信接続タイムアウト時間を変更できます。無通信接続タイムアウト時間を少し延ばしてようすをみます。<br>
+無通信接続タイムアウト時間は、レジストリのキーを手動で登録することで調整可能です。キー値がない場合、デフォルトで1200秒（＝約20分）の設定になっています。<br>
+<small><br>
+[メール作業ディレクトリ]内<br>
+->reg<br>
+ ->epost<br>
+   ->ims<br>
+　　　　->EPST5DS　　　　　　　(ディレクトリ)<br>
+　　　　　->SendDataTimeout.1　　(数値)sec 送信１回当りのタイムアウト時間<br>
+　　　　　　　　　　　　　　　 キー値がない場合＝デフォルト 1200sec<br>
+　　　　　->RecvDataTimeout.1　　(数値)sec 応答１回当りのタイムアウト時間<br>
+　　　　　　　　　　　　　　　 キー値がない場合＝デフォルト 1200sec<br>
+数値は10進で入力します。設定値を変更した後は、epstddを再起動してください。<br></small>
+<br>
+<b>（例２）データ送信中に「SendData error=54」が記録されている場合</b><br>
+<br>
+code=54や、error=54 は、socketのエラーコードであり、Socket error が起きていることを表わしています。<br>
+この Socket error が発生するときは、回線エラーであったり、無通信タイムアウトで通信ができない状況が発生している可能性があります。さらに、SMTPプロトコルレベルではなく、物理層に近い別の層でトラブルが起きている可能性もあります。つまり、通信の経路や通信環境の問題、OSやハードウェア絡みのトラブルが原因となっているケースもあり得ます。<br>
+<small><br>
+[BXXXXXXXXXX] SendMailMess:354 Start mail input; end with &lt;CRLF&gt;.&lt;CRLF&gt;<br>
+[BXXXXXXXXXX] SendData error=54<br>
+[BXXXXXXXXXX]       ：<br>
+[BXXXXXXXXXX]       ：<br>
+[BXXXXXXXXXX] SendData error=54<br>
+<br></small>
+code=54やerror=54は、socketのエラーコード(ECONNRESET)です。これ以外のコードは<A HREF="./FAQ10-04.html">socketエラーコード表</a>を参照してください。<br>
+<br>
+データ送信時に「相手側で切断」された場合のこれらの理由コードですが、通信環境を見直すとともに、前述した無通信タイムアウト時間を延ばすなどの方策を取って、ようすを見てください。</OL>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-10.html">配送時の詳細ログ(senderlog)について</a><br>
+●<a href="./faq05-09.html">配送失敗ログ（faillog）について</a><br>
+●<a href="./faq05-20.html">senderlog と faillog に記載された配送失敗の理由が異なる</a><br>
+●<a href="./faq05-33.html">senderlogにデータ送信途中で&quot;socket error code=54&quot;や&quot;=53&quot;のようにsocketのエラーコードが記録される場合</a><br>
+●<a href="./faq05-32.html">senderlogに&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;が記録される場合の対処策</a><br>
+●<a href="./faq05-26.html">senderlogに&quot;421 Service Temporarily Unavailable&quot;と&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;が記録される理由について</a><br>
+●<a href="./faq05-34.html">senderlogに送信リトライのたび&quot;socket error code=60&quot;のエラーが記録される場合</a><br>
+●<a href="./faq10-04.html">socketエラーコード表</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

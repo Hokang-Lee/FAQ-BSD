@@ -1,0 +1,80 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-57</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>dead フォルダに格納されたメールデータを使って手動で再送信させるには</b></FONT>
+<HR>
+<br>
+dead フォルダには、配送失敗しただけでなく、送信元にもエラーメールを戻すことができなかったメールデータが格納されます。<br>
+dead フォルダに格納されたメールデータは通常なら廃棄するのが普通です。ただし残されたメールデータを使って手動で再送信させることも工夫すれば可能です。deadフォルダには.MSGファイルだけが残り.RCPファイルは破棄される仕様のため、.RCPファイルを手動で復元させる必要があります。<br>
+.RCPファイルを復元できたら、epstdd サービスを停止させた状態にし、incoming フォルダ内に.MSGファイルと復元された.RCPファイルを対にして置くようにします。ファイルを置いた後で epstdd サービスを再開させると、メールの再送信動作が自動的に行われます。<br>
+なお、.RCPファイルの復元するには以下の方法があります。Aがベストですが、ログ情報がない場合はBになります。.RCPファイルの書式は、サンプルデータを参考にしたり、下記を参照してください。<br>
+<br>
+<b>Ａ．faillog（配送失敗ログ）から.RCPを復元する</b><br>
+faillog（配送失敗ログ）から送信元（エンベロープFROM）、送信先（エンベロープTO）の情報を取り出し、.RCPファイルを手動で復元します。<br>
+・メッセージIDとドメイン名→Message-ID:<br>
+・エンベロープFROM→Return-path:<br>
+・エンベロープTO→Recipient:<br>
+※メッセージID＝"B"で始まる.MSGの拡張子を除くファイル名部分<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-09.html">配送失敗ログ（faillog）について </a><br>
+<br>
+<b>Ｂ．メールのヘッダ情報から.RCPを復元する</b><br>
+メールデータであるMSGファイルの中身を参照し、ヘッダ情報からFrom:ヘッダ、To:やCC:ヘッダの情報を取り出し、その情報から.RCPファイルを復元します。<br>
+※ただしヘッダ情報なのでFrom:ヘッダ情報とエンベロープFROMを書き換えて変えている場合は対処できません。またヘッダ情報からはBCCはカットされているため、BCCで送られた情報は復元できないことに注意してください。<br>
+・メッセージIDとドメイン名→Message-ID:<br>
+・ヘッダFrom→Return-path:<br>
+・ヘッダTo→Recipient:<br>
+・ヘッダCC→Recipient:<br>
+※メッセージID＝"B"で始まる.MSGの拡張子を除くファイル名部分<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-78.html">メールキュー（incoming）フォルダに生成される一時ファイルについて</a><br>
+<br>
+<b>RCP、RCXのファイルの書式について</b><br>
+エンベロープ情報の.RCP、.RCXファイルの書式例は以下の通り。Recipient:では TO:CC:BCC: の区別はありません。<br>
+　---------------------------------------------------------------<br>
+　Message-ID: &lt;[メッセージID]@[ドメイン名]&gt;<br>
+　Return-path: [エンベロープFROMで指定したメールアドレス]<br>
+　Recipient: [エンベロープTOで指定したメールアドレス]<br>
+　Recipient: [エンベロープTOで指定したメールアドレス]<br>
+　Recipient: [エンベロープTOで指定したメールアドレス]<br>
+　　　　　　　：<br>
+　Recipient: [エンベロープTOで指定したメールアドレス]<br>
+　---------------------------------------------------------------<br>
+　※メッセージID＝"B"で始まる.MSGの拡張子を除くファイル名部分<br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

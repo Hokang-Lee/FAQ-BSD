@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-14</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>スパムメール本文に載っているスパムサイトが短縮URLを使ってくるときの対策</b></FONT>
+<HR>
+<br>
+スパムメールがsurbl方式のスパム判定をかいくぐるために、スパムメール本文に載っているスパムサイトとして本来のURLを載せず短縮URLを載せて送ってくることがあります。一般的なsurbl方式のスパム判定サービスを利用しているときや、E-Postアンチスパムオプションサービスを利用している場合も、有名な短縮URLを使ったスパムメールが送られてきた場合、ブラックとして判定されなくなってしまいます。<br>
+決定打とはなかなか言い切れませんが、E-Post Mail Server / E-Post SMTP Serverには、短縮URLを使ったスパムメールが送られてきたときの対策機能、短縮URLのリダイレクト結果テーブル【shorturl.dat】が用意されていますので紹介します。ただし、これは使われる短縮URLごとに登録しなければなりませんので、新しい短縮URLを発見するごとに登録するという、いわゆる“いたちごっこ”状態になることは承知してください。<br>
+<ol>
+<li>スパムメールに載っている短縮URLにアクセスし、実際のスパムサイトURLを調べておく。（バックドアが仕掛けられている危険性もあるので検出機能のあるPCから行うこと）<br>
+<li>root権限でコンソールにログインし、プログラムインストールフォルダ（既定値 /usr/local/mta/bin/）を開く。</li>
+<li>同上のフォルダ内にテキストファイルを作成、【shorturl.dat】のファイル名にする。</li>
+<li>【shorturl.dat】の書式に従って記述する。複数あるときは行を追加して記述していく。<br>
+----------------------------------------------<br>
+[短縮URL],[スパムサイトURL]<br>
+----------------------------------------------<br>
+（例）<br>
+----------------------------------------------<br>
+http://bit.ly/1X2Y,http://meiwakuXXX/YYY<br>
+http://bit.ly/3X4Y,http://meiwakuXXX/ZZZ<br>
+----------------------------------------------</li>
+<li>スパムサイトURLのTOPドメインをブラックリストとして登録しておく。</li>
+</ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

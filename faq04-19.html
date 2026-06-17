@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-19</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールフィルタ設定でzipファイルが添付されたメールを特定アドレスに隔離するには</b></FONT>
+<HR>
+<br>
+メールフィルタ設定で下記事例のように記述を工夫することにより、zipファイルが添付されたメールを特定アドレスに隔離することはとりあえず可能です。下記書式例の条件にマッチしたメールは、の Level:600 の指定により、Forward:～ で指定されたメールアドレスに転送され隔離されるようになります。管理用アドレスにしておくことで隔離されたことを気づきやすくします。<br>
+ただし、これはあくまでもMIME書式をメールフィルタで設定する方法ですので、送信元のメーラーや送信ツールによって指定された以外のMIME Typeが使われた場合は、通過する可能性があることを承知してください。これ以外のMIME Typeが見つかったら必要に応じて設定パターンを追加してください。<br>
+設定例その2のように、Level:600 を Level:610 とした場合は、さらに[メール用作業フォルダ]\viruslogフォルダ内にメールデータ本体の .MSGファイルとエンベロープ情報の .RCPファイルとの2ファイルが保管格納されます。 .RCPファイルの中を確認すると、&quot;Warning:&quot; ～ &quot;WarningEnd:&quot; の間で指定した情報が記載されていますので、フィルタ設定のどの部分の条件でマッチしたのかを判断できます。<br>
+<br>
+<b>（メールフィルタ設定例その1）</b><br>
+'------------------------------------------------------<br>
+Virus: attach zip file<br>
+<font color="#ff0000">Content-Type:mutipart/mixed;</font>　　←(a)<br>
+Tag:[Attach_Zip]<br>
+Body:<br>
+<font color="#ff0000">Content-Type: application/x-zip-compressed;</font>　　←(b)<br>
+BodyEnd:<br>
+Level:600<br>
+Forward:kanrisha＠abcdef.jp<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+<b>（メールフィルタ設定例その2）</b><br>
+'------------------------------------------------------<br>
+Virus: attach zip file<br>
+<font color="#ff0000">Content-Type:mutipart/mixed;</font>　　←(a)<br>
+Tag:[Attach_Zip]<br>
+Body:<br>
+<font color="#ff0000">Content-Type: application/x-zip-compressed;</font>　　←(b)<br>
+BodyEnd:<br>
+Level:610<br>
+Forward:kanrisha＠abcdef.jp<br>
+Warning:<br>
+[!]WARNING[!]<br>
+This mail has attached file - attach zip file<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+<b>※指定する際の要注意ポイント</b><br>
+(a) 添付付きメールの指定条件。&quot;Content-Type:&quot; の後は [token] 指定に該当する部分なので<font color="#ff0000">&quot;Content-Type:mutipart/mixed;&quot; というように半角スペースを入れず、続けて記述</font>する。<br>
+(b) 本文のMIME構造書式として application形式の添付ファイルの指定条件。本文の条件指定である &quot;Body:&quot; ～ &quot;BodyEnd:&quot; の間に指定するのは、<font color="#ff0000">本文に書かれたMIME構造の書式文字列をそのまま指定する部分なので、&quot;Content-Type: application/x-zip-compressed;&quot; というように、実際のメール本文にある文字列 &quot;Content-Type:&quot;の後ろに半角スペースが入っている状態の通り指定</font>する。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-81.html">メールフィルタ（mail.dat）の設定事例</a><br>
+●<a href="./faq04-18.html">メールフィルタ設定で実行形式のファイルを含む添付ファイル付きメールを拒絶するには</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

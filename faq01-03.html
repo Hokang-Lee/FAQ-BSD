@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-03</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>SMTP認証を設定すると外部からのメールが届かない</b></FONT>
+<HR>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開き、SMTP認証の「セキュリティレベル」が<U>「認証専用」</U>に設定されていないか確認してください。<BR>
+「認証専用」設定にしている場合、外部MTAから単にメールを受信するだけであっても、SMTP認証のリクエストに応じて、接続元のSMTPサーバが正しいIDとPASSWORDを送出できなければ、SMTP受信部が接続を拒絶し、その結果、受信拒否されてしまうことになります。<BR>
+<BR>
+SMTP認証を有効設定にする際、ユーザー単位で送信時認証を行う設定にしておいて、なおかつ通常通り外部からのメールを受信したい場合は、<U>「認証ファイル」</U>を選択するようにしてください。<BR>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

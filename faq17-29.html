@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-29</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTPゲートウェイに設定したSMTP Serverに内側のメールサーバと同名のドメインが登録されていると user unknown となり正しく働かない <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+SMTPゲートウェイとして設定した E-Post SMTP Server において、内側のメールサーバと同名のドメインが登録されている場合、SMTP Server にはローカルユーザーを登録していないはずなので、そのままでは SMTP Server が user unknown を返す結果となり正しく働かない状態になります。E-Post SMTP Server には内側のメールサーバと同名のドメインを登録しておかないよう注意が必要です。<br>
+<br>
+SMTPゲートウェイ構成の設定方法には二通りの方法があります。E-Post SMTP Serverにエイリアスを設定、そのエイリアス設定の際、内側のメールサーバにあるドメイン配下のアカウントをワイルドカード指定および1行のエイリアス設定する方法（Aの方法）と 、内側のメールサーバにあるドメイン配下のアカウントと一対一のエイリアスを設定する方法（Bの方法）です。（下記記事参照）<br>
+なお、E-Post SMTP Server を単純な SMTPリレーや SMTPゲートウェイとして使用する場合でも、E-Post内に登録しておくアカウント数はゼロにはできません。ダミードメインを登録しそこにダミーアカウント最低一つ以上の登録が必要です。（下記記事参照）<br>
+<br>
+仮にSMTPゲートウェイ内に内側のメールサーバと同名のドメインが登録されているときに「未指定のアカウントへの送信」や「未指定のアカウントからの送信」がされると、SMTPゲートウェイにしたはずの SMTP Server が user unknown を返す結果になります。その動きはSMTP受信詳細ログ（receivelog）に記録されます。<br>
+SMTPゲートウェイとして設定した E-Post SMTP Server に登録しておく内部ドメインは、内側のメールサーバと同名のドメインではなく、異なる名前のダミードメインを登録しその中にダミーカウントを最低一つ以上追加しておくべきです。<br>
+<br>
+<b>（関連資料）</b><br>
+■<a href="https://www.e-postinc.jp/doc/SMTPgatewaysetting2.3.pdf">技術資料『SMTPゲートウェイ基本設定と応用 Rev2.3』</a><br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-30.html">SMTPゲートウェイとして利用したい</a><br>
+●<a href="./faq01-61.html">SMTPゲートウェイとメールサーバの設定ポイント（E-Post Mail Server・E-Post SMTP Server）</a><br>
+●<a href="./faq01-99.html">SMTPゲートウェイとして構築したとき踏み台にならないようにする（重要）</a><br>
+●<a href="./faq08-08.html">無制限ライセンスが必要になる状況は避けてください</a><br>
+●<a href="./faq15-62.html">送信専用用途でもSMTPゲートウェイ用途でもアカウント数 &quot;0&quot; は避けてください</a><br>
+●<a href="./faq17-27.html">送信専用にしている SMTP Server にはメールボックスが存在していることを忘れずに</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-29</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>クローズド環境で使ってきたメールサーバを特定の外部ドメインだけにメールを配信できるようにしたい <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+クローズド環境で使ってきたメールサーバであれば、外部につながるDNSサーバを設定していないか、あるいは「DNSサーバー」設定項目に何も設定していなかったと推測します。<br>
+仮に特定の一部ドメインのみの限定であれば、「基本設定」内の「DNSサーバー」設定項目に指定したDNSサーバでのMX参照ではなく、配送テーブルである【gateway.dat】に直接記述指定してしまう方法が使えます。<br>
+配送時の名前解決の際、【gateway.dat】の記述があると、DNSサーバのMXレコード参照より優先して名前解決が行われます。<br>
+【gateway.dat】は、「基本設定」内にある［ゲートウェイ詳細］ボタンをクリックすると表示されます。［ゲートウェイ詳細］［テーブル編集］【gateway.dat】はサーバのSMTP配送段階で参照され、配送先を指定できます。記述方法はヘルプや下記関連FAQ記事を参照ください。<br>
+なお、接続元IPアドレスを指定するといったことや、送信元 From:を指定するといった条件は【gateway.dat】には加えられません。<br>
+<br>
+一方、送信元ごとに特定のドメイン送信を許可する、許可を与えない、などを設定する場合、「ユーザー管理」から各アカウント単位で指定できる「送信先制限」【sender.dat】を組み合わせて対処することになります。<br>
+「送信先制限」の指定方法の基本は、「ユーザー管理」から各アカウント単位で送信を許可する配送先ドメインを記述する方法となります。<br>
+たとえば、該当アカウントに「送信先制限」【sender.dat】を設定し、内部ドメインdomainA.comと外部ドメインdomainB.comを2行記述しておくと、該当ユーザーはそれらのドメイン宛てには送信許可はされますが、それ以外の（記述されていない）ドメイン宛てに送信しようとすると、サーバからメールクライアントに対し、次のエラー応答が返されるようになります。<blockquote>
+550 5.1.1 Please mail to a valid e-mail address. approval filter. '[fromaddress]' is entry in the blacklist. (epstrd v5.04以降)</blockquote>
+この「送信先制限」機能は、サーバ側のSMTP受領段階においてチェックが行われる形となります。記述方法はヘルプや下記関連FAQ記事を参照ください。<br>
+なお、「ユーザー管理」から「送信先制限」を設定すると、該当ユーザーのメールボックスフォルダ内に【sender.dat】というファイルが生成されます。同じ設定をしたい別のユーザーのメールボックスフォルダにこのファイルをコピーすれば、同じ設定がそのまま反映されます。さらに、「送信先制限」を全体設定にしたいということであれば、記述された【sender.dat】をプログラムインストールフォルダ（/usr/local/mta/bin/）にコピーしておくと、そのまま全体共通設定として反映させることができます。【sender.dat】ファイルコピーは、標準コンソールやTeraTermなどSSHでターミナルにログインし操作してください。<br>
+<br>
+まとめると、配送時の名前解決の指定には、SMTP配送テーブルである【gateway.dat】を記述するということ。加えて、サーバ側のSMTP受領段階において送信元や送信元アドレスでの送信許可制限を与えたければ、「ユーザー管理」から「送信先制限」【sender.dat】を加えるということです。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-55.html">epstdd（SMTP配送サービス）が配送先を決める優先順位</a><br>
+●<a href="./faq10-28.html">フォワードするSMTPサーバをドメイン別に振り分け制御する</a><br>
+●<a href="./faq15-73.html">サブドメインが複数あるサーバ宛に送ると名前解決の問題で配送が失敗することがある場合の対策</a><br>
+●<a href="./faq10-86.html">送信先のMXレコードにある優先MTAがダウンしていて別の次点MTAに強制的に送信したい</a><br>
+●<a href="./faq10-97.html">テーブル編集【gateway.dat】の設定でメールアドレス単位による振り分け設定が可能に</a><br>
+●<a href="./faq10-45.html">「送信先制限」で送り先アドレスを送信禁止させたい</a><br>
+●<a href="./faq10-88.html">「送信先制限」で1ドメインを送信禁止したとき、同報で他ドメイン宛もいっしょに拒絶される</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

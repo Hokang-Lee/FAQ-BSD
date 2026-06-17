@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-51</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>tempフォルダにファイルが数十件溜まってしまう現象が起こるときの原因は？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Postはメール受領完了までは、ファイルが [メール作業フォルダ]（既定値 /var/spool/epms/）temp フォルダに蓄えられるという仕様です。<br>
+通常のメールはサイズがそれ程大きくないのでフォルダを目視しても溜まったようには見えませんが、以下のような事象の場合はメールが溜まったように見えることもあり得ます。<br>
+<blockquote>
+1. 大量のメールが一度に送られてきている場合（一種のDDosや大量SPAMの踏み台）<br>
+2. 接続だけしてセキュリティホールを探しているBotツールによる場合（接続だけしても無通信タイムアウトまで切らない場合）<br>
+3. 巨大なサイズの添付が送られて完了まで時間がかかる場合<br>
+</blockquote>
+これらは、目視で'temp'フォルダに溜まったように見えることはあり得ますが、相手からの送信による影響のためと捉える事象です。関連FAQを参照ください。<br>
+<br>
+tempフォルダにmsgファイルとrcpファイルが数十件溜まっている状態になっている場合、以下の３点が考えられます。<br>
+<blockquote>
+1. epstrd サービスから呼び出す「ウイルススキャン」で時間がかかっている場合（ファイルの競合などの可能性）<br>
+2. epstrd が処理を行う「メールフィルタ」処理で時間がかかっている場合（メールフィルタ指定行のうち処理に時間がかかっている可能性）<br>
+3. DKIM等の設定がある場合は、DNSの解答が得られない状況（ネットワークに何らかの問題が起きている可能性）<br>
+</blockquote>
+<br>
+対処策として考えられることは以下です。<br>
+<blockquote>
+1. 「サービス制御」画面にある fsupdd, fsengd を停止し、［システム管理メニュー］をクリック、［アンチウイルス］を選択すると表示される「アンチウイルスを有効にする」チェックボックスをオフにする。さらにサードパーティ製のアンチウイルスソフトを同居している場合は除外を確認する<br>
+2. ［システム管理メニュー］をクリック、［メールフィルタ］を選択すると表示される「メールフィルタ機能を使用する」チェックボックスをオフにする<br>
+3. ［システム管理メニュー］をクリック、［中継の制限］を開いて表示される［RBL(ORDB)］ボタンをクリック、設定しているRBL（ORDB）サイトをコメントアウトする<br>
+4. ネットワーク設定に利用しているDNSサーバとの通信は問題ないか、通常通り参照可能か、 nslookup コマンドで任意のサーバのMXレコードを引けるかなど確認してみる<br>
+5. epstrd サービスを再起動する<br>
+6. OSごと再起動する<br>
+</blockquote>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-71.html">メールクライアントからの送信時にサイズ制限をかけるには</a><br>
+●<a href="./faq10-74.html">メール送信時のメールサイズ制限を設定しているが設定サイズより小さいサイズで制限されてしまう</a><br>
+<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

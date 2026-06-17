@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-98</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>複数MXレコードへの対応とグレイリスト方式への対策について</b></FONT>
+<HR>
+<br>
+相手のサーバがグレイリスト方式を採用しているときの対策について、その仕組みと、E-Postシリーズの仕様を理解して対策の設定を行う必要があります。<br>
+<br>
+相手のサーバがグレイリスト方式を採用していて、１回目の接続時には必ず拒絶する設定になっているとすると、E-Post Mail Server／E-Post SMTP Serverシリーズでは、最初にMXレコードを参照して接続を試みた後、その動作が失敗したときは、次に、Aレコードに書かれたドメインに接続しようと試みます。これは、E-Postシリーズ独自で工夫されている仕様です。<br>
+<br>
+これは、今だに、DNSのMXレコードをきちんと記述していないドメインやサーバがたくさん存在しており、そうした設定の「ルーズ」なドメインやサーバへの対応策です。ちなみに、この仕様は変更できません。<br>
+<br>
+<b>■配送およびそのリトライ動作について</b><ol>
+<li>MXレコードの参照によって、MTAへの接続・送信を試みます。<br>
+メールサーバ内にMXのキャッシュ情報があればそちらを優先します。<br>
+MXのキャッシュ情報で送信失敗した時は、DNSサーバに対して、MXレコードの参照を行います。</li>
+<li>１が失敗した場合、＠以降に書かれているドメインを Aレコードとして送信を試みます。</li>
+<li>上記1．2．をリトライ動作ごとに繰り返します。</li>
+</ol>
+こうしたことから、相手のサーバがグレイリスト方式を採用していることが判明しているときは、リトライを１，２回で終えるのではなく、最低でも３回、できれば５回以上のリトライがされるように設定を行うことがベストです。<br>
+その理由としては、たとえば、下記のような複数MXレコードがあり、グレイリスト方式を採用しているケースでは、メインのMXレコード　→　A レコード　→　サブのMXレコード　→　Aレコード　→　という順番で配送が試みられるため、リトライ動作に入って、メインのMXレコードにつながるためには、５回以上のリトライが必要になってしまうケースも考えられるからです。<br>
+<br>
+グレイリスト方式が採用されているサーバの場合、１度目は拒絶されることを考えても下記例のように最大で５回リトライされるケースも予想されます。なお、この例では、MXレコードを記述している以上、当然のことながらAレコードを参照して接続してきた相手に対しては拒絶するポリシーにしているという想定です。<ul>
+１回目・・メインのMXレコード&quot;mail1.domain.jp&quot;に接続　→　グレイリスト方式で１回目の拒絶<br>
+２回目・・Aレコード&quot;domain.jp&quot;に接続　→　サーバのポリシーで常時拒絶<br>
+３回目・・サブのMXレコード&quot;mail2.wh.domain.jp&quot;に接続　→　グレイリスト方式で１回目の拒絶<br>
+４回目・・Aレコード&quot;domain.jp&quot;に接続　→　サーバのポリシーで常時拒絶<br>
+５回目・・メインのMXレコード&quot;mail1.domain.jp&quot;に接続　→　グレイリスト方式で２回目の接続OK</ul>
+従って、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP送信詳細］を開いて表示される「SMTP送信詳細設定」画面にある「リトライ回数（受信拒否）」を設定するとき、上記のことを念頭に置いてリトライ回数を設定してください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

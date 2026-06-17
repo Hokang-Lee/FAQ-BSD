@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-08</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>PDFファイルなどの添付ファイル付きメールをメールフィルタ機能に通さないようにするには</b></FONT>
+<HR>
+<BR>
+PDFファイルなどを添付ファイルに持つメールの場合、メールフィルタ設定で以下のようにすれば、SURBLによるメールフィルタ機能を通さないで素通りにさせることができます。
+<blockquote>
+【mail.dat】<br>
+（Level:300でSURBLサイトのmulti.surbl.orgを指定している例）<br>
+'------------------------------------------------------<br>
+Virus:RBL multi.surbl.org<br>
+RBL:multi.surbl.org<br>
+Level:300<br>
+Tag:[SPAM]<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+<br>
+（↑上記パターンの手前に次の内容を挿入する）<br>
+'------------------------------------------------------<br>
+Virus:through pass<br>
+Level:000<br>
+Content-Type: application/pdf;<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+</blockquote>
+<b>（説明）</b><br>
+設定のポイントは、Content-Type:の部分を判定して、PDFファイルを添付ファイルに持つメールの場合にフィルタ対象とならないようにしています。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

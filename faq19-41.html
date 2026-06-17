@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-41</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4での適正規模は250～500userということだが、仮に700user規模でIMAP4構成するときはどのようにしたらよいか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+仮に「POP3/IMAP4併用（IMAP4比率高）でアンチウイルス機能が必要な場合」の構成を考えてみます。<br>
+<br>
+<B>１．SMTPゲートウェイとして、E-Post SMTP Server (x64) を中継サーバとして立てる。</B><br>
+　　負荷面に少々懸念があるものの、E-Post SMTP Server Enterprise II (x64) 1000user版を使って実質700userが出入りするゲートウェイとするか、E-Post SMTP Server Standard (x64) 1000user版を使って実質700userが出入りするゲートウェイとする。メールのアンチウイルス対策は前者。アンチウイルス機能が不要な場合は後者。<br>
+<br>
+<B>２．E-Post Mail Server Standard V 250user版を3台立てる。</B><br>
+　　内側に立てるメールサーバは、POP3/IMAP4併用でIMAP4使用のユーザー比率高い可能性があるので、3台に対して、実質700userをIMAP4使用ユーザーを加味しながら、3つに分けて登録する。<br>
+<br>
+--------------------（基本構成の考え方）-----------------------------<br>
+　　　　　　　　　　　　　　　　　　　＋－［Mail Server 1］<br>
+［Internet］－－－［SMTP Gateway］－＋－［Mail Server 2］<br>
+　　　　　　　　　　　　　　　　　　　＋－［Mail Server 3］<br>
+-------------------------------------------------------------------------------<br>
+立てたメールサーバ３台に対してSMTPゲートウェイから振り分けるには、大きく２つの方法が考えられます。<br>
+<br>
+<B>Ａ．サブドメインで分割してメールサーバを3台立て、それぞれにアカウントを適正かつ均等に登録する（よくプロバイダが使っている手法）</B><br>
+　　例：mb1.domain.jp、mb2.domain.jp、mb3.domain.jp、など<br>
+<br>
+　　SMTPゲートウェイから振り分けるには、【gateway.dat】を記述し、各サブドメインごとにサーバ振り分けを記述する。【gateway.dat】は、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある［ゲートウェイ詳細］ボタンをクリックすると表示される。<br>
+　　--------【gateway.dat】例 -------------<br>
+　　mb1.domain.jp,192.168.xxx.xxx,25<br>
+　　mb2.domain.jp,192.168.xxx.yyy,25<br>
+　　mb3.domain.jp,192.168.xxx.zzz,25<br>
+　　---------------------------------------------<br>
+<br>
+<B>Ｂ．内側のメールサーバを3台立てるが、同じドメイン名で登録しておき、それぞれの中にアカウントを適正かつ均等に登録する。</B><br>
+　　SMTPゲートウェイから振り分けるには、同じく【gateway.dat】を記述し、全アカウントを記述しておいて、全アカウントごとにサーバ振り分け指示を記述する。<br>
+　　--------【gateway.dat】例 -------------<br>
+　　user1＠domain.jp,192.168.xxx.xxx,25<br>
+　　user2＠domain.jp,192.168.xxx.yyy,25<br>
+　　user3＠domain.jp,192.168.xxx.zzz,25<br>
+　　user4＠domain.jp,192.168.xxx.xxx,25<br>
+　　user5＠domain.jp,192.168.xxx.yyy,25<br>
+　　user6＠domain.jp,192.168.xxx.zzz,25<br>
+　　　　：<br>
+　　　　：<br>
+　　---------------------------------------------<br>
+　　※これを全アカウントに対してそれぞれ記述します。<br>
+　　メールアドレス（アカウント）をそれぞれ指定する方法は可能ですが、【gateway.dat】内で指定する場合、ワイルドカード表記は使えません。すなわち、k＊＠domain.jp のような書き方は不可です。<br>
+<br>
+<B>搭載するサーバのCPUやメモリが高ければ、POP3/IMAP4併用でIMAP4比率高めでも、1台のサーバで収める事は可能？</B><br>
+<B>最近は1台で100コアを超えるサーバも出てきているが、ハードウェア性能で解消できるのか？</B><br>
+メールサーバ、SMTPサーバのボトルネックは、CPUやメモリではなく、常にディスクI/OあるいはファイルI/Oに存在しています。したがって、CPUやメモリを上げても効果はあまり期待できません。<br>
+ある程度のユーザー数増加は、CPUやメモリの性能や量で押し切ることができるケースもありますが、やはりボトルネックはディスクI/OあるいはファイルI/O（Windows NTFSファイルシステム性能）に存在します。<br>
+具体的には、メールの保存されるデータ量：1つのフォルダ内にどれくらいの数のメールデータ数を溜められるかということが一番の問題になるかと思われます。<br>
+OSのファイルシステムには、実用上問題になりうるという意味で、1フォルダ当たりのファイル数の実質的上限があるようです。<br>
+<br>
+IMAP4は、基本的にメールをサーバ側に溜めるので、1フォルダあたり数千ファイル溜めたユーザーが大勢現れたとすると、同時接続してきた場合に、DISKアクセスやファイルアクセスに負荷がかかりすぎてレスポンスが非常に悪くなることが十分予想されます。<br>
+さらに、IMAP4はPOP3と違い、クライアントからの接続がマルチセッション可能であるため、クライアント側から見て1つのログインしかしていないにもかかわらず、POP3のログインセッションが1つで済むところ、IMAP4ではそれに比べて5倍程度のセッションを一度に発生させてくるメールクライアントが実際に存在します。<br>
+ユーザーがどのようなメールクライアント製品を選択するかによっても、負荷の程度は大幅に変わってくるということになります。<br>
+そのため、接続時のユーザー数に比べて、IMAP4では、その5倍程度のユーザー数からの接続があるのと同じ前提で考慮する必要があります。<br>
+仮に、100ユーザーだと思っても、実質的に500ユーザー以上の負荷がかかっているのと同じであるという想定が必要です。<br>
+<br>
+<B>（関連FAQ）</B><br>
+●<a href="./faq15-38.html">パフォーマンス上負荷のかかるAD連携・IMAP4使用時の性能検証について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

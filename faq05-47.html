@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-47</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	dd {
+		padding:0;
+		margin:0 0 0.5em 0em;
+		padding:3px;
+		background:#f4f3e8;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>receivelogにtempフォルダに枝番付き.RCPファイルの記録があるがこの意味は？</b></FONT>
+<HR>
+<br>
+receivelogにtempフォルダに枝番付き.RCPファイルが展開されている記録があるが、この意味は何かを尋ねられたことがあります。<br>
+同報をする際、メーリングリストアドレス宛のものを含む場合は、SMTP受領時に展開されるtempフォルダ内には枝番付き.RCPファイルが展開されます。このときreceivelogには、tempフォルダに展開された枝番付き.RCPファイルは、メールキューであるincomingフォルダに移動していく処理内容が記録されていくことになります。<br>
+FreeBSD版のシングルサーバ環境では、tempフォルダは［メール作業用フォルダ］下の場所がデフォルトで使用されます。<br>
+同報をする際、メーリングリストアドレス宛のものを含まない場合は、tempフォルダ内に枝番付き.RCPファイルは作成されませんが、同報にメーリングリストアドレス宛が含まれる場合は、枝番付き.RCPファイルが作成され、題名ヘッダなどの採番などが入る仕様です。<br>
+複数のメーリングリストアドレス宛に同報で送信し、後からSMTP受信詳細ログ（receivelog）を見ると、枝番付き.RCPファイルが生成され、tempフォルダからincomingフォルダへ移動処理される動きを確認することができます。<br>
+<br>
+（例）<br>
+[[10/Apr/2019:16:33:45], 012faf00, MoveFileEx(/var/spool/epms/temp/B0000000010.RCP, /var/spool/epms/incoming/B0000000010.RCP) is successed.<br>
+[10/Apr/2019:16:33:45], 012faf00, MoveFileEx(/var/spool/epms/temp/B0000000010-001.RCP, /var/spool/epms/incoming/B0000000010-001.RCP) is successed.<br>
+[10/Apr/2019:16:33:45], 012faf00, MoveFileEx(/var/spool/epms/temp/B0000000010-002.RCP, /var/spool/epms/incoming/B0000000010-002.RCP) is successed.<br>
+[10/Apr/2019:16:33:45], 012faf00, 250 2.0.0 Message received ok.<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

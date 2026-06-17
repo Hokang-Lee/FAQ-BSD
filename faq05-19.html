@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-19</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>配送時の詳細ログ（senderlog）の仕様とログの長/短出力設定 <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>の仕様について、E-Postシリーズ製品の「ヘルプ」「ユーザーズガイド」、書籍・Webでの『完全ガイド』、「導入後の製品FAQ」などいずれも配送時の詳細ログ（senderlog）は、「内部ドメインや外部ドメインの配送動作の詳細記録である」旨の記載がされておりますが、実際には<b>内部ドメインどうしの配送動作について、デフォルトの出力設定（短い出力設定）ではほとんど記録されません</b>。結果的に、弊社製品ドキュメント類の記述が実際の仕様に合わせた記載になっておりませんでした。<br>
+内部ドメインどうしの送信記録を取りたいときには、<a href="./faq05-08.html">SMTPローカル送信ログ（outlocallog）</a>を取得してください。<br>
+ちなみに、設定ファイルを変更することにより、senderlog を長めの出力設定した時に送信先だけが記録されます。正しい働きと仕様は下記の通りです。<br>
+<b><ol><li>senderlogはセッションが張られたときのプロトコルベースの記録であること</b><br>
+<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>は、基本としてセッションが張られたときのプロトコルベースの記録です。<br>
+セッションが張られたときの記録であることから、外部ドメイン宛の送信は常に、DNSやhostsを参照して名前解決し、セッションを張って通信が行われますので、すべての記録がされます。<br>
+それに対し、内部ドメインどうしの単純な送信は、E-Postシリーズ製品では、セッションを張らず、プログラム内部でファイルコピーの動作を行って高速に処理されています。そのため、そのようなケースでは、senderlog  にはその動作内容はほとんど記録されません。<br>
+<br>
+<b>(1) デフォルトの短い出力設定 &quot;Sender2logEnabled.1&quot;= 1 のとき<a href="#shrt"><font color="#800000">（※1）</font></b></a><br>
+設定ファイルを特に変更しないときは、下記（※1）のようにデフォルトの短い出力設定になっています。<br>
+このとき、内部ドメインどうしの単純な送信はファイルコピーの動作処理が行われるため、原則として記録されません。該当のメッセージIDだけが記録として残るだけで、内部ドメインの送信元・送信先ともに記録されません。<br>
+一方、自動転送の設定時に転送先が内部ドメインであったときにはセッションが張られるため、送信元・転送先の記録が残ります。また、メーリングリストのメンバーとして内部ドメインのメンバーを加えている場合には、記録は残りません。<br>
+<a name="shrt"></a><small>
+<hr align="left" width="90%" size="1">
+<font color="#800000"><b>（※1）デフォルトの短い出力設定 </b></font><br>
+メール作業フォルダ<br>
+　-> reg<br>
+　　-> epost<br>
+　　　-> ims<br>
+　　　　-> EPST5DS<br>
+　　　　　-> Sender2logEnabled.1 = 1　(数値  Default 1)<br>
+<hr align="left" width="90%" size="1"></small>
+<b>(2) 長い出力設定 &quot;SenderlogEnabled.1&quot; = 1 のとき<a href="#long"><font color="#800000">（※2a,2b）</font></b></a><br>
+設定ファイルを変更し、下記（※2a,2b）のいずれかの方法で長い出力設定に変更した場合、内部ドメインどうしの単純な送信はファイルコピーの動作処理が行われるため、内部ドメインの送信元の記録はされませんが、送信先についてはファイルコピーがされた結果による &quot;SendLocalMail&quot; のトークン部分で下記のような記録が残ります。<br>
+　[例] [13:27:37:066] [B0000123123]:<u>SendLocalMail</u>:domain=user＠company.jp<br>
+ただしこの &quot;SenderlogEnabled.1&quot; = 1 を設定すると、「ログ設定」-「配送時の詳細ログ」チェックボックスが強制的にオフに遷移します。ご注意ください。元に戻すときは「配送時の詳細ログ」チェックボックスを再度オンにするようにしてください。<br>
+一方で長い出力設定では、自動転送設定時に転送先が内部ドメインであったときセッションが張られるため、記録として送信元・送信先・転送先すべての記録が残ります。また、メーリングリストのメンバーとして内部ドメインのメンバーを加えている場合にも記録が残ります。<br>
+具体的には "LogonUser ...." や自動転送処理 &quot;AutoTransfar ....&quot; が記録され、自動転送記録 &quot;Forward address ....&quot;、自動応答記録 &quot;AutoReply ....&quot;、DNSキャッシュ記録 &quot;SetMXCashList ...&quot;,&quot;GetMXCashList ....&quot;,&quot;DelMXCashList ....&quot; などの記録が出力されます。<br>
+<hr align="left" width="90%" size="1"><small>
+<a name="long"></a><font color="#800000"><b>（※2a）設定ファイル &quot;Sender2logEnabled.1&quot; 値を変更、キーを追加作成して値を設定、長い出力設定に変更</b></font><br>
+メール作業フォルダ<br>
+　-> reg<br>
+　　-> epost<br>
+　　　-> ims<br>
+　　　　-> EPST5DS<br>
+　　　　　-> <u>SenderlogEnabled.1</u> = <u>1</u>　(数値  Default 0)<br>
+　　　　　-> Sender2logEnabled.1 = <u>0</u>　(数値  Default 1)<br>
+<hr align="left" width="90%" size="1">
+<font color="#800000"><b>（※2b）設定ファイル &quot;Sender2logEnabled.1&quot; 値を変えないまま、キーを追加作成して値を設定、長い出力設定に変更</b></font><br>
+メール作業フォルダ<br>
+　-> reg<br>
+　　-> epost<br>
+　　　-> ims<br>
+　　　　-> EPST5DS<br>
+　　　　　-> <u>SenderlogEnabled.1</u> = <u>1</u>　(数値  Default 0)<br>
+　　　　　-> Sender2logEnabled.1 = <u>1</u>　(数値  Default 1)<br>
+<hr align="left" width="90%" size="1"></small></li>
+<b><li>senderlogを長い出力設定したときの記録について</b><br>
+上記の言い換えになりますが、設定ファイルを変更することによって、senderlogの長い出力設定をしたときでも、内部ドメインどうしの単純な送信は、セッションが張られないために、完全な記録はされないことになります。</li>
+<br>
+<b><li>内部ドメイン（ローカル）どうしの送信記録について</b><br>
+内部ドメイン（ローカル）どうしの送信記録については、自動転送やメーリングリストのケースを除いては、原則としてセッションが張られないため、senderlog にはすべてが記録されません。<br>
+内部ドメイン（ローカル）どうしの送信記録を取るには、<a href="./faq05-08.html">SMTPローカル送信ログ（outlocallog）</a>を取得し参照してください。SMTPローカル送信ログ（outlocallog）の書式は、基本ログのSMTP送信ログ（outlog）と同じです。</li></ol>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-08.html">SMTP ローカル送信ログ（outlocallog）について </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

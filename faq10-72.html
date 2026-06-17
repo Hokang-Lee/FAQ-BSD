@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-72</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>アンチウイルス機能で添付ファイル上限サイズや展開レベルを指定してスキップさせる方法</b></FONT>
+<HR>
+<br>
+アンチウイルス機能を持つ E-Post Mail／SMTP Server Enterpriseでは、以下のように、アンチウイルスエンジン用の設定ファイル【fastscan.ini】で設定することにより、メールに含まれる一定のサイズ以上の添付ファイルに対して、バイトサイズで上限値を設定でき、アンチウイルス検査をスキップする設定が可能です。<br>
+<ol>
+<li>プログラムインストールフォルダ（/usr/local/Fastscan/bin/）内に【fastscan.ini】という名前のテキストファイルを作成する。<br>
+<br>
+<li>[size]項目を記述し、次の行にbyte単位のサイズで上限サイズを設定する。<br>
+【fastscan.ini】記述例<br>
+------------------------------------------------<br>
+[size]<br>
+3145728 ← byte単位による上限サイズ<br>
+------------------------------------------------<br>
+※設定ファイルがない場合、デフォルトで添付ファイル１ファイル当たり約3MBの上限サイズが設定されています。なお、設定上の最大値は、1,073,741,824byte=0x40000000(Hex)byte=1GB です。<br>
+<br>
+<li>fsengdサービスを再起動する。<br>
+<br>
+※ウイルス検出ログ &quot;fsenglog&quot; のログ結果を見ても、検査をスキップしているかどうかの判別はつきません。他のメールと同じように nResult = 1 () を返します。<br>
+</ol>
+<small>※大きなサイズのメール受領を制限するためには、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］を開いて［中継の制限］項目、もしくは［中継の制限］を開いて表示される「中継の制限設定」にある「メール受信時のサイズ」をbyte単位で指定します。組み合わせてご利用ください。</small><br>
+<br>
+また、上限サイズを指定する方法以外に、zipファイルなどの展開するレベルを指定することで、多重構造のzipファイルをすべて展開せずスキップさせることも可能です。設定ファイル【fastscan.ini】内に[analyze]という項目で'5'より小さな値、たとえば'1'を指定してください。[analyze]はファイル展開の深さレベルの指定で、設定値がない場合のデフォルトでは'5'の値が設定されています。<br>
+<ol>
+<li>プログラムインストールフォルダ（/usr/local/Fastscan/bin/）内の【fastscan.ini】ファイルを編集する。なければテキストファイルを作成する。<br>
+<li>[analyze]項目を記述し、次の行に深さレベルを設定する。<br>
+【fastscan.ini】記述例<br>
+------------------------------------------------<br>
+[analyze]<br>
+1  ← ファイル展開の深さレベル（デフォルト:5)<br>
+------------------------------------------------<br>
+<li>fsengdサービスを再起動する。<br></ol>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

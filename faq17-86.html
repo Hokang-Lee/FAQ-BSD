@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-86</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SendGrid へのSMTP認証付き送信フォワードする際、70文字の長いパスワードを設定できるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+SendGrid を利用し、SMTP認証付き送信フォワードする際、E-Post Vシリーズ側で70文字の長いパスワードを設定できるか問い合わせを受けたことがあります。<br>
+<br>
+E-Post Vシリーズに実装されている epstdd サービスでは、レジストリ設定を行うことでSMTP認証パスワードを最長127byteまで設定可能になっています。<br>
+以下の設定ファイル &quot;SMTPAUTHPass.2&quot; を作成・編集し、ファイル内に認証パスワードを直接入力することにより、 epstdd サービスプログラムとしては最大127byteまで許容され、認識します。変更後は epstdd の再起動が必要です。<br>
+<br>
+[メール作業ディレクトリ]　（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5DS<br>
+　　　　→SMTPAUTHPass.2　　(文字列)<br>
+　　　　　　（SMTP認証時のPassword）<br>
+<br>
+ただし、設定ファイル編集した後で、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］を開き、サービスの「詳細設定」画面では、パスワード部分は空白表示されます。この状態のまま保存したりしてしまうと、E-POSTコントロールセンター側がパスワードを14文字で切ってしまいます。注意してください。万が一間違えて操作したときは、再度設定ファイルを編集してください。<br>
+<br>
+epstdd サービスからSendGridへのSMTP認証パスワード付き送信フォワード（中継）を弊社が確認した限りでは、SendGridによるAPIキーは何度作成しても70byte固定の長さになっているようでした。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-34.html">SMTP認証を有効にして外部MTAに送信要求をそのままフォワードさせる方法</a><br>
+●<a href="./faq15-20.html">SMTP認証付きフォワードする際、受信対象の内部アカウントすべてを登録しなくてすむエイリアス設定での回避方法とそのときの注意点</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-54</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP認証（SMTP-AUTH）の認証方法を選択したときの挙動と「認証ファイル」の意味は？</b></FONT>
+<HR>
+<br>
+E-Post Mail Serverシリーズ、E-Post SMTP Serverシリーズ製品では、SMTP認証（SMTP-AUTH）の認証方法について、いくつかの方法が選択できるようになっていますが、全体および個別でSMTP認証を有効にした場合、認証方法として、&quot;PLAIN LOGIN CRAM-MD5&quot;にしておけば、メールクライアント側からアクセスしてきたときに、メールクライアントが認証方法としてもっているもので、いちばん強いいずれかの方法で認証しようとします。つまり、逆にメールサーバ側で、PLAINのみとか、CRAM-MD5のみにしておくと、アクセスするクライアント側の有効な認証方法が限定されるということになります。<br>
+<br>
+セキュリティレベルの「認証ファイル」とは、ユーザーごとにSMTP認証を有効にしたり、SMTP認証を無効にしているとき、ユーザー単位で作成される「認証ファイル」によって、認証をするという動きになります。「認証ファイル」はそうした状況で使われます。そのため、これ以外の選択肢には、「非認証有効」「認証専用」がありますが、それらの設定では、個別にSMTP認証を有効にしたり無効にしたりといったことができなくなります。ユーザー個別のSMTP認証するための認証ファイル &quot;apop.dat&quot; は、APOPとの共通ファイルになっています。<br>
+<br>
+なお、Active Directory（LDAP）連携時は、SMTP認証方式を PLAIN 方式か LOGIN 方式に限定したときのSMTP認証パスワード項目は、Active Directory側で管理されたユーザー認証パスワードが連動、ドメインコントローラ側で管理されることになるため、&quot;apop.dat&quot; の認証ファイルは使われません。<br>
+一方、SMTP認証方式を CRAM-MD5 方式に設定している場合、そのとき利用されるSMTP認証パスワードは Active Directory側で管理されるパスワードと連動項目とはならず、E-Post側で管理されることになるため、&quot;apop.dat&quot; に記録されている内容が認証ファイルとして使われます。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

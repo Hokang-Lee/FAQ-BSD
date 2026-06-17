@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-95</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>senderlogに記録された &quot;451 Requested action aborted error in processing.(code=54/ffffff)&quot; の意味 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>に接続先サーバからの応答が次のように記録されている場合は、接続先サーバ側の問題、経路上にある装置等の問題という解釈ができます。基本的に、こちら側（E-Post側）の問題でなく、相手側（先方）の問題です。<br>
+&quot;451 Requested action aborted: error in processing.(code=54/ffffffff)&quot; のエラーは、相手先サーバより返された応答ではなく、SMTPプロトコルのアプリケーション層よりネットワーク層や物理層に近いレベルにおいて、リモートホストによって接続が強制的に切断されたようなケースです。<br>
+詳細に言うと（）内の前半は Socket Errorcode 54 でソケット受信しなかったことを意味し、後半は受信サイズ ffffffff＝-1：ソケット受信しなかったことを示します。<br>
+このエラーは一時的拒絶を示す400番台に分類される扱いですから、E-Post側のリトライ設定に応じて配送のリトライが行われます。<br>
+SMTPプロトコルだけでは、下位の物理層に近いネットワーク層で起きたエラーや回線切断は、先方からのエラー応答がなく取得できないため直接の原因を知る由がありません。そのため、E-Post側が内部生成したエラー応答として送信元にエラーメールで返したり、ログに記録しています。<br>
+<br>
+<B>〔括弧内部分の詳細な説明〕</B><br>
+E-Post が内部生成する同タイプの 451 エラーについて次のようなものがあります。<br>
+-------------------------------------------------------------------------<br>
+451 Requested action aborted: error in processing. (code=0/0)<br>
+451 Requested action aborted: error in processing. (code=0/ffffffff)<br>
+451 Requested action aborted: error in processing. (code=54/ffffffff)<br>
+-------------------------------------------------------------------------<br>
+上記3つはそれぞれ（ ）内の code に続く値が異なりますが、これは (code=Socket Errorcode/受信サイズ) の意味です。<br>
+<B>・(code=0/0) ＝ Socket Errorcode なし/0バイト受信</B><br>
+前半は接続開始したにも関わらず、Socket Errorcode なしでソケット受信しなかったことを示します。<br>
+後半はデータ 0 バイトで切断していることを示します。無通信タイムアウトで 0 バイト受信したか、あるいは相手サーバ側もしくは途中の中継経路から 0 バイトを受信等、通信切断された可能性が最も大きいことを示します。<br>
+<B>・(code=0/ffffffff) = Socket Errorcode なし/-1</B><br>
+前半は Socket Errorcode なしでソケット受信しなかったことを示します。<br>
+後半は受信サイズ ffffffff＝-1：ソケット受信しなかったことを示し、これは無通信タイムアウトによる切断を示します。<br>
+<B>・(code=54/ffffffff) = Socket Errorcode 情報54/-1</B><br>
+前半は Socket Errorcode 54 でソケット受信しなかったことを示します。Socket Errorcode：54 は［Connection reset by peer / ネットワーク接続が相手によって破棄された］ことを意味します。［Socket Errorcode54：ピアによる接続のリセット。リモート ホストによって既存の接続は強制的に切断された］<br>
+後半は受信サイズ ffffffff＝-1：ソケット受信しなかったことを示します。無通信タイムアウトによる切断を示します。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-41.html">senderlogにデータ送信途中で&quot;socket error code=54&quot;が複数回続けて記録される理由とリトライの挙動について</a><br>
+●<a href="./faq05-33.html">senderlogにデータ送信途中で&quot;socket error code=54&quot;や&quot;=53&quot;のようにWINSOCKのエラーコードが記録される場合</a><br>
+●<a href="./faq05-26.html">senderlog に&quot;421 Service Temporarily Unavailable&quot;と&quot;451 Requested action aborted: error in processing. (code=0/0)&quot;が記録される理由について</a><br>
+●<a href="./faq10-04.html">socket エラーコード表</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

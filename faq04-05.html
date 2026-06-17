@@ -1,0 +1,180 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-05</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールフィルタ設定においてFrom:文字列に2バイト文字コードを指定する方法とワイルドカード指定について <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+<B>【メールフィルタ設定において、From:文字列に2バイト文字コードを指定する方法】</B><br>
+From:ヘッダーにある特定の全角文字で拒絶するには「メールフィルタ設定【mail.dat】」を利用します。From:項目で指定する文字列は、基本的には完全一致でなく、部分一致でマッチングされます。<br>
+メール件名の文字コードの大多数は、UTF-8やJIS（iso-2022-j）にエンコードされて送信されてくるので、【mail.dat】のFrom:項目で指定する場合は、エンコードされた文字列を指定します。ちなみに直接書いた全角文字（2バイト文字コード）の文字列は、Shift-JISとして判定されます。従って【mail.dat】には1件の全角文字語句を登録しようとする場合、最低でも3～4種類のMIME-Bエンコードした文字列の指定が必要となります。<br>
+<br>
+<B>【用意する文字コード】</B><br>
+<B>・必須（国内メールの大半）</B><br>
+　1.<font color="#FF1493">JIS（iso-2022-j）</font><br>
+　2.<font color="#0000CD">UTF-8</font><br>
+　3.<font color="#008000">Shift-JIS（Windows-31J）</font><br>
+<B>・余裕があれば</B><br>
+　4.<font color="#FF8C00">EUC-JP</font><br>
+<B>・海外スパムまで視野</B><br>
+　5.GB18030 ／ Big5 ／ EUC-KR（中韓系の全角系）<br>
+<br>
+<b>【設定の手順】</b><br>
+メールフィルタ設定【mail.dat】に設定例のように記述していきます。<br>
+From:ヘッダーにある特定の全角文字で拒絶する場合は、&quot;MIME-Bエンコード&quot;されたトークン指定、すなわちヘッダ(=?xxxxx?B?)とフッタ(?=)で囲んだエンコードされた文字を記述します。JIS（iso-2022-j）用とUTF-8用それぞれ必要です。E-Postがメールフィルタ機能によってマッチングする際、この文字列をデコードし、部分一致でマッチングされます。<br>
+エンコードするには、いろいろある変換サイトのサービスを使うとか、送信メールの文字コードを変更指定できるメーラーから実際に送信し、受け取ったメールデータから取り出して利用します。<br>
+下記の設定例では、Level:110の指定をすることによって、指定された条件に合致したメールを拒絶するとともに、拒絶されたメールはviruslogフォルダに.MSGと.RCPファイルと対で保管されます。合わせてWarning:～WarningEnd:項目で指定されたメッセージが、拒絶時に保管される.RCPファイル内に記載されるため、どの条件にマッチしたかが後で見きわめられます。<br>
+<br>
+<b>【設定例】</b><br>
+JIS（iso-2022-j）、UTF-8、Shift-JISで記載された&quot;高確率&quot;や&quot;当る&quot;がFrom:ヘッダーに含まれているメールを拒絶する例<br>
+※下線部分がMIME-Bエンコードした文字列<br>
+'------------------------------------------------------<br>
+Virus:SPAM(1) &quot;高確率 (From:<font color="#FF1493">JIS（iso-2022-j）</font>)&quot;<br>
+From:=<u>?iso-2022-jp?B?GyRCOWIzTk4oGyhC?=</u><br>
+Level:110<br>
+Warning:<br>
+　---------------- warning ---------------------<br>
+　SPAM(1) &quot;高確率 (From:<font color="#FF1493">JIS（iso-2022-j）</font>)&quot;<br>
+　-----------------------------------------------<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+Virus:SPAM(2) &quot;高確率 (From:<font color="#0000CD">UTF-8</font>)&quot;<br>
+From:=<u>?UTF-8?B?6auY56K6546H?=</u><br>
+Level:110<br>
+Warning:<br>
+　---------------- warning ---------------------<br>
+　SPAM(2) &quot;高確率 (From:<font color="#0000CD">UTF-8</font>)&quot;<br>
+　-----------------------------------------------<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+Virus:SPAM(3) &quot;高確率 (From:<font color="#008000">Shift-JIS</font>)&quot;<br>
+From:<u>=?Shift_JIS?B?jYKKbZem?=</u><br>
+Level:110<br>
+Warning:<br>
+　---------------- warning ---------------------<br>
+　SPAM(3) &quot;高確率 (From:<font color="#008000">Shift-JIS</font>)&quot;<br>
+　-----------------------------------------------<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+Virus:SPAM(4) &quot;高確率 (From:<font color="#FF8C00">EUC-JP</font>)&quot;<br>
+From:=<u>?EUC-JP?B?ueKzzs6o?=</u><br>
+Level:110<br>
+Warning:<br>
+　---------------- warning ---------------------<br>
+　SPAM(4) &quot;高確率 (From:<font color="#FF8C00">EUC-JP</font>)&quot;<br>
+　-----------------------------------------------<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+Virus:SPAM(5) &quot;当る (From:<font color="#FF1493">JIS（iso-2022-j）</font>)&quot;<br>
+From:=<u>?iso-2022-jp?B?GyRCRXYkaxsoQg==?=</u><br>
+Level:110<br>
+Warning:<br>
+　---------------- warning ---------------------<br>
+　SPAM(5) &quot;当る (From:<font color="#FF1493">JIS（iso-2022-j）</font>)&quot;<br>
+　-----------------------------------------------<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+Virus:SPAM(6) &quot;当る (From:<font color="#0000CD">UTF-8</font>)&quot;<br>
+From:=<u>?UTF-8?B?5b2T44KL?=</u><br>
+Level:110<br>
+Warning:<br>
+　---------------- warning ---------------------<br>
+　SPAM(6) &quot;当る (From:<font color="#0000CD">UTF-8</font>)&quot;<br>
+　-----------------------------------------------<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+Virus:SPAM(7) &quot;当る (From:<font color="#008000">Shift-JIS</font>)&quot;<br>
+From:<u>=?Shift_JIS?B?k5aC6Q==?=</u><br>
+Level:110<br>
+Warning:<br>
+　---------------- warning ---------------------<br>
+　SPAM(7) &quot;当る (From:<font color="#008000">Shift-JIS</font>)&quot;<br>
+　-----------------------------------------------<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+Virus:SPAM(8) &quot;当る (From:<font color="#FF8C00">EUC-JP</font>)&quot;<br>
+From:=<u>?EUC-JP?B?xfak6w==?=</u><br>
+Level:110<br>
+Warning:<br>
+　---------------- warning ---------------------<br>
+　SPAM(8) &quot;当る (From:<font color="#FF8C00">EUC-JP</font>)&quot;<br>
+　-----------------------------------------------<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+<br>
+<B>半角の場合</B><br>
+'------------------------------------------------------<br>
+Virus:SPAM(9)&quot;apple (From:ASCII)&quot;<br>
+From:<u>apple</u><br>
+Level:110<br>
+Warning:<br>
+　---------------- warning ---------------------<br>
+　SPAM(9) &quot;apple (From:ASCII)&quot;<br>
+　-----------------------------------------------<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+<br>
+<B>【ワイルドカード指定について】</B><br>
+「メールフィルタ設定【mail.dat】」では&quot＊&quotで表すワイルドカード記述は無効扱いとなります。<br>
+実際は、先述のとおり部分一致でのマッチングのため、&quot＊&quotを記述せずとも基本的に前後がワイルドカード扱いとなっています。<br>
+<br>
+それでも、明示的に&quot＊&quotを記述することによってワイルドカード指定を<u>どうしても</u>行いたい場合は、下記に記すオプション指定方法が用意されております。<br>
+この値を入力せずとも、既にワイルドカード指定された扱いとして基本動作していますので、手動によるファイル変更を行う必要性をご検討のうえご判断ください。<br>
+------------------------------------------------------<br>
+ワイルドカード記述するためのオプションを有効にする方法<br>
+以下の設定ファイル&quot;MailFilterUp.1&quot;を手動で作成し、ファイル内に&quot;1&quot;を数値で記述します。なお記述した数値の後の末尾は改行しません。<br>
+<small>[メール作業ディレクトリ]（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→MailFilterUp.1<br></small>
+※ファイル作成後、全サービスを再起動します。<br>
+これにより、From:＊=utf-8?b?xxxxx?=＊といった記述が利用可能となります。<br>
+------------------------------------------------------<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq04-13.html">メールフィルタ設定の Warning: は何のために用意されている？</a><br>
+●<a href="./faq01-81.html">メールフィルタ（mail.dat）の設定事例</a><br>
+●<a href="./faq04-07.html">メールフィルタ設定でワイルドカードは使えないか</a><br>
+●<a href="./faq16-47.html">SecureHandlerのハンドリングルールでFrom:文字列を指定する方法</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

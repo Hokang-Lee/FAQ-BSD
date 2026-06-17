@@ -1,0 +1,48 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-14</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>配送リトライ関係フォルダやincomingにたまっていたメールについて、配送詳細の変更後 epstdd 再起動したところ、設定時間後でも再開時に配送が試みられる <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+配送リトライ関係「配送詳細(SMTP)」の設定変更後には、epstdd サービスの再開が必要です。<br>
+そのときメールキュー（incoming）に溜まっていたメールのうち、24時間経過したものに関しては、サービス再開時にひとまず送信を試みる仕様となっています。<br>
+<br>
+一方で「テーブル編集」【gateway.dat】ファイルの設定を変更した後は、サービスの再開は必須ではなく、その後に発生したセッションから反映されます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-11.html">設定変更してもサービスの再起動しなくて「よい」設定について</a><br>
+●<a href="./faq15-77.html">「SMTPゲートウェイ」項目と【gateway.dat】の併用は可能？　両方が設定されているときの優先順位は？</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

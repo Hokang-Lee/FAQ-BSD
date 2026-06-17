@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-09</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>個人メールフィルタ設定で制限しているとき、他アカウント宛に同報すると同じように制限されてしまう</b></FONT>
+<HR>
+<BR>
+アカウント単位で設定が可能な個人の「メールフィルタ設定」を行っているとき、個人のメールフィルタ設定により受信制限をかけているユーザーと、かけていないユーザー両方に同報されたメールを受ける場合、同報されたどちらのメールも同じ受信制限がかかります。<br>
+<br>
+現行の E-Post Mail Serverシリーズ での個人メールフィルタ設定では、該当の個人アカウント宛に送られたメールであれば、正しい動作をしますが、同じ１メールで他アカウント宛に同報された場合は、個人メールフィルタ設定をしていないアカウントに対しても、同じフィルタ設定が適用され働いてしまいます。これは現在の仕様で避けることができません。<br>
+<br>
+<b>【全体・個人メールフィルタ設定での原理的な仕組みについて】</b><br>
+<br>
+E-Postシリーズの全体・個人メールフィルタ設定（&quot;mail.dat&quot;,&quot;virus.dat&quot;）は、下記のSMTPプロトコルの流れにおいて、どの位置で処理されているのかと言えば、DATAコマンドでデータ受け取ってから後の処理となっています。（<font color="#ff0000">〔１〕</font>の位置）<br>
+<br>
+メールフィルタ機能でFrom、To判定を行うときは、エンベロープレベルでのFrom、Toによる判定をしておらず、ヘッダレベルでの判定が行われています。さらに送信先ごとに是か非かの応答を返しません。メールフィルタ機能の主要な用途は、ヘッダレベルでの件名、本文、独自ヘッダなどをマッチングさせ判定させることに重きを置いています。<br>
+<br>
+以上のことから、個別のメールフィルタ設定において、拒絶条件で仮にマッチした場合、DATAコマンドの応答として、一括での結果応答となってしまいます。このことは、同報されたメールは、一つの個別メールフィルタに引っかかってしまうと、同報された他のアカウント宛に対しても、同じように拒絶されてしまう結果となります。<br>
+<br>
+<b>【SMTPプロトコルの流れとメールフィルタでの動作について】</b><br>
+　-------------------------------------------------------------------------<br>
+　Helo xxxx<br>
+　〈応答〉<br>
+　Mail From: xxxx<br>
+　〈応答〉<br>
+　Rcpt To: xxxx<br>
+　〈応答〉←　送信先毎の結果応答<br>
+　Rcpt To: xxxx<br>
+　〈応答〉←　送信先毎の結果応答<br>
+　Data<br>
+　.　　　←　コロンで終了<br>
+　〈応答〉←　個別mail.dat/個別virus.datの結果応答 <font color="#ff0000">〔１〕</font><br>
+　メッセージを参照した結果での応答のため送信先毎の結果応答ではない<br>
+　-------------------------------------------------------------------------<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq04-10.html">個人アカウント単位で【effect.dat】を有効にするには</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

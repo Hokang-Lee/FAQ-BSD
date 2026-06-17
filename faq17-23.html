@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-23</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Mail Server V でSMTPゲートウェイ構築は可能か？設定方法に違いは？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Post SMTP Server V シリーズではなく E-Post Mail Server V シリーズでもSMTPゲートウェイの機能は構築可能かどうか質問されたことがあります。<br>
+E-Post Mail Server V シリーズでもSMTPゲートウェイ構築は可能です。<br>
+さらに E-Post SMTP Server V シリーズでのSMTPゲートウェイ構築時と設定内容や設定方法は基本的に同じです。<br>
+<br>
+SMTPゲートウェイ位置に立てるサーバが E-Post SMTP Server V シリーズか E-Post Mail Server V シリーズかによって、設定が異なるケースをかろうじてあげるなら、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］または［基本設定］から呼び出す画面に「全受信メールをSMTPゲートウェイに転送」チェックボックスがありますが、この設定に少し差が生まれるケースがあります。<br>
+これをオンにすると「自分自身にメールボックスは存在しないので、すべて転送せよ」という命令と同義になります。SMTP Server V をゲートウェイに立てるときは事実上この選択だけになります。<br>
+一方これをオフにすると、「自分自身にメールボックスは存在しうる」という意味になります。Mail Server V をゲートウェイに立てるときには、SMTPゲートウェイの役目もしながら、自分自身でもドメインをもち、有効なアカウントを持っていて、メールボックスを持っている場合は、チェックボックスオフで使うケースもあり得ます。自分自身に有効なメールボックスが存在しない、着信しなくてよいということなら、チェックボックスオンにします。<br>
+いずれの場合も［ゲートウェイ詳細］ボタンで表示される &quot;gateway.dat&quot; ファイルに書かれている内容に従って、内側のメールサーバに転送する、あるいは複数のメールサーバ宛に振り分ける等の挙動が決まっていきます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-61.html">SMTPゲートウェイとメールサーバの設定ポイント（E-Post Mail Server・E-Post SMTP Server）</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

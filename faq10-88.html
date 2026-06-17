@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-88</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>「送信先制限」で1ドメインを送信禁止したとき、同報で他ドメイン宛もいっしょに拒絶される</b></FONT>
+<HR>
+<br>
+「送信先制限」【sender.dat】で1ドメイン宛を送信禁止に設定したとき、同報によって対象ドメインを含む他ドメイン宛も送信しようとすると、いっしょに拒絶されるようになりますが、これは仕様です。<br>
+これを避けるには、同報ではなく、各ドメイン単位で分けて送信するようにしてください。<br>
+<br>
+（例）<br>
+<ol>
+<li>「送信先制限」で1ドメインを送信禁止に設定<br>
+（Bドメインが送信対象外とするため　1行目:「*@Bドメイン:-1」2行目:「*:0」と定義）</li><br>
+<li>対象ドメインを含む他ドメイン宛にも同報でメール送信する<br>
+（Aドメイン、Bドメイン、Cドメインの各1名計3名宛に同報）</li><br>
+</ol>
+上記の方法でAドメイン、Bドメイン、Cドメインの3名に同報で送信しようとした場合、そのうち一つのBドメイン宛が「送信先制限」【sender.dat】の記述、「*@Bドメイン:-1」に引っかかり、epstrd（E-Post SMTP Receiver）サービスの受領段階において拒否されます。これは受領時の拒否のため、Aドメイン、Cドメイン宛のメールもいっしょに拒絶されます。<br>
+<br>
+いっしょに拒否されないようにするには、同報ではなく、各ドメイン単位で分けて送信してください。<br>
+<br>
+なお、送信先制限【sender.dat】による送信先が禁止指定された条件に当てはまるときの拒絶に関しては、下記の応答コードとエラーメッセージがepstrdサービスからメールクライアントに返されます。それを受けて、メールクライアントは通常、その応答コードとエラーメッセージをユーザーに対して、ポップアップ表示することになります。<br>
+<blockquote>
+<b>550 5.1.1 Please mail to a valid e-mail address.<br>
+（RCPT TO:〈メールアドレス〉）</b><br>
+（※意味）MAIL FROM:命令への送信元エンベロープ受領拒否応答。<br>
+</blockquote>
+このようにエラーメッセージは、あくまで受領拒否応答であり、「送ることができない宛先がある」旨のメッセージではありませんので、メールクライアント側に表示される（RCPT TO:〈メールアドレス〉）の部分により、送信禁止となっているドメイン宛であることをユーザーが気づいてもらう必要があります。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

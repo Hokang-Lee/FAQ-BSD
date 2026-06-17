@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-61</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>自動転送時の「不転送レポート先」を管理者に設定したときの仕様について</b></FONT>
+<HR>
+<br>
+自動転送時の「不転送レポート先」を管理者アカウントに設定しているとき、管理者アカウントが存在すれば何の問題もありませんが、実際の管理者アカウントが存在しない場合、動作に支障をきたす結果になってしまいます。<br>
+ここでは、その理由について、自動転送時の「不転送レポート先」を管理者に設定したときの仕様から説明します。<br>
+自動転送時の「不転送レポート先」設定では、自動転送メールについて<b>エンベロープFROM をメールサーバが書き換える</b>ように動作します。「不転送レポート先」設定によって、どのようにエンベロープFROMが書き換えられるかは以下の通りです。<br>
+<ol>
+<li type="a">管理者　　　　　　→エンベロープFROM を管理者アカウントに書き換え<br>
+<li type="a">送信者　　　　　　→エンベロープFROM は書き換えずそのまま<br>
+<li type="a">返信しない　　　　→エンベロープFROM を空欄&lt;&gt;に書き換え<br>
+<li type="a">返信先指定（任意）→エンベロープFROM を任意アカウントに書き換え<br>
+</ol>
+ただし、書き換えるのは、エンベロープFROM であり、メールヘッダのFrom:は書き換えません。自動転送メールを受け取った側から、メールヘッダのFrom:を見ても特に変更されていないので区別はつきません。<br>
+上記によって、自動転送時にうまく転送ができなかったときのエラーメールは、それぞれの設定に応じて届くように考慮されています。従って、「不転送レポート先」を管理者に設定したときには、実在さえしていれば、管理者アカウントにエラーメールが正しく送られる仕組みです。<br>
+<br>
+これらのこととは別に、内部（ローカル）アカウントどうしの（自動転送でない）通常の送信は、メールプロトコルのSMTPを使わず、システム側のファイルコピーで処理されます。このことにより、内部アカウントどうしの通常送信は、確実さの向上と高速化がはかられています。一方、内部（ローカル）アカウント宛に自動転送を設定したときには、自動転送時には、ファイルコピーで処理されず、メールプロトコルを使って、SMTP受信サービス（epstrd）が再度受信する仕組みで処理されます。通常の送信と自動転送時の動きが異なります。<br>
+<br>
+従って、内部（ローカル）アカウントどうしへの自動転送を設定している場合で、「不転送レポート先」を管理者に設定していて、その管理者アカウントが万が一、アカウントマネージャに登録されていない状態では、次のような流れになります。<br>
+<ol>
+<li type="1">自動転送時の「不転送レポート先」設定に基づき、自動転送メールについて、エンベロープFROM をメールサーバが管理者アカウントに書き換える。<br>
+<li type="1">自動転送メールは、メールプロトコルを使って処理されるため、エンベロープFROMが管理者アカウントになったメールをSMTP受信サービス（epstrd）が再度受け付けるが、アカウントが存在しないため、無効なユーザーアカウントで送ろうとしていると見なされ、SMTP受信サービス（epstrd）により550番台の永続的なエラーを返し、受領が拒絶される。<br>
+<li type="1">自分自身のメールサーバであるが、拒絶をされた側のSMTP配送サービス（epstdd）は、設定に基づいてリトライを繰り返し、配送がうまく行かないことになる。<br>
+（※epstddの詳細ダイアログの「リトライ回数（受信拒否）」の設定に依存。）<br>
+</ol>
+結論として、管理者アカウントが作られていないときに、自動転送時の「不転送レポート先」を管理者に設定している状態では、仕様上からいって自動転送が正しく行えません。<br>
+従って、自動転送時の「不転送レポート先」を管理者に設定するときは、事前に必ず、設定済みの管理者アカウントがあることことを確認してください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

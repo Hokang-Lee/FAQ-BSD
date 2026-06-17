@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-18</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>ログに記録されるメッセージIDの後の枝番種類について</b></FONT>
+<HR>
+<br>
+<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>などのログ記録を解析しようとした場合、[メッセージID]の右に枝番が付加されている部分がありますが、この枝番の種類とその内容・意味は、下記の通りです。<br>
+<br>
+　　<b>-00x</b>　　…同報・メーリングリスト関係<br>
+　　<b>-T00x</b>　 …自動転送<br>
+　　<b>-Y00x</b>　 …自動応答<br>
+　　<b>-C0000000x</b>　…メールボックスの破棄やサイズ調整処理が有効になっている場合の転送<br>
+　　<b>-T000x</b> …メーリングリスト管理者通知<br>
+　　<b>-L000x</b> …メーリングリスト制御命令の応答<br>
+　　<b>-M0000000x</b> …メーリングリスト複数ドメインの分割<br>
+　　<b>-S000x</b> …上長承認機能（BossCheck）の保留通知<br>
+　　<b>-R000x</b> …リトライ<br>
+　　<b>-E00x</b>　 …エラー（送信者個人あて）<br>
+　　<b>-EP00x</b> …エラー（postmasterあて）<br>
+<br>
+実際にログに記録される形としては、次のように枝番が付加される形で記載されます。<br>
+　　[B0000123123-001]<br>
+　　[B0000123123-E001]<br>
+　　[B0000123123-EP001]<br>
+　　[B0000123123-R0001-E001]<br>
+　　[B0000123123-T001-R0001]<br>
+　　[B0000123123-T001-R0001-E001]<br>
+　　[B0000123123-T001-R0001-EP001]<br>
+　　[B0000123123-C00000001-T001-R0001]<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

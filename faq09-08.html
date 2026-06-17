@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ09-08</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Web管理での自動転送設定を行うときの仕様について</b></FONT>
+<HR>
+<br>
+<ol><li><b>自動転送設定・自動応答設定のオンオフの違い</b></li>
+<br>
+Web管理ツールでは、自動転送設定または自動応答設定のいずれかを有効に設定した場合、後から設定した方が自動的に有効にされる仕組みです。ちなみに自動応答設定には「自動応答を有効にする」チェックボックスが存在します。<br>
+<br>
+<li><b>転送先複数アドレスの設定手順と動作結果</b></li>
+<br>
+Web管理ツールには、&quot;転送先１&quot;から&quot;転送先１０&quot;まで複数アドレスのボックスが用意されています。<br>
+新規で複数アドレスを指定した場合、実際にはメール制御設定ファイル &quot;ims.ctl&quot; 内の &quot;ForwardTo=&quot; 項目には、複数アドレスを直接記述しておけないため、以下の処理が自動的になされます。<br>
+<ul type=disc>
+<li><b>メールボックスフォルダ</b>（既定値 /var/spool/epms/inbox/[domain.jp]/[user]/）<b>内にファイル &quot;send.txt&quot; が自動生成される</b>。</li>
+<li>メール制御設定ファイル<b> &quot;ims.ctl&quot; 内の &quot;ForwardTo=&quot; 項目に &quot;file:/var/spool/epms/inbox/[domain.jp]/[user]/send.txt&quot; が自動的に記述</b>される。</li>
+</ul>
+<br>
+<li><b>転送先複数アドレスの一部を変更したり削除するときの注意</b></li>
+<br>
+Web管理ツールに用意されている複数アドレス指定のボックスから、登録済みアドレスから一部アドレスだけ変更したりクリアした後、適用する操作が必要になります。<br>
+なお、仮にすべてのアドレスをクリアした場合は、自動転送自体が解除されたものとして扱われ、その結果、&quot;ims.ctl&quot;自体が削除される結果となります。<br>
+</ol>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

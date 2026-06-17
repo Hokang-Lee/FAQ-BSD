@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-09</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>送信メールアドレスが「&lt;&gt;」のメールが受信拒否される</b></FONT>
+<HR>
+<BR>
+RFCには、送信元エンベロープが空のメールもサポート<B>しなければならない</B>と記述されています。<br>
+<BR>
+しかし、送信元エンベロープを<b>「空でも良いことを利用した」</b>SPAMメールや、ウイルス付メールが多々あるために、いったん<B>「不正中継可能なブラックリストサイトとしてデータベースに登録されてしまう」</b>と、登録サイトからの<b>解除試験</b>でこの設定がないと<b>解除してもらえなくなる場合</b>があります。<BR>
+そのため、あえて、E-Post Mail Server・E-Post SMTP Serverシリーズでは、［中継の制限］で表示される「中継の制限設定」にある［マシンごとの中継］ボタンをクリックして表示されるデフォルトの【effect.dat】ファイルに&quot;#blank false&quot;を設定しています。<BR>
+<BR>
+送信メールアドレスが「&lt;&gt;」のメールを受信したい場合は、以下の通り、デフォルトの設定を残しておく必要があります。<blockquote>
+【effect.dat】の設定<BR>
+---------------------------<BR>
+#&lt;&gt; default<BR>
+#blank false<BR>
+---------------------------</blockquote>
+上記２行を優先処理させるように先頭行部分に設定しておけば、送信元エンベロープの状況により、次のように選別されることになります。<blockquote>
+MAIL FROM: &lt;&gt;　（内部のユーザー宛のみ通過）<BR>
+MAIL FROM:　　　（拒否）</blockquote>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

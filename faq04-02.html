@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-02</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>ORDBによる制限（ordb.dat）設定</b></FONT>
+<HR>
+<BR>
+「中継の制限設定」にある［RDB（ORDB）］ボタンで呼び出す【ordb.dat】で設定するORDBによる制限設定は、SMTPサーバ（厳密にはepstrd）への接続時に、接続してきたIPアドレスが、不正中継やSPAMブラックリストとして登録されていないか、データベースに問い合わせる機能で、RBL参照機能に該当します。問い合わせた結果、受信を拒絶するかしないかを決定させることができます。<BR>
+また、問い合わせるRBL参照サイト（ORDBサイト）によって、ブラックリストをどのようにデータベース化しているかどうかの違いが如実に出ますので、それぞれの特性を把握して、問い合せ先を決めるとよいでしょう。<BR>
+<BR>
+ORDBによる制限設定【ordb.dat】では、問い合せサイトのサーバ名設定を行うと、epstrd（SMTP受信部）への接続時にブラックリストに載っているIPアドレスか否かを問い合わせして、その結果、ブラックとして判断された場合は、接続を制限し受信を拒絶します。その際、<b>接続マシンログ（acceptlog）にabortされた結果と拒絶理由として &quot;It was in the ORDB IP.&quot; が記載</b>されます。メール全体量のうち、2～3割ぐらいはこのORDBによる制限設定により、拒絶されるため、サーバによけいな負荷を高めなくてすみます。<BR>
+<BR>
+RBL参照サイト（ORDBサイト）様々なものがありますので、問い合わせサイトを吟味して設定してください。<br>
+E-Post Mail Server・E-Post SMTP Serverシリーズでは、最大５件分まで設定可能です。あまり多すぎても、問い合わせ時間がかかり過ぎ、処理の遅延が発生する元凶となりますので、十分注意してください。現実的には、質のよいサイトであれば１つで十分です。<br>
+<BR>
+RBL参照サイト（ORDBサイト）は以下を参考にしてください。ただし、情報が古く、既に停止しているサイトもあることを了承してください。未整理のまま掲載しておきます。<BR>
+<BR>
+<a href="http://www.spamhaus.org/sbl/" target="_blank">SBL</a> <i>Spamhaus Block List</i><BR>
+<a href="http://spamcop.net/bl.shtml" target="_blank">SPAMCOP</a> <i>SpamCop Blocking List</i>: <a href="http://spamcop.net/w3m?action=checkblock&ip=202.219.93.39" target="_blank">bl.spamcop.net<BR>
+<a href="http://www.rbl.jp/" target="_blank">RBL.JP</a> <i>日本独自のブラックリストRBLサービス</i><br>
+<a href="http://dsbl.org/" target="_blank">DSBLLIST</a> <i>Distributed Sender Boycott List: single-stage relays tested by trusted users</i><BR>
+<a href="http://dsbl.org/" target="_blank">DSBLUNCONFIRMED</a> <i>Distributed Sender Boycott List: single-stage relays, multihop relays and listings by anonymous users</i><BR>
+<a href="http://dsbl.org/" target="_blank">DSBLMULTI</a> <i>Distributed Sender Boycott List: multihop relays tested by trusted users</i>: <a href="http://dsbl.org/listing.php?ip=202.219.93.39" target="_blank">multihop.dsbl.org<BR>
+<a href="http://fabel.dk" target="_blank">SSFABEL</a> <i>networks (mostly in Asia and South America) that keep sending spam</i>: spamsources.fabel.dk<br>
+<a href="http://www.exsilia.net/" target="_blank">EXSILIA-PROXIES</a> <i>open proxies (small)</i>: proxies.exsilia.net<br>
+<a href="http://www.exsilia.net/" target="_blank">EXSILIA-SPAM</a> <i>local bl at exsilia.net</i>: spam.exsilia.net<br>
+<a href="http://www.blars.org/block.html" target="_blank">BLARSBL</a> <i>Blars Block List</i>: block.blars.org<br>
+<a href="http://www.leadmon.net/spamguard/" target="_blank">LNSG</a> <i>Leadmon.Net's SpamGuard Listings</i>: spamguard.leadmon.net<br>
+<a href="http://www.intersil.com/" target="_blank">INTERSIL</a> <i>lists...spammers...who have pestered users at Intersil</i>: blackholes.intersil.net<br>
+<a href="http://blacklist.jippg.org/" target="_blank">JIPPG-ABUSE</a> <i>JIPPG's Relay Blackhole List Project</i><BR>
+<a href="http://blacklist.jippg.org/" target="_blank">JIPPG-DUL</a> <i>JIPPG's Relay Blackhole List Project</i><BR>
+<a href="http://andrew.triumf.ca/relaytest.html" target="_blank">TRIUMF</a> <i>open relays, open formmail.pl and open proxy</i><BR>
+<a href="http://www.pan-am.ca/pdl/" target="_blank">PDL</a> <i>Pan-Am Dynamic List</i><BR>
+<a href="http://www.pan-am.ca/pdl/" target="_blank">PDLBOFHIT</a> <i>Pan-Am Dynamic List (mirror)</i><BR>
+<a href="http://www.kempt.net/spam-policy.html" target="_blank">KEMPTBL</a> <i>local bl at kempt.net</i>: kempt.net<br>
+<a href="http://sunsite.icm.edu.pl/spam/bh.html" target="_blank">ICMFORBIDDEN</a> <i>companies which took ORBS administrator to court</i>: forbidden.icm.edu.pl<br>
+<a href="http://puck.nether.net/or/" target="_blank">NETHERRELAYS</a> <i>hosts that are confirmed open-relays</i><BR>
+<a href="http://puck.nether.net/or/" target="_blank">NETHERUNSURE</a> <i>hosts that can not be tested</i><BR>
+<a href="http://www.iecc.com/korea.html" target="_blank">KOREA</a> <i>ip-space assigned to KRNIC</i>: korea.services.net<br>
+<a href="http://countries.nerd.dk/" target="_blank">NERD-JP</a> <i>ip-space assigned to Japan</i>: jp.countries.nerd.dk<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

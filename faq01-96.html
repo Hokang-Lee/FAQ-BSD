@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-96</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>内部アカウントで多重転送するときの回数制限は？</b></FONT>
+<HR>
+<br>
+内部アカウント（ローカルユーザー）から内部アカウント宛に多重転送するときの回数制限は、特に設けられていません。<br>
+内部アカウント宛の自動転送は、プログラム内部でSMTPサービスに接続して送信されますので、回数そのものに多重転送に制限はありませんが、転送されるごとに、&quot;Received:&quot;ヘッダがメールに加算され、結果的にこの&quot;Received:&quot;ヘッダの数により制限されることになります。<br>
+デフォルトでは、&quot;Received.1:&quot;ヘッダが20を超えるメールは転送できなくなります。転送を可能にするために、20以上のヘッダが必要な場合は、以下設定ファイル値を手動にて作成し、上限設定の変更を行います。<br>
+<ul>
+<hr align="left" width="80%" size="1" noshade>
+[メール作業フォルダ]（既定値 /var/spool/epms/）<br>
+→reg<br>
+　→epost<br>
+　　→ims<br>
+　　　→EPST5RS<br>
+　　　　→Received.1　　← 左記値を手動で作成。<br>
+　　　　(数値  Default 20) メールループ最大回数<br>
+<hr align="left" width="80%" size="1" noshade>
+</ul>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-42.html">自動転送設定数が多いと、処理が遅くなり負荷が過大にかかってしまう</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

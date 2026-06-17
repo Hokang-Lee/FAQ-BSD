@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-50</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールの不正利用への対処後、incomingフォルダから一時的に待避させていたメールデータを戻すときの注意点 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メールの不正利用に遭った場合、メールデータが残っている incoming フォルダやリトライデータが滞留しているリトライ関係フォルダ domains/holding フォルダをリネームする作業を行いますが、一連の対処作業を終えたのち、リネームしてある旧incoming フォルダから一時的に待避させていたメールデータを正規の incoming フォルダに戻すときの注意点にふれます。<br>
+<ol>
+<b><li>内部メールドメイン名をしっかりマシンの/etc/hostsファイルに記述しているか確認してください。</li></b>
+特に構築作業を自己流で行っていた場合、この記述をしっかり行っていないケースがとても多いです。改めて確認してください。/etc/hostsファイル内に内部ドメイン（自ドメイン）を記述していないときは、しっかり記述するようにしてください。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-53.html">/etc/hostsファイル記述の必要性と有用性について</a><br>
+●<a href="./faq01-04.html">クライアントからのメール送信が遅いケースと/etc/hostsファイルの必要性</a><br>
+●<a href="./faq15-04.html">POP3/IMAP4利用時にも/etc/hostsファイル記述を必須とする理由について</a><br>
+<br>
+<b><li>incomingフォルダへ戻す際、リトライ設定時間（デフォルト時間）を超えている可能性があるので .RCPファイルのタイムスタンプを更新してください。</li></b>
+faillogに配送できなかったエラー理由として [Unable to deliver to destination domain] が記録されている場合、incoming フォルダへ戻すときの時間として、リトライ設定時間（回線異常の場合デフォルト8時間、マシン無応答の場合デフォルト24時間）を超えてしまっている可能性があるため、戻す前に .RCPファイルのタイムスタンプを更新しておく必要があります。<br>
+epstddサービスは .RCPファイルのタイムスタンプを見て判断します。リトライ設定時間（回線異常の場合デフォルト8時間、マシン無応答の場合デフォルト24時間）を超えている場合、配送が取りやめになってしまう可能性があります。一方、epstddサービスは .MSGファイルの方のタイムスタンプは見ません。<br>
+RCPファイルと .MSGファイルを incoming フォルダに戻す際、.RCPファイルをエディタで開いて上書き更新するといった方法でかまいませんので、.RCPファイルのタイムスタンプを更新してください。<br>
+タイムスタンプは上記の設定時間に引っかからない日付時刻になればよく、作業しているそのときの時刻でかまいません。<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-65.html">リトライ回数やリトライ期間の設定について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

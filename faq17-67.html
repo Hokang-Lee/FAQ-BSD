@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-67</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IMAP4プロトコルでメーラーにサーバ側からプッシュ通知されるようにするには <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+IMAP4プロトコル使用時にメーラー側がIDLEコマンドに対応しているとき、サーバ側からプッシュ通知されるようにするには、E-Postサーバ側にIDLEコマンドを有効にする設定と時間間隔の設定が下記の通りあります。<br>
+メーラー側がIDLEコマンドに対応しているときに、サーバ側からプッシュ通知されるようになります。<br>
+<br>
+ただし、Outlookでは、IDLEコマンドを有効にしている場合、Outlook側が命令を頻発させる異常な動きが過去に見られたことから、IDLEコマンドは無効にしてお使いいただくよう提案しています。IDLEコマンドを有効にする場合は、異常な命令頻発現象が起きたりしないか、ログなどでようすを見ながら設定してください。<br>
+<blockquote><small>[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5IMAP4S<br>
+　　　　　→IDLECmd.1 (数値  Default 1) IDLE命令の有効化  0:Disable, 1:Enable<br>
+　　　　　→IDLELoop.1 (数値  Default 5) sec IDLE命令実施中の監視間隔 デフォルト:5秒<br>
+　　　　※変更した後は、epstimap4dサービスの再起動が必要になります。<br>
+</small></blockquote>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq15-44.html">メールクライアントに Outlookシリーズを使用するときはIMAP4のIDLE命令とBroadcastフラグを無効設定にすることを推奨</a><br>
+●<a href="./faq15-45.html">IDLE命令を無効に変更する前と後でログ記録にどのように違いが出るか</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

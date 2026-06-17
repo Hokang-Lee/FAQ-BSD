@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-13</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>配送のリトライが配送詳細で設定した内容より２分ほどずれて送られていることがあるのはなぜか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+配送リトライ期間の設定「リトライ期間（マシン無応答）」でデフォルト設定（24時間後）にしているが、23時間58分後に送信された。2分ずれたのはなぜかという質問を受けたことがあります。<br>
+<br>
+仕様面と考えられる点を説明します。<br>
+まず、リトライ期間（時間）のカウントは、E-Post Mail Server へのメール着信時間に依存しますので、メールがサーバ内に保存されたタイムスタンプからの累計時間となります。<br>
+<br>
+--------------------------------------------------------<br>
+<small>（※参考）E-Post Mail Server（SMTP）での処理の略図<br>
+epstrd［SMTP受信サービス］<br>
+（一時フォルダ temp フォルダ）<br>
+　　↓<br>
+（配送キューincomingフォルダ）　←<br>
+epstdd［SMTP配送サービス］ 　　↑<br>
+　　↓　　　　　　　　　　　　　　↑※incomingへ<br>
+　　↓→→配送のリトライ処理待ち→↑<br>
+　　↓　　（domains/holdingフォルダ）<br>
+　　↓<br></small>
+--------------------------------------------------------<br>
+<br>
+他のメールが配送キューやリトライ関係フォルダにメールが溜まっていたりすると、配送開始の順番待ちで配送の開始が遅延することがあります。<br>
+（※配送キューのincomingフォルダ、配送リトライ関係のdomains/holdingフォルダ、詳細な動きに関しては下記FAQ記事参照)<br>
+<br>
+メール着信直後に1回目の配送が始まっているとは言い切れませんので、その点のタイムラグはどうしてもある前提で確認する必要があります。<br>
+なお、疎通ができない状態ですと、記録は接続タイムアウトで終了してからの記録を取ることになるので、タイムラグはどうしても発生してしまいます。<br>
+<br>
+また、SMTP受領サービス側（epstrd）とSMTP配送サービス側（epstdd）の両者は内部通信で”連動をしていない”という意味で、いわゆる非同期で動作していることを前提として認識してください。<br>
+<br>
+epstrd/epstdd 両者が同期しないなら、なぜSMTP受信と配送が継続して行われているのかという点について説明します。<br>
+epstdd は単にメールキューであるincomingフォルダにメールデータが存在しているかどうかを判定して配送動作に入ります。<br>
+ですので、通常SMTP受領後、メールキューであるincomingにメールデータとしてファイルが生成され存在していれば、配送側に通知が届いたタイミングで送信がされます。<br>
+メールキューであるincomingフォルダにメールデータファイルとして存在していない状態のとき、例えば書き込みが遅延しディスクキャッシュにまだとどまっている状態などメールデータが実態として見つからない場合は、ひとまずSMTP配送サービスである epstdd の処理スレッドは終了します。<br>
+その場合、次の配送リトライタイミング（デフォルト2分後）に配送トライされるといった2分程度のタイムラグはどうしても発生する可能性があります。<br>
+<br>
+この場合の改善方法としては、SMTP配送サービス側（epstdd）のスレッド数をデフォルト値（30）より例えば50～100程度に増やしてみると、配送のタイムラグが改善される場合があります。 <br>
+<br>
+そのほか、epstdd の［詳細］ボタンで呼び出せる「配送詳細（SMTP）」の「リトライ間隔のまま」チェックボックスをオンにすれば、2分の定間隔で送信を必ずおこなう指定となり、配送のタイムラグがかなり改善される場合もあります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-67.html">リトライ処理が行われるときの情報とフォルダについて</a><br>
+●<a href="./faq10-91.html">リトライを待たずに手動で強制的に実行させる方法</a><br>
+●<a href="./faq15-50.html">内部アカウントどうしの送信しかない環境のためリトライ回数・リトライ期間を最小限にしたい</a><br>
+●<a href="./faq01-66.html">「リトライ間隔のまま」チェックボックスの意味について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

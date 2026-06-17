@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-59</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>携帯アドレスに自動転送したところ、“501 Syntax error in parameters or arguments to RCPT command”エラーが返され転送に失敗する <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+携帯アドレスに自動転送したところ、“501 Syntax error in parameters or arguments to RCPT command”エラーが返され転送に失敗するという報告があり、faillogにこの失敗理由が記録されていました。<br>
+このfaillogに記録された“501 Syntax error in parameters or arguments to RCPT command”エラーは、E-Post側によるエラー応答ではありません。<br>
+エラー内容を読み取ると「RCPTコマンドのパラメータ（受信者指定）の書式が不正」という永続的エラーであることがわかります。SMTPのやり取りの中で、転送先サーバへ「RCPT TO：」を送信した際に、接続した転送先相手からのエラー内容と考えられます。<br>
+以下の事項を順番に確認していきます。<br>
+<br>
+<b>１．自動転送先アドレスの記述を確認する</b><br>
+RCPT TO：に送出したメールアドレスの記述に不要な文字が入って転送送信していないか、Account Managerの該当アカウントの自動転送設定の転送先に不要な文字が混入していないか確認します。<br>
+（例）<br>
+・全角／半角スペース<br>
+・制御コード（改行・タブ等）<br>
+・先頭や末尾の不可視文字<br>
+・アドレスの前後に ＜＞ や ，； 等が混入している<br>
+<br>
+<b>２．senderlog（配送詳細ログ）で、実際に送出したRCPT TO：を確認する</b><br>
+faillog（配送失敗ログ）だけでなく、同一配送処理プロセス部分が記録されているsenderlog（配送詳細ログ）も確認し、RCPT TO：の行に不正な文字列が付与されていないかをログ上で確認します。<br>
+<br>
+<b>３．１・２で問題が見つからなければ、転送先（相手側）での確認を依頼する</b><br>
+もし、「ユーザー管理」の［転送指定］設定（※）およびsenderlog上で記述に問題が見当たらない場合、<b>相手側SMTPサーバが当該アドレス表記を受け付けていない／相手側の使用や制限で501を返している</b>可能性があります。相手側に調べてもらう流れとなります。<br>
+※E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック、［転送指定］で転送先を確認できます。<br>
+<br>
+この場合は、転送先に以下を確認してもらうようにしてください。<br>
+・受信拒否／迷惑メールフィルタ（許可・拒否リスト、ドメイン指定等）<br>
+・受信側が要求するアドレス表記・制限（特殊な拒否条件等）<br>
+・受信側ログでのエラー理由（501を返した根拠）<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-31.html">自動転送設定時にメール転送の成功・失敗の判断はどのログで行うか</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

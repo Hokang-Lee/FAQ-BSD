@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-78</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールキュー（incoming）フォルダに生成される一時ファイルについて</b></FONT>
+<HR>
+<br>
+メールキュー（incoming）フォルダには、メッセージキュー用の一時ファイルが生成され、配送処理が施されます。それらの一時ファイルの種類と働きは次の通りです。<br>
+<br>
+<b>メッセージキューの一時ファイルの種類について</b><br>
+<ul>
+<li>拡張子RCP　（拡張子RCX）</li>
+<li>拡張子MSG</li>
+<li>拡張子$CP</li>
+<li>拡張子$OK</li>
+<li>拡張子$NG</li>
+</ul>
+<b>拡張子 MSG、RCP、RCXのファイルの用途と働きについて</b><br>
+<ul>
+<li>.MSG　　・・・メールメッセージのヘッダ＋本文</li>
+<li>.RCPおよび.RCX　・・・エンベロープ情報(送信元・送信先アドレス)</li>
+<li>上記&quot;$&quot;付きの３種のファイルは、配送処理中に作成されるテンポラリなファイル。 </li>
+</ul>
+<b>RCP、RCXのファイルの書式について</b><br>
+エンベロープ情報の.RCP、.RCXファイルの書式例は以下の通りです。Recipient:では TO:CC:BCC: の区別はありません。<br>
+　---------------------------------------------------------------<br>
+　Message-ID: &lt;[メッセージID]@[ドメイン名]&gt;<br>
+　Return-path: [エンベロープFROMで指定したメールアドレス]<br>
+　Recipient: [エンベロープTOで指定したメールアドレス]<br>
+　Recipient: [エンベロープTOで指定したメールアドレス]<br>
+　Recipient: [エンベロープTOで指定したメールアドレス]<br>
+　　　　　　　：<br>
+　Recipient: [エンベロープTOで指定したメールアドレス]<br>
+　---------------------------------------------------------------<br>
+　※メッセージID＝"B"で始まる.MSGの拡張子を除くファイル名部分<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

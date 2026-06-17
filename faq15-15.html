@@ -1,0 +1,80 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-15</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メッセージIDを進めたり戻したりするときの動作と仕様について</b></FONT>
+<HR>
+<br>
+E-Post SMTPサービスが受領時のタイミングで管理しているメッセージIDのうち、数値情報は、下記にあげる [メール作業フォルダ]/reg/ フォルダ下にある設定ファイル内にメール受信カウンタ値として保管されます。<br>
+<br>
+サーバリプレースのためにメールサーバを再インストールした場合、今までのメッセージIDの情報に合わせて、メッセージIDの値を進めておく作業を行うことがあります。（詳細は下記FAQ記事を参照）<br>
+メッセージIDの値を大きくする場合は、下記の情報にあるように、&quot;/var/spool/epms/reg/epost/ims/&quot; フォルダ下にある <b>&quot;LastMsgId.1&quot;</b> の設定ファイルだけを書き換えればよいのですが、逆にメッセージIDの値を戻したり小さくする場合には、それだけでは不可になっており、注意が必要です。<br>
+<br>
+メッセージIDの値を戻したり小さくする場合は、&quot;/var/spool/epms/reg/epost/ims/&quot; フォルダ下の <b>&quot;LastMsgId.1&quot;</b> の設定ファイルに加え、&quot;/var/spool/epms/cluster/&quot; フォルダ下の <b>&quot;msg.id&quot;</b> の設定ファイルも合わせて変更するようにしてください。これは、小さい値から大きい値に進めるときには、&quot;LastMsgId.1&quot; ファイルの書き換えだけでそのまま利用されますが、逆に大きい値から小さい値に戻すときには、メッセージIDを排他処理用に管理するためのフォルダである、&quot;/var/spool/epms/cluster/&quot; フォルダ下の &quot;msg.id&quot; とも比較され、記録されていた大きい値の方で上書きされる安全設計の仕組みがとられていることによります。<br>
+<br>
+なお、メッセージIDの値を書き換える場合は、事前に E-Post SMTP 関係の2つのサービスを停止しておくことが必要です。<br>
+<br>
+（参考・<b>メッセージIDを進める</b>テストの例）<br>
+<ol><li>E-Post のサービスを停止。<br>
+<li>SSHなどを使ってコンソールにログイン。<br>
+<li>viエディタを使い、&quot;/var/spool/epms/reg/epost/ims/LastMsgId.1&quot; の値を 5000→20001 へ書き換え。<br>
+<li>E-Post のサービスを再開。<br>
+<li>テストメールの送受信。<br>
+<li>&quot;B&quot; で始まる20001のメッセージIDがデータファイル名となっていること、および受信メールのヘッダを確認しメッセージIDの数字がふられていることを確認。<br>
+</ol>
+（参考・<b>メッセージIDを戻す</b>テストの例）<br>
+<ol><li>E-Postのサービスを停止。<br>
+<li>SSHなどを使ってコンソールにログイン。<br>
+<li>viエディタを使い、&quot;/var/spool/epms/reg/epost/ims/LastMsgId.1&quot; の値を 20001→5001 へ書き換え。合わせて &quot;/var/spool/epms/cluster/msg.id&quot; の値も 20001→5001 へ書き換える。<br>
+<li>E-Postのサービスを再開。<br>
+<li>テストメールの送受信。<br>
+<li>&quot;B&quot; で始まる5001のメッセージIDがデータファイル名となっていること、および受信メールのヘッダを確認しメッセージIDの数字がふられていることを確認。<br>
+</ol>
+<hr width="85%" align="left" border="1" noshade><small>
+[メール作業フォルダ]（既定値 /var/spool/epms/）<br>
+　→reg フォルダ<br>
+　　→epost <br>
+　　　　→ims <br>
+　　　　　→LastMsgId.1　(DWORD  Default 0) メッセージID管理のメール受信カウンタ<br>
+※ファイルの拡張子&quot;.1&quot;は、値の型が DWORD であることを表わす。またファイル内の末尾に改行を入れない。<br>
+<hr width="85%" align="left" border="1" noshade>
+[メール作業フォルダ]（既定値 /var/spool/epms/）<br>
+　→cluster フォルダ<br>
+　　→msg.id　メッセージIDを排他処理用に管理するためのメール受信カウンタ<br></small>
+<hr width="85%" align="left" border="1" noshade>
+<br>
+（関連FAQ）<br>
+●<a href="./faq03-23.html">サーバをバックアップデータからリストアしたとき、メッセージ開始番号の上書き警告メッセージが表示されたときの対処方法について</a>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

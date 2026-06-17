@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-01</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTP認証を有効にするとき旧来のユーザーに影響を与えないでおくには</b></FONT>
+<HR>
+<br>
+メールサーバ全体でSMTP認証を有効に設定して、一部ユーザーだけ試験的にSMTP認証を有効設定し、旧来のSMTP認証を使っていないユーザーに影響を与えない状態にしておきたい場合は注意が必要です。<br>
+具体的にはこれまでの非認証有効設定状態下で、各アカウントの「認証ファイルを設定する」チェックボックスをオンの状態にして使っていないか確認が必要で、影響を与えたくないユーザーすべてについて同チェックボックスがオフになっているかを事前に調べます。<br>
+万が一、オンの状態になっているアカウントについては、メールサーバ全体でSMTP認証を認証ファイルベースで有効に設定すると、その時点以降、SMTP認証が必要な状態になります。<br>
+これは、非認証有効設定状態下では、各アカウントの「認証ファイルを設定する」チェックボックスがオンの状態でもSMTP認証なしで使えるからです。<br>
+この設定状態は、各アカウントのメールボックスフォルダ内に &quot;apop.dat&quot; ファイルが存在するか、存在しないかでも確認できます。<br>
+<ul><li> &quot;apop.dat&quot; が存在する＝「認証ファイルを設定する」チェックボックスがオン<br>
+<li> &quot;apop.dat&quot; が存在しない＝「認証ファイルを設定する」チェックボックスがオフ<br>
+</ul>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-38.html">SMTP認証（SMTP-AUTH）設定の手順</a><br>
+●<a href="./faq01-54.html">SMTP認証（SMTP-AUTH）の認証方法を選択したときの挙動と「認証ファイル」の意味は？</a><br>
+●<a href="./faq01-74.html">SMTP AUTHあり／なしで接続したときの動作とメッセージについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

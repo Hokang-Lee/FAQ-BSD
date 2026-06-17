@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ03-14</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>不正中継の踏み台対策 <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+SMTP認証を各ユーザに課し運用している限り、第三者による不正中継の踏み台になることは、通常ではまずありません。<br>
+SMTP認証を各ユーザに課さずに利用している場合、登録アカウントを使った、詐称による不正中継の踏み台になる可能性があります。<br>
+ただし、SMTP認証を課していても、容易に類推できるパスワードでは、危険であることは何ら変わりませんので、容易に類推できそうなパスワードは絶対に避ける必要があります。<br>
+万が一、不正中継の踏み台に利用されてしまう可能性を考え、以下のような状況が起きていないか、日ごろからチェックしておくとよいでしょう。<br>
+<ul><li>急に回線が重くなった。<br>
+<li>異常なメールの遅配が発生するようになった。<br>
+<li>メールサーバの動作が極端におかしくなった。<br>
+<li>見知らぬ所から苦情のメールが来た。<br>
+<li>上流プロバイダからの警告が来た。<br>
+<li>配信不能の大量のリターンメール等がメールの管理者宛てに届くようになった。<br>
+<li>接続マシンログ（acceptlog）やSMTP受信ログ（inlog）のファイルサイズが異様に肥大化している。<br>
+<li>SMTP送信ログ（outlog）や配送失敗ログ（faillog）のファイルサイズが異様に肥大化している。<br><li>POP3ログ（pop3log）やIMAP4ログ（imap4log）のファイルサイズが異様に肥大化している。（※POP3/IMAP4を実装している Mail Server の場合）<br>
+etc.....<br>
+</ul>
+もし、このような状況に遭遇した場合、以下の内容を確認してみましょう。<br>
+<ol><li><a href="./faq05-04.html">SMTP受信ログ（inlog）</a>や<a href="./faq05-03.html">接続マシンログ（acceptlog）</a>、さらに<a href="./faq05-07.html">SMTP送信ログ（outlog）</a>ならびに<a href="./faq05-09.html">配送失敗ログ（faillog）</a>を取得しているときは、ログを調べ、見覚えのない送信元アドレスからの送信依頼の受領が行われ、大量の配信や配送失敗がないかを確認します。もし大量の配信や配送失敗をした記録が確認されれば、不正利用されたと考えられる該当アカウントを特定します。<br>
+<li>不正利用されているアカウントを見つけた場合、そのアカウントはSMTP認証をしているか、していないのかをAccount Managerから確認します。<br>
+<li>SMTP認証していないときは、おさまって以降はSMTP認証を実施するようにしますが、当面の不正利用をさせないためにアカウント名の先頭部分に文字を付け足す方法でリネームします。<br>
+<li>SMTP認証しているのにSMTP認証パスワードが見破られ使われたのかを確認するには、<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）</a>を確認します。認証パスワードが見破られたときは該当アカウントの認証パスワードを変更するようにします。<br>
+<li>メール作業フォルダ（既定値 /var/spool/epms/）にある以下のフォルダにSPAMメールのデータが溜まっていないかチェックします。<br>
+<b>incoming、domains、holding、lists</b> などのフォルダ内のようすをチェックします。<br>
+万が一、メールのデータが大量溜まっている場合、SPAMメールをメールサーバが配信し続けている可能性がありますので、epstrd・epstddサービスを直ちに停止させてください。<br>
+ファイルが少数のときは、フォルダ内のデータ全てを削除するか、別の場所へ移動します。<br>
+ファイル数が膨大になってしまっていて、削除や移動の操作自体に支障があるときは、フォルダ名を別名にリネームします。フォルダ名を別名に変えることで、メールサーバの処理対象から除外されます。<br>
+<li>不正中継（SPAM）メールの受信拒否対策を行います。<br>
+ここでは、見知らぬメール送信者から外部への送信を行わせないように設定します。<br>
+その際、上記SMTP受信ログ（inlog）や接続マシンログ（acceptlog）を参考に、「中継の制限」【effect.dat】ファイルに送信元（IPアドレスやドメインなど）からの受領を拒絶するように定義します。<br>
+<li>SMTP認証を実施していなかったときは、メールサーバ全体および全ユーザーについてSMTP認証の導入をするように計画し実施してください。<br>
+<li>特定アカウントのSMTP認証パスワードが見破られ使われた可能性があると推測されるケースで Mail Server を運用中の場合、その手始めはPOP3パスワードあるいはIMAP4パスワードからかもしれません。特にPOP3/IMAP4を実装している Mail Server の場合は、該当するアカウントについてPOP3パスワードあるいはIMAP4パスワードを総当たりで試されていることはないか、<a href="./faq05-11.html">POP3ログ（pop3log）</a>あるいは<a href="./faq05-13.html">IMAP4ログ（imap4log）</a>から調べます。<br>
+</ol>以上の対応が完了したら、epstrd・epstddのサービスを再開して下さい。なお、自身のSMTPサーバーが踏み台にされていないのに、「SPAMメールがあなたのサイトから送られて来る」といったメールが届くことがあります。これらは、「あなたの管理するドメイン管理するメールアドレス」を送信元として、第三者のSMTPサーバーを踏み台にした送信によるケースもあります。どこを中継しているかは、メールヘッダの&quot;Received:&quot;ヘッダを参照することにより、判別することが可能ですので、確認してみましょう。<br>
+踏み台にされてしまってから、相当の時間が経過している場合、いくつかのRBLサイト（DNSBLサービス）に「ブラックサイト」として、登録されてしまっている可能性もあります。自身の管理するSMTPサーバーが登録されていないか確認し、登録されている場合は、解除の手続きが必要になります。できるかぎり、有力なRBLサイトを訪れ、チェックを行うようにしてください。<br>
+<br>
+<b>（参考情報）</b><br>
+　<a href="http://www.blacklistalert.org/" target="_blank">スパム判定DBサイト：BLACKLISTALERT.ORG</a><br>
+　<a href="http://www.spamcop.net/" target="_blank">RBLサイト例：spamcop.net</a><br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-08.html">作成されていないアカウントで受理され、勝手な送信を許している</a><br>
+●<a href="./faq04-20.html">存在しないアカウントに大量メールなどメール攻撃に対する総合的な手だてはどうしたらよいか</a><br>
+●<a href="./faq15-25.html">〔新機能〕SMTP認証時の「認証接続ロックアウト機能」について </a><br>
+●<a href="./faq17-09.html">〔新機能〕SMTP接続時の「IPロックアウト機能」について</a><br>
+●<a href="./faq15-26.html">〔新機能〕POP3認証時の「認証接続ロックアウト機能」について</a><br>
+●<a href="./faq15-27.html">〔新機能〕IMAP4認証時の「認証接続ロックアウト機能」について </a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

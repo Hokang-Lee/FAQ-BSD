@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-06</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールを4人宛に送信したところ、1人だけ届いていないようでエラーメールも返されていない。どこから調べるべき？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メール送信で何らかの理由で配送失敗した場合は、理由と原因に応じて配送のリトライがE-Postの設定内容に準じて必要回数分だけ行われます。<br>
+これが最終リトライが終えられているか、まだリトライ途中なのか、不明な場合はログを中心に調べてみるしかありません。<br>
+<br>
+メール作業用フォルダ（既定値 /var/spool/epms/）配下に inlog（SMTP受信ログ）/outlog（SMTP配送ログ）/faillog（SMTP配送失敗ログ）/senderlog（配送時の詳細ログ）といったログが記録されていることが前提です。<br>
+もしログが取得されている設定になっているか不明のときは、「ログ設定」画面で必要ログのチェックボックスがオンになっていることを確認してください。<br>
+<br>
+4人宛てのうち、配送ができなかった1人の記録がoutlogに見つかれば、配送成功していることになります。<br>
+逆にfaillogに見つかれば、リトライした結果、最終的に配送失敗に終わっていることが確認できます。<br>
+また、senderlogには、配送成功した場合も、配送失敗した場合も、詳細内容が記録されていく形です。<br>
+<br>
+配送失敗ログのfaillogに掲載されていたり、senderlogに配送失敗した記録が見つかれば、記載されている配送失敗理由を中心に調べていくことになります。<br>
+一方、配送成功を記録するログであるoutlogに掲載されていたり、senderlogに配送成功した記録が見つかれば、その先の経路を含む相手側SMTPの問題ということになります。<br>
+まずはログを調べることを優先にご確認ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-43.html">配送できなかったメールをログで確認する方法</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-04</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>POP3/IMAP4利用時にも/etc/hostsファイル記述を必須とする理由について</b></FONT>
+<HR>
+<br>
+E-Postシリーズでは、内部のメールドメイン名を /etc/hosts ファイルに記述することを必須のお願いにしています。<br>
+下記の記事では、SMTPプロトコル時の話しとして解説しておりますが、実はPOP3/IMAP4プロトコル使用時にも逆引きを利用する部分があり、/etc/hosts ファイルの記述をしていただいていることが大前提になります。<br>
+どのような部分で逆引きを利用しているかといえば、IMAP4サービスでは、ホスト名をAUTHENTICATE命令時の処理で利用するため接続開始時に一律取得するときに使います。これはE-Postシリーズの仕様です。<br>
+また、SMTP/POP3サービス時においても、同様の認証やその他の処理に利用するため、接続開始時に一律取得しているときに使っています。こうした機構のため、SMTPプロトコル使用時だけでなく、POP3/IMAP4プロトコル使用時にも、/etc/hosts ファイル記述が必須となりますので、ご留意ください。<br>
+<br>
+/etc/hostsファイルの記述については、メールサーバに設定しているメールドメイン名を記述するようにしてください。設定するIPアドレスは、メールサーバ用に割り当てたIPアドレスを記述します。なお、複数のドメインを設定している場合は、複数分すべてを設定してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-53.html">/etc/hostsファイル記述の必要性と有用性について</a><br>
+●<a href="./faq01-04.html">クライアントからのメール送信が遅いケースと/etc/hostsファイルの必要性</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

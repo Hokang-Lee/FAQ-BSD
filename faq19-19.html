@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-19</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>IPロックアウト機能でiplockが記載されており、時間を調べることはできるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+IPロックアウト機能で使用される設定ファイルである &quot;rejectsmtpip.dat&quot; のファイル内を確認したとき、IPアドレスの右側、iplock表示の左側には数値が記録されています。<br>
+この数値は（1900年分を加算したunixtime値）であり、ここから時間を算出することができます。<br>
+<br>
+接続元IPアドレス[TABコード]接続時間情報（シリアル値）or 論理値[TABコード]iplock<br>
+---(例)rejectsmtpip.dat--------------------------<br>
+220.120.xxx.xxx<font color="pink">[TAB]</font>61712500428<font color="pink">[TAB]</font>iplock<br>
+　：<br>
+-------------------------------------------------------<br>
+上記の例では、iplock表示されているIPアドレスに表示されている数値は &quot;61712500428&quot; となっていますが、実際の時間は［datファイル内に記録された数値］－［59958144000（1900年分を加算したunixtime値）］＝ となります。これを計算すると次のようになります。<br>
+　61712500428-59958144000=1754356428<br>
+その後、FreeBSDに用意されている &quot;date -r&quot; コマンドで調べることができます。標準コンソールやSSHでターミナルにログインし下記コマンド書式で実行します。<br>
+---(例)ターミナルより-----------------------<br>
+# date -r 1754356428<br>
+　Tue Aug  5 10:13:48 JST 2025<br>
+　^^^^^^^^^^^^^^^^^^^←得られた日時です<br>
+--------------------------------------------<br>
+そのほか、曜日は正しく表示されませんが、日付・時刻だけであれば次の方法でも調べられます。<br>
+---(例)ターミナルより-----------------------<br>
+# date -r 61712500428<br>
+　Wed Aug  5 10:13:48 JST 3925<br>
+　^^^^^^^^^^^^^^^^^^^←得られた日時から[年]-1900 として扱ってください<br>
+--------------------------------------------<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-09.html">〔新機能〕SMTP接続時の「IPロックアウト機能」について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-63</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>異なるドメイン間で各アカウントが同一のメールボックスを使うときは共通メールボックスを利用する <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+異なるドメインで各アカウントが同一のメールボックスを使うときは共通ボックス（区別しない）方式を利用します。<br>
+ドメインをこれから作成する場合はドメイン1とドメイン2の両方を「共通ボックス（区別しない）」方式で作成してください。既に「接続するIP/ドメインで区別する方式」で作成済みのときは、サービスを停止した状態で上記「共通ボックス（区別しない）」方式に両方を変更します。<br>
+<ol><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、「ドメイン管理」→「ドメインの新規作成・設定変更」→登録済み既存ドメインの［詳細設定を開く］をクリック。</li>
+<li>詳細設定画面で「共通ボックス（区別しない）」方式か、「接続ドメイン/IPで区別する」方式のどちらが選択されているか確認する。<br>
+・まだ作成していない場合は、「サービス制御」からE-Post全サービスを停止した状態でドメインを「共通ボックス（区別しない）」方式で作成する。<br>
+・「接続するIP/ドメインで区別する方式」で作成済みである場合は、「サービス制御」からE-Post全サービスを停止した状態でドメインを「共通ボックス（区別しない）」方式に変更して確定する。</li>
+<li>その後、全サービスを再開する。</li></ol>
+「接続するIP/ドメインで区別する方式」から「共通ボックス（区別しない）」方式に変更することに応じて、メールボックスの位置が変更されます。<br>
+<ol><li>開いたフォルダの位置が下記の一番目記事の内容になっていることを確認する。<br>
+・「接続ドメイン/IPで区別する」方式の場合<br>
+　/var/spool/epms/inbox/[ドメイン名]/[ユーザ名]/<br>
+　　　　　　　　　↓<br>
+・「共通ボックス（区別しない）」方式の場合<br>
+　/var/spool/epms/inbox/[ユーザ名]/</li>
+<li>必要であれば、変更前のフォルダ位置に残っている拡張子.datや.ctlなどの制御系ファイル、拡張子.MSGのメールデータファイルを変更後のメールボックスフォルダ位置にコピーしておく。</li></ol>
+2つの方式それぞれの違いですが、メールボックスフォルダの位置が違うこと、メールクライアントからログインするときのユーザーIDが＠以降が必要なケース（「接続するIP/ドメインで区別する方式」）と、＠以降が不要なケース（「共通ボックス方式」）の違いがあります。詳しくは下記の記事を参照してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-11.html">方式の違いによるメールボックスフォルダの作成位置について</a><br>
+●<a href="./faq01-62.html">メールクライアントから接続するユーザーIDに＠以降が必要なケース</a><br>
+●<a href="./faq10-12.html">ドメインの管理方法を共通ボックス方式から接続ドメイン/IPで区別する方式へ移行するとき</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

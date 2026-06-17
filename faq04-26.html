@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-26</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	pre {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:1.6em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Fromヘッダーに自分のメールアドレスが名乗られているメールが送られてくる <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+Fromヘッダーに自分のメールアドレスが名乗られている迷惑メールが送られてくるが、これはどう見たらよいのか質問を受けたことがあります。<br>
+<br>
+まず一般的にMTA（メールサーバ）にとって、ヘッダーFromとエンベロープFROM、ヘッダーToとエンベロープTOとは、通常の運用形態ではそれぞれ同じ内容で一致していることが普通なのですが、実はそれぞれの機能は別ものであるという理解が必要です。MTAが配送用に使うものはエンベロープFROMとエンベロープTOの方であり、ヘッダーFromとヘッダーToは基本的に扱いません。<br>
+<br>
+そして重要なこととして、大部分のメーラー（メールクライアント）が送信時にはヘッダーFromだけを任意のアドレスに書き換えできるようになっていることを知る必要があります。メーラーで行えるヘッダーFromの書き換えは機能的には可能であっても、これを悪用すれば詐称につながるわけですが、現状ではこうした機能が特に問題になっていないことも一つは要因としてあることを理解する必要があります。誤解ないように言えば、悪いのはメーラーではなく、telnetコマンドで送信させた場合もヘッダーFromとヘッダーToを別の任意のアドレスに自由に書き換えられますので、メールプロトコル自体がいろいろな課題・問題をはらんでいると理解すべきでしょう。<br>
+<br>
+メールを受ける相手側のメーラー（メールクライアント）にしてみれば、MTA（メールサーバ）が使用しているエンベロープ情報は配送完了時に切り捨てられて廃棄されているため、メーラーにはエンベロープ情報は何も与えられません。残っているのはヘッダーFromとヘッダーToのヘッダー情報だけで、メーラーとすれば利用者にこの情報を見せるのが関の山ということになります。<br>
+<br>
+もし、ヘッダーFromをエンベロープFROMと異なるアドレスに書き換えたメール、つまり詐称のおそれがあるメールが来たとき、これらを検知したり排除したい場合には、Enterprise 版に実装されている Secure Handler 機能をお使いください。 Secure Handler 機能には、ヘッダーFromとエンベロープFROMが異なるものを検知する機能が備わっています。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

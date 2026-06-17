@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-25</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>複数のドメインから来たメールを指定して自動転送させたい <font color="#ff0000">updated!</font></b></FONT>
+<HR>
+<br>
+複数のドメインから来たメールを指定して自動転送させたいときは、以下のように設定します。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリック。続けて該当ユーザーを選択して［転送指定］を選択、［操作する］ボタンをクリックします。<br>
+表示された［許可する転送元アドレス］ボタンをクリックすることで、自動転送時に送信元を複数のドメイン指定することが可能です。<br>
+たとえば、abc.jp と def.jp のドメインから送られてきたメールをすべて、指定されたメールアドレスに転送するときは、以下のように設定を行います。このとき、指定されたドメイン以外から送られてきたメールは、自動転送の対象になりません。<br>
+<ol>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリックします。
+<li>表示されるアカウント一覧から該当ユーザーを選択して［転送指定］を選択、［操作する］ボタンをクリックします。<li>該当ユーザーを選択して［転送指定］を選択、［操作する］ボタンをクリックします。
+<li>「許可する転送元アドレス」ボタンをクリックします。
+<li>表示される &quot;permitfrom.txt&quot; 内に次の２行を記述します。<br>
+<hr align="left" width="80%" size="1" noshade>
+*@abc.jp<br>
+*@def.jp<br>
+<hr align="left" width="80%" size="1" noshade>
+<li> &quot;permitfrom.txt&quot; を閉じます。
+<li>「転送先１～１０」に転送先アドレスを入力します。
+<li>転送後にメールボックスに残すかどうかの設定を「メールボックスに残す」チェックボックスで設定します。
+<li>最後に［設定する］ボタンをクリックします。
+</ol>
+自動転送設定時の［送信元編集］については、以下の注意点があります。<br>
+［送信元編集］で転送元アドレスを指定している場合、<font color="#ff0000"><b>メールの転送元エンベロープ（エンベロープFROM）と合致することが必要</b></font>です。仮にエンベロープFROMとヘッダーFromが異なっているようなメールですと、転送時の条件として判断するのはエンベロープFROMだけです。<br>
+一般的にメーラー上から確認できるのは、ヘッダーFromの情報の方であり、エンベロープFROMの情報を知っているのはメールサーバだけです。また、E-Postのログに記載されているFromアドレスはエンベロープFROMの情報です。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

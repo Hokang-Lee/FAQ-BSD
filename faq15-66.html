@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-66</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>User unknown エラーのとき、エラーメールが送られてくるケースとエラー応答のみが返されるケースがあるのはなぜ？</b></FONT>
+<HR>
+<br>
+User unknown エラーのとき、エラーメールが送られてくるケース（エラーメールを送信するケース）と、エラー応答のみが返されるケースがあるのはどうしてなのかというご質問を受けることがあります。<br>
+<br>
+E-Post Mail Serverシリーズの動きは、あくまでSMTPプロトコルでのメールの一般的なルールと動作仕様に合わせています。<br>
+まず、送信元MTAからメールが送られてくる場合で E-Postが「User unknown」（550 5.1.1 xxxx ... User unknown.）のエラー応答を相手に返したときは、その応答を受けて送信元MTAが配送失敗メールを自動生成し、送信者に向けてエラーメールを送ることになります。<br>
+<blockquote><small><b>（図A) 送信元MTAからE-Postにメールが送信されてきて User unknown エラー応答を返すケース</b><br>
+（送信者）　　⇒⇒　［送信元MTA］　⇒⇒　<b>［E-Post］</b><br>
+　　　　　　←←←　　　　　　　　　　　　　←×<br>
+　　　　　　・配送失敗エラーメール　　　　　・User unknown <font color="#ff0000">エラー応答</font><br>
+</small></blockquote>次にこれと反対のケース、E-Postから送信先MTAにメールを送る場合で送信先MTAから「User unknown」エラー応答が返されるとき、一定のリトライをしても同じエラー応答が繰り返されて最終的に失敗と判断された時点で、E-Post側で配送失敗のエラーメールを自動生成し、エンベロープの送信元つまりメールの送信者にメールの形で送ります。<br>
+<blockquote><small><b>（図B）E-Postから送信したところ送信先MTAからの User unknown エラー応答を受けて配送失敗のエラーメールを生成するケース</b><br>
+（送信者）　　⇒⇒　<b>［E-Post］</b>　　⇒⇒　［送信先MTA］<br>
+　　　　　　←←←　　　　　　　　　　　　←×<br>
+　　　　　　・配送失敗<font color="#ff0000">エラーメール</font>　　　　・User unknown エラー応答<br>
+</small></blockquote>以上のこうした動きがSMTPプロトコルでのルールに基づいた通常の動作となります。<br>
+ですから、図Aの場合、「User unknown」と判断した時は、接続元であり送信元MTAにエラー応答を返すだけです。配送失敗エラーメールを自動生成して送信者に送るのは、あくまで送信元MTAに任されるということになります。この状況を再現するために、メーラーを使って、E-Postに実在する内部アカウントから「User unknown」となるはずの架空の内部アカウントに向けて送ってみるとよくわかります。このときE-Postから接続元のメーラーに向けてエラー応答がダイレクトに返されます。一般的なメーラーでは画面上にポップアップ表示されることが普通です。配送失敗エラーメールを生成することはしません。図Aの状況と同じだからです。<br>
+これに対して、図Bの状況を再現するために、内部アカウントから「User unknown」となるはずの実在する外部ドメインの架空アカウントに向けて送ってみると、一定の時間を経過した後、最終的に配送失敗エラーメールがユーザーのメールボックスに送られてきます。この配送失敗エラーメールは、送信先MTAからの「User unknown」エラー応答を受けて、E-Postが自動生成したものです。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

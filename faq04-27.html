@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-27</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	pre {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:1.6em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>個別メールフィルタ設定がうまく働かないときのチェックポイント <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+個別メールフィルタ設定をしたのに個別メールフィルタ機能が働かない場合、原因として考えられるチェックポイントは次の通りです。<br>
+<ol><li>全体でのメールフィルタ設定が有効化されていない。<br>
+→E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［メールフィルタ］を選択。続いて「メールフィルタ（機能）を使用する」チェックボックスがオンになっているか確認します。チェックボックスがオフの状態ですと、個別メールフィルタ設定も働きません。チェックボックスをオフからオンにした後は、epstrd サービス再起動が必要になります。</li><br>
+<li>「チェック不要なIP」（メールフィルタ機能の除外対象であるホワイトリストIPの意味）に設定しているIPアドレスからの送信が試されている。<br>
+→E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［メールフィルタ］を選択。続いて「チェック不要なIP」を確認します。</li><br>
+<li>全体のメールフィルタ設定である【mail.dat】の設定や、アカウント個別用メールフィルタ設定の【mail.dat】内に書かれた別の設定が影響している。<br>
+→メールフィルタ機能の優先順位は全体設定＞個別設定であり、また【mail.dat】の記述行の優先順位は、上の記述行＞下の記述行という鉄則があります。これら別の設定が影響を及ぼしていないか確認します。</li></ol><br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

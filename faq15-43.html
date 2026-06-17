@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-43</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>POP3使用時にCAPA命令へエラーを返さず、どうしてもOKを返したいときは</b></FONT>
+<HR>
+<br>
+POP3ログ（pop3log）に以下のようなエラー内容が数多く記録されることがあります。<br>
+<blockquote>-ERR unknown or invarid command in thie state[CAPA]</blockquote>
+下記FAQ記事にもあるように、POP3プロトコルにおけるCAPA命令は、拡張機能を調査するコマンドですが、E-PostシリーズのPOP3サービス（epstpop3d）は、通常状態ではこのCAPA命令に応答としてエラーを返す仕様です。エラーを返すといっても、仕様上正常な動作であり、そのままにしておいても特に問題はありません。ちなみにCAPA命令は、RFCの拡張仕様の一つですが、必須命令でも推奨仕様でもありません。<br>
+ただし、どうしてもE-PostシリーズでCAPA命令にOKを返さなければ困るケースでは、SSLの設定を行う必要があります。下記FAQ記事の要領でメールサーバ側でのSSL設定を導入し、さらにメーラーからSTARTTLS（STLS）でPOP3受信するようにメーラーのアカウント設定を変更すれば、そうした環境下ではCAPA命令にOKを返します。<br>
+もっとも、SSLやTLS通信を必須としない要件では、こうした理由からわざわざサーバでSSLの設定を行い、クライアント側でもSSLやTLS通信を行うように変更していくのはかなり煩雑な作業になってきます。<br>
+ですから、あえて必須要件でないのであれば、POP3ログ（pop3log）に仕様上記録されるCAPA命令のエラーは無視しておいてかまいません。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-28.html">pop3log に -ERR unknown or invalid command in this state [CAPA] が記録される理由</a><br>
+●<a href="./faq01-40.html">SMTP/POP3/IMAP4 over SSL設定方法</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

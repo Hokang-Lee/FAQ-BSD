@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-53</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>アカウント削除時やアカウント登録時のアカウントデータファイル（.idx）の挙動について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+アカウント削除時やアカウント登録時のアカウントデータファイル（.idx）の挙動について説明します。<br>
+<br>
+Soft Account方式（E-Post独自アカウント方式）でのアカウント管理を選択している場合、E-Postのアカウントデータファイル（拡張子.idx）では、本格的DBで採用されているレコード単位でのロックの仕組みは導入されていません。<br>
+そのため、管理者がメールサーバ管理［ユーザー管理］から、特に不要ユーザーアカウントの削除作業を行っている時には、アカウントDBを管理しているアカウントデータファイル（拡張子.idx）全体に一時的にリネームとロック操作がかけられ、タイミングによっては E-Postシステム内部からアカウントデータファイルが参照できない瞬間が発生する可能性は理論上あり得ます。<br>
+そのときちょうどメールのSMTP送受信処理が行われていたとすると、最悪のタイミングではユーザアカウントのチェックが処理されている最中に &quot;User unknown&quot; のエラー応答を返す結果になることも考えられます。ユーザーアカウントの削除作業をまとめて行うような場合は、メールの送受信頻度が少ない、深夜帯などのタイミングで作業することが望ましいと考えます。<br>
+<br>
+一方、管理者がメールサーバ管理［ユーザー管理］から、ユーザーアカウントの追加登録作業を行っている時はどのようになっているか説明すると、アカウントデータファイルへのアカウント追加登録時には、アカウントデータファイル（拡張子.idx）の末行への追加動作が行われます。その際にはデータファイルのリネームやロック操作などは行われません。そのため、ユーザーアカウントのチェックが処理される際にアカウントデータファイルが瞬間的に参照できなくなる事象は発生しません。<br>
+<br>
+ですので、アカウント削除時の動作とアカウント追加登録時の動作とは原理的に異なります。いずれにしても、特にアカウント削除の作業は、メールの使用頻度のきわめて少ない空いた時間帯で作業を行ってください。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

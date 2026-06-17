@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ10-40</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Active Directory（LDAP）連携時のアカウント情報インポートの挙動について</b></FONT>
+<HR>
+<br>
+<b>１．Active Directory（LDAP）連携時のインポート動作について</b><br>
+<br>
+Active Directory（LDAP）連携時に、E-POSTコントロールセンターのメールサーバ管理からユーザーアカウントのインポート作業を行った場合の結果についてパターン別にまとめると下記のようになります。<br>
+A．AD上に存在せず　E-POSTコントロールセンターにもないユーザーアカウントの場合<br>
+<blockquote>
+・アカウント（＝ADのメンバー）を作成<br>
+・IMSUserグループへのメンバー追加<br>
+・<font color="#cc0000">パスワード項目はインポート対象外</font><br>
+</blockquote>
+B．AD上に存在するが　E-POSTコントロールセンターにないユーザーアカウントの場合<br>
+<blockquote>
+・IMSUserグループへのメンバー追加<br>
+・<font color="#cc0000">パスワード項目はインポート対象外</font><br>
+</blockquote>
+C．AD上に存在し　E-POSTコントロールセンターに存在するユーザーアカウントの場合<br>
+<blockquote>
+・<font color="#cc0000">パスワード項目はインポート対象外</font><br>
+</blockquote>
+<b>（関連FAQ）</b><br>
+●<a href=./faq01-84.html>Active Directory（LDAP）連携時の連動項目は？</a><br>
+●<a href=./faq01-87.html>アカウントデータとインポートの仕様について</a><br>
+<br>
+<b>２．Active Directory（LDAP）連携時のインポート制約事項</b><br>
+<br>
+・<font color="#cc0000">Active Directory（LDAP）連携時、インポート時にパスワード項目の値を指定していても、値はインポートされず無視されます。</font><br>
+・<font color="#cc0000">[Domain]名項目にドメイン名を指定してインポートを行っても、連動項目ではないため無視されます。Active Directory（LDAP）連携時には、IMSUsersグループに所属する全てのユーザーが連携される形となるため、マルチドメイン設定はできません。</font><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

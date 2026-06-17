@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-15</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>受信経路上にスパムフィルタ装置をはさんでいるが、メールの遅延がおきており、どこをどのように調べたらよいか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+下記のような経路で遅延が発生する場合は、まずはそれぞれのログを調べてください。<br>
+<small>
+------------------------<br>
+外部メールサーバ<br>
+　↓<br>
+スパムフィルターサーバ<br>
+　↓<br>
+E-Post Mail Server<br>
+------------------------<br>
+</small>
+<br>
+Ａ．スパムフィルターサーバ側の送信時間がわかるログ記録を調べる。<br>
+Ｂ．E-Post Mail Server側でinlog（SMTP受信ログ）を調べる。<br>
+　　[記録日時]からSMTP受信（受領）時間を調べ、ＡＢ両者の比較でタイムラグがあるか否かで判断できます。<br>
+　　inlog（SMTP受信ログ）に記録される[記録日時]の受信時間は下記記事を参考にしてください。<br>
+<br>
+なお、E-Post側でメールフィルタ設定をしている場合や、Enterprise版のときにアンチウイルスの設定が有効となっている場合は、１メールサイズの大小によっては遅延が発生する可能性があります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-04.html">SMTP受信ログ（inlog）について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

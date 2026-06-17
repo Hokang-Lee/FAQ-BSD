@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-04</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="5" COLOR="#000000"><b>SMTP受信ログ（inlog）について</b></FONT>
+<HR>
+<br>
+SMTP受信ログ（inlog）は、メール配送対象として受領したメールの記録です。<br>
+<ol><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ログ］を開き［SMTP受信ログ］チェックボックスの状態を確認します。
+<li>チェックボックスがオンの設定のままのときはそのままで、チェックボックスがオフのときはオンに変更してから［設定する］ボタンクリックします。［SMTP受信ログ］チェックボックスをオンにした後、［設定する］ボタンクリックします。<br>
+<li>次に、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面からSMTP受信サービス（epstrd）を［停止］→［開始］で再起動します。<br></ol>
+ログ記録は、［メール作業フォルダ/inlog/コンピュータ名］フォルダ下に日付単位で作成されます。<br>
+<br>
+SMTP受信ログ（inlog）の内容は、以下の通りです。
+<br><small>
+<hr align="center" width="98%" size="1" noshade>
+ &lt;メッセージID＠マシン名&gt;　[記録日時]　　　　　　送信元IPアドレス　送信元FQDN(*1)　送信元アドレス(*2)　送信先アドレス<br>
+<hr align="center" width="98%" size="1" noshade> &lt;B0000097403＠xxx.xxx.xxx&gt; [11/Nov/2017:17:58:25] 192.168.XXX.XXX  xxxx.xxxx.jp xxxx＠xxxx.xx.jp xxxx＠xxxx.xx.jp<br>
+<hr align="center" width="98%" size="1" noshade>
+<br>
+※1）正確にはHELOコマンドで送出された、所属するドメイン名（文字列）を記録します。<br>
+※2）送信元アドレスが空白の場合や、SMTPゲートウェイでフォワードされている場合は、空欄になる場合があります。<br>
+<br></small>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

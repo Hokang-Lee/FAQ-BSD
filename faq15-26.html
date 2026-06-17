@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-26</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>POP3認証時の「認証接続ロックアウト機能」について</b></FONT>
+<HR>
+<br>
+POP3認証時の「認証接続ロックアウト機能」を使えば、たとえば外部からアカウントの不正利用やなりすまし、あるいは標的攻撃を目的とするような、POP3認証のID／パスワードを総当たりで何十何百通りも試された場合、その動きを早めにブロック、サーバ側で完全抑止することができます。メールサーバのセキュリティを大幅に高められると同時に、不用意にサーバ負荷が高まってしまうことを防止することにも役立ちます。<br>
+<br>
+<b>【基本機能と仕様】</b><br>
+<ol><li>POP3認証時の「認証接続ロックアウト機能」は、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［POP3詳細］を開き、<b>「認証失敗ロックアウトまでの接続回数」</b>項目や<b>「ロックアウト期間」</b>項目、<b>［POP3認証ロックアウト］</b>ボタンクリックでテーブル情報ともなっている設定ファイル <b>&quot;rejectpopip.dat&quot;</b> を確認したり編集できるようになっています。<br>
+<li>POP3認証時にID／パスワードが異なる理由で認証失敗、特定の同一IPアドレスからの接続回数が<b>「認証失敗ロックアウトまでの接続回数」</b>で設定された回数に達したとき、接続元IPアドレスと接続時間情報（シリアル値）を <b>&quot;rejectpopip.dat&quot;</b> ファイルにテーブル情報として追記で記録します。<b>&quot;rejectpopip.dat&quot;</b> ファイルはプログラムインストールフォルダ内に自動生成され、その内容は<b>［POP3認証ロックアウト］</b>ボタンクリックで確認できます。<br>
+<li>設定された<b>「ロックアウト期間」</b>＝接続拒絶期間の間、epstpop3d サービスは該当IPアドレスからの接続を一切拒絶し、接続時に強制切断します。<br>
+<li>設定された<b>「ロックアウト期間」</b>＝接続拒絶期間をすぎると、自動的に再度接続が可能となります。再接続後、正しいID／パスワードで認証できれば問題はありませんが、認証失敗を繰り返し、再び設定された回数に達すると、再度テーブル情報として追記で記録、同様の接続ロックアウト処理が繰り返されます。<br>
+<li>メールサーバ管理者が <b>&quot;rejectpopip.dat&quot;</b> ファイルを編集し、記録された接続時間情報（シリアル値）部分をカット、接続元IPアドレスだけを残すと、該当IPアドレスからの接続は、永続的に拒絶されます。
+<li>メールサーバ管理者が <b>&quot;rejectpopip.dat&quot;</b> ファイルを編集し、記録された接続元IPアドレスおよび接続時間情報（シリアル値）部分を行ごと削除すれば、該当IPアドレスからの接続はリセット扱いされます。
+<li>以下のエラー応答で拒絶されたときにはこの機能の対象外であり、「認証接続ロックアウト機能」は働きません。<br>
+(1) 接続しただけで切断したようなケース<br>
+<li>メールサーバ管理者が <b>&quot;rejectpopip.dat&quot;</b> ファイルを編集し、接続を許可したい接続元IPアドレスを&quot;true&quot;指定する方法で該当IPアドレスからの接続を永続的に許可するようになります。<font color="#ff0000">（※下記D.の書式例参照）</font></ol>
+<b>【設定方法】</b><br>
+<ol><li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面から epstpop3d サービス停止。<br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［POP3詳細］を開き、<b>「認証失敗ロックアウトまでの接続回数」</b>を設定。設定値 &quot;0&quot; のときは認証ロックアウト機能は無効になっていることを表わしている。認証ロックアウトを有効にするには、&quot;0&quot; 以外の任意の回数、たとえば10回なら &quot;10&quot; を入力。<br>
+<li>右にある<b>「ロックアウト期間」</b>を分単位で設定。設定値 &quot;0&quot; のときは認証ロックアウト期間無効＝期間無制限を表す。設定するには、任意の分、たとえば30分なら &quot;30&quot; を入力。<br>
+<li>最後に最下の［設定する］ボタンをクリック。
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面から epstpop3d サービス開始。<br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［POP3詳細］を開くと表示される<b>［POP3認証ロックアウト］</b>ボタンをクリック。<br>
+<li><b>&quot;rejectpopip.dat&quot;</b> ファイルが表示され、設定直後は空の状態であることを確認。<br>
+</ol>
+<b>【運用方法】</b><br>
+<ol>
+<li>しばらく運用を続ける。<br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［POP3詳細］を開くと表示される［POP3認証ロックアウト］ボタンをクリック。<br>
+<li><b>&quot;rejectpopip.dat&quot;</b> ファイルが表示されるのを確認。運用を続けた結果、下記の記録例のように、POP3認証ロックアウトとなったIPアドレスの記録がされており、同時にそれが拒否テーブルとなっているのを確認する。<br>
+<li>POP3認証ロックアウトとなったIPアドレスについて、必要に応じて編集する。くわしくは下記。<br>
+</ol>
+<b>【ロックアウト記録されたIPアドレスを扱う&quot;rejectpopip.dat&quot;ファイル運用上のポイント】</b><br>
+<ol type="A"><li>&quot;rejectpopip.dat&quot; ファイルは蓄積されていく一方であるため、システム管理者がときどき目を配り過去の古いロックアウト記録は行ごと削除などのメンテナンス作業を行う。<br>
+<li>ロックアウト記録がされたIPアドレスについて<b>永続拒否</b>をしたいとき→接続元IPアドレスだけを残し、接続時間情報（シリアル値）部分をカットする。<font color="#ff0000">（→下記B.の書式例）</font><br>
+<li>ロックアウト記録がされたIPアドレスについてリセットしたいとき→記録された接続元IPアドレスおよび接続時間情報（シリアル値）部分を行ごと削除する。<br>
+<li>ロックアウト記録がされたIPアドレスについて<b>永続許可</b>をしたいとき→接続時間情報（シリアル値）部分をカットし代わりに <b>&quot;true&quot;</b> を追記して保存する。<font color="#ff0000">（→下記D.の書式例）</font><br>
+</ol>
+<b>【&quot;rejectpopip.dat&quot;ファイル記録例】</b><br>
+<ol>接続元IPアドレス[TABコード]接続時間情報（シリアル値）or 論理値<br>
+-------------------------------------------------------<br>
+200.100.xxx.xxx<font color="pink">[TAB]</font>131093276603370000<br>
+210.110.xxx.xxx<font color="pink">[TAB]</font>131093277310880000<br>
+220.120.xxx.xxx<font color="pink">[TAB]</font>　　　　<font color="#ff0000">（→上記B.）</font><br>
+192.168.xxx.xxx<font color="pink">[TAB]</font>true　<font color="#ff0000"><b>※</b>（→上記D.）</font><br>
+　：<br>
+　：<br>
+-------------------------------------------------------<br>
+</ol>
+<b>【参考】「認証接続ロックアウト機能」の設定ファイル「認証失敗ロックアウトまでの接続回数」「ロックアウト期間」</b><br>
+<ul><li><small>「認証失敗ロックアウトまでの接続回数」設定ファイル &quot;AuthLockOut&quot;<br>
+　[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5POP3S<br>
+　　　　　→AuthLockOut.1 (数値) ロックアウトまでの回数<br>
+　　　　　　（デフォルト=0:無効）例：10回→10<br>
+<li>「ロックアウト期間」設定ファイル &quot;AuthLockOutTime&quot;<br>
+　[メール作業フォルダ]　（既定値 /var/spool/epms/）<br>
+　→reg<br>
+　　→epost<br>
+　　　→ims<br>
+　　　　→EPST5POP3S<br>
+　　　　　→AuthLockOutTime.1 (数値) ロックアウト期間：分単位<br>
+　　　　　（デフォルト=0:無限）例：30分→30<br>
+</small></ul><br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq17-10.html">〔新機能〕POP3接続時の「IPロックアウト機能」について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-06</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>epstrd / epstpop3d / epstimap4d のサービスが起動できず開始されない </b></FONT>
+<HR>
+<BR>
+サービス開始を行っても、サービスがうまく起動できず、開始されない場合は、以下の点について再確認してください。<br>
+ちなみに、E-POSTコントロールセンターのメールサーバ管理では、状態がよくわからない場合でも、SSHなどを使いコンソールへログインし、&quot;service epstrd status&quot;、&quot;service epstpop3d status&quot;、&quot;service epstimap4d status&quot;で確認すると、状態が確認できます。<br>
+<br>
+<b>１．既にSMTP（Port 25）、POP3（Port 110）、IMAP4（Port 143）を占有している別のサービスが起動している</b>
+<blockquote>
+・Sendmail/Postfixなどからのメールサーバソフトからの移行を行っている場合、従来のサービスが自動で起動されていませんか？<br>
+・OS標準のSMTPサービスを導入したとき、サービスが自動で開始されていませんか？<br>
+・その他、上記のポート番号を塞いでいるファイヤーウォールソフトや、ポート番号を占有するプログラムが稼働していませんか？<br>
+</blockquote>
+<b>２．「IP バージョン」の選択が、IPv6サービスが組み込まれていないのに、&quot;IPv4/6&quot;や&quot;IPv6 Only&quot;を指定している</b>
+<blockquote>
+・E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］にある「IP バージョン」の選択は正しいですか？　通常の場合はIPv4使用の環境でしょうから、&quot;IPv4 only&quot;を選択してください。<br>
+・IPv6が組み込まれていないのに、&quot;IPv4/6&quot;や&quot;IPv6 Only&quot;を指定しているときも、使用できない環境と判断され、各サービスプログラムは起動できません。ただし epstdd サービスだけは例外で、自律的に動作するために無関係に動きます。<br>
+・上記IPv6が組み込まれていない場合は、&quot;IPv4 only&quot;で使用する必要があります。<br>
+</blockquote>
+<b>３．各サービスの「詳細設定」「IP設定」関係に正しくないIPアドレスが登録されている</b>
+<blockquote>
+・E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［SMTP受信詳細］［POP3詳細］［IMAP4詳細］それぞれを開き、各サービスの「詳細設定」において、「一覧のアドレスに応答する」設定を行っている場合、正しくないIPアドレスが登録されているときは、サービスが正常に開始できません。<br>
+・メールサーバマシンのIPアドレスを変更した場合など、以前のIPアドレスや正しくないIPアドレスが、上記の「詳細設定」に設定されたままだと、各サービスがうまく起動できません。なお、この場合も epstdd サービスだけは例外で、自律的に動作するために、IPアドレス設定とは無関係に動きます。<br>
+</blockquote>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

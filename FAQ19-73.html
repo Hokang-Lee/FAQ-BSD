@@ -1,0 +1,98 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-73</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>複数ドメインで「外部送信可ドメイン」と「内部のみ送受信ドメイン」を共存させるには、中継の制限【effect.dat】と送信先制限【sender.dat】をどう設定すればよいか？ <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+複数ドメインを運用する際、ドメインごとに送信範囲を分けたい場合は、中継の制限【effect.dat】と送信先制限【sender.dat】を組み合わせて対応します。<br>
+設定前に以下のポイントを理解してください。<br>
+<blockquote>
+1. 【effect.dat】は上の行から順に評価され、最初に該当した条件で処理が確定します。順序が重要です。<br>
+2. 【effect.dat】は接続元IPアドレスやエンベロープFROMの制限・許可が主目的です。<br>
+3. 送信先（RCPT TO）の制限はAccount Managerの「送信先制限」【sender.dat】で個別アカウントごとに設定します。<br>
+</blockquote>
+
+<b>【中継の制限【effect.dat】の設定例】</b><br>
+以下の条件を想定します。<br>
+<blockquote>
+・ドメインA：登録済みアカウントのみ送信可（外部送信可）<br>
+・ドメインB：未登録アカウントも送信可（ただし外部送信不可・ドメインB同士のみ）<br>
+・IPアドレス1、2、3からは未登録アカウントでも無条件許可<br>
+</blockquote>
+<pre>
+--------【effect.dat】--------
+[ドメインA] default
+[IPアドレス1] true
+[IPアドレス2] true
+[IPアドレス3] true
+*.*.*.* norelay
+------------------------------
+</pre>
+注意：「[ドメインB] true」とすると、ドメインBを名乗ればどこからでもなりすまし・不正利用が可能になるため設定してはいけません。<br>
+ドメインBについても登録済みアカウントのみ送信可とする場合は、「[ドメインB] default」を追加します。<br>
+<br>
+<b>【送信先制限【sender.dat】の設定例】</b><br>
+ドメインAのアカウントは外部送信可のため、送信先制限の設定は不要です（デフォルトのまま）。<br>
+ドメインBのアカウントには、ドメインB宛てのみ送信を許可する【sender.dat】を設定します。<br>
+<blockquote>
+任意の1アカウントで【sender.dat】を作成後、全ドメインBアカウントのメールボックスフォルダにコピーします。<br>
+</blockquote>
+<pre>
+--------【sender.dat】--------
+*@[ドメインB]
+------------------------------
+</pre>
+<b>【未登録アカウントへの送信先制限について】</b><br>
+未登録アカウントにはAccount Managerから【sender.dat】を設定できません。<br>
+【effect.dat】で無条件許可（true）された接続元からは、未登録アカウントでドメインB以外にも送信できてしまいます。<br>
+この問題を回避するには以下のいずれかを検討してください。<br>
+<blockquote>
+(1) 未登録アカウントもAccount Managerに登録し、【sender.dat】で送信先を制限する<br>
+(2) アカウント未登録のままメールボックスフォルダだけを手動で作成し、そのフォルダに【sender.dat】ファイルを置く（フォルダのみ作成の場合、ライセンス数としてカウントされません）<br>
+</blockquote>
+フォルダの作成場所は以下の通りです。<br>
+<blockquote>
+[接続ドメイン/IPで区別する方式の場合]<br>
+C:\mail\inbox\[ドメインB]\[未登録アカウント]\sender.dat<br>
+[共通ボックス（区別しない）方式の場合]<br>
+C:\mail\inbox\[未登録アカウント]\sender.dat<br>
+</blockquote>
+なお、提示された条件（未登録アカウントからの送信可・かつ外部送信不可）をすべて完全に満たすことは、現時点のE-Postの機能では難しい面があります。「ドメインBの未登録アカウントからの送信可」の条件を再検討することをお勧めします。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="https://www.e-postinc.jp/faq/faq10-45.html" target="_blank">「送信先制限」で送り先アドレスを送信禁止させたい</a><br>
+●<a href="https://www.e-postinc.jp/faq/faq10-88.html" target="_blank">「送信先制限」で1ドメインを送信禁止したとき、同報で他ドメイン宛もいっしょに拒絶される</a><br>
+●<a href="https://www.e-postinc.jp/faq/faq10-11.html" target="_blank">方式の違いによるメールボックスフォルダの作成位置について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

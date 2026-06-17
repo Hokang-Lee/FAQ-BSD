@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-04</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>E-Postシリーズは UTF-8 / 8bit Encoding のメールを文字化けせず正しく送受信できますか？</b></FONT>
+<HR>
+<br>
+E-Postシリーズでは、メールデータの文字コードを変換したり置き換えたりすることは原則として行っていないのですが、受信したメールが文字化けしているものを調査しているうちに、あるユーザー様から標題のような質問を受けたことがあります。<br>
+それはユーザー様の環境で受けたメールの文字コードが UTF-8 で指定されているメールを調査しているうち、文字化けするものと、文字化けしていないものの両者のヘッダに下記の違いがあったため、E-Postシリーズで UTF-8 / 8bit Encoding のメールを文字化けせず受信できるかという質問内容でした。<br>
+<blockquote>
+・ユーザー様の環境で文字化けしていないメール<br>
+　Content-Type: text/plain; charset="UTF-8"<br>
+　Content-Transfer-Encoding: base64<br>
+・ユーザー様の環境で文字化けしていたメール<br>
+　Content-Type: text/plain; charset="UTF-8"<br>
+　Content-Transfer-Encoding: 8bit<br>
+</blockquote>
+この質問は、E-Postシリーズがメールサーバシステムとして8ビットを通さないのではないかという質問内容と同義だと考えます。結論から言うと、E-Postシリーズはメールサーバシステムとして8ビットも問題なく通します。具体的には以下のヘッダ構成の UTF-8 / 8bit Encoding のメールであっても文字コードを変換したり置き換えたりせず、そのまま通します。<br>
+<blockquote>
+　Content-Type: text/plain; charset="UTF-8"<br>
+　Content-Transfer-Encoding: 8bit<br>
+</blockquote>
+しかしながら、大部分のメールクライアントは文字化けせず何の問題もなく表示できる一方で、メールクライアント種類によってはこの構成のメールを表示させる能力差が依然として存在する可能性は少なからずあります。世の中には、いまだ8ビットを通さないメールシステムやSMTPゲートウェイも存在する可能性があることを考えた方が無難です。そのため、送信元が努力する余地がもしあるとすれば、大事を取って &quot;Content-Transfer-Encoding: base64&quot; で Base64 符号化するのが最善ではないかと考えます。そのように提案している技術者やシステム開発者も多いです。<br>
+<br>
+ちなみに、E-Postシリーズでは、メールデータの文字コードを変換したり置き換えたりすることは、一部の例外を除いては実施しません。一部例外のケースについては下記の記事をご参照ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-87.html">E-Postシリーズでの文字コードの取り扱いについて</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

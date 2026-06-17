@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-27</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Active Directory（LDAP）で管理しているアカウントをメールサーバに使う場合</b></FONT>
+<HR>
+<br>
+既に設定されたActive Directory（アクティブディレクトリ）で管理されているアカウントを E-Post Mail Server V / E-Post SMTP Server V シリーズのメールサーバ側に反映させ、メールの送受信を可能にする、いわゆる「Active Directory（LDAP）連携」を行うには、Active Directoryドメインコントローラ側およびメールサーバ側で次のように設定します。<br>
+<br>
+<b>[メール用グループを"IMSUsers"として利用する]</b><br>
+Active Directoryドメインコントローラ側では、事前に&quot;ドメインローカル&quot; の&quot;セキュリティグループ&quot;としてグループ &quot;IMSUsers&quot;があることを確認し、なければ作成しておきます。<br>
+<br>
+<b>１．Active Directoryドメインコントローラ側での事前設定</b><br>
+<br>
+(1) ドメインコントローラの「Active Directory　ユーザーとコンピュータ」を開き、&quot;ドメインローカル&quot; の &quot;セキュリティグループ&quot; としてグループ &quot;IMSUsers&quot; があるか確認します。もしないようなら &quot;ドメインローカル&quot; の &quot;セキュリティグループ&quot; としてグループ名 <b>&quot;IMSUsers&quot;</b> を作成します。<br>
+　　[Active Directory　ユーザーとコンピュータ]<br>
+　　　→[Users]（コンテナー）<br>
+　　　　→[IMSUsers]<br>
+　　　　<small> &quot;ドメインローカル&quot; の &quot;セキュリティグループ&quot; としてグループ名 &quot;IMSUsers&quot; を作成。</small><br>
+<br>
+(2) ドメインコントローラの「ローカルセキュリティポリシー」を開き、メール用グループとして利用する &quot;IMSUsers&quot; が「バッチジョブとしてのログオン」権限を許可する設定になっているか確認します。もし設定されていないようなら、「バッチジョブとしてのログオン」権限を許可する設定にしておきます。<br>
+　　[ローカルセキュリティポリシー]<br>
+　　　→[セキュリティの設定]<br>
+　　　　→[ローカルポリシー]<br>
+　　　　　→[ユーザー権利の割り当て]<br>
+　　　　　　→[バッチジョブとしてのログオン]<br>
+　　　　　　<small>メール用グループとして利用する &quot;IMSUsers&quot; を追加。</small><br>
+<br>
+(3) ドメインコントローラの「Active Directory　ユーザーとコンピュータ」を開き、メールサーバと連携したいユーザーアカウントが既に登録済みのときは、連携したいユーザーアカウントについて &quot;IMSUsers&quot; と &quot;Domain Users&quot; とを「所属するグループ」に追加しておきます。まだユーザーアカウントを作成していない場合は、ユーザーアカウントを作成したら、連携したいユーザーアカウントについて同じように &quot;IMSUsers&quot; と &quot;Domain Users&quot; とを「所属するグループ」に追加します。<br>
+　　[Active Directory　ユーザーとコンピュータ]<br>
+　　　→[Users]（コンテナー）<br>
+　　　　→連携するユーザーアカウント<br>
+　　　　<small>メールサーバと連携するユーザーアカウントについてそれぞれ、&quot;IMSUsers&quot;と &quot;Domain Users&quot;を「所属するグループ」に追加。</small><br>
+<br>
+（注意）<br>
+Active Directoryドメインコントローラ側には、<font color="#cc0000"><b>ドメインローカルのセキュリティグループとして IMSUsers と Users が用意されていることが前提</b></font>です。［Users］コンテナーの下に IMSUsers がない場合は、IMSUsers をドメインローカルのセキュリティグループとして作成してください。ドメインコントローラに登録されているユーザーのうち、 IMSUsers グループに所属するユーザーのみが Active Directory（LDAP）連携される形となります。<br>
+<br>
+<b>２．メールサーバ側での設定</b><br>
+<br>
+(1) E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面からいったん各サービスを［停止］します。<br>
+<br>
+(2) メールサーバ管理から［システム管理メニュー］をクリック、［基本設定］を選択して［開始する］をクリック、表示された基本設定の「アカウント管理環境」から「LDAP管理」を選択、最後に［設定する］ボタンをクリック。<br>
+<br>
+(3) メールサーバ管理から［システム管理メニュー］をクリック、［ドメイン管理］でメールドメインを共通ボックス方式で作成します。既にメールドメインを作成しているときはメールサーバ側のドメイン管理でメールドメインが作成済みかどうか共通ボックス方式になっているかどうかを確認します。<br>
+運用するメールドメインが共通ボックス方式になっているかどうかを確認するには、「既存ドメインの設定変更」からドメインを選択、［詳細設定を開く］ボタンをクリックして、「共通ボックス（区別しない）」オプションボタンが選択されている状態を確認します。確認したら［詳細設定する］ボタンをクリックします。<br>
+<br>
+(4) メールサーバ管理から［システム管理メニュー］をクリック、［LDAP設定］を選び、［Set AD default value］ボタンをクリック。表示されたLDAP設定に基づき下記のように変更します。<br>
+［Set AD default value］ボタンクリック後に<font color="#cc0000"><b> dc=&lt;domain&gt;,dc=jp と表示されている部分について、Active Directoryドメイン名を入力</b></font>します。<font color="#cc0000"><b>メールドメイン名ではありませんので注意</b></font>してください。たとえばActive Directoryドメイン名が test.local ならば、 dc=test,dc=local と変更するようにしてください。<br>
+<blockquote>
+［Server］　　　Active DirectoryドメインコントローラのIPアドレスを指定。<br>
+［Username］　<font color="#cc0000">dc=&lt;domain&gt;,dc=jp の部分をActive Directoryドメイン名を指定</font>するようにし、ドット区切り単位で dc=xxxx,dc=yyyy のように設定。<br>
+［Password］　Active Directory側のAdministratorのパスワードを指定。<br>
+［Base DN］　 <font color="#cc0000">dc=&lt;domain&gt;,dc=jp の部分をActive Directoryドメイン名を指定</font>するようにし、ドット区切り単位で dc=xxxx,dc=yyyy のように設定。<br>
+［Scope］　　　<font color="#cc0000">dc=&lt;domain&gt;,dc=jp の部分をActive Directoryドメイン名を指定</font>するようにし、ドット区切り単位で dc=xxxx,dc=yyyy のように設定。<br>
+最後にいちばん下の［設定する］ボタンをクリック。<br>
+</blockquote>
+<b>（設定例)</b><br>
+Active DirectoryドメインコントローラのIPアドレスが192.168.0.10、Active Directoryドメイン名が sample.co.jp 、ドメインコントローラの Administratorパスワードが **** のときの設定例。この例の［Scope］項では、デフォルト設定の memberof=cn=<font color="#cc0000">imsusers</font>,cn=<font color="#cc0000">users</font> の指定部分は変更しないで <font color="#0000cc">dc=&lt;domain&gt;,dc=jp</font> の部分のみを修正しています。<br>
+<blockquote>(&(objectCategory=person)(objectClass=user)(memberof=cn=<font color="#cc0000">imsusers</font>,cn=<font color="#cc0000">users</font>,<font color="#0000cc">dc=sample,dc=co,dc=jp</font>))</blockquote>
+<p align="center"><a href="./img/faq01-27-01b.gif"><img src="./img/faq01-27-01.gif" border="0"></a></p>
+ちなみに、Active Directoryドメインコントローラ側に参加するセキュリティグループとして IMSUsers を指定しない場合は、［Scope］項から cn=imsusers 部分を削除する必要があります。その場合は、ドメインコントローラに登録されている全ユーザーが Active Directory（LDAP）連携される形となりますので注意してください。<br>
+<blockquote>(&(objectCategory=person)(objectClass=user)(memberof=cn=<font color="#cc0000">users</font>,dc=sample,dc=co,dc=jp))</blockquote>
+(5) メールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面からいったん各サービスを［開始］します。<br>
+<br>
+<b>３．メールサーバ側およびドメインコントローラ側の確認作業</b><br>
+<br>
+(1) Active Directoryドメインコントローラ側でユーザーアカウントを作成していないときには、 ドメインコントローラの「Active Directory　ユーザーとコンピュータ」を開き、メールサーバと連携したいユーザーアカウントを作成したら、作成されたユーザーアカウントに対して、「所属するグループ」として &quot;IMSUsers&quot; と &quot;Domain Users&quot; を追加します。<br>
+<br>
+(2) メールサーバのユーザー管理で表示されるようになっていることを確認します。ユーザーが表示されるか確認するには、E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」から対象ドメインを選択して［ユーザー管理へ］をクリックします。<br>
+なお、BSD版のE-Post V シリーズでは、Active Directory（LDAP）連携の設定をしたとき、メールサーバ側のユーザー管理にてユーザーアカウントを追加しても、Active Directoryドメインコントローラ内に該当するユーザーアカウントがうまく作成できずパスワードも通らないことがわかっておりますので、十分注意してください。<br>
+<br>
+確認作業が終わったら、メールサーバのサービスを開始させ、実際にメール送受信ができるか、テストを行います。<br>
+<br>
+<b><font color="#cc0000">（注意）</font></b><br>
+<font color="#cc0000">Active Directory（LDAP）連携を利用したアカウント管理の場合、マルチドメイン仕様でドメイン名を区別したメールサーバ運用はできません。</font>これは、ドメインコントローラ側で管理されているメールグループ &quot;IMSUsers&quot; に所属するアカウントを利用するため、アカウントが一意のものになるためです。具体的に言うと、メールサーバ側で複数のメールドメイン &quot;a_domain&quot; と &quot;b_domain&quot; を作っても、&quot;taro&quot; アカウントはどちらにも登場する共通アカウントとなってしまいます。異なるドメイン名で区別したメールサーバ運用することはできません。<br>
+また、ドメインコントローラ側で作成済みユーザーアカウントについて、設定しているパスワードについては、メールサーバ側のPOP3認証パスワードならびにIMAP4認証パスワードと連携されるようになり、さらにSMTP認証を有効にしたときはSMTP認証パスワードと連携されます。<font color="#cc0000">パスワード変更の際はActive Directoryのドメインコントローラ側で行う操作のみ有効となりますので注意してください。E-POSTコントロールセンターのメールサーバ管理からのパスワード変更操作は無効です。またE-POSTコントロールセンターのメールサーバ管理からインポートしたときもパスワードは変更されません。</font><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

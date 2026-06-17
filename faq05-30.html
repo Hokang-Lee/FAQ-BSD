@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ05-30</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>該当メールをログから探し出す基本的な方法と手順</b></FONT>
+<HR>
+<br>
+受信したメールや配送失敗エラーメールを記録ログから調べるとき、該当メールをSMTP関係の以下のログから探し出すには、メッセージIDによって探し出す方法がより確実です。ただし、SMTP受信時に拒絶されるケースでは、メッセージIDが発番されないケースもありますので、そのときは、接続時間と接続アカウントで判断してください。<br>
+<ul><li>接続マシンログ（acceptlog）［※受領の全部・拒絶の一部］<br>
+<li>SMTP受信ログ（inlog）<br>
+<li>SMTP受信詳細ログ（receivelog）［※受領の全部・拒絶の一部］<br>
+<li>配送失敗ログ（faillog）<br>
+<li>配送時の詳細ログ(senderlog)<br>
+<li>SMTP送信ログ（outlog）［※外部宛への送信成功のみ］<br>
+<li>SMTP送信ローカルログ（outlocallog）［※内部宛への送信成功のみ］<br>
+</ul>
+<ol type=1>（例）<br>
+<li>受信したメールや配送失敗エラーメールなど該当メールのメールヘッダを確認し、最上部にあるReceivedヘッダのうち、&quot;B&quot;で始まるE-PostのSMTPサービスが発番したメッセージIDを調べる<br>
+<ul>Received: from [192.168.0.xx] (unverified [192.168.0.xx])<br>
+ by test-sample00.jp (E-POST ESMTP Receiver (4.90))<br>
+ with ESMTP id ＜B0000319576＠test-sample00.jp＞<br>
+ Mon, 24 Aug 2015 16:09:13 +0900<br>
+ 　　　↓<br>
+ &quot;B0000319576&quot;がメッセージID</ul>
+<li>上記にあげたログから、該当する同じメッセージIDの記録を探し出していく<br>
+</ol>
+一方、POP3関係のログおよびIMAP4関係のログでは、ログから該当するメールを調べるには、接続時間及び接続アカウント名での判断を中心にしてください。<br>
+<ul><li>POP3ログ（pop3log）<br>
+<li>POP3詳細ログ（receivepop3）<br>
+<li>IMAP4ログ（imap4log）<br>
+<li>IMAP4の詳細ログ（receiveimap4）<br>
+</ul>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

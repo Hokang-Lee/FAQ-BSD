@@ -1,0 +1,98 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-25</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	pre {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:1.6em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールフィルタや中継の制限機能で拒絶された記録や該当メールの取り出し方について <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+メールフィルタや中継の制限機能で拒絶されたときのログ記録の見方や、該当メールの取り出し方について質問を受けたことがあります。メールフィルタや中継の制限機能で拒絶されたときのログ記録、およびそのときの該当メールの保存がどうなっているかに関して主なものを下記の通り整理してみました。<br>
+<ol>
+<b><li>「メールフィルタ機能【mail.dat】」（全体／個別）によって拒絶設定されたもの</li></b>
+<br>
+●【mail.dat】内で Level:x1x の保管設定がされているケースの場合<br>
+（x1x:条件にヒットしたメールの保管を有効　例・Level:110）<br>
+この場合は、[メール作業用フォルダ]/viruslog へメールデータまるごと保管されます。<br>
+（[メール作業用フォルダ]の既定値は /var/spool/epms/ ）<br>
+<br>
+●【mail.dat】内で Level:1xx の拒絶設定がされているケースの場合<br>
+この場合は、以下のエラー応答を接続元に返すとともに、receivelog（SMTP受信詳細ログ）に記録します。<br>
+&quot;552 5.7.1 Requested mail action aborted: caught by the filter setting.&quot;<br>
+<br>
+<b><li>「メールフィルタ機能【mail.dat】」（全体／個別）によって転送指定されたもの</li></b>
+<br>
+●【mail.dat】内で Level:5xx、Level:6xx、Level:7xx と &quot;Forward:&quot; で指定したアドレスへ転送することにより隔離指定がされているケースの場合<br>
+（6xx:Subject:へ &quot;Tag:&quot; で指定した文字列の挿入を行い、&quot;Forward:&quot; で指定したアドレスへ転送する。例・Level:600）<br>
+この場合は、 &quot;Forward:&quot; で指定した隔離用メールアドレスへ転送移動されます。<br>
+<br>
+<b><li>「中継の制限－マシンごとの中継」【effect.dat】でfalse指定されたものがマッチし拒絶されたもの</li></b>
+<br>
+「中継の制限設定」にある「マシンごとの中継」【effect.dat】でfalse指定されたものがマッチし拒絶された場合は、以下の受領拒否のエラー応答を接続元に返すとともに、receivelog（SMTP受信詳細ログ）に記録します。<br>
+&quot;550 5.1.7 Please, mail from a valid IP or Domain address.&quot;<br>
+<br>
+<b><li>個人用【effect.dat】でfalse指定されたものがマッチし拒絶されたもの</li></b>
+<br>
+個人用【effect.dat】でfalse指定されたものがマッチし拒絶された場合も、以下の受領拒否のエラー応答を接続元に返すとともに、receivelog（SMTP受信詳細ログ）に記録します。<br>
+&quot;550 5.1.7 Please, mail from a valid IP or Domain address.&quot;<br>
+<br>
+<b><li>「中継の制限－RDB（ORDB）」【ordb.dat】で指定されたORDBサイトを設定している場合</li></b>
+<br>
+「中継の制限設定」にある「RDB（ORDB）」【ordb.dat】でORDBによる制限を設定しているとき、指定されたORDBサイトでマッチした場合の記録は、その拒絶理由が acceptlog（接続マシンログ）に記録されます。この拒絶理由の記録は、receivelogには記載されませんので注意してください。<br>
+&quot;It was in the ORDB IP.&quot;<br>
+</ol>
+receivelog（SMTP受信詳細ログ）は下記記事にあるようにきわめて重要性の高い記録ログです。取得するように設定してください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq10-01.html">epstrd（SMTPレシーバー）応答コード</a><br>
+●<a href="./faq05-05.html">SMTP受信詳細ログ（receivelog）について</a><br>
+●<a href="./faq01-81.html">メールフィルタ【mail.dat】の設定事例</a><br>
+●<a href="./faq10-56.html">外部からの正常なメールがスパムメールと判断され、受信されないケースがあるかどうかを調べるには</a><br>
+●<a href="./faq04-22.html">ORDBによる制限で拒絶された接続元のメールアドレスを知るには</a><br>
+●<a href="./faq05-24.html">接続マシンログ（acceptlog）で abort されている理由を知るには</a><br>
+●<a href="./faq04-01.html">中継の制限－マシンごとの中継【effect.dat】設定</a><br>
+●<a href="./faq04-10.html">個人アカウント単位で【effect.dat】を有効にするには</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

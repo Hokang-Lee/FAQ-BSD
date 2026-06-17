@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-04</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>ユーザー毎に特定ドメインや特定アカウントのみを許可するには</b></FONT>
+<HR>
+<br>
+ユーザー毎に特定ドメインや特定アカウントのみを許可するには、ユーザー毎の「メールフィルタ(mail.dat)」設定を利用します。<br>
+<b><font color="#ff0000">ここであげた設定手順は、メールヘッダのFrom:ヘッダ情報をもとに許可や拒絶するよう設定する事例をあげていますが、メールヘッダのFrom:ヘッダは簡単に詐称できるため、設定しても効果がきわめて低い可能性があります。さらにメールフィルタ機能で指定可能な条件部分である「From:」はメールヘッダのFrom:ヘッダ情報を指定しているにすぎません。<br>
+迷惑メールではメールヘッダに表示されるFrom:ヘッダに記載されるアドレスやドメインは詐称され、十中八九なりすましされていると考えてください。ですから、この設定は理論的にはできても、効果が低いことを理解してください。</font><br>
+より効果が高い現実的な制御方法としては最後尾リンク先の記事、個人アカウント単位で【effect.dat】を設定する方法がよりベターです。</b><br>
+<br>
+[設定の手順]<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［ユーザー管理］を選択して「ドメインの選択」からエクスポートする対象ドメインを選択して［ユーザー管理へ］をクリックします。<br>
+該当ユーザーを選択して「フィルタ設定」を選択して［操作する］、続けて「メールフィルタ」を［実行する］をクリックします。<br>
+メールフィルタは先頭の条件から順次処理されますので、特定ドメインや特定アカウントは先頭の処理部分にて通過条件としてフィルタに設定します。「特定のドメインまたはアドレスを通過させる設定」＝Level:指定を&quot;000&quot;にして設定します。通過条件を全て設定した最後に、全てのメールを拒絶する設定を行います。「上記以外の設定を拒絶」＝Level:指定を&quot;100&quot;にして設定します。（下記設定例を参照）<br>
+※ユーザー毎の「メールフィルタ(mail.dat)」設定が有効に働くためには、サーバ全体のメールフィルタ機能が有効になっている必要があります。E-POSTコントロールセンターのメールサーバ管理から「メールフィルタ」を選択して［開始する］をクリックし、「メールフィルタを利用する」チェックボックスがオンになっているか確認します。このチェックボックスを変更した場合は、epstrd の再起動が必要になります。<br>
+<br>
+[設定例]<br>
+'---------------------------<br>
+Virus:True Address(1)<br>
+From:xxx1＠xxx.co.jp 　　　<small>←特定アドレス許可</small><br>
+Level:000<br>
+VirusEnd:<br>
+'---------------------------<br>
+Virus:True Address(2)<br>
+From:＠xxx.com　　　　　　　<small>←特定ドメイン許可</small><br>
+Level:000<br>
+VirusEnd:<br>
+'---------------------------<br>
+　　:<br>
+　　: 　　　　　　　　　　　<small>←通過させる条件を引き続き記述</small><br>
+　　:<br>
+'---------------------------<br>
+Virus:Reject All(1)　　　　　<small>←最後に上記以外のすべてを拒絶</small><br>
+Level:100<br>
+VirusEnd:<br>
+---------------------------<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq04-10.html">個人アカウント単位で【effect.dat】を有効にするには</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

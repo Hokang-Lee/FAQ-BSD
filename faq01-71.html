@@ -1,0 +1,111 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ01-71</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>アンチウイルス機能の有効化と検出ログを確認するには</b></FONT>
+<HR>
+<BR>
+Enterprise版でのアンチウイルス機能の有効化とウイルス検出ログの確認は次のように行います。<br>
+<br>
+<b>［アンチウイルス機能の開始と検出ウイルスメールの隔離］</b>
+<ol>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［アンチウイルス］を選択すると表示される「アンチウイルスを有効にする」チェックボックスをオンする。必要に応じて「ログを残す」チェックボックスもオンにする。さらに必要に応じて「アンチウイルスＤＢ更新」の［更新ログを残す］チェックボックスもオンにする。<br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［メールフィルタ］を選択すると表示される「メールフィルタ機能を使用する」チェックボックスがオンのときはそのままでかまいません。メール作業フォルダ（/var/spool/epms/）下に&quot;viruslog&quot;という名前のフォルダが用意され、その場所に検出ウイルスメールが隔離されます。「メールフィルタ機能を使用する」オフのときはオンにするか、オフのままで使いたい場合はSSHなどを使いroot権限でコンソールにログインし、メール作業フォルダ（/var/spool/epms/）下に&quot;viruslog&quot;という名前のフォルダを手動で作成します。<br>
+<li>E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［サービス制御］をクリックして表示される「サービス制御」画面から各サービスを停止→開始で再起動する。<br>
+</ol>
+<b>［検出されたウイルスメールの確認・メンテナンス］</b>
+<ol>
+<li>SSHなどを使ってコンソールにログインし、メール作業フォルダ（/var/spool/epms/）下にある&quot;viruslog&quot;フォルダ内に、検出されたウイルスメールがメールデータの形、すなわちヘッダ情報とメッセージ本文からなる .MSGファイルと、エンベロープ情報である .RCPファイルとの一対になっている形で格納されているのを確認する。（※&quot;B&quot;で始まるファイル名はメッセージIDと同一です）<br>
+　●メッセージデータファイルの例　　：B0000123123.MSG<br>
+　●送受信エンベロープファイルの例　：B0000123123.RCP<br>
+<li>必要に応じて、メールデータの該当ファイルをviエディタなどで開いて確認する。アンチウイルス機能による結果理由は、.RCPファイル内の末尾に&quot;Warning:&quot;記述が書き加えられているので、参照する。<br>
+<li>メールデータの該当ファイルが不要であることがわかり次第、削除する。<br>
+</ol>
+<b>［ウイルス検出動作のログ］</b>
+<ol>
+<li>「検出ログを残す」チェックボックスをオンにしたとき、SSHなどを使ってコンソールにログインし、メール作業フォルダ（/var/spool/epms/）下に&quot;fsenglog&quot;という名前のフォルダがあるのを確認する。<br>
+<li>&quot;fsenglog&quot;→&quot;コンピュータ名（ホスト名）&quot;のフォルダ内にウイルス検出ログが記録されているので、ログファイルをviエディタなどで開いて内容を確認する。<br>
+ウイルス検出ログに記録された内容のうち、コードの意味は下記の通り。<br>
+・<b><u>〈nResult = 1 ()〉</u>　…　「ウイルス未検出（発見しなかった）」</b><br>
+　<a href="#code1">［ウイルス未検出時〈nResult = 1 ()〉のログ事例］</a>参照<br>
+・<b><u>〈nResult = 0 (xxxxxx)〉</u>　…　「ウイルス検出（発見した）」</b><br>
+　<a href="#code0">［ウイルス検出時〈nResult = 0 (xxxxxx)〉のログ事例］</a>参照<br>
+<br>
+また、ウイルス検出ログに記録される初期化エラーを起こすケースは次の通り。<br>
+・<b>initializing...failed (ret code = 0x80004005)</b>　…「アンチウイルスDBのデータが空か不整合が原因のエラー」<br>
+・<b>initializing...failed (ret code = 0x8004025d)</b>　…「ライセンス切れ」<br>
+</ol>
+<b><a name="code1"></a>［ウイルス未検出時〈nResult = 1 ()〉のログ事例］</b>
+<HR size="1" noshade width="98%">
+ <blockquote>
+[B0000099998] argv[1] = /var/spool/epms/temp/B0000099998.MSG<br>
+[B0000099998] Source = /var/spool/epms<br>
+[B0000099998] Start Virus scan.<br>
+/usr/local/bin/fsreq /var/spool/epms/temp/B0000099998.MSG<br>
+[B0000099998] End Virus scan.(/var/spool/epms/temp/B0000099998.MSG, )<br>
+[B0000099998] <u>nResult = 1 ()</u><br>
+ </blockquote>
+<HR size="1" noshade width="98%"><br>
+<b><a name="code0"></a>［ウイルス検出時〈nResult = 0 (xxxxxx)〉のログ事例］</b><br>
+<HR size="1" noshade width="98%">
+ <blockquote>
+[B0000099999] argv[1] = /var/spool/epms/temp/B0000099999.MSG<br>
+[B0000099999] Source = /var/spool/epms<br>
+[B0000099999] Start Virus scan.<br>
+/usr/local/bin/fsreq /var/spool/epms/temp/B0000099999.MSG<br>
+[B0000099999] End Virus scan.(/var/spool/epms/temp/B0000099999.MSG, Result: VIRUSBATEICAR-TEST-FILE<br>
+)
+[B0000099999] <u>nResult = 0 (Result: VIRUSBATEICAR-TEST-FILE)</u><br>
+ </blockquote>
+<HR size="1" noshade width="98%"><br>
+なお、ウイルス検査が正しく動作するのかを確認するための簡易テストは、次のように行います。<br>
+<br>
+<b>［ウイルス検査が正しく動作するか確認する方法］</b>
+<ol>
+<li>SSHなどを使いroot権限でコンソールにログインし、カレントディレクトリをプログラムインストールフォルダ（既定値 /usr/local/mta/bin/）に移動する。<br>
+<li>コマンドラインから　下記のように入力し、実行結果が &quot;Result: CLEAN&quot; と表示されるか確認する。<br>
+  <blockquote>
+  # cd /usr/local/mta/bin[Enter]<br>
+  # <b>./fsreq epstrd</b>[Enter]<br>
+  -------------------------------------------------<br>
+  Scanning: epstrd<br>
+  Result: CLEAN<br>
+  -------------------------------------------------<br>
+  </blockquote>
+</ol>
+（関連FAQ）<br>
+●<a href="./faq01-72.html">ウイルスパターンファイル更新の記録を取るには</a><br>
+●<a href="./faq01-58.html">アンチウイルス機能を有効にしても、［メール作業フォルダ］下に&quot;viruslog&quot;というフォルダが自動的に作成されない</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

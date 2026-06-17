@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-59</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+	tr {
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>内部ドメイン宛の自動転送の際、ドメイン省略したりIP指定することはできるか <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+内部ドメイン宛の自動転送の際に＠以下のメールドメイン名を省略してアカウントだけを指定したり、＠以下にIPアドレスを指定することはできるかどうかという点について説明します。<br>
+<br>
+自動転送機能の転送先登録でメールドメイン名を省略してしまうと、転送処理は「共通メールボックス（区別しない）」方式として扱われるメールボックスフォルダ位置のフォルダに強制的コピーする処理になってしまいます。「簡単セットアップ」ウィザードの初期設定もそうですが、多くのケースで完全マルチドメインにするために「接続ドメイン/IPで区別する」方式でドメインが設定されることが主流です。このように「接続ドメイン/IPで区別する」方式でドメイン運用されている状況下で、メールドメイン名を省略してアカウントだけ指定した転送設定を行うと、転送メールは階層が異なるフォルダにメールが着信することとなり、読むことができない場所に転送メールがたまってしまうという事態に陥ります。<br>
+自動転送機能の転送先登録では、必ず＠以下を省略せず、フルのメールアドレスを入力するようにしてください。このことは「共通メールボックス」方式での運用をしているときも間違いの元になりません。フルのメールアドレスを指定する習慣にしておくことをお薦めします。<br>
+また、＠マーク以下にIPアドレスを指定することは無効および禁則です。＠以下はあくまでメールドメイン名を入力するようにしてください。<br>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq10-47.html">ドメイン名を付けないアカウント名のみのアドレスに送信したメールの扱いについて</a><br>
+●<a href="./faq15-41.html">内部ドメイン宛アドレスに自動転送を行ったときに遅延する場合</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

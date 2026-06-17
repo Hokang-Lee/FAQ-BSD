@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ15-29</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>送信できなかったエラーメールの内容とfaillogの内容が異なる</b></FONT>
+<HR>
+<br>
+送信できなかったときに受け取るエラーメールに記載されている送信失敗理由と、<a href="./faq05-09.html">配送失敗ログ（faillog）</a>に掲載されている配送失敗理由とがなぜか食い違っているケースがあります。これはE-Postがリトライをする上での仕組みと工夫に密接にかかわっており、理論的に発生することがあります。この理由は、下記FAQ記事と同等の内容になります。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq05-20.html">senderlogとfaillogに記載された配送失敗の理由が異なる</a><br>
+<br>
+上記記事でもふれているように、E-Postは、送信リトライ時において、名前解決できないときのリトライで、MXレコードの参照→Aレコードの参照の順番で送信を試み、ドメイン名をそのままAレコードとして送信を試みる仕組みを持っています。<br>
+配送失敗ログ（faillog）では、リトライ回の最終タイミングで失敗理由が記録されるため、そのようなときに実際の配送失敗理由とは違う &quot;Unable to deliver destination domain&quot; として記録されるケースがあるのです。<br>
+普通、MXレコードでも見つからなければAレコードでも見つからないのが通常ですが、万が一、ルーズな運営をしているサーバで、MXレコードを登録せずにAレコードだけで運用しているところがありうるため、それらを考慮してわざわざリトライをはかっている、E-Post独自の工夫と言えます。<br>
+<br>
+実際の配送失敗理由を探るには、<a href="./faq05-10.html">配送時の詳細ログ（senderlog）</a>を調べます。途中のリトライにて、相手先からのエラー応答内容を詳細に追っかけてみます。&quot;B&quot;で始まる該当するメッセージIDをもとに、senderlogから探してみてください。途中のリトライ回にて、別のエラー応答が返されているのを見つけることができるでしょう。<br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

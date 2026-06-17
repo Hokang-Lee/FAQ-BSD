@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ19-32</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>エンベロープFROMを判定条件に使う場合の方法[A] <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+E-Postの設定ではエンベロープFROMを判定条件に使う方法のひとつ、【effect.dat】にエンベロープFROMのドメインかメールアドレスをfalse指定で記載する方法を以下に示します。<br>
+<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［全設定（サーバー環境設定）］の中ほど［中継の制限］の［マシンごとの中継］、もしくは［中継の制限］で表示される「中継の制限設定」にある［マシンごとの中継］ボタンをクリックして表示される【effect.dat】の設定を行い、エンベロープFROMのドメインかメールアドレスをfalse指定する方法があります。エンベロープFROMを調べるには、SMTP受信ログ（inlog）の送信元アドレス欄に記載されているものから調べるという方法が順当になります。<br>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq04-01.html">［中継の制限］の［マシンごとの中継］【effect.dat】設定</a><br>
+上記記事のうち、後半にある【effect.dat】記述例 - 2.送信元エンベロープによる制限 b、d、gの例をご覧ください。<br>
+------------------------<br>
+abc.co.jp false<br>
+------------------------<br>
+あるいは<br>
+------------------------<br>
+abc＠abc.co.jp false<br>
+------------------------<br>
+※記事にも書かれているように、ドメイン名を &quot;true&quot; 指定してしまうととても危険な行為となりますが、拒絶する設定の &quot;false&quot; 指定をしていただく分にはまったく支障はありません。<br>
+<br>
+<b>（参考FAQ）</b><br>
+●<a href="./faq05-04.html">SMTP受信ログ（inlog）について</a><br>
+※ログに記載される送信元アドレスは、MTAが使用するエンベロープFROMの情報になります。<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>

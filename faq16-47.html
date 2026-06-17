@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ16-47</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>Secure HandlerのハンドリングルールでFrom:文字列を指定する方法 <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<B>メールサーバ側設定との違い</B><br>
+E-Post Mail Server V シリーズ製品では、メールフィルタ設定【mail.dat】において、From:文字列を部分一致マッチングでフィルタリングすることができます。また、各種MIME-Bエンコードした全角文字列でも指定が可能です。<br>
+Enterprise版に付いている Secure Handler においては、メール承認管理 -［ハンドリングルール］から設定することができます。また、Secure Handlerでは、全角文字列は各種MIME-Bエンコードせず、そのまま入力することが可能となっています。<br>
+<br>
+<B>設定方法</B><br>
+メール承認管理 -［ハンドリングルール］［reciverkey.dat］を開き、&quot;from1=&quot;［保留送信元］で文字列指定をおこないます。<br>
+<u>ここでは完全一致マッチングとなるので、部分一致とする場合は、前後にワイルドカードを指定する必要があります。</u>これにより、似たような差出人に対する対策ができます。<br>
+特別な事情がない限り、記述済みの最初から2行分(white=... および black=...)は変更しないでください。<br>
+<br>
+------［ハンドリングルール例］---------<br>
+white=/usr/local/mta/bin/reciverwhiteword.dat<br>
+black=/usr/local/mta/bin/reciverblackword.dat<br>
+date0=＊+0900＊<br>
+from1=＊info＠＊.com＊<br>
+from1=＊info＠＊<br>
+from1=＊銀行＊<br>
+from1=＊予約＊<br>
+from1=＊緊急＊<br>
+from1=＊マイレージクラブ＊<br>
+from1=＊ETC更新サポートセンター＊<br>
+from1=＊Amazon＊<br>
+from1=＊Apple Support＊<br>
+：<br>
+-------------------------------------------------<br>
+※本番では「＠」「＊」は半角で入力ください。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq16-44.html">Secure Handler 設定時・運用時での各項目について</a><br>
+●<a href="./faq04-05.html">メールフィルタ設定においてFrom:文字列に2バイト文字コードを指定する方法とワイルドカード指定について</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

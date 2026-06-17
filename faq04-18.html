@@ -1,0 +1,80 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ04-18</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>メールフィルタ設定で実行形式のファイルを含む添付ファイル付きメールを拒絶するには</b></FONT>
+<HR>
+<br>
+メールフィルタ設定で下記事例のように記述を工夫することにより、exeタイプの実行形式を含む可能性のあるファイルが添付されたメールを拒絶・遮断することはとりあえず可能です。ただし、拡張子が.exeであるときに拒絶・遮断したいといった条件指定はできません。<br>
+設定例その1は、Microsoft Outlook や Windows Live Mail 等からの添付方式対応の書式、設定例その2は、Thunderbird や Becky! 等の添付方式対応の書式です。両方の書式が使われたメールが来る環境では、２つ続けて指定する必要があります。これはあくまでメールフィルタ設定ですので、送信元のメーラーや送信ツールの流儀によって、指定された以外のMIME書式が使われた場合は通過する可能性があることを承知してください。<br>
+<br>
+下記書式例で拒絶されたメールは、[メール用作業フォルダ]\viruslogフォルダ内にメールデータ本体の .MSGファイルとエンベロープ情報の .RCPファイルが保管格納されます。 .MSGファイルも .RCPファイルもどちらもテキストファイルです。.RCPファイルの中を確認すると、&quot;Warning:&quot; ～ &quot;WarningEnd:&quot; の間で指定した情報が記載されていますので、フィルタ設定のどの部分で拒絶されたのかを判断することが可能です。<br>
+<br>
+<b>（メールフィルタ設定例その1）</b><br>
+'------------------------------------------------------<br>
+Virus: attach application file<br>
+<font color="#ff0000">Content-Type:mutipart/mixed;</font>　　←(a)<br>
+Body:<br>
+<font color="#ff0000">Content-Type: application/x-msdownload;</font>　　←(b)<br>
+BodyEnd:<br>
+Level:110<br>
+Warning:<br>
+[!]WARNING[!]<br>
+This mail has attached file - attach application file<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+<b>（メールフィルタ設定例その2）</b><br>
+'------------------------------------------------------<br>
+Virus: attach application file<br>
+<font color="#ff0000">Content-Type:mutipart/mixed;</font>　　←(a)<br>
+Body:<br>
+<font color="#ff0000">Content-Type: application/octet-stream;</font>　　←(b)<br>
+BodyEnd:<br>
+Level:110<br>
+Warning:<br>
+[!]WARNING[!]<br>
+This mail has attached file - attach application file<br>
+WarningEnd:<br>
+VirusEnd:<br>
+'------------------------------------------------------<br>
+<b>※指定する際の要注意ポイント</b><br>
+(a) 添付付きメールの指定条件。&quot;Content-Type:&quot; の後は [token] 指定に該当する部分なので<font color="#ff0000">&quot;Content-Type:mutipart/mixed;&quot; というように半角スペースを入れず、続けて記述</font>する。<br>
+(b) 本文のMIME構造書式として application形式の添付ファイルの指定条件。本文の条件指定である &quot;Body:&quot; ～ &quot;BodyEnd:&quot; の間に指定するのは、<font color="#ff0000">本文に書かれたMIME構造の書式文字列をそのまま指定する部分なので、&quot;Content-Type: application/x-msdownload;&quot; あるいは &quot;Content-Type: application/octet-stream;&quot; というように、実際のメール本文にある文字列 &quot;Content-Type:&quot;の後ろに半角スペースが入っている状態の通り指定</font>する。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-81.html">メールフィルタ（mail.dat）の設定事例</a><br>
+●<a href="./faq04-19.html">メールフィルタ設定でzipファイルが添付されたメールを特定アドレスに隔離するには</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</BODY>
+</HTML>

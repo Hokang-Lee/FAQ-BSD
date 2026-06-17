@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<TITLE>FAQ17-17</TITLE>
+<script language="JavaScript" src="/pull.js"></script>
+<link rel=stylesheet type=text/css href=/font.css>
+<style type="text/css">
+	body {
+		background-color: #ffffff;
+		font-size: 12px;
+		line-height:2.0em;
+		margin: 10px;
+		padding: 5px;
+	}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7N0CMEK0LT');
+</script>
+<!-- Google tag end -->
+</HEAD>
+<BODY TEXT="black">
+<!-- ACCESS KAISEKIKEN  -->
+<script src="//accaii.com/epost/script.js" async></script><noscript><img src="//accaii.com/epost/script?guid=on"></noscript>
+<!-- ACCESS KAISEKIKEN end-->
+<HR>
+<FONT SIZE="4" COLOR="#000000"><b>SMTPゲートウェイの設定方法により user unknown の結果がエラー応答かエラーメール生成かが異なる <font color="#ff0000">new!</font></b></FONT>
+<HR>
+<br>
+SMTPゲートウェイが構築されている環境では、内側のメールサーバにユーザーアカウントが存在しなかったり、無効なアドレスになっている場合は、user unknown という結果になるわけですが、SMTPゲートウェイをどのように設定しているかによって、user unknown のエラー応答を返すだけなのか、エラーメール生成して送信するかの違いが生じます。具体的には、下記関連ドキュメントや関連FAQ記事中にあるSMTPゲートウェイの設定方法について、次のどちらにしているかによります。<blockquote>
+<b>(A)</b> エイリアスと実メールアドレスとをワイルドカードで指定する方法により、既存メールサーバーが管理しているドメイン名のついたすべてのメールアドレスを無条件に通す設定にしている<br>
+<b>(B)</b> エイリアスを実メールアドレスと１対１で指定する方法により、セキュリティ面を考慮し、既存メールサーバーが管理しているドメイン名のうち、存在する有効なアカウントのみ通す設定にしている<br>
+</blockquote>
+<b>(A)</b> 設定では、SMTPゲートウェイ位置の E-Post SMTP Server ではエイリアスと実アドレスをワイルドカード指定していますから、受信するアカウントがどのようなものであっても、いったん全部受けてメールサーバである E-Post Mail Server にすべて流します。その後、メールサーバである E-Post Mail Server でアカウントが実在するか、無効でないかなどを判定することになります。<br>
+すると、アカウントが無効であるという user unknown の応答は、SMTPゲートウェイ位置の E-Post SMTP Server に返され、応答を受けたSMTPゲートウェイ位置の E-Post SMTP Server が、送信元のMTAに user unknown の応答内容を含んだエラーメールを生成して送り出すということになります。<br>
+<br>
+<b>(B)</b> 設定では、SMTPゲートウェイ位置の E-Post SMTP Server ではエイリアスと実アドレスを１対１で指定していますから、無効なアカウントはここで user unknown の応答を送信元のMTAに返すだけになります。こちらはエラーメールを生成することはありません。<br>
+エラー応答 &quot;550 5.1.1 xxxx ... User unknown.&quot; のような「エラーコードとエラー応答」を送信元のSMTPに返すだけです。<br>
+<br>
+結論として、万全な対策はよりセキュアな <b>(B)</b> 設定を取っていただくことに尽きます。SMTPゲートウェイ位置の E-Post SMTP Server で無効なアカウントかどうかをチェックすることが可能になり、エラーメール生成して送ることはせず、エラー応答だけを送信元に返すことになります。<br>
+<br>
+ちなみに、<b>(A)</b> 設定時にエラーメールを生成して送り返す先は、実際のエンベロープFROMの内容に基づいて送られます。スパムメール発信者によって詐称されることが常態化しているのはヘッダーFrom情報の方です。ヘッダーFromの情報はE-Postを含め、すべてのMTAはふつうエラーメールを送り返すときには一切使いません。エラーメールはエンベロープFROMを元に返信されます。<br>
+<br>
+<b>（関連FAQ）</b><br>
+●<a href="./faq01-30.html">SMTPゲートウェイとして利用したい</a><br>
+●<a href="./faq01-61.html">SMTPゲートウェイとメールサーバの設定ポイント（E-Post Mail Server・E-Post SMTP Server）</a><br>
+●<a href="./faq01-99.html">SMTPゲートウェイとして構築したとき踏み台にならないようにする</a><br>
+<br>
+<p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
+<br>
+<br>
+</body>
+</html>
