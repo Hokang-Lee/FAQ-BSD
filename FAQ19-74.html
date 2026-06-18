@@ -1,17 +1,17 @@
 <HTML>
 <HEAD>
 <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
-<TITLE>FAQ19-74</TITLE>
+<TITLE>faq19-74</TITLE>
 <script language="JavaScript" src="/pull.js"></script>
 <link rel=stylesheet type=text/css href=/font.css>
 <style type="text/css">
-	body {
-		background-color: #ffffff;
-		font-size: 12px;
-		line-height:2.0em;
-		margin: 10px;
-		padding: 5px;
-	}
+    body {
+        background-color: #ffffff;
+        font-size: 12px;
+        line-height:2.0em;
+        margin: 10px;
+        padding: 5px;
+    }
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7N0CMEK0LT"></script>
@@ -39,17 +39,17 @@ EPSTDSの配送先を決める優先順位は以下の通りです。<br>
 ただし、以下の2つの方法で対応できます。<br>
 <br>
 <b>【方法1】E-PostのDNSサーバ設定を空白にする</b><br>
-E-Post Mail Controlの「サーバー設定」タブにある「DNSサーバー」項目欄を空白にすることで、DNS MXレコードを参照する挙動を抑えることができます。<br>
+E-POSTコントロールセンターのメールサーバ管理から［システム管理メニュー］をクリック、［基本設定］を開いたとき表示される「基本設定」画面の「DNSサーバー」項目欄を空白にすることで、DNS MXレコードを参照する挙動を抑えることができます。<br>
 <blockquote>
-・E-Post Mail Controlの「DNSサーバー」項目欄 ... DNS MXレコードの参照に使用<br>
-・Windows側の「DNSサーバー」設定欄 ... DNS Aレコードの参照に使用（優先順位は低い）<br>
+・E-POST コントロールセンターの「DNSサーバー」項目欄 ... DNS MXレコードの参照に使用<br>
+・/etc/hostsファイル、あるいは、/etc/resolv.confファイルのnameserverの設定項目で割り当てられたDNS ... DNS Aレコードの参照に使用（優先順位は低い）<br>
 </blockquote>
 設定を変更した場合は、[適用]ボタンをクリック後、E-Post関連サービスの再起動が必要です。<br>
-なお、Windows側の「DNSサーバー」設定欄については、Aレコード解決の最終手段として参照されますが、実際にはこの方法ではメール送信できないケースがほとんどのため、そのままでも支障はないと思われます。<br>
+なお、/etc/hostsファイル、あるいは、/etc/resolv.confファイルのnameserverの設定項目で割り当てられたDNSについては、Aレコード解決の最終手段として参照されますが、実際にはこの方法ではメール送信できないケースがほとんどのため、そのままでも支障はないと思われます。<br>
 <br>
 <b>【方法2】送信先制限【sender.dat】で特定ドメイン宛を受領段階で拒絶する</b><br>
-配送段階（EPSTDS）ではなく、受領段階（EPSTRS）で特定ドメイン宛の送信を止める方法です。<br>
-プログラムインストールフォルダ（C:\Program Files\EPOST\MS\）に【sender.dat】を配置することで全体共通設定として反映されます。<br>
+配送段階（epstdd）ではなく、受領段階（epstrd）で特定ドメイン宛の送信を止める方法です。<br>
+プログラムインストールフォルダ（/usr/local/mta/bin）に【sender.dat】を配置することで全体共通設定として反映されます。<br>
 <pre>
 --------（【sender.dat】例）--------
 *@cybermail.jp,-1
@@ -66,11 +66,11 @@ E-Post Mail Controlの「サーバー設定」タブにある「DNSサーバー」項目欄を空白にする
 【sender.dat】の設定はサービス再起動不要で、ファイルを保存した次のメール送信から反映されます。<br>
 <br>
 <b>（関連FAQ）</b><br>
-●<a href="https://www.e-postinc.jp/faq/faq17-55.html" target="_blank">EPSTDS（SMTP配送サービス）が配送先を決める優先順位</a><br>
-●<a href="https://www.e-postinc.jp/faq/faq10-23.html" target="_blank">メールサーバがDNSを参照するときの動きについて</a><br>
-●<a href="https://www.e-postinc.jp/faq/faq01-64.html" target="_blank">配送処理とDNS参照について</a><br>
-●<a href="https://www.e-postinc.jp/faq/faq10-45.html" target="_blank">「送信先制限」で送り先アドレスを送信禁止させたい</a><br>
-●<a href="https://www.e-postinc.jp/faq/faq10-88.html" target="_blank">「送信先制限」で1ドメインを送信禁止したとき、同報で他ドメイン宛もいっしょに拒絶される</a><br>
+●<a href="https://www.e-postinc.jp/faq-bsd/faq17-55.html" target="_blank">epstdd（SMTP配送サービス）が配送先を決める優先順位</a><br>
+●<a href="https://www.e-postinc.jp/faq-bsd/faq10-23.html" target="_blank">メールサーバがDNSを参照するときの動きについて</a><br>
+●<a href="https://www.e-postinc.jp/faq-bsd/faq01-64.html" target="_blank">配送処理とDNS参照について</a><br>
+●<a href="https://www.e-postinc.jp/faq-bsd/faq10-45.html" target="_blank">「送信先制限」で送り先アドレスを送信禁止させたい</a><br>
+●<a href="https://www.e-postinc.jp/faq-bsd/faq10-88.html" target="_blank">「送信先制限」で1ドメインを送信禁止したとき、同報で他ドメイン宛もいっしょに拒絶される</a><br>
 <br>
 <p align="right"><input type="button" value="閉じる" onclick="window.close();"></p>
 <br>
